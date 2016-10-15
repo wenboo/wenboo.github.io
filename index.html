@@ -289,7 +289,7 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">struct</span> sdsdr&#123;   </div><div class="line">    <span class="keyword">int</span> len;  <span class="comment">//存放字符串长度   </span></div><div class="line">    <span class="keyword">int</span> <span class="built_in">free</span>; <span class="comment">//记录buf中还有多少字节未使用   </span></div><div class="line">    <span class="keyword">char</span> buf[];   </div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 <hr>
 <p>Redis总将字符串封装成如上结构，你能看出它相比于原生字符串，有什么好处么？</p>
-<p>##<strong>至少有如下几个好处：</strong></p>
+<p>##<strong>至少有如下几个好处</strong>##</p>
 <ul>
 <li><p>能够在O(1)时间内获取到字符串的长度。而原生字符串要获取器长度择需要通过检测字符串结尾符才能得到字符串长度，时间复杂度为O(n)</p>
 </li>
