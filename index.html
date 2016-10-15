@@ -266,14 +266,16 @@
                                                         
                                                             
                                                                 
-                                                                            <p><strong>1. C语言中的字符串</strong></p>
+                                                                            <p>##<strong>1. C语言中的字符串</strong>##</p>
 <p>C语言中，字符串的使用对于初学者来说是个很容易混淆、很容易出错。C语言字符串是以‘\0′结尾。因此，我们使用字符串时，始终要记得留一个字节用于存放结尾符。</p>
 <p>请看下面一段代码，哪个地方会在运行时出错？</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">    <span class="keyword">char</span> str1[]=<span class="string">"hello,world"</span>;   </div><div class="line">    <span class="keyword">char</span> str2[<span class="number">100</span>]=<span class="string">"hello,world"</span>;   </div><div class="line">    <span class="keyword">char</span> *str3 = <span class="string">"hello,world"</span>;   </div><div class="line">    str1[<span class="number">0</span>]=<span class="string">'H'</span>;   </div><div class="line">    str3[<span class="number">0</span>]=<span class="string">'H'</span>;     </div><div class="line">    <span class="built_in">printf</span>(<span class="string">" %s   %s  %s"</span>,str1,str2,str3);</div><div class="line">```    </div><div class="line">    </div><div class="line">上面的代码会在如下地方出错。</div><div class="line"></div><div class="line">```c</div><div class="line">    str3[<span class="number">0</span>]=<span class="string">'H'</span>;</div></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">char</span> str1[]=<span class="string">"hello,world"</span>;   </div><div class="line"><span class="keyword">char</span> str2[<span class="number">100</span>]=<span class="string">"hello,world"</span>;   </div><div class="line"><span class="keyword">char</span> *str3 = <span class="string">"hello,world"</span>;   </div><div class="line">str1[<span class="number">0</span>]=<span class="string">'H'</span>;   </div><div class="line">str3[<span class="number">0</span>]=<span class="string">'H'</span>;     </div><div class="line"><span class="built_in">printf</span>(<span class="string">" %s   %s  %s"</span>,str1,str2,str3);</div></pre></td></tr></table></figure>
+<p>上面的代码会在如下地方出错。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">str3[<span class="number">0</span>]=<span class="string">'H'</span>;</div></pre></td></tr></table></figure>
 <p>从概念上讲，之所以出错是因为str3是个常量字符串，而常量是不允许被改变的。</p>
 <p>在一些开源项目中，我们能看到C语言字符串的一些引申版本，他们对c语言原生字符串进行封装以获得额外的优点。例如：</p>
 <hr>
-<p> <strong>2. Nginx中的字符串</strong></p>
+<p>##<strong>2. Nginx中的字符串</strong>##</p>
 <p> nginx中字符串类型被定义为一个结构体，如下：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> &#123;</div><div class="line">    <span class="keyword">size_t</span> len;</div><div class="line">    u_char *data;</div><div class="line">&#125; <span class="keyword">ngx_str_t</span>;</div></pre></td></tr></table></figure>
 <p>这样定义有什么好处呢？</p>
@@ -282,12 +284,12 @@
 <p>我们要取出http请求的请求方法，只需要如下赋值即可获得，而不需要额外开辟内存空间来存储。这样就节省了内存。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">len=<span class="number">3</span>;</div><div class="line">data = <span class="number">0x12345678</span></div></pre></td></tr></table></figure>
 <hr>
-<p> <strong>3. Redis中的字符串</strong></p>
+<p>##<strong>3. Redis中的字符串</strong>##</p>
 <p> 在Redis中，字符串同样也被封装成了一个结构体，具体如下：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">struct</span> sdsdr&#123;   </div><div class="line">    <span class="keyword">int</span> len;  <span class="comment">//存放字符串长度   </span></div><div class="line">    <span class="keyword">int</span> <span class="built_in">free</span>; <span class="comment">//记录buf中还有多少字节未使用   </span></div><div class="line">    <span class="keyword">char</span> buf[];   </div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 <hr>
 <p>Redis总将字符串封装成如上结构，你能看出它相比于原生字符串，有什么好处么？</p>
-<p><strong>至少有如下几个好处：</strong></p>
+<p>##<strong>至少有如下几个好处：</strong></p>
 <ul>
 <li><p>能够在O(1)时间内获取到字符串的长度。而原生字符串要获取器长度择需要通过检测字符串结尾符才能得到字符串长度，时间复杂度为O(n)</p>
 </li>
