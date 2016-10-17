@@ -4,19 +4,16 @@
   <meta charset="utf-8">
   <meta name="baidu-site-verification" content="6fea7fc7276fc383ec5b2080c662f076"/>
   
-  <title>Wenboo&#39;s Blog</title>
+  <title>Hi~Welcome to Wenboo&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="测试简介">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Wenboo's Blog">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hi~Welcome to Wenboo's Blog">
 <meta property="og:url" content="http://wenboo.github.io/index.html">
-<meta property="og:site_name" content="Wenboo's Blog">
-<meta property="og:description" content="测试简介">
+<meta property="og:site_name" content="Hi~Welcome to Wenboo's Blog">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Wenboo's Blog">
-<meta name="twitter:description" content="测试简介">
+<meta name="twitter:title" content="Hi~Welcome to Wenboo's Blog">
   
-    <link rel="alternative" href="/atom.xml" title="Wenboo&#39;s Blog" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="Hi~Welcome to Wenboo&#39;s Blog" type="application/atom+xml">
   
   
     <link rel="icon" href="/img/leaves.ico">
@@ -44,8 +41,6 @@
 		  <h1 class="header-author"><a href="/" class="alluraregular">Cheng</a></h1>
 		</hgroup>
         <!--
-		
-		<p class="header-subtitle">测试副标题</p>
 		
         -->
 		
@@ -115,7 +110,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/c/" style="font-size: 20px;">c</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/os/" style="font-size: 10px;">os</a> <a href="/tags/tool/" style="font-size: 10px;">tool</a> <a href="/tags/微机原理/" style="font-size: 20px;">微机原理</a>
+						<a href="/tags/c/" style="font-size: 15px;">c</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/os/" style="font-size: 10px;">os</a> <a href="/tags/tool/" style="font-size: 10px;">tool</a> <a href="/tags/微机原理/" style="font-size: 20px;">微机原理</a>
 					</div>
 				</section>
 				
@@ -149,8 +144,6 @@
 				  <h1 class="header-author">Cheng</h1>
 				</hgroup>
 			</div>
-			
-			<p class="header-subtitle">测试副标题</p>
 			
 			<nav class="header-menu">
 				<ul>
@@ -192,6 +185,135 @@
 
 
 
+
+  
+    <article id="post-为什么寄存器比内存块？" class="article article-type-post" itemscope itemprop="blogPost">
+    <script>
+        $("html").niceScroll({
+            cursorcolor: "#2a2929",
+            cursoropacitymax: 1,
+            touchbehavior: false,
+            cursorwidth: "6px",
+            cursorborder: "5",
+            cursorborderradius: "0px",
+            autohidemode: true
+        });
+    </script>
+    
+        <div class="article-meta">
+            <a href="/2016/10/17/为什么寄存器比内存块？/" class="article-date">
+  	<time datetime="2016-10-17T14:55:49.000Z" itemprop="datePublished">2016-10-17</time>
+</a>
+
+        </div>
+        
+            <div class="article-inner">
+                
+                    <input type="hidden" class="isFancy" />
+                    
+                        
+                            <header class="article-header">
+                                
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/17/为什么寄存器比内存块？/">为什么寄存器比内存块？</a>
+    </h1>
+  
+
+
+                            </header>
+                            
+                                    
+                                        <div class="article-entry" itemprop="articleBody">
+                                            
+                                                    <!--02-->
+                                                    <p class="toc-button">目录</p>
+<div id="toc" class="toc-article" style="display:none;">
+    
+</div>
+<script>
+    $(function(){
+
+        var width = document.body.scrollWidth;
+        if (width <=550) {
+             $(".toc-button").css("display","none");
+        }
+        $(".toc-button").hover(function(){
+            var top = $(this).get(0).offsetTop-$(".toc-article").height()/2;
+            $(".toc-article").css({
+                top:top +"px"
+            });
+            $("#toc").show(1000,function(){});
+           // $("#toc").animate({width:500;},3000);
+        },function(){
+
+        });
+        $(".toc-article").hover(function(){
+
+        },function(){
+            $("#toc").hide(1000,function(){});
+        });
+    })
+</script>
+
+                                                        
+                                                            
+                                                                
+                                                                            <p>计算机的存储层次（memory hierarchy）之中，寄存器（register）最快，内存其次，最慢的是硬盘。</p>
+<p><img src="http://image.beekka.com/blog/201310/2013101401.png" alt="图片"></p>
+<p>同样都是晶体管存储设备，为什么寄存器比内存快呢？</p>
+<p><img src="http://image.beekka.com/blog/201310/2013101402.jpg" alt="图片"></p>
+<p>Mike Ash写了一篇很好的解释，非常通俗地回答了这个问题，有助于加深对硬件的理解。</p>
+<p>##原因一：距离不同##</p>
+<p>距离不是主要因素，但是最好懂，所以放在最前面说。内存离CPU比较远，所以要耗费更长的时间读取。</p>
+<p>以3GHz的CPU为例，电流每秒钟可以振荡30亿次，每次耗时大约为0.33纳秒。光在1纳秒的时间内，可以前进30厘米。也就是说，在CPU的一个时钟周期内，光可以前进10厘米。因此，如果内存距离CPU超过5厘米，就不可能在一个时钟周期内完成数据的读取，这还没有考虑硬件的限制和电流实际上达不到光速。相比之下，寄存器在CPU内部，当然读起来会快一点。</p>
+<p>距离对于桌面电脑影响很大，对于手机影响就要小得多。手机CPU的时钟频率比较慢（iPhone5s为1.3GHz），而且手机的内存紧挨着CPU。</p>
+<p>##原因二：硬件设计不同##</p>
+<p>苹果公司新推出的iPhone 5s，CPU是A7，寄存器有6000多位（31个64位寄存器，加上32个128位寄存器）。而iPhone 5s的内存是1GB，约为80亿位（bit）。这意味着，高性能、高成本、高耗电的设计可以用在寄存器上，反正只有6000多位，而不能用在内存上。因为每个位的成本和能耗只要增加一点点，就会被放大80亿倍。</p>
+<p><img src="http://image.beekka.com/blog/201310/2013101403.jpg" alt="图片"></p>
+<p>事实上确实如此，内存的设计相对简单，每个位就是一个电容和一个晶体管，而寄存器的设计则完全不同，多出好几个电子元件。并且通电以后，寄存器的晶体管一直有电，而内存的晶体管只有用到的才有电，没用到的就没电，这样有利于省电。这些设计上的因素，决定了寄存器比内存读取速度更快。</p>
+<p>##原因三：工作方式不同##</p>
+<p>寄存器的工作方式很简单，只有两步：（1）找到相关的位，（2）读取这些位。</p>
+<p>内存的工作方式就要复杂得多：</p>
+<blockquote>
+<p>（1）找到数据的指针（指针可能存放在寄存器内，所以这一步就已经包括寄存器的全部工作了）<br>（2）将指针送往内存管理单元（MMU），由MMU将虚拟的内存地址翻译成实际的物理地址<br>（3）将物理地址送往内存控制器（memorycontroller）由内存控制器找出该地址在哪一根内存插槽（bank）  上<br>（4）确定数据在哪一个内存块（chunk）上，从该块读取数据<br>（5）数据先送回内存控制器，再送回CPU，然后开始使用</p>
+</blockquote>
+<p>内存的工作流程比寄存器多出许多步。每一步都会产生延迟，累积起来就使得内存比寄存器慢得多。</p>
+<p>为了缓解寄存器与内存之间的巨大速度差异，硬件设计师做出了许多努力，包括在CPU内部设置缓存、优化CPU工作方式，尽量一次性从内存读取指令所要用到的全部数据等等。</p>
+
+                                                                                
+                                        </div>
+                                        
+                                            <div class="article-info article-info-index">
+                                                
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/微机原理/">微机原理</a></li></ul>
+	</div>
+
+
+                                                    
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/work/">work</a>
+	</div>
+
+
+                                                        
+                                                                <div class="clearfix"></div>
+                                            </div>
+                                            
+            </div>
+            
+                    
+                                <!-- 多说评论框 start -->
+                                
+</article>
+
+<!--
+
+-->
+<!--
+
+-->
 
   
     <article id="post-sizeof()用法汇总" class="article article-type-post" itemscope itemprop="blogPost">
@@ -286,7 +408,7 @@
 <p><strong>经典问题：</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">double</span>* (*a)[<span class="number">3</span>][<span class="number">6</span>]; </div><div class="line"><span class="built_in">cout</span>&lt;&lt;<span class="keyword">sizeof</span>(a)&lt;&lt;<span class="built_in">endl</span>; <span class="comment">// 4 a为指针</span></div><div class="line"><span class="built_in">cout</span>&lt;&lt;<span class="keyword">sizeof</span>(*a)&lt;&lt;<span class="built_in">endl</span>; <span class="comment">// 72 *a为一个有3*6个指针元素的数组</span></div><div class="line"><span class="built_in">cout</span>&lt;&lt;<span class="keyword">sizeof</span>(**a)&lt;&lt;<span class="built_in">endl</span>; <span class="comment">// 24 **a为数组一维的6个指针</span></div><div class="line"><span class="built_in">cout</span>&lt;&lt;<span class="keyword">sizeof</span>(***a)&lt;&lt;<span class="built_in">endl</span>; <span class="comment">// 4 ***a为一维的第一个指针</span></div><div class="line"><span class="built_in">cout</span>&lt;&lt;<span class="keyword">sizeof</span>(****a)&lt;&lt;<span class="built_in">endl</span>; <span class="comment">// 8 ****a为一个double变量</span></div></pre></td></tr></table></figure>
 <p><strong>问题解析：</strong></p>
-<p>a是一个很奇怪的定义，它表示一个指向double<em>[3][6]类型数组的指针。既然是指针，所以sizeof(a)就是4。<br>既然a是执行double</em>[3][6]类型的指针，<em>a就表示一个double</em>[3][6]的多维数组类型，因此sizeof(<em>a)=3</em>6<em>sizeof(double</em>)=72。同样的，<strong>a表示一个double*[6]类型的数组，所以sizeof(</strong>a)=6<em>sizeof  (double</em>)=24。<strong><em>a就表示其中的一个元素，也就是double</em>了，所以sizeof(*</strong>a)=4。至于<strong><strong>a，就是一个double了，所以sizeof(</strong></strong>a)=sizeof(double)=8。</p>
+<p>a是一个很奇怪的定义，它表示一个指向double<em>[3][6]类型数组的指针。既然是指针，所以sizeof(a)就是4。<br>既然a是执行double</em>[3][6]类型的指针，<em>a就表示一个double</em>[3][6]的多维数组类型，因此sizeof(<em>a)=3</em>6<em>sizeof(double</em>)=72。同样的，<em> </em> a表示一个double<em>[6]类型的数组，所以sizeof(</em> <em> a)=6</em>sizeof  (double<em>)=24。</em> <em> </em> a就表示其中的一个元素，也就是double<em>了，所以sizeof(</em> <em> </em> a)=4。至于<em> </em> <em> </em> a，就是一个double了，所以sizeof(<em> </em> <em> </em> a)=sizeof(double)=8。</p>
 <hr>
 <ul>
 <li><strong>格式的写法</strong></li>
