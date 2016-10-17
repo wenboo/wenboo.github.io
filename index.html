@@ -115,7 +115,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/c/" style="font-size: 10px;">c</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/os/" style="font-size: 10px;">os</a> <a href="/tags/tool/" style="font-size: 10px;">tool</a> <a href="/tags/微机原理/" style="font-size: 20px;">微机原理</a>
+						<a href="/tags/c/" style="font-size: 20px;">c</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/os/" style="font-size: 10px;">os</a> <a href="/tags/tool/" style="font-size: 10px;">tool</a> <a href="/tags/微机原理/" style="font-size: 20px;">微机原理</a>
 					</div>
 				</section>
 				
@@ -192,6 +192,175 @@
 
 
 
+
+  
+    <article id="post-sizeof()用法汇总" class="article article-type-post" itemscope itemprop="blogPost">
+    <script>
+        $("html").niceScroll({
+            cursorcolor: "#2a2929",
+            cursoropacitymax: 1,
+            touchbehavior: false,
+            cursorwidth: "6px",
+            cursorborder: "5",
+            cursorborderradius: "0px",
+            autohidemode: true
+        });
+    </script>
+    
+        <div class="article-meta">
+            <a href="/2016/10/17/sizeof()用法汇总/" class="article-date">
+  	<time datetime="2016-10-17T14:28:55.000Z" itemprop="datePublished">2016-10-17</time>
+</a>
+
+        </div>
+        
+            <div class="article-inner">
+                
+                    <input type="hidden" class="isFancy" />
+                    
+                        
+                            <header class="article-header">
+                                
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/17/sizeof()用法汇总/">sizeof()用法汇总</a>
+    </h1>
+  
+
+
+                            </header>
+                            
+                                    
+                                        <div class="article-entry" itemprop="articleBody">
+                                            
+                                                    <!--02-->
+                                                    <p class="toc-button">目录</p>
+<div id="toc" class="toc-article" style="display:none;">
+    
+</div>
+<script>
+    $(function(){
+
+        var width = document.body.scrollWidth;
+        if (width <=550) {
+             $(".toc-button").css("display","none");
+        }
+        $(".toc-button").hover(function(){
+            var top = $(this).get(0).offsetTop-$(".toc-article").height()/2;
+            $(".toc-article").css({
+                top:top +"px"
+            });
+            $("#toc").show(1000,function(){});
+           // $("#toc").animate({width:500;},3000);
+        },function(){
+
+        });
+        $(".toc-article").hover(function(){
+
+        },function(){
+            $("#toc").hide(1000,function(){});
+        });
+    })
+</script>
+
+                                                        
+                                                            
+                                                                
+                                                                            <ul>
+<li><strong>与strlen()比较</strong></li>
+</ul>
+<p>strlen()计算字符数组的字符数，以”\0”为结束判断，不计算为’\0’的数组元素。<br>sizeof计算数据（包括数组、变量、类型、结构体等）所占内存空间，用字节数表示。</p>
+<hr>
+<ul>
+<li><strong>指针与静态数组的sizeof操作</strong></li>
+</ul>
+<p>指针均可看为变量类型的一种。所有指针变量的sizeof 操作结果均为4。<br>注意：int <em>p; sizeof(p)=4;<br>但sizeof(</em>p)相当于sizeof(int); 对于静态数组，sizeof可直接计算数组大小；</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> a[<span class="number">10</span>];<span class="keyword">char</span> b[]=<span class="string">"hello"</span>;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>sizeof(a)等于4*10=40;<br>sizeof(b)等于6;</p>
+</blockquote>
+<p>注意：数组做型参时，数组名称当作指针使用</p>
+<blockquote>
+<p>void  fun(char p[])<br>{sizeof(p)等于4}    </p>
+</blockquote>
+<p><strong>经典问题：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">double</span>* (*a)[<span class="number">3</span>][<span class="number">6</span>]; </div><div class="line"><span class="built_in">cout</span>&lt;&lt;<span class="keyword">sizeof</span>(a)&lt;&lt;<span class="built_in">endl</span>; <span class="comment">// 4 a为指针</span></div><div class="line"><span class="built_in">cout</span>&lt;&lt;<span class="keyword">sizeof</span>(*a)&lt;&lt;<span class="built_in">endl</span>; <span class="comment">// 72 *a为一个有3*6个指针元素的数组</span></div><div class="line"><span class="built_in">cout</span>&lt;&lt;<span class="keyword">sizeof</span>(**a)&lt;&lt;<span class="built_in">endl</span>; <span class="comment">// 24 **a为数组一维的6个指针</span></div><div class="line"><span class="built_in">cout</span>&lt;&lt;<span class="keyword">sizeof</span>(***a)&lt;&lt;<span class="built_in">endl</span>; <span class="comment">// 4 ***a为一维的第一个指针</span></div><div class="line"><span class="built_in">cout</span>&lt;&lt;<span class="keyword">sizeof</span>(****a)&lt;&lt;<span class="built_in">endl</span>; <span class="comment">// 8 ****a为一个double变量</span></div></pre></td></tr></table></figure>
+<p><strong>问题解析：</strong></p>
+<p>a是一个很奇怪的定义，它表示一个指向double<em>[3][6]类型数组的指针。既然是指针，所以sizeof(a)就是4。<br>既然a是执行double</em>[3][6]类型的指针，<em>a就表示一个double</em>[3][6]的多维数组类型，因此sizeof(<em>a)=3</em>6<em>sizeof(double</em>)=72。同样的，<strong>a表示一个double*[6]类型的数组，所以sizeof(</strong>a)=6<em>sizeof  (double</em>)=24。<strong><em>a就表示其中的一个元素，也就是double</em>了，所以sizeof(*</strong>a)=4。至于<strong><strong>a，就是一个double了，所以sizeof(</strong></strong>a)=sizeof(double)=8。</p>
+<hr>
+<ul>
+<li><strong>格式的写法</strong></li>
+</ul>
+<p>sizeof操作符，对变量或对象可以不加括号，但若是类型，须加括号。</p>
+<hr>
+<ul>
+<li><strong>使用sizeof时string的注意事项</strong></li>
+</ul>
+<blockquote>
+<p>string s=”hello”;<br>sizeof(s)等于string类的大小，sizeof(s.c_str())得到的是与字符串长度。</p>
+</blockquote>
+<hr>
+<ul>
+<li><strong>union 与struct的空间计算</strong></li>
+</ul>
+<p><strong>总体上遵循两个原则：</strong></p>
+<blockquote>
+<ul>
+<li>整体空间是占用空间最大的成员（的类型）所占字节数的整倍数</li>
+<li>数据对齐原则：内存按结构成员的先后顺序排列，当排到该成员变量时，其前面已摆放的空间大小必须是该成员类型大小的整倍数，如果不够则补齐，以此向后类推</li>
+</ul>
+</blockquote>
+<p><strong>注意：</strong>数组按照单个变量一个一个的摆放，而不是看成整体。如果成员中有自定义的类、结构体，也要注意数组问题。</p>
+<p><strong>例：</strong>因为对齐问题使结构体的sizeof变得比较复杂，看下面的例子：(默认对齐方式下)<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">struct</span> s1</div><div class="line">&#123;</div><div class="line"><span class="keyword">char</span> a;</div><div class="line"><span class="keyword">double</span> b;</div><div class="line"><span class="keyword">int</span> c;</div><div class="line"><span class="keyword">char</span> d; </div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">struct</span> s2</div><div class="line">&#123;</div><div class="line"><span class="keyword">char</span> a;</div><div class="line"><span class="keyword">char</span> b;</div><div class="line"><span class="keyword">int</span> c;</div><div class="line"><span class="keyword">double</span> d;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="built_in">cout</span>&lt;&lt;<span class="keyword">sizeof</span>(s1)&lt;&lt;<span class="built_in">endl</span>; <span class="comment">// 24</span></div><div class="line"><span class="built_in">cout</span>&lt;&lt;<span class="keyword">sizeof</span>(s2)&lt;&lt;<span class="built_in">endl</span>; <span class="comment">// 16</span></div></pre></td></tr></table></figure></p>
+<p>同样是两个char类型，一个int类型，一个double类型，但是因为对齐问题，导致他们的大小不同。计算结构体大小可以采用元素摆放法，我举例子说明一下：首先，CPU判断结构体的对界，根据上一节的结论，s1和s2的对界都取最大的元素类型，也就是double类型的对界8。然后开始摆放每个元素。</p>
+<p>  对于s1，首先把a放到8的对界，假定是0，此时下一个空闲的地址是1，但是下一个元素d是double类型，要放到8的对界上，离1最接近的地址是8了，所以d被放在了8，此时下一个空闲地址变成了16，下一个元素c的对界是4，16可以满足，所以c放在了16，此时下一个空闲地址变成了20，下一个元素d需要对界1，也正好落在对界上，所以d放在了20，结构体在地址21处结束。由于s1的大小需要是8的倍数，所以21-23的空间被保留，s1的大小变成了24。</p>
+<p>  对于s2，首先把a放到8的对界，假定是0，此时下一个空闲地址是1，下一个元素的对界也是1，所以b摆放在1，下一个空闲地址变成了2；下一个元素c的对界是4，所以取离2最近的地址4摆放c，下一个空闲地址变成了8，下一个元素d的对界是8，所以d摆放在8，所有元素摆放完毕，结构体在15处结束，占用总空间为16，正好是8的倍数。</p>
+<p> 这里有个陷阱，对于结构体中的结构体成员，不要认为它的对齐方式就是他的大小，看下面的例子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">struct</span> s1</div><div class="line">&#123;</div><div class="line"><span class="keyword">char</span> a[<span class="number">8</span>];</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">struct</span> s2</div><div class="line">&#123;</div><div class="line"><span class="keyword">double</span> d;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">struct</span> s3</div><div class="line">&#123;</div><div class="line">s1 s;</div><div class="line"><span class="keyword">char</span> a;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">struct</span> s4</div><div class="line">&#123;</div><div class="line">s2 s;</div><div class="line"><span class="keyword">char</span> a; </div><div class="line">&#125;;</div><div class="line"><span class="built_in">cout</span>&lt;&lt;<span class="keyword">sizeof</span>(s1)&lt;&lt;<span class="built_in">endl</span>; <span class="comment">// 8</span></div><div class="line"><span class="built_in">cout</span>&lt;&lt;<span class="keyword">sizeof</span>(s2)&lt;&lt;<span class="built_in">endl</span>; <span class="comment">// 8</span></div><div class="line"><span class="built_in">cout</span>&lt;&lt;<span class="keyword">sizeof</span>(s3)&lt;&lt;<span class="built_in">endl</span>; <span class="comment">// 9</span></div><div class="line"><span class="built_in">cout</span>&lt;&lt;<span class="keyword">sizeof</span>(s4)&lt;&lt;<span class="built_in">endl</span>; <span class="comment">// 16;</span></div></pre></td></tr></table></figure>
+<p>s1和s2大小虽然都是8，但是s1的对齐方式是1，s2是8（double），所以在s3和s4中才有这样的差异。</p>
+<p>所以，在自己定义结构体的时候，如果空间紧张的话，最好考虑对齐因素来排列结构体里的元素。</p>
+<p>补充：不要让double干扰你的位域 </p>
+<p>在结构体和类中，可以使用位域来规定某个成员所能占用的空间，所以使用位域能在一定程度上节省结构体占用的空间。不过考虑下面的代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">struct</span> s1 </div><div class="line">&#123; </div><div class="line">　<span class="keyword">int</span> i: <span class="number">8</span>; </div><div class="line">　<span class="keyword">int</span> j: <span class="number">4</span>; </div><div class="line">　<span class="keyword">double</span> b; </div><div class="line">　<span class="keyword">int</span> a:<span class="number">3</span>; </div><div class="line">&#125;; </div><div class="line"></div><div class="line"><span class="keyword">struct</span> s2 </div><div class="line">&#123; </div><div class="line">　<span class="keyword">int</span> i; </div><div class="line">　<span class="keyword">int</span> j; </div><div class="line">　<span class="keyword">double</span> b; </div><div class="line">　<span class="keyword">int</span> a; </div><div class="line">&#125;; </div><div class="line"></div><div class="line"><span class="keyword">struct</span> s3 </div><div class="line">&#123; </div><div class="line">　<span class="keyword">int</span> i; </div><div class="line">　<span class="keyword">int</span> j; </div><div class="line">　<span class="keyword">int</span> a; </div><div class="line">　<span class="keyword">double</span> b; </div><div class="line">&#125;; </div><div class="line"></div><div class="line"><span class="keyword">struct</span> s4 </div><div class="line">&#123; </div><div class="line">　<span class="keyword">int</span> i: <span class="number">8</span>; </div><div class="line">　<span class="keyword">int</span> j: <span class="number">4</span>; </div><div class="line">　<span class="keyword">int</span> a:<span class="number">3</span>; </div><div class="line">　<span class="keyword">double</span> b; </div><div class="line">&#125;; </div><div class="line"></div><div class="line"><span class="built_in">cout</span>&lt;&lt;<span class="keyword">sizeof</span>(s1)&lt;&lt;<span class="built_in">endl</span>; <span class="comment">// 24 </span></div><div class="line"><span class="built_in">cout</span>&lt;&lt;<span class="keyword">sizeof</span>(s2)&lt;&lt;<span class="built_in">endl</span>; <span class="comment">// 24 </span></div><div class="line"><span class="built_in">cout</span>&lt;&lt;<span class="keyword">sizeof</span>(s3)&lt;&lt;<span class="built_in">endl</span>; <span class="comment">// 24 </span></div><div class="line"><span class="built_in">cout</span>&lt;&lt;<span class="keyword">sizeof</span>(s4)&lt;&lt;<span class="built_in">endl</span>; <span class="comment">// 16</span></div></pre></td></tr></table></figure>
+<p>可以看到，有double存在会干涉到位域（sizeof的算法参考上一节），所以使用位域的的时候，最好把float类型和double类型放在程序的开始或者最后。</p>
+<p><strong>相关常数：</strong> </p>
+<blockquote>
+<p>sizeof int:4<br>sizeof short:2<br>sizeof long:4<br>sizeof float:4<br>sizeof double:8<br>sizeof char:1<br>sizeof p:4<br>sizeof WORD:2<br>sizeof DWORD:4</p>
+</blockquote>
+
+                                                                                
+                                        </div>
+                                        
+                                            <div class="article-info article-info-index">
+                                                
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/">c</a></li></ul>
+	</div>
+
+
+                                                    
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/work/">work</a>
+	</div>
+
+
+                                                        
+                                                                <div class="clearfix"></div>
+                                            </div>
+                                            
+            </div>
+            
+                    
+                                <!-- 多说评论框 start -->
+                                
+</article>
+
+<!--
+
+-->
+<!--
+
+-->
 
   
     <article id="post-Java多线程面试题及回答" class="article article-type-post" itemscope itemprop="blogPost">
