@@ -6,26 +6,23 @@
   
   <title>让你的C程序更有效率的十种方法 | Hi~Welcome to Wenboo&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="##避免不必要的函数调用##
-考虑下面的2个函数：
+  <meta name="description" content="避免不必要的函数调用考虑下面的2个函数：
 1234567void str_print( char *str )&amp;#123;    int i;    for ( i = 0; i &amp;lt; strlen ( str ); i++ ) &amp;#123;        printf(&quot;%c&quot;,str[ i ] );    &amp;#125;&amp;#125;
-12345678void str_print1">
+12345678void str_print1 ( cha">
 <meta property="og:type" content="article">
 <meta property="og:title" content="让你的C程序更有效率的十种方法">
 <meta property="og:url" content="http://wenboo.github.io/2016/10/19/让你的C程序更有效率的十种方法/index.html">
 <meta property="og:site_name" content="Hi~Welcome to Wenboo's Blog">
-<meta property="og:description" content="##避免不必要的函数调用##
-考虑下面的2个函数：
+<meta property="og:description" content="避免不必要的函数调用考虑下面的2个函数：
 1234567void str_print( char *str )&amp;#123;    int i;    for ( i = 0; i &amp;lt; strlen ( str ); i++ ) &amp;#123;        printf(&quot;%c&quot;,str[ i ] );    &amp;#125;&amp;#125;
-12345678void str_print1">
+12345678void str_print1 ( cha">
 <meta property="og:image" content="http://static.oschina.net/uploads/img/201108/04114621_JEuB.png">
-<meta property="og:updated_time" content="2016-10-18T16:55:22.142Z">
+<meta property="og:updated_time" content="2016-10-18T16:58:38.037Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="让你的C程序更有效率的十种方法">
-<meta name="twitter:description" content="##避免不必要的函数调用##
-考虑下面的2个函数：
+<meta name="twitter:description" content="避免不必要的函数调用考虑下面的2个函数：
 1234567void str_print( char *str )&amp;#123;    int i;    for ( i = 0; i &amp;lt; strlen ( str ); i++ ) &amp;#123;        printf(&quot;%c&quot;,str[ i ] );    &amp;#125;&amp;#125;
-12345678void str_print1">
+12345678void str_print1 ( cha">
 <meta name="twitter:image" content="http://static.oschina.net/uploads/img/201108/04114621_JEuB.png">
   
     <link rel="alternative" href="/atom.xml" title="Hi~Welcome to Wenboo&#39;s Blog" type="application/atom+xml">
@@ -260,7 +257,7 @@
                                                     <!--02-->
                                                     <p class="toc-button">目录</p>
 <div id="toc" class="toc-article" style="display:none;">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#避免不必要的内存引用"><span class="toc-number">1.</span> <span class="toc-text">避免不必要的内存引用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#节约内存（内存对齐和填充的概念）"><span class="toc-number">2.</span> <span class="toc-text">节约内存（内存对齐和填充的概念）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用无符号整数，而不是整数的，如果你知道的值将永远是否定的"><span class="toc-number">3.</span> <span class="toc-text">使用无符号整数，而不是整数的，如果你知道的值将永远是否定的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在一个逻辑条件语句中常数项永远在左侧"><span class="toc-number">4.</span> <span class="toc-text">在一个逻辑条件语句中常数项永远在左侧</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在可能的情况下使用typedef替代macro。当然有时候你无法避免macro，但是typedef更好"><span class="toc-number">5.</span> <span class="toc-text">在可能的情况下使用typedef替代macro。当然有时候你无法避免macro，但是typedef更好</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#确保声明和定义是静态的，除非您希望从不同的文件中调用该函数"><span class="toc-number">6.</span> <span class="toc-text">确保声明和定义是静态的，除非您希望从不同的文件中调用该函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用Memoization，以避免递归重复计算"><span class="toc-number">7.</span> <span class="toc-text">使用Memoization，以避免递归重复计算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#避免悬空指针和野指针"><span class="toc-number">8.</span> <span class="toc-text">避免悬空指针和野指针</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#永远记住释放你分配给程序的任何内存"><span class="toc-number">9.</span> <span class="toc-text">永远记住释放你分配给程序的任何内存</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#避免不必要的函数调用"><span class="toc-number">1.</span> <span class="toc-text">避免不必要的函数调用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#避免不必要的内存引用"><span class="toc-number">2.</span> <span class="toc-text">避免不必要的内存引用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#节约内存（内存对齐和填充的概念）"><span class="toc-number">3.</span> <span class="toc-text">节约内存（内存对齐和填充的概念）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用无符号整数，而不是整数的，如果你知道的值将永远是否定的"><span class="toc-number">4.</span> <span class="toc-text">使用无符号整数，而不是整数的，如果你知道的值将永远是否定的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在一个逻辑条件语句中常数项永远在左侧"><span class="toc-number">5.</span> <span class="toc-text">在一个逻辑条件语句中常数项永远在左侧</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在可能的情况下使用typedef替代macro。当然有时候你无法避免macro，但是typedef更好"><span class="toc-number">6.</span> <span class="toc-text">在可能的情况下使用typedef替代macro。当然有时候你无法避免macro，但是typedef更好</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#确保声明和定义是静态的，除非您希望从不同的文件中调用该函数"><span class="toc-number">7.</span> <span class="toc-text">确保声明和定义是静态的，除非您希望从不同的文件中调用该函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用Memoization，以避免递归重复计算"><span class="toc-number">8.</span> <span class="toc-text">使用Memoization，以避免递归重复计算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#避免悬空指针和野指针"><span class="toc-number">9.</span> <span class="toc-text">避免悬空指针和野指针</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#永远记住释放你分配给程序的任何内存"><span class="toc-number">10.</span> <span class="toc-text">永远记住释放你分配给程序的任何内存</span></a></li></ol>
 </div>
 <script>
     $(function(){
@@ -290,8 +287,7 @@
                                                         
                                                             
                                                                 
-                                                                            <p>##避免不必要的函数调用##</p>
-<p>考虑下面的2个函数：</p>
+                                                                            <h2 id="避免不必要的函数调用"><a href="#避免不必要的函数调用" class="headerlink" title="避免不必要的函数调用"></a>避免不必要的函数调用</h2><p>考虑下面的2个函数：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">str_print</span><span class="params">( <span class="keyword">char</span> *str )</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> i;</div><div class="line">    <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt; <span class="built_in">strlen</span> ( str ); i++ ) &#123;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"%c"</span>,str[ i ] );</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">str_print1</span> <span class="params">( <span class="keyword">char</span> *str )</span> </span></div><div class="line">&#123; </div><div class="line">    <span class="keyword">int</span> len; </div><div class="line">    len = <span class="built_in">strlen</span> ( str ); </div><div class="line">    <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt; len; i++ ) &#123; </div><div class="line">        <span class="built_in">printf</span>(<span class="string">"%c"</span>,str[ i ] ); </div><div class="line">    &#125; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>请注意 这两个函数的功能相似。然而，第一个函数调用strlen（）函数多次，而第二个函数只调用函数strlen（）一次。因此第一个函数性能明显比第二个好。</p>
