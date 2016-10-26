@@ -113,7 +113,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/c/" style="font-size: 16.67px;">c</a> <a href="/tags/java/" style="font-size: 16.67px;">java</a> <a href="/tags/os/" style="font-size: 13.33px;">os</a> <a href="/tags/tool/" style="font-size: 10px;">tool</a> <a href="/tags/微机原理/" style="font-size: 16.67px;">微机原理</a> <a href="/tags/计算机网络/" style="font-size: 20px;">计算机网络</a>
+						<a href="/tags/c/" style="font-size: 16.67px;">c</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/os/" style="font-size: 13.33px;">os</a> <a href="/tags/tool/" style="font-size: 10px;">tool</a> <a href="/tags/微机原理/" style="font-size: 16.67px;">微机原理</a> <a href="/tags/计算机网络/" style="font-size: 20px;">计算机网络</a>
 					</div>
 				</section>
 				
@@ -191,6 +191,149 @@
 
 
 
+
+  
+    <article id="post-进程与线程的一个简单解释" class="article article-type-post" itemscope itemprop="blogPost">
+    <script>
+        $("html").niceScroll({
+            cursorcolor: "#2a2929",
+            cursoropacitymax: 1,
+            touchbehavior: false,
+            cursorwidth: "6px",
+            cursorborder: "5",
+            cursorborderradius: "0px",
+            autohidemode: true
+        });
+    </script>
+    
+        <div class="article-meta">
+            <a href="/2016/10/20/进程与线程的一个简单解释/" class="article-date">
+  	<time datetime="2016-10-19T16:13:42.000Z" itemprop="datePublished">2016-10-20</time>
+</a>
+
+        </div>
+        
+            <div class="article-inner">
+                
+                    <input type="hidden" class="isFancy" />
+                    
+                        
+                            <header class="article-header">
+                                
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/20/进程与线程的一个简单解释/">进程与线程的一个简单解释</a>
+    </h1>
+  
+
+
+                            </header>
+                            
+                                    
+                                        <div class="article-entry" itemprop="articleBody">
+                                            
+                                                    <!--02-->
+                                                    <p class="toc-button">目录</p>
+<div id="toc" class="toc-article" style="display:none;">
+    
+</div>
+<script>
+    $(function(){
+
+        var width = document.body.scrollWidth;
+        if (width <=550) {
+             $(".toc-button").css("display","none");
+        }
+        $(".toc-button").hover(function(){
+            var top = $(this).get(0).offsetTop-$(".toc-article").height()/2;
+            $(".toc-article").css({
+                top:top +"px"
+            });
+            $("#toc").show(1000,function(){});
+           // $("#toc").animate({width:500;},3000);
+        },function(){
+
+        });
+        $(".toc-article").hover(function(){
+
+        },function(){
+            $("#toc").hide(1000,function(){});
+        });
+    })
+</script>
+
+                                                        
+                                                            
+                                                                
+                                                                            <p><strong>1 计算机的核心是CPU，它承担了所有的计算任务。它就像一座工厂，时刻在运行。</strong></p>
+<p><img src="http://images.cnitblog.com/news/145819/201304/24231003-62541ee9b2f74245996a2bdd5cb71be1.jpg" alt="1"></p>
+<hr>
+<p><strong>2 假定工厂的电力有限，一次只能供给一个车间使用。也就是说，一个车间开工的时候，其他车间都必须停工。背后的含义就是，单个CPU一次只能运行一个任务。</strong></p>
+<p><img src="http://images.cnitblog.com/news/145819/201304/24231003-c95c56a39b3841469e31327e2e5471b6.png" alt="2"></p>
+<hr>
+<p><strong>3 进程就好比工厂的车间，它代表CPU所能处理的单个任务。任一时刻，CPU总是运行一个进程，其他进程处于非运行状态。</strong></p>
+<p><img src="http://images.cnitblog.com/news/145819/201304/24231003-454e3f0e81804fee82241ec46ac091e8.jpg" alt="3"></p>
+<hr>
+<p><strong>4 一个车间里，可以有很多工人。他们协同完成一个任务。</strong><br><img src="http://images.cnitblog.com/news/145819/201304/24231003-565388fbe5124a1480313fdc6dfef8f7.jpg" alt="4"></p>
+<hr>
+<p><strong>5 线程就好比车间里的工人。一个进程可以包括多个线程。</strong><br><img src="http://images.cnitblog.com/news/145819/201304/24231003-dbb0ef8fba91405ca591d42376343ccd.jpg" alt="5"></p>
+<hr>
+<p><strong>6 车间的空间是工人们共享的，比如许多房间是每个工人都可以进出的。这象征一个进程的内存空间是共享的，每个线程都可以使用这些共享内存。</strong></p>
+<p><img src="http://images.cnitblog.com/news/145819/201304/24231003-5b0fb7d99c4e4524816e57b27f27d9d7.png" alt="6"></p>
+<hr>
+<p><strong>7 可是，每间房间的大小不同，有些房间最多只能容纳一个人，比如厕所。里面有人的时候，其他人就不能进去了。这代表一个线程使用某些共享内存时，其他线程必须等它结束，才能使用这一块内存。</strong></p>
+<p><img src="http://images.cnitblog.com/news/145819/201304/24231006-1ee7049df7cb48bc8382570551706ae0.jpg" alt="7"></p>
+<hr>
+<p><strong>8 一个防止他人进入的简单方法，就是门口加一把锁。先到的人锁上门，后到的人看到上锁，就在门口排队，等锁打开再进去。这就叫”互斥锁”（MutualExclusion，缩写Mutex），防止多个线程同时读写某一块内存区域。</strong></p>
+<p><img src="http://images.cnitblog.com/news/145819/201304/24231005-5239f4a827444a1eb44502b7bab7e62f.jpg" alt="8"></p>
+<hr>
+<p><strong>9 还有些房间，可以同时容纳n个人，比如厨房。也就是说，如果人数大于n，多出来的人只能在外面等着。这好比某些内存区域，只能供给固定数目的线程使用。</strong></p>
+<p><img src="http://images.cnitblog.com/news/145819/201304/24231005-574168dceaeb4d7da0c1e1860b9140b1.jpg" alt="9"></p>
+<hr>
+<p><strong>10 这时的解决方法，就是在门口挂n把钥匙。进去的人就取一把钥匙，出来时再把钥匙挂回原处。后到的人发现钥匙架空了，就知道必须在门口排队等着了。这种做法叫做”信号量”（Semaphore），用来保证多个线程不会互相冲突。不难看出，mutex是semaphore的一种特殊情况（n=1时）。也就是说，完全可以用后者替代前者。但是，因为mutex较为简单，且效率高，所以在必须保证资源独占的情况下，还是采用这种设计。</strong></p>
+<p><img src="http://images.cnitblog.com/news/145819/201304/24231005-f8b8ff4e03ec4cca84d2976ba2c69aba.jpg" alt="10"></p>
+<hr>
+<p><strong>11 操作系统的设计，因此可以归结为三点：</strong></p>
+<ul>
+<li>以多进程形式，允许多个任务同时运行</li>
+<li>以多线程形式，允许单个任务分成不同的部分运行</li>
+<li>提供协调机制，一方面防止进程之间和线程之间产生冲突，另一方面允许进程之间和线程之间共享资源</li>
+</ul>
+<p><img src="http://images.cnitblog.com/news/145819/201304/24231004-af56379265f44ab595760f4438624f06.png" alt="11"></p>
+
+                                                                                
+                                        </div>
+                                        
+                                            <div class="article-info article-info-index">
+                                                
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/os/">os</a></li></ul>
+	</div>
+
+
+                                                    
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/work/">work</a>
+	</div>
+
+
+                                                        
+                                                                <div class="clearfix"></div>
+                                            </div>
+                                            
+            </div>
+            
+                    
+                                <!-- 多说评论框 start -->
+                                
+</article>
+
+<!--
+
+-->
+<!--
+
+-->
 
   
     <article id="post-编译器的工作原理" class="article article-type-post" itemscope itemprop="blogPost">
@@ -1632,146 +1775,6 @@
                                                 
 	<div class="article-tag tagcloud">
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/微机原理/">微机原理</a></li></ul>
-	</div>
-
-
-                                                    
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/work/">work</a>
-	</div>
-
-
-                                                        
-                                                                <div class="clearfix"></div>
-                                            </div>
-                                            
-            </div>
-            
-                    
-                                <!-- 多说评论框 start -->
-                                
-</article>
-
-<!--
-
--->
-<!--
-
--->
-
-  
-    <article id="post-C语言中的字符串" class="article article-type-post" itemscope itemprop="blogPost">
-    <script>
-        $("html").niceScroll({
-            cursorcolor: "#2a2929",
-            cursoropacitymax: 1,
-            touchbehavior: false,
-            cursorwidth: "6px",
-            cursorborder: "5",
-            cursorborderradius: "0px",
-            autohidemode: true
-        });
-    </script>
-    
-        <div class="article-meta">
-            <a href="/2016/10/15/C语言中的字符串/" class="article-date">
-  	<time datetime="2016-10-15T14:35:47.000Z" itemprop="datePublished">2016-10-15</time>
-</a>
-
-        </div>
-        
-            <div class="article-inner">
-                
-                    <input type="hidden" class="isFancy" />
-                    
-                        
-                            <header class="article-header">
-                                
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/15/C语言中的字符串/">C语言中的字符串</a>
-    </h1>
-  
-
-
-                            </header>
-                            
-                                    
-                                        <div class="article-entry" itemprop="articleBody">
-                                            
-                                                    <!--02-->
-                                                    <p class="toc-button">目录</p>
-<div id="toc" class="toc-article" style="display:none;">
-    
-</div>
-<script>
-    $(function(){
-
-        var width = document.body.scrollWidth;
-        if (width <=550) {
-             $(".toc-button").css("display","none");
-        }
-        $(".toc-button").hover(function(){
-            var top = $(this).get(0).offsetTop-$(".toc-article").height()/2;
-            $(".toc-article").css({
-                top:top +"px"
-            });
-            $("#toc").show(1000,function(){});
-           // $("#toc").animate({width:500;},3000);
-        },function(){
-
-        });
-        $(".toc-article").hover(function(){
-
-        },function(){
-            $("#toc").hide(1000,function(){});
-        });
-    })
-</script>
-
-                                                        
-                                                            
-                                                                
-                                                                            <p><strong>1. C语言中的字符串</strong></p>
-<p>C语言中，字符串的使用对于初学者来说是个很容易混淆、很容易出错。C语言字符串是以‘\0′结尾。因此，我们使用字符串时，始终要记得留一个字节用于存放结尾符。</p>
-<p>请看下面一段代码，哪个地方会在运行时出错？</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">char</span> str1[]=<span class="string">"hello,world"</span>;   </div><div class="line"><span class="keyword">char</span> str2[<span class="number">100</span>]=<span class="string">"hello,world"</span>;   </div><div class="line"><span class="keyword">char</span> *str3 = <span class="string">"hello,world"</span>;   </div><div class="line">str1[<span class="number">0</span>]=<span class="string">'H'</span>;   </div><div class="line">str3[<span class="number">0</span>]=<span class="string">'H'</span>;     </div><div class="line"><span class="built_in">printf</span>(<span class="string">" %s   %s  %s"</span>,str1,str2,str3);</div></pre></td></tr></table></figure>
-<p>上面的代码会在如下地方出错。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">str3[<span class="number">0</span>]=<span class="string">'H'</span>;</div></pre></td></tr></table></figure>
-<p>从概念上讲，之所以出错是因为str3是个常量字符串，而常量是不允许被改变的。</p>
-<p>在一些开源项目中，我们能看到C语言字符串的一些引申版本，他们对c语言原生字符串进行封装以获得额外的优点。例如：</p>
-<hr>
-<p><strong>2. Nginx中的字符串</strong></p>
-<p> nginx中字符串类型被定义为一个结构体，如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> &#123;</div><div class="line">    <span class="keyword">size_t</span> len;</div><div class="line">    u_char *data;</div><div class="line">&#125; <span class="keyword">ngx_str_t</span>;</div></pre></td></tr></table></figure>
-<p>这样定义有什么好处呢？</p>
-<p>nginx针对web服务器特定的场景对字符串进行的一个简单封装。这样封装的好处是可以有效的降低内存使用量。</p>
-<p>例如：假设如下一个http请求存放在起始地址为0×12345678的内存处。<br>GET  /about.html  http/1.1</p>
-<p>我们要取出http请求的请求方法，只需要如下赋值即可获得，而不需要额外开辟内存空间来存储。这样就节省了内存。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">len=<span class="number">3</span>;</div><div class="line">data = <span class="number">0x12345678</span></div></pre></td></tr></table></figure>
-<hr>
-<p><strong>3. Redis中的字符串</strong></p>
-<p> 在Redis中，字符串同样也被封装成了一个结构体，具体如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">struct</span> sdsdr&#123;   </div><div class="line">    <span class="keyword">int</span> len;  <span class="comment">//存放字符串长度   </span></div><div class="line">    <span class="keyword">int</span> <span class="built_in">free</span>; <span class="comment">//记录buf中还有多少字节未使用   </span></div><div class="line">    <span class="keyword">char</span> buf[];   </div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<hr>
-<p>Redis总将字符串封装成如上结构，你能看出它相比于原生字符串，有什么好处么？</p>
-<p><strong>至少有如下几个好处</strong></p>
-<ul>
-<li><p>能够在O(1)时间内获取到字符串的长度。而原生字符串要获取器长度择需要通过检测字符串结尾符才能得到字符串长度，时间复杂度为O(n)</p>
-</li>
-<li><p>能够有效杜绝缓冲区溢出。这个很好理解，比如c语言字符串复制操作，如果如果事先没有分配足够的内存，便会出现缓存区溢出。而有了len这个字段后，我们可以利用它来防止缓存区溢出。</p>
-</li>
-<li><p>二进制安全。这个有点不容易注意到。C语言中的字符中，除了字符串末尾之外，字符串里不能包含空字符，否则最先读入的空字符就会被误认为是字符串结尾，因此字符串就被无故截断了，这种限制使得C语言原生字符串只能保持文本数据，而不能保持诸如图片、音频、视频等二进制数据。但是，通过上面的结构体封装后，有了len字段记录字符串的真实长度，我们就不会再有限制，我们只管通过len来取数据就行了，不用担心buf里面存放的是不是空字符。</p>
-</li>
-</ul>
-
-                                                                                
-                                        </div>
-                                        
-                                            <div class="article-info article-info-index">
-                                                
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/">c</a></li></ul>
 	</div>
 
 
