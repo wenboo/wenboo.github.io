@@ -113,7 +113,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/c/" style="font-size: 16.67px;">c</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/os/" style="font-size: 13.33px;">os</a> <a href="/tags/tool/" style="font-size: 10px;">tool</a> <a href="/tags/微机原理/" style="font-size: 16.67px;">微机原理</a> <a href="/tags/计算机网络/" style="font-size: 20px;">计算机网络</a>
+						<a href="/tags/c/" style="font-size: 20px;">c</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/os/" style="font-size: 13.33px;">os</a> <a href="/tags/tool/" style="font-size: 10px;">tool</a> <a href="/tags/微机原理/" style="font-size: 16.67px;">微机原理</a> <a href="/tags/计算机网络/" style="font-size: 20px;">计算机网络</a>
 					</div>
 				</section>
 				
@@ -191,6 +191,239 @@
 
 
 
+
+  
+    <article id="post-应该知道的Linux技巧" class="article article-type-post" itemscope itemprop="blogPost">
+    <script>
+        $("html").niceScroll({
+            cursorcolor: "#2a2929",
+            cursoropacitymax: 1,
+            touchbehavior: false,
+            cursorwidth: "6px",
+            cursorborder: "5",
+            cursorborderradius: "0px",
+            autohidemode: true
+        });
+    </script>
+    
+        <div class="article-meta">
+            <a href="/2016/10/26/应该知道的Linux技巧/" class="article-date">
+  	<time datetime="2016-10-26T14:24:29.000Z" itemprop="datePublished">2016-10-26</time>
+</a>
+
+        </div>
+        
+            <div class="article-inner">
+                
+                    <input type="hidden" class="isFancy" />
+                    
+                        
+                            <header class="article-header">
+                                
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/26/应该知道的Linux技巧/">应该知道的Linux技巧</a>
+    </h1>
+  
+
+
+                            </header>
+                            
+                                    
+                                        <div class="article-entry" itemprop="articleBody">
+                                            
+                                                    <!--02-->
+                                                    <p class="toc-button">目录</p>
+<div id="toc" class="toc-article" style="display:none;">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基础"><span class="toc-number">1.</span> <span class="toc-text">基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#日常"><span class="toc-number">2.</span> <span class="toc-text">日常</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据处理"><span class="toc-number">3.</span> <span class="toc-text">数据处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#系统调试"><span class="toc-number">4.</span> <span class="toc-text">系统调试</span></a></li></ol>
+</div>
+<script>
+    $(function(){
+
+        var width = document.body.scrollWidth;
+        if (width <=550) {
+             $(".toc-button").css("display","none");
+        }
+        $(".toc-button").hover(function(){
+            var top = $(this).get(0).offsetTop-$(".toc-article").height()/2;
+            $(".toc-article").css({
+                top:top +"px"
+            });
+            $("#toc").show(1000,function(){});
+           // $("#toc").animate({width:500;},3000);
+        },function(){
+
+        });
+        $(".toc-article").hover(function(){
+
+        },function(){
+            $("#toc").hide(1000,function(){});
+        });
+    })
+</script>
+
+                                                        
+                                                            
+                                                                
+                                                                            <h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><ul>
+<li><p>学习 Bash 。你可以man bash来看看bash的东西，并不复杂也并不长。你用别的shell也行，但是bash是很强大的并且也是系统默认的。（学习zsh或tsch只会让你在很多情况下受到限制）</p>
+</li>
+<li><p>学习 vim 。在Linux下，基本没有什么可与之竞争的编译辑器（就算你是一个Emacs或Eclipse的重度用户）。你可以看看《简明vim攻略》和 《Vim的冒险游戏》以及《给程序员的Vim速查卡》还有《把Vim变成一个编程的IDE》等等。</p>
+</li>
+<li><p>了解 ssh。明白不需要口令的用户认证（通过ssh-agent, ssh-add），学会用ssh翻墙，用scp而不是ftp传文件，等等。你知道吗？scp 远端的时候，你可以按tab键来查看远端的目录和文件（当然，需要无口令的用户认证），这都是bash的功劳。</p>
+</li>
+<li><p>熟悉bash的作业管理，如： &amp;, Ctrl-Z, Ctrl-C, jobs, fg, bg, kill, 等等。当然，你也要知道Ctrl+\（SIGQUIT）和Ctrl+C （SIGINT）的区别。<br>简单的文件管理 ： ls 和 ls -l (你最好知道 “ls -l” 的每一列的意思), less, head, tail 和 tail -f, ln 和 ln -s (你知道明白hard link和soft link的不同和优缺点), chown, chmod, du (如果你想看看磁盘的大小 du -sk *), df, mount。当然，原作者忘了find命令。</p>
+</li>
+<li><p>基础的网络管理： ip 或 ifconfig, dig。当然，原作者还忘了如netstat, ping, traceroute, 等</p>
+</li>
+<li><p>理解正则表达式，还有grep/egrep的各种选项。比如： -o, -A, 和 -B 这些选项是很值得了解的。</p>
+</li>
+<li><p>学习使用 apt-get 和 yum 来查找和安装软件（前者的经典分发包是Ubuntu，后者的经典分发包是Redhat），我还建议你试着从源码编译安装软件。</p>
+</li>
+</ul>
+<h2 id="日常"><a href="#日常" class="headerlink" title="日常"></a>日常</h2><ul>
+<li><p>在 bash 里，使用 Ctrl-R 而不是上下光标键来查找历史命令。</p>
+</li>
+<li><p>在 bash里，使用 Ctrl-W 来删除最后一个单词，使用 Ctrl-U 来删除一行。请man bash后查找Readline Key Bindings一节来看看bash的默认热键，比如：Alt-. 把上一次命令的最后一个参数打出来，而Alt-* 则列出你可以输入的命令。</p>
+</li>
+<li><p>回到上一次的工作目录： cd –  （回到home是 cd ~）</p>
+</li>
+<li><p>使用 xargs。这是一个很强大的命令。你可以使用-L来限定有多少个命令，也可以用-P来指定并行的进程数。如果你不知道你的命令会变成什么样，你可以使用xargs echo来看看会是什么样。当然， -I{} 也很好用。示例：</p>
+</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">find . -name \*.py | xargs grep some_function</div><div class="line"> </div><div class="line">cat hosts | xargs -I&#123;&#125; ssh root@&#123;&#125; hostname</div></pre></td></tr></table></figure>
+<ul>
+<li><p>pstree -p 可以帮你显示进程树。（读过我的那篇《一个fork的面试题》的人应该都不陌生）</p>
+</li>
+<li><p>使用 pgrep 和 pkill 来找到或是kill 某个名字的进程。 (-f 选项很有用).</p>
+</li>
+<li><p>了解可以发给进程的信号。例如：要挂起一个进程，使用 kill -STOP [pid]. 使用 man 7 signal 来查看各种信号，使用kill -l 来查看数字和信号的对应表</p>
+</li>
+<li><p>使用 nohup 或  disown 如果你要让某个进程运行在后台。<br>使用netstat -lntp来看看有侦听在网络某端口的进程。当然，也可以使用 lsof。</p>
+</li>
+<li><p>在bash的脚本中，你可以使用 set -x 来debug输出。使用 set -e 来当有错误发生的时候abort执行。考虑使用 set -o pipefail 来限制错误。还可以使用trap来截获信号（如截获ctrl+c）。</p>
+</li>
+<li><p>在bash 脚本中，subshells (写在圆括号里的) 是一个很方便的方式来组合一些命令。一个常用的例子是临时地到另一个目录中，例如：</p>
+</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># do something in current dir</span></div><div class="line">(cd /some/other/dir; other-command)</div><div class="line"><span class="meta"># continue in original dir</span></div></pre></td></tr></table></figure>
+<ul>
+<li><p>在 bash 中，注意那里有很多的变量展开。如：检查一个变量是否存在: ${name:?error message}。如果一个bash的脚本需要一个参数，也许就是这样一个表达式 input_file=${1:?usage: $0 input_file}。一个计算表达式： i=$(( (i + 1) % 5 ))。一个序列： {1..10}。 截断一个字符串： ${var%suffix} 和 ${var#prefix}。 示例： if var=foo.pdf, then echo ${var%.pdf}.txt prints “foo.txt”.</p>
+</li>
+<li><p>通过 &lt;(some command) 可以把某命令当成一个文件。示例：比较一个本地文件和远程文件 /etc/hosts： diff /etc/hosts &lt;(ssh somehost cat /etc/hosts)</p>
+</li>
+<li><p>了解什么叫 “here documents” ，就是诸如 cat &lt;&lt;EOF 这样的东西。</p>
+</li>
+<li><p>在 bash中，使用重定向到标准输出和标准错误。如： some-command &gt;logfile 2&gt;&amp;1。另外，要确认某命令没有把某个打开了的文件句柄重定向给标准输入，最佳实践是加上 “&lt;/dev/null”，把/dev/null重定向到标准输入。</p>
+</li>
+<li><p>使用 man ascii 来查看 ASCII 表。</p>
+</li>
+<li><p>在远端的 ssh 会话里，使用 screen 或 dtach 来保存你的会话。（参看《28个Unix/Linux的命令行神器》）<br>要来debug Web，试试curl 和 curl -I 或是 wget 。我觉得debug Web的利器是firebug，curl和wget是用来抓网页的，呵呵。</p>
+</li>
+<li><p>把 HTML 转成文本： lynx -dump -stdin</p>
+</li>
+<li><p>如果你要处理XML，使用 xmlstarlet</p>
+</li>
+<li><p>对于 Amazon S3， s3cmd 是一个很方便的命令（还有点不成熟）</p>
+</li>
+<li><p>在 ssh中，知道怎么来使用ssh隧道。通过 -L or -D (还有-R) ，翻墙神器。</p>
+</li>
+<li><p>你还可以对你的ssh 做点优化。比如，.ssh/config 包含着一些配置：避免链接被丢弃，链接新的host时不需要确认，转发认证，以前使用压缩（如果你要使用scp传文件）：</p>
+</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">TCPKeepAlive=yes</div><div class="line">ServerAliveInterval=<span class="number">15</span></div><div class="line">ServerAliveCountMax=<span class="number">6</span></div><div class="line">StrictHostKeyChecking=no</div><div class="line">Compression=yes</div><div class="line">ForwardAgent=yes</div></pre></td></tr></table></figure>
+<ul>
+<li>如果你有输了个命令行，但是你改变注意了，但你又不想删除它，因为你要在历史命令中找到它，但你也不想执行它。那么，你可以按下 Alt-# ，于是这个命令关就被加了一个#字符，于是就被注释掉了。</li>
+</ul>
+<h2 id="数据处理"><a href="#数据处理" class="headerlink" title="数据处理"></a>数据处理</h2><ul>
+<li><p>了解 sort 和 uniq 命令 (包括 uniq 的 -u 和 -d 选项).</p>
+</li>
+<li><p>了解用 cut, paste, 和 join 命令来操作文本文件。很多人忘了在cut前使用join。</p>
+</li>
+<li><p>如果你知道怎么用sort/uniq来做集合交集、并集、差集能很大地促进你的工作效率。假设有两个文本文件a和b已解被 uniq了，那么，用sort/uniq会是最快的方式，无论这两个文件有多大（sort不会被内存所限，你甚至可以使用-T选项，如果你的/tmp目录很小）</p>
+</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">cat a b | sort | uniq &gt; c   <span class="meta"># c is a union b 并集</span></div><div class="line"> </div><div class="line">cat a b | sort | uniq -d &gt; c   <span class="meta"># c is a intersect b 交集</span></div><div class="line"> </div><div class="line">cat a b b | sort | uniq -u &gt; c   <span class="meta"># c is set difference a - b 差集</span></div></pre></td></tr></table></figure>
+<ul>
+<li><p>了解和字符集相关的命令行工具，包括排序和性能。很多的Linux安装程序都会设置LANG 或是其它和字符集相关的环境变量。这些东西可能会让一些命令（如：sort）的执行性能慢N多倍（注：就算是你用UTF-8编码文本文件，你也可以很安全地使用ASCII来对其排序）。如果你想Disable那个i18n 并使用传统的基于byte的排序方法，那就设置export LC_ALL=C （实际上，你可以把其放在 .bashrc）。如果这设置这个变量，你的sort命令很有可能会是错的。</p>
+</li>
+<li><p>了解 awk 和 sed，并用他们来做一些简单的数据修改操作。例如：求第三列的数字之和： awk ‘{ x += $3 } END { print x }’。这可能会比Python快3倍，并比Python的代码少三倍。</p>
+</li>
+<li><p>使用 shuf 来打乱一个文件中的行或是选择文件中一个随机的行。</p>
+</li>
+<li><p>了解sort命令的选项。了解key是什么（-t和-k）。具体说来，你可以使用-k1,1来对第一列排序，-k1来对全行排序。</p>
+</li>
+<li><p>Stable sort (sort -s) 会很有用。例如：如果你要想对两例排序，先是以第二列，然后再以第一列，那么你可以这样： sort -k1,1 | sort -s -k2,2</p>
+</li>
+<li><p>我们知道，在bash命令行下，Tab键是用来做目录文件自动完成的事的。但是如果你想输入一个Tab字符（比如：你想在sort -t选项后输入<tab>字符），你可以先按Ctrl-V，然后再按Tab键，就可以输入<tab>字符了。当然，你也可以使用$’\t’。</tab></tab></p>
+</li>
+<li><p>如果你想查看二进制文件，你可以使用hd命令（在CentOS下是hexdump命令），如果你想编译二进制文件，你可以使用bvi命令（<a href="http://bvi.sourceforge.net/" target="_blank" rel="external">http://bvi.sourceforge.net/</a> 墙）</p>
+</li>
+<li><p>另外，对于二进制文件，你可以使用strings（配合grep等）来查看二进制中的文本。</p>
+</li>
+<li><p>对于文本文件转码，你可以试一下 iconv。或是试试更强的 uconv 命令（这个命令支持更高级的Unicode编码）</p>
+</li>
+<li><p>如果你要分隔一个大文件，你可以使用split命令（split by size）和csplit命令（split by a pattern）。</p>
+</li>
+</ul>
+<h2 id="系统调试"><a href="#系统调试" class="headerlink" title="系统调试"></a>系统调试</h2><ul>
+<li><p>如果你想知道磁盘、CPU、或网络状态，你可以使用 iostat, netstat, top (或更好的 htop), 还有 dstat 命令。你可以很快地知道你的系统发生了什么事。关于这方面的命令，还有iftop, iotop等（参看《28个Unix/Linux的命令行神器》）</p>
+</li>
+<li><p>要了解内存的状态，你可以使用free和vmstat命令。具体来说，你需要注意 “cached” 的值，这个值是Linux内核占用的内存。还有free的值。</p>
+</li>
+<li><p>Java 系统监控有一个小的技巧是，你可以使用kill -3 <pid> 发一个SIGQUIT的信号给JVM，可以把堆栈信息（包括垃圾回收的信息）dump到stderr/logs。</pid></p>
+</li>
+<li><p>使用 mtr 会比使用 traceroute 要更容易定位一个网络问题。</p>
+</li>
+<li><p>如果你要找到哪个socket或进程在使用网络带宽，你可以使用 iftop 或 nethogs。<br>Apache的一个叫 ab 的工具是一个很有用的，用quick-and-dirty的方式来测试网站服务器的性能负载的工作。如果你需要更为复杂的测试，你可以试试 siege。</p>
+</li>
+<li><p>如果你要抓网络包的话，试试 wireshark 或 tshark。</p>
+</li>
+<li><p>了解 strace 和 ltrace。这两个命令可以让你查看进程的系统调用，这有助于你分析进程的hang在哪了，怎么crash和failed的。你还可以用其来做性能profile，使用 -c 选项，你可以使用-p选项来attach上任意一个进程。</p>
+</li>
+<li><p>了解用ldd命令来检查相关的动态链接库。注意：ldd的安全问题</p>
+</li>
+<li><p>使用gdb来调试一个正在运行的进程或分析core dump文件。参看我写的《GDB中应该知道的几个调试方法》<br>学会到 /proc 目录中查看信息。这是一个Linux内核运行时记录的整个操作系统的运行统计和信息，比如： /proc/cpuinfo, /proc/xxx/cwd, /proc/xxx/exe, /proc/xxx/fd/, /proc/xxx/smaps.</p>
+</li>
+<li><p>如果你调试某个东西为什么出错时，sar命令会有用。它可以让你看看 CPU, 内存, 网络, 等的统计信息。</p>
+</li>
+<li><p>使用 dmesg 来查看一些硬件或驱动程序的信息或问题。</p>
+</li>
+</ul>
+
+                                                                                
+                                        </div>
+                                        
+                                            <div class="article-info article-info-index">
+                                                
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/">c</a></li></ul>
+	</div>
+
+
+                                                    
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/work/">work</a>
+	</div>
+
+
+                                                        
+                                                                <div class="clearfix"></div>
+                                            </div>
+                                            
+            </div>
+            
+                    
+                                <!-- 多说评论框 start -->
+                                
+</article>
+
+<!--
+
+-->
+<!--
+
+-->
 
   
     <article id="post-Java-集合类问题集" class="article article-type-post" itemscope itemprop="blogPost">
@@ -1992,229 +2225,6 @@
 </li>
 </ol>
 </blockquote>
-
-                                                                                
-                                        </div>
-                                        
-                                            <div class="article-info article-info-index">
-                                                
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/计算机网络/">计算机网络</a></li></ul>
-	</div>
-
-
-                                                    
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/work/">work</a>
-	</div>
-
-
-                                                        
-                                                                <div class="clearfix"></div>
-                                            </div>
-                                            
-            </div>
-            
-                    
-                                <!-- 多说评论框 start -->
-                                
-</article>
-
-<!--
-
--->
-<!--
-
--->
-
-  
-    <article id="post-HTTP-HTTP2-0-SPDY-HTTPS你应该知道的一些事" class="article article-type-post" itemscope itemprop="blogPost">
-    <script>
-        $("html").niceScroll({
-            cursorcolor: "#2a2929",
-            cursoropacitymax: 1,
-            touchbehavior: false,
-            cursorwidth: "6px",
-            cursorborder: "5",
-            cursorborderradius: "0px",
-            autohidemode: true
-        });
-    </script>
-    
-        <div class="article-meta">
-            <a href="/2016/10/21/HTTP-HTTP2-0-SPDY-HTTPS你应该知道的一些事/" class="article-date">
-  	<time datetime="2016-10-21T14:27:18.000Z" itemprop="datePublished">2016-10-21</time>
-</a>
-
-        </div>
-        
-            <div class="article-inner">
-                
-                    <input type="hidden" class="isFancy" />
-                    
-                        
-                            <header class="article-header">
-                                
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/21/HTTP-HTTP2-0-SPDY-HTTPS你应该知道的一些事/">HTTP,HTTP2.0,SPDY,HTTPS你应该知道的一些事</a>
-    </h1>
-  
-
-
-                            </header>
-                            
-                                    
-                                        <div class="article-entry" itemprop="articleBody">
-                                            
-                                                    <!--02-->
-                                                    <p class="toc-button">目录</p>
-<div id="toc" class="toc-article" style="display:none;">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-WEB-始祖-HTTP"><span class="toc-number">1.</span> <span class="toc-text">1 WEB 始祖 HTTP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-HTTP-与现代化浏览器"><span class="toc-number">2.</span> <span class="toc-text">2 HTTP 与现代化浏览器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-HTTP-的基本优化"><span class="toc-number">3.</span> <span class="toc-text">3 HTTP 的基本优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-HTTP1-0-和-HTTP1-1-的一些区别"><span class="toc-number">4.</span> <span class="toc-text">4 HTTP1.0 和 HTTP1.1 的一些区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-HTTP1-0-和-HTTP1-1-现存的一些问题"><span class="toc-number">5.</span> <span class="toc-text">5 HTTP1.0 和 HTTP1.1 现存的一些问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-HTTPS-应声而出"><span class="toc-number">6.</span> <span class="toc-text">6 HTTPS 应声而出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-HTTPS-与-HTTP-的一些区别"><span class="toc-number">7.</span> <span class="toc-text">7 HTTPS 与 HTTP 的一些区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-HTTPS-改造"><span class="toc-number">8.</span> <span class="toc-text">8 HTTPS 改造</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-使用SPDY加快你的网站速度"><span class="toc-number">9.</span> <span class="toc-text">9 使用SPDY加快你的网站速度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-HTTP2-0-的前世今生"><span class="toc-number">10.</span> <span class="toc-text">10 HTTP2.0 的前世今生</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-HTTP2-0-的新特性"><span class="toc-number">11.</span> <span class="toc-text">11 HTTP2.0 的新特性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-HTTP2-0-的升级改造"><span class="toc-number">12.</span> <span class="toc-text">12 HTTP2.0 的升级改造</span></a></li></ol>
-</div>
-<script>
-    $(function(){
-
-        var width = document.body.scrollWidth;
-        if (width <=550) {
-             $(".toc-button").css("display","none");
-        }
-        $(".toc-button").hover(function(){
-            var top = $(this).get(0).offsetTop-$(".toc-article").height()/2;
-            $(".toc-article").css({
-                top:top +"px"
-            });
-            $("#toc").show(1000,function(){});
-           // $("#toc").animate({width:500;},3000);
-        },function(){
-
-        });
-        $(".toc-article").hover(function(){
-
-        },function(){
-            $("#toc").hide(1000,function(){});
-        });
-    })
-</script>
-
-                                                        
-                                                            
-                                                                
-                                                                            <h2 id="1-WEB-始祖-HTTP"><a href="#1-WEB-始祖-HTTP" class="headerlink" title="1 WEB 始祖 HTTP"></a>1 WEB 始祖 HTTP</h2><p>全称：<strong>超文本传输协议(HyperText Transfer Protocol)</strong></p>
-<p>伴随着计算机网络和浏览器的诞生，HTTP1.0也随之而来，处于计算机网络中的应用层，HTTP是建立在TCP协议之上，所以HTTP协议的瓶颈及其优化技巧都是基于TCP协议本身的特性，例如tcp建立连接的3次握手和断开连接的4次挥手以及每次建立连接带来的RTT延迟时间。</p>
-<h2 id="2-HTTP-与现代化浏览器"><a href="#2-HTTP-与现代化浏览器" class="headerlink" title="2 HTTP 与现代化浏览器"></a>2 HTTP 与现代化浏览器</h2><p>早在HTTP建立之初，主要就是为了将超文本标记语言(HTML)文档从Web服务器传送到客户端的浏览器。也是说对于前端来说，我们所写的HTML页面将要放在我们的web服务器上，用户端通过浏览器访问url地址来获取网页的显示内容，但是到了WEB2.0以来，我们的页面变得复杂，不仅仅单纯的是一些简单的文字和图片，同时我们的HTML页面有了CSS，Javascript，来丰富我们的页面展示，当ajax的出现，我们又多了一种向服务器端获取数据的方法，这些其实都是基于HTTP协议的。同样到了移动互联网时代，我们页面可以跑在手机端浏览器里面，但是和PC相比，手机端的网络情况更加复杂，这使得我们开始了不得不对HTTP进行深入理解并不断优化过程中。</p>
-<p><img src="http://tenny.qiniudn.com/timeline.png" alt="pic"></p>
-<h2 id="3-HTTP-的基本优化"><a href="#3-HTTP-的基本优化" class="headerlink" title="3 HTTP 的基本优化"></a>3 HTTP 的基本优化</h2><p>影响一个HTTP网络请求的因素主要有两个：带宽和延迟。</p>
-<ul>
-<li><p><strong>带宽：</strong>如果说我们还停留在拨号上网的阶段，带宽可能会成为一个比较严重影响请求的问题，但是现在网络基础建设已经使得带宽得到极大的提升，我们不再会担心由带宽而影响网速，那么就只剩下延迟了。</p>
-</li>
-<li><p><strong>延迟：</strong></p>
-<blockquote>
-<p>浏览器阻塞（HOL blocking）：浏览器会因为一些原因阻塞请求。浏览器对于同一个域名，同时只能有 4 个连接（这个根据浏览器内核不同可能会有所差异），超过浏览器最大连接数限制，后续请求就会被阻塞。</p>
-<p>DNS 查询（DNS Lookup）：浏览器需要知道目标服务器的 IP 才能建立连接。将域名解析为 IP 的这个系统就是 DNS。这个通常可以利用DNS缓存结果来达到减少这个时间的目的。</p>
-<p>建立连接（Initial connection）：HTTP 是基于 TCP 协议的，浏览器最快也要在第三次握手时才能捎带 HTTP 请求报文，达到真正的建立连接，但是这些连接无法复用会导致每次请求都经历三次握手和慢启动。三次握手在高延迟的场景下影响较明显，慢启动则对文件类大请求影响较大。</p>
-</blockquote>
-</li>
-</ul>
-<p><img src="http://tenny.qiniudn.com/3woshou.png" alt="pic"></p>
-<h2 id="4-HTTP1-0-和-HTTP1-1-的一些区别"><a href="#4-HTTP1-0-和-HTTP1-1-的一些区别" class="headerlink" title="4 HTTP1.0 和 HTTP1.1 的一些区别"></a>4 HTTP1.0 和 HTTP1.1 的一些区别</h2><p>HTTP1.0最早在网页中使用是在1996年，那个时候只是使用一些较为简单的网页上和网络请求上，而HTTP1.1则在1999年才开始广泛应用于现在的各大浏览器网络请求中，同时HTTP1.1也是当前使用最为广泛的HTTP协议。 主要区别主要体现在：</p>
-<ul>
-<li><p><strong>缓存处理</strong><br>在HTTP1.0中主要使用header里的If-Modified-Since,Expires来做为缓存判断的标准，HTTP1.1则引入了更多的缓存控制策略例如Entity tag，If-Unmodified-Since, If-Match, If-None-Match等更多可供选择的缓存头来控制缓存策略。</p>
-</li>
-<li><p><strong>带宽优化及网络连接的使用</strong><br>HTTP1.0中，存在一些浪费带宽的现象，例如客户端只是需要某个对象的一部分，而服务器却将整个对象送过来了，并且不支持断点续传功能，HTTP1.1则在请求头引入了range头域，它允许只请求资源的某个部分，即返回码是206（Partial Content），这样就方便了开发者自由的选择以便于充分利用带宽和连接。</p>
-</li>
-<li><p><strong>错误通知的管理</strong><br>在HTTP1.1中新增了24个错误状态响应码，如409（Conflict）表示请求的资源与资源的当前状态发生冲突；410（Gone）表示服务器上的某个资源被永久性的删除。</p>
-</li>
-<li><p><strong>Host头处理</strong><br>在HTTP1.0中认为每台服务器都绑定一个唯一的IP地址，因此，请求消息中的URL并没有传递主机名（hostname）。但随着虚拟主机技术的发展，在一台物理服务器上可以存在多个虚拟主机（Multi-homed Web Servers），并且它们共享一个IP地址。HTTP1.1的请求消息和响应消息都应支持Host头域，且请求消息中如果没有Host头域会报告一个错误（400 Bad Request）。</p>
-</li>
-<li><p><strong>长连接</strong><br>HTTP 1.1支持长连接（PersistentConnection）和请求的流水线（Pipelining）处理，在一个TCP连接上可以传送多个HTTP请求和响应，减少了建立和关闭连接的消耗和延迟，在HTTP1.1中默认开启Connection： keep-alive，一定程度上弥补了HTTP1.0每次请求都要创建连接的缺点。以下是常见的HTTP1.0：</p>
-</li>
-</ul>
-<p><img src="http://tenny.qiniudn.com/http11.png" alt="pic"></p>
-<p><strong>区别用一张图来体现：</strong></p>
-<p><img src="http://tenny.qiniudn.com/DIF12.png" alt="pic"></p>
-<h2 id="5-HTTP1-0-和-HTTP1-1-现存的一些问题"><a href="#5-HTTP1-0-和-HTTP1-1-现存的一些问题" class="headerlink" title="5 HTTP1.0 和 HTTP1.1 现存的一些问题"></a>5 HTTP1.0 和 HTTP1.1 现存的一些问题</h2><ul>
-<li><p>上面提到过的，HTTP1.x在传输数据时，每次都需要重新建立连接，无疑增加了大量的延迟时间，特别是在移动端更为突出。</p>
-</li>
-<li><p>HTTP1.x在传输数据时，所有传输的内容都是明文，客户端和服务器端都无法验证对方的身份，这在一定程度上无法保证数据的安全性。</p>
-</li>
-<li><p>HTTP1.x在使用时，header里携带的内容过大，在一定程度上增加了传输的成本，并且每次请求header基本不怎么变化，尤其在移动端增加用户流量。</p>
-</li>
-<li><p>虽然HTTP1.x支持了keep-alive，来弥补多次创建连接产生的延迟，但是keep-alive使用多了同样会给服务端带来大量的性能压力，并且对于单个文件被不断请求的服务(例如图片存放网站)，keep-alive可能会极大的影响性能，因为它在文件被请求之后还保持了不必要的连接很长时间。</p>
-</li>
-</ul>
-<h2 id="6-HTTPS-应声而出"><a href="#6-HTTPS-应声而出" class="headerlink" title="6 HTTPS 应声而出"></a>6 HTTPS 应声而出</h2><p>为了解决以上问题，网景在1994年创建了HTTPS，并应用在网景导航者浏览器中。 最初，HTTPS是与SSL一起使用的；在SSL逐渐演变到TLS时（其实两个是一个东西，只是名字不同而已），最新的HTTPS也由在2000年五月公布的RFC 2818正式确定下来。简单来说，HTTPS就是安全版的HTTP，并且由于当今时代对安全性要求更高，chrome和firefox都大力支持网站使用HTTPS，苹果也在ios 10系统中强制app使用HTTPS来传输数据，由此可见HTTPS势在必行。 </p>
-<h2 id="7-HTTPS-与-HTTP-的一些区别"><a href="#7-HTTPS-与-HTTP-的一些区别" class="headerlink" title="7 HTTPS 与 HTTP 的一些区别"></a>7 HTTPS 与 HTTP 的一些区别</h2><ul>
-<li><p>HTTPS协议需要到CA申请证书，一般免费证书很少，需要交费。</p>
-</li>
-<li><p>HTTP协议运行在TCP之上，所有传输的内容都是明文，HTTPS运行在SSL/TLS之上，SSL/TLS运行在TCP之上，所有传输的内容都经过加密的。</p>
-</li>
-<li><p>HTTP和HTTPS使用的是完全不同的连接方式，用的端口也不一样，前者是80，后者是443。</p>
-</li>
-<li><p>HTTPS可以有效的防止运营商劫持，解决了防劫持的一个大问题。</p>
-</li>
-</ul>
-<p><img src="http://tenny.qiniudn.com/HTTPQUBIE2.png" alt="pic"></p>
-<h2 id="8-HTTPS-改造"><a href="#8-HTTPS-改造" class="headerlink" title="8 HTTPS 改造"></a>8 HTTPS 改造</h2><p>如果一个网站要全站由HTTP替换成HTTPS，可能需要关注以下几点：</p>
-<ul>
-<li><p>安装CA证书，一般的证书都是需要收费的，这边推荐一个比较好的购买证书网站：1）Let’s Encrypt，免费，快捷，支持多域名（不是通配符），三条命令即时签署+导出证书。缺点是暂时只有三个月有效期，到期需续签。2) Comodo PositiveSSL，收费，但是比较稳定。</p>
-</li>
-<li><p>在购买证书之后，在证书提供的网站上配置自己的域名，将证书下载下来之后，配置自己的web服务器，同时进行代码改造。</p>
-</li>
-<li><p>HTTPS 降低用户访问速度。SSL握手，HTTPS 对速度会有一定程度的降低，但是只要经过合理优化和部署，HTTPS 对速度的影响完全可以接受。在很多场景下，HTTPS 速度完全不逊于 HTTP，如果使用 SPDY，HTTPS 的速度甚至还要比 HTTP 快。</p>
-</li>
-<li><p>相对于HTTPS降低访问速度，其实更需要关心的是服务器端的CPU压力，HTTPS中大量的密钥算法计算，会消耗大量的CPU资源，只有足够的优化，HTTPS 的机器成本才不会明显增加。</p>
-</li>
-</ul>
-<p>推荐一则<a href="http://velocity.oreilly.com.cn/2015/ppts/lizhenyu.pdf" target="_blank" rel="external">淘宝网改造HTTPS</a>的文章。</p>
-<h2 id="9-使用SPDY加快你的网站速度"><a href="#9-使用SPDY加快你的网站速度" class="headerlink" title="9 使用SPDY加快你的网站速度"></a>9 使用SPDY加快你的网站速度</h2><p>2012年google如一声惊雷提出了SPDY的方案，大家才开始从正面看待和解决老版本HTTP协议本身的问题，SPDY可以说是综合了HTTPS和HTTP两者有点于一体的传输协议，主要解决：</p>
-<ul>
-<li><p><strong>降低延迟</strong><br>针对HTTP高延迟的问题，SPDY优雅的采取了多路复用（multiplexing）。多路复用通过多个请求stream共享一个tcp连接的方式，解决了HOL blocking的问题，降低了延迟同时提高了带宽的利用率。</p>
-</li>
-<li><p><strong>请求优先级（request prioritization）</strong><br>多路复用带来一个新的问题是，在连接共享的基础之上有可能会导致关键请求被阻塞。SPDY允许给每个request设置优先级，这样重要的请求就会优先得到响应。比如浏览器加载首页，首页的html内容应该优先展示，之后才是各种静态资源文件，脚本文件等加载，这样可以保证用户能第一时间看到网页内容。</p>
-</li>
-<li><p><strong>header压缩</strong><br>前面提到HTTP1.x的header很多时候都是重复多余的。选择合适的压缩算法可以减小包的大小和数量。</p>
-</li>
-<li><p><strong>基于HTTPS的加密协议传输</strong><br>大大提高了传输数据的可靠性。</p>
-</li>
-<li><p><strong>服务端推送（server push）</strong><br>采用了SPDY的网页，例如我的网页有一个sytle.css的请求，在客户端收到sytle.css数据的同时，服务端会将sytle.js的文件推送给客户端，当客户端再次尝试获取sytle.js时就可以直接从缓存中获取到，不用再发请求了。SPDY构成图：</p>
-</li>
-</ul>
-<p><img src="http://tenny.qiniudn.com/SPDY.png" alt="pic"></p>
-<p>SPDY位于HTTP之下，TCP和SSL之上，这样可以轻松兼容老版本的HTTP协议(将HTTP1.x的内容封装成一种新的frame格式)，同时可以使用已有的SSL功能。</p>
-<p><strong>兼容性：</strong></p>
-<p><img src="http://tenny.qiniudn.com/sodyuse.png" alt="pic"></p>
-<h2 id="10-HTTP2-0-的前世今生"><a href="#10-HTTP2-0-的前世今生" class="headerlink" title="10 HTTP2.0 的前世今生"></a>10 HTTP2.0 的前世今生</h2><p>顾名思义有了HTTP1.x，那么HTTP2.0也就顺理成章的出现了。HTTP2.0可以说是SPDY的升级版（其实原本也是基于SPDY设计的），但是，HTTP2.0 跟 SPDY 仍有不同的地方，主要是以下两点：</p>
-<ul>
-<li>HTTP2.0 支持明文 HTTP 传输，而 SPDY 强制使用 HTTPS</li>
-<li>HTTP2.0 消息头的压缩算法采用 HPACK，而非 SPDY 采用的 DEFLATE</li>
-</ul>
-<h2 id="11-HTTP2-0-的新特性"><a href="#11-HTTP2-0-的新特性" class="headerlink" title="11 HTTP2.0 的新特性"></a>11 HTTP2.0 的新特性</h2><ul>
-<li><p><strong>新的二进制格式（Binary Format）</strong><br>HTTP1.x的解析是基于文本。基于文本协议的格式解析存在天然缺陷，文本的表现形式有多样性，要做到健壮性考虑的场景必然很多，二进制则不同，只认0和1的组合。基于这种考虑HTTP2.0的协议解析决定采用二进制格式，实现方便且健壮。</p>
-</li>
-<li><p><strong>多路复用（MultiPlexing）</strong><br>即连接共享，即每一个request都是是用作连接共享机制的。一个request对应一个id，这样一个连接上可以有多个request，每个连接的request可以随机的混杂在一起，接收方可以根据request的 id将request再归属到各自不同的服务端请求里面。多路复用原理图：</p>
-</li>
-</ul>
-<p><img src="http://tenny.qiniudn.com/duolufuyong.png" alt="pic"></p>
-<ul>
-<li><p><strong>header压缩</strong><br>如上文中所言，对前面提到过HTTP1.x的header带有大量信息，而且每次都要重复发送，HTTP2.0使用encoder来减少需要传输的header大小，通讯双方各自cache一份header fields表，既避免了重复header的传输，又减小了需要传输的大小。</p>
-</li>
-<li><p><strong>服务端推送（server push）</strong><br>同SPDY一样，HTTP2.0也具有server push功能。目前，有大多数网站已经启用HTTP2.0，例如YouTuBe，淘宝网等网站，利用chrome控制台可以查看是否启用H2：</p>
-</li>
-</ul>
-<p><img src="http://tenny.qiniudn.com/h2.png" alt="pic"></p>
-<p>更多关于HTTP2的问题可以参考：<a href="http://www.alloyteam.com/2015/03/http2-0-di-qi-miao-ri-chang/" target="_blank" rel="external">HTTP2奇妙日常</a>，以及<a href="https://http2.akamai.com/" target="_blank" rel="external">HTTP2.0的官方网站</a>。</p>
-<p><strong>关于HTTP2和HTTP1.x的区别大致可以看下图：</strong></p>
-<p><img src="http://tenny.qiniudn.com/diff332.png" alt="pic"></p>
-<h2 id="12-HTTP2-0-的升级改造"><a href="#12-HTTP2-0-的升级改造" class="headerlink" title="12 HTTP2.0 的升级改造"></a>12 HTTP2.0 的升级改造</h2><p>对比HTTPS的升级改造，HTTP2.0或许会稍微简单一些，你可能需要关注以下问题：</p>
-<ul>
-<li><p>前文说了HTTP2.0其实可以支持非HTTPS的，但是现在主流的浏览器像chrome，firefox表示还是只支持基于 TLS 部署的HTTP2.0协议，所以要想升级成HTTP2.0还是先升级HTTPS为好。</p>
-</li>
-<li><p>当你的网站已经升级HTTPS之后，那么升级HTTP2.0就简单很多，如果你使用NGINX，只要在配置文件中启动相应的协议就可以了，可以参考NGINX白皮书，NGINX配置HTTP2.0官方指南。</p>
-</li>
-<li><p>使用了HTTP2.0那么，原本的HTTP1.x怎么办，这个问题其实不用担心，HTTP2.0完全兼容HTTP1.x的语义，对于不支持HTTP2.0的浏览器，NGINX会自动向下兼容的。</p>
-</li>
-</ul>
 
                                                                                 
                                         </div>
