@@ -193,6 +193,174 @@
 
 
   
+    <article id="post-图解TCP-IP协议" class="article article-type-post" itemscope itemprop="blogPost">
+    <script>
+        $("html").niceScroll({
+            cursorcolor: "#2a2929",
+            cursoropacitymax: 1,
+            touchbehavior: false,
+            cursorwidth: "6px",
+            cursorborder: "5",
+            cursorborderradius: "0px",
+            autohidemode: true
+        });
+    </script>
+    
+        <div class="article-meta">
+            <a href="/2016/10/21/图解TCP-IP协议/" class="article-date">
+  	<time datetime="2016-10-21T15:47:49.000Z" itemprop="datePublished">2016-10-21</time>
+</a>
+
+        </div>
+        
+            <div class="article-inner">
+                
+                    <input type="hidden" class="isFancy" />
+                    
+                        
+                            <header class="article-header">
+                                
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/21/图解TCP-IP协议/">图解TCP/IP协议</a>
+    </h1>
+  
+
+
+                            </header>
+                            
+                                    
+                                        <div class="article-entry" itemprop="articleBody">
+                                            
+                                                    <!--02-->
+                                                    <p class="toc-button">目录</p>
+<div id="toc" class="toc-article" style="display:none;">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#三次握手建立连接"><span class="toc-number">1.</span> <span class="toc-text">三次握手建立连接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据传输过程"><span class="toc-number">2.</span> <span class="toc-text">数据传输过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四次握手断开连接"><span class="toc-number">3.</span> <span class="toc-text">四次握手断开连接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP通信过程中的状态转移图"><span class="toc-number">4.</span> <span class="toc-text">TCP通信过程中的状态转移图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#状态图详细解读"><span class="toc-number">5.</span> <span class="toc-text">状态图详细解读</span></a></li></ol>
+</div>
+<script>
+    $(function(){
+
+        var width = document.body.scrollWidth;
+        if (width <=550) {
+             $(".toc-button").css("display","none");
+        }
+        $(".toc-button").hover(function(){
+            var top = $(this).get(0).offsetTop-$(".toc-article").height()/2;
+            $(".toc-article").css({
+                top:top +"px"
+            });
+            $("#toc").show(1000,function(){});
+           // $("#toc").animate({width:500;},3000);
+        },function(){
+
+        });
+        $(".toc-article").hover(function(){
+
+        },function(){
+            $("#toc").hide(1000,function(){});
+        });
+    })
+</script>
+
+                                                        
+                                                            
+                                                                
+                                                                            <p>本文通过两个图来梳理TCP-IP协议相关知识。TCP通信过程包括三个步骤：建立TCP连接通道，传输数据，断开TCP连接通道。</p>
+<p><img src="http://cricode.qiniudn.com/tcp-ip-handshark.png" alt="pic"></p>
+<p>图中主要包括三部分：<strong>建立连接、传输数据、断开连接</strong>。</p>
+<ul>
+<li><p>建立TCP连接很简单，通过三次握手便可建立连接。</p>
+</li>
+<li><p>建立好连接后，开始传输数据。TCP数据传输牵涉到的概念很多：超时重传、快速重传、流量控制、拥塞控制等等。</p>
+</li>
+<li><p>断开连接的过程也很简单，通过四次握手完成断开连接的过程。</p>
+</li>
+</ul>
+<h2 id="三次握手建立连接"><a href="#三次握手建立连接" class="headerlink" title="三次握手建立连接"></a>三次握手建立连接</h2><blockquote>
+<p><strong>第一次握手：</strong>客户端发送syn包(seq=x)到服务器，并进入SYN_SEND状态，等待服务器确认；</p>
+<p><strong>第二次握手：</strong>服务器收到syn包，必须确认客户的SYN（ack=x+1），同时自己也发送一个SYN包（seq=y），即SYN+ACK包，此时服务器进入SYN_RECV状态；</p>
+<p><strong>第三次握手：</strong>客户端收到服务器的SYN＋ACK包，向服务器发送确认包ACK(ack=y+1)，此包发送完毕，客户端和服务器进入ESTABLISHED状态，完成三次握手。</p>
+</blockquote>
+<p>握手过程中传送的包里不包含数据，三次握手完毕后，客户端与服务器才正式开始传送数据。理想状态下，TCP连接一旦建立，在通信双方中的任何一方主动关闭连接之前，TCP 连接都将被一直保持下去。</p>
+<h2 id="数据传输过程"><a href="#数据传输过程" class="headerlink" title="数据传输过程"></a>数据传输过程</h2><ul>
+<li><p>超时重传<br>超时重传机制用来保证TCP传输的可靠性。每次发送数据包时，发送的数据报都有seq号，接收端收到数据后，会回复ack进行确认，表示某一seq号数据已经收到。发送方在发送了某个seq包后，等待一段时间，如果没有收到对应的ack回复，就会认为报文丢失，会重传这个数据包。</p>
+</li>
+<li><p>快速重传<br>接受数据一方发现有数据包丢掉了。就会发送ack报文告诉发送端重传丢失的报文。如果发送端连续收到标号相同的ack包，则会触发客户端的快速重传。比较超时重传和快速重传，可以发现超时重传是发送端在傻等超时，然后触发重传；而快速重传则是接收端主动告诉发送端数据没收到，然后触发发送端重传。</p>
+</li>
+<li><p>流量控制<br>这里主要说TCP滑动窗流量控制。TCP头里有一个字段叫Window，又叫Advertised-Window，这个字段是接收端告诉发送端自己还有多少缓冲区可以接收数据。于是发送端就可以根据这个接收端的处理能力来发送数据，而不会导致接收端处理不过来。 滑动窗可以是提高TCP传输效率的一种机制。</p>
+</li>
+<li><p>拥塞控制<br>滑动窗用来做流量控制。流量控制只关注发送端和接受端自身的状况，而没有考虑整个网络的通信情况。拥塞控制，则是基于整个网络来考虑的。考虑一下这样的场景：某一时刻网络上的延时突然增加，那么，TCP对这个事做出的应对只有重传数据，但是，重传会导致网络的负担更重，于是会导致更大的延迟以及更多的丢包，于是，这个情况就会进入恶性循环被不断地放大。试想一下，如果一个网络内有成千上万的TCP连接都这么行事，那么马上就会形成“网络风暴”，TCP这个协议就会拖垮整个网络。为此，TCP引入了拥塞控制策略。拥塞策略算法主要包括：慢启动，拥塞避免，拥塞发生，快速恢复。</p>
+</li>
+</ul>
+<h2 id="四次握手断开连接"><a href="#四次握手断开连接" class="headerlink" title="四次握手断开连接"></a>四次握手断开连接</h2><blockquote>
+<p><strong>第一次挥手：</strong>主动关闭方发送一个FIN，用来关闭主动方到被动关闭方的数据传送，也就是主动关闭方告诉被动关闭方：我已经不会再给你发数据了(当然，在fin包之前发送出去的数据，如果没有收到对应的ack确认报文，主动关闭方依然会重发这些数据)，但此时主动关闭方还可以接受数据。</p>
+<p><strong>第二次挥手：</strong>被动关闭方收到FIN包后，发送一个ACK给对方，确认序号为收到序号+1（与SYN相同，一个FIN占用一个序号）。</p>
+<p><strong>第三次挥手：</strong>被动关闭方发送一个FIN，用来关闭被动关闭方到主动关闭方的数据传送，也就是告诉主动关闭方，我的数据也发送完了，不会再给你发数据了。</p>
+<p><strong>第四次挥手：</strong>主动关闭方收到FIN后，发送一个ACK给被动关闭方，确认序号为收到序号+1，至此，完成四次挥手。</p>
+</blockquote>
+<hr>
+<h2 id="TCP通信过程中的状态转移图"><a href="#TCP通信过程中的状态转移图" class="headerlink" title="TCP通信过程中的状态转移图"></a>TCP通信过程中的状态转移图</h2><p><img src="http://zezhi.qiniudn.com/wp-content/uploads/2014/07/zhuangtaitu.jpeg" alt="pic"></p>
+<h2 id="状态图详细解读"><a href="#状态图详细解读" class="headerlink" title="状态图详细解读"></a>状态图详细解读</h2><p><strong>1. CLOSED：</strong> 起始点，在超时或者连接关闭时候进入此状态。</p>
+<p><strong>2. LISTEN：</strong> 服务端在等待连接过来时候的状态，服务端为此要调用socket，bind,listen函数，就能进入此状态。此称为应用程序被动打开（等待客户端来连接）。</p>
+<p><strong>3. SYN_SENT:</strong> 客户端发起连接，发送SYN给服务器端。如果服务器端不能连接，则直接进入CLOSED状态。</p>
+<p><strong>4. SYN_RCVD：</strong> 跟3对应，服务器端接受客户端的SYN请求，服务器端由LISTEN状态进入SYN_RCVD状态。同时服务器端要回应一个ACK，同时发送一个SYN给客户端；另外一种情况，客户端在发起SYN的同时接收到服务器端得SYN请求，客户端就会由SYN_SENT到SYN_RCVD状态。</p>
+<p><strong>5.ESTABLISHED：</strong> 服务器端和客户端在完成3次握手进入状态，说明已经可以开始传输数据了。</p>
+<p>以上是建立连接时服务器端和客户端产生的状态转移说明。相对来说比较简单明了，如果你对三次握手比较熟悉，建立连接时的状态转移还是很容易理解。</p>
+<p>下面，我们来看看连接关闭时候的状态转移说明，关闭需要进行4次双方的交互，还包括要处理一些善后工作（TIME_WAIT状态），注意，这里主动关闭的一方或被动关闭的一方不是指特指服务器端或者客户端，是相对于谁先发起关闭请求来说的：</p>
+<p><strong>6.FIN_WAIT_1:</strong> 主动关闭的一方，由状态5进入此状态。具体的动作是发送FIN给对方。</p>
+<p><strong>7.FIN_WAIT_2:</strong> 主动关闭的一方，接收到对方的FIN-ACK(即fin包的回应包)，进入此状态。</p>
+<p><strong>8.CLOSE_WAIT：</strong> 接收到FIN以后，被动关闭的一方进入此状态。具体动作是接收到FIN，同时发送ACK。(之所以叫close_wait可以理解为被动关闭方此时正在等待上层应用发出关闭连接指令)</p>
+<p><strong>9.LAST_ACK：</strong> 被动关闭的一方，发起关闭请求，由状态8进入此状态。具体动作是发送FIN给对方，同时在接收到ACK时进入CLOSED状态。</p>
+<p><strong>10.CLOSING：</strong> 两边同时发起关闭请求时，会由FIN_WAIT_1进入此状态。具体动作是接收到FIN请求，同时响应一个ACK。</p>
+<p><strong>11.TIME_WAIT：</strong> 最纠结的状态来了。从状态图上可以看出，有3个状态可以转化成它，我们一一来分析：</p>
+<blockquote>
+<p> <strong>a.</strong> 由FIN_WAIT_2进入此状态：在双方不同时发起FIN的情况下，主动关闭的一方在完成自身发起的关闭请求后，接收到被动关闭一方的FIN后进入的状态。<br> <strong>b.</strong> 由CLOSING状态进入:双方同时发起关闭，都做了发起FIN的请求，同时接收到了FIN并做了ACK的情况下，由CLOSING状态进入。<br> <strong>c.</strong> 由FIN_WAIT_1状态进入：同时接受到FIN（对方发起），ACK（本身发起的FIN回应），与b的区别在于本身发起的FIN回应的ACK先于对方的FIN请求到达，而b是FIN先到达。这种情况概率最小。</p>
+</blockquote>
+<p>关闭的4次连接最难理解的状态是TIME_WAIT，存在TIME_WAIT的2个理由：</p>
+<blockquote>
+<ol>
+<li><p>可靠地实现TCP全双工连接的终止。</p>
+</li>
+<li><p>允许老的重复分节在网络中消逝</p>
+</li>
+</ol>
+</blockquote>
+
+                                                                                
+                                        </div>
+                                        
+                                            <div class="article-info article-info-index">
+                                                
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/计算机网络/">计算机网络</a></li></ul>
+	</div>
+
+
+                                                    
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/work/">work</a>
+	</div>
+
+
+                                                        
+                                                                <div class="clearfix"></div>
+                                            </div>
+                                            
+            </div>
+            
+                    
+                                <!-- 多说评论框 start -->
+                                
+</article>
+
+<!--
+
+-->
+<!--
+
+-->
+
+  
     <article id="post-HTTP-HTTP2-0-SPDY-HTTPS你应该知道的一些事" class="article article-type-post" itemscope itemprop="blogPost">
     <script>
         $("html").niceScroll({
@@ -1651,225 +1819,6 @@
                                                 
 	<div class="article-tag tagcloud">
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/微机原理/">微机原理</a></li></ul>
-	</div>
-
-
-                                                    
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/work/">work</a>
-	</div>
-
-
-                                                        
-                                                                <div class="clearfix"></div>
-                                            </div>
-                                            
-            </div>
-            
-                    
-                                <!-- 多说评论框 start -->
-                                
-</article>
-
-<!--
-
--->
-<!--
-
--->
-
-  
-    <article id="post-操作系统原理面试题目总结" class="article article-type-post" itemscope itemprop="blogPost">
-    <script>
-        $("html").niceScroll({
-            cursorcolor: "#2a2929",
-            cursoropacitymax: 1,
-            touchbehavior: false,
-            cursorwidth: "6px",
-            cursorborder: "5",
-            cursorborderradius: "0px",
-            autohidemode: true
-        });
-    </script>
-    
-        <div class="article-meta">
-            <a href="/2016/10/16/操作系统原理面试题目总结/" class="article-date">
-  	<time datetime="2016-10-16T13:44:18.000Z" itemprop="datePublished">2016-10-16</time>
-</a>
-
-        </div>
-        
-            <div class="article-inner">
-                
-                    <input type="hidden" class="isFancy" />
-                    
-                        
-                            <header class="article-header">
-                                
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/16/操作系统原理面试题目总结/">操作系统原理面试题目总结</a>
-    </h1>
-  
-
-
-                            </header>
-                            
-                                    
-                                        <div class="article-entry" itemprop="articleBody">
-                                            
-                                                    <!--02-->
-                                                    <p class="toc-button">目录</p>
-<div id="toc" class="toc-article" style="display:none;">
-    
-</div>
-<script>
-    $(function(){
-
-        var width = document.body.scrollWidth;
-        if (width <=550) {
-             $(".toc-button").css("display","none");
-        }
-        $(".toc-button").hover(function(){
-            var top = $(this).get(0).offsetTop-$(".toc-article").height()/2;
-            $(".toc-article").css({
-                top:top +"px"
-            });
-            $("#toc").show(1000,function(){});
-           // $("#toc").animate({width:500;},3000);
-        },function(){
-
-        });
-        $(".toc-article").hover(function(){
-
-        },function(){
-            $("#toc").hide(1000,function(){});
-        });
-    })
-</script>
-
-                                                        
-                                                            
-                                                                
-                                                                            <p><strong>1. 进程和现成的区别</strong></p>
-<ul>
-<li><p>粒度性分析：线程的粒度小于进程。</p>
-</li>
-<li><p>调度性分析：进程是资源拥有的基本单位，线程是独立调度与独立运行的基本单位，出了寄存器，程序计数器等必要的资源外基本不拥有其他资源。</p>
-</li>
-<li><p>系统开销分析：由于线程基本不拥有系统资源，所以在进行切换时，线程切换的开销远远小于进程。</p>
-</li>
-</ul>
-<p><strong>2. 进程的状态及其转换</strong><br><img src="http://img.blog.csdn.net/20141020094108593" alt="图片"></p>
-<p><strong>3. 进程同步与互斥的区别</strong></p>
-<ul>
-<li><p>互斥：是指某一资源同时只允许一个访问者对其进行访问，具有唯一性和排它性。但互斥无法限制访问者对资源的访问顺序，即访问是无序的。</p>
-</li>
-<li><p>同步：是指在互斥的基础上（大多数情况），通过其它机制实现访问者对资源的有序访问。在大多数情况下，同步已经实现了互斥，特别是所有写入资源的情况必定是互斥的。少数情况是指可以允许多个访问者同时访问资源。</p>
-<p>简单地说：同步体现的是一种协作性，互斥体现的是一种排他性。</p>
-</li>
-</ul>
-<p><strong>4. 进程间的通信方式有哪些？</strong></p>
-<ul>
-<li><p>管道( pipe )：管道是一种半双工的通信方式，数据只能单向流动，而且只能在具有亲缘关系的进程间使用。进程的亲缘关系通常是指父子进程关系。</p>
-</li>
-<li><p>有名管道 (named pipe) ： 有名管道也是半双工的通信方式，但是它允许无亲缘关系进程间的通信。</p>
-</li>
-<li><p>信号量( semophore ) ： 信号量是一个计数器，可以用来控制多个进程对共享资源的访问。它常作为一种锁机制，防止某进程正在访问共享资源时，其他进程也访问该资源。因此，主要作为进程间以及同一进程内不同线程之间的同步手段。</p>
-</li>
-<li><p>消息队列( message queue ) ： 消息队列是由消息的链表，存放在内核中并由消息队列标识符标识。消息队列克服了信号传递信息少、管道只能承载无格式字节流以及缓冲区大小受限等缺点。</p>
-</li>
-<li><p>信号 ( sinal ) ： 信号是一种比较复杂的通信方式，用于通知接收进程某个事件已经发生。</p>
-</li>
-<li><p>共享内存( shared memory ) ：共享内存就是映射一段能被其他进程所访问的内存，这段共享内存由一个进程创建，但多个进程都可以访问。共享内存是最快的 IPC 方式，它是针对其他进程间通信方式运行效率低而专门设计的。它往往与其他通信机制，如信号两，配合使用，来实现进程间的同步和通信。</p>
-</li>
-<li><p>套接字( socket ) ： 套解口也是一种进程间通信机制，与其他通信机制不同的是，它可用于不同及其间的进程通信。</p>
-</li>
-</ul>
-<p><strong>5. 作业（或进程）的调度算法有哪些？</strong></p>
-<ul>
-<li><p>先来先服务（FCFS，First-Come-First-Served）: 此算法的原则是按照作业到达后备作业队列（或进程进入就绪队列）的先后次序来选择作业（或进程）。</p>
-</li>
-<li><p>短作业优先（SJF,Shortest Process Next）：这种调度算法主要用于作业调度，它从作业后备队列中挑选所需运行时间（估计值）最短的作业进入主存运行。</p>
-</li>
-<li><p>时间片轮转调度算法（RR，Round-Robin）：当某个进程执行的时间片用完时，调度程序便停止该进程的执行，并将它送就绪队列的末尾，等待分配下一时间片再执行。然后把处理机分配给就绪队列中新的队首进程，同时也让它执行一个时间片。这样就可以保证就绪队列中的所有进程，在一给定的时间内，均能获得一时间片处理机执行时间。</p>
-</li>
-<li><p>高响应比优先（HRRN，Highest Response Ratio Next）: 按照高响应比（（已等待时间＋要求运行时间）/ 要求运行时间）优先的原则，在每次选择作业投入运行时，先计算此时后备作业队列中每个作业的响应比RP然后选择其值最大的作业投入运行。</p>
-</li>
-<li><p>优先权(Priority)调度算法: 按照进程的优先权大小来调度，使高优先权进程得到优先处理的调度策略称为优先权调度算法。注意：优先数越多，优先权越小。</p>
-</li>
-<li><p>多级队列调度算法：多队列调度是根据作业的性质和类型的不同，将就绪队列再分为若干个子队列，所有的作业（或进程）按其性质排入相应的队列中，而不同的就绪队列采用不同的调度算法。</p>
-</li>
-</ul>
-<p><strong>6. 死锁产生的原因，死锁产生的必要条件是什么，如何预防死锁，如何避免死锁，死锁定理？</strong></p>
-<p><strong>死锁产生的原因：</strong></p>
-<ul>
-<li>竞争资源</li>
-<li>进程推进顺序不当</li>
-</ul>
-<p><strong>死锁产生的必要条件：</strong></p>
-<ul>
-<li>互斥条件：一个资源一次只能被一个进程所使用，即是排它性使用。</li>
-<li>不剥夺条件：一个资源仅能被占有它的进程所释放，而不能被别的进程强占。</li>
-<li>请求与保持条件：进程已经保持了至少一个资源，但又提出了新的资源要求，而该资源又已被其它进程占有，此时请求进程阻塞，但又对已经获得的其它资源保持不放。</li>
-<li>环路等待条件：当每类资源只有一个时，在发生死锁时，必然存在一个进程-资源的环形链。</li>
-</ul>
-<p><strong>预防死锁：</strong></p>
-<ul>
-<li>破坏四个必要条件之一。</li>
-</ul>
-<p><strong>死锁的避免：</strong></p>
-<ul>
-<li>银行家算法，该方法允许进程动态地申请资源，系统在进行资源分配之前，先计算资源分配的安全性。若此次分配不会导致系统从安全状态向不安全状态转换，便可将资源分配给进程；否则不分配资源，进程必须阻塞等待。从而避免发生死锁。</li>
-</ul>
-<p><strong>死锁定理：</strong></p>
-<ul>
-<li>S为死锁状态的充分条件是：尚且仅当S状态的资源分配图是不可完全简化的，该充分条件称为死锁定理。</li>
-</ul>
-<p><strong>死锁的解除：</strong></p>
-<ul>
-<li><p>方法1：强制性地从系统中撤消一个或多个死锁的进程以断开循环等待链，并收回分配给终止进程的全部资源供剩下的进程使用。</p>
-</li>
-<li><p>方法2：使用一个有效的挂起和解除机构来挂起一些死锁的进程，其实质是从被挂起的进程那里抢占资源以解除死锁。</p>
-</li>
-</ul>
-<p><strong>7. 分段式存储管理、分页式存储管理，两个的区别？</strong></p>
-<ul>
-<li><p>分段式存储管理：分页存储管理是将一个进程的地址（逻辑地址空间）空间划分成若干个大小相等的区域，称为页，相应地，将内存空间划分成与页相同大小（为了保证页内偏移一致）的若干个物理块，称为块或页框（页架）。在为进程分配内存时，将进程中的若干页分别装入多个不相邻接的块中。</p>
-</li>
-<li><p>分页式存储管理：在分段存储管理方式中，作业的地址空间被划分为若干个段，每个段是一组完整的逻辑信息，如有主程序段、子程序段、数据段及堆栈段等，每个段都有自己的名字，都是从零开始编址的一段连续的地址空间，各段长度是不等的。</p>
-</li>
-</ul>
-<p><strong>两者的区别：</strong></p>
-<ul>
-<li><p>页是信息的物理单位，分页是为了实现非连续的分配，以便解决内存的碎片问题，或者说分页是为了由于系统管理的需要。</p>
-</li>
-<li><p>页的大小固定是由系统确定的，将逻辑地址划分为页号和页内地址是由机器硬件实现的。而段的长度是不固定的，决定与用户的程序长度，通常由编译程序进行编译时根据信息的性质来划分。</p>
-</li>
-<li><p>分页式存储管理的作业地址空间是一维的，分段式的存储管理的作业管理地址空间是二维的。</p>
-</li>
-</ul>
-<p><strong>8. 页面置换算法有哪些？</strong></p>
-<ul>
-<li><p>最佳置换算法（Optimal）：即选择那些永不使用的，或者是在最长时间内不再被访问的页面置换出去。（它是一种理想化的算法，性能最好，但在实际上难于实现）。</p>
-</li>
-<li><p>先进先出置换算法FIFO：该算法总是淘汰最先进入内存的页面，即选择在内存中驻留时间最久的页面予以淘汰。</p>
-</li>
-<li><p>最近最久未使用置换算法LRU（Least Recently Used）：该算法是选择最近最久未使用的页面予以淘汰，系统在每个页面设置一个访问字段，用以记录这个页面自上次被访问以来所经历的时间T，当要淘汰一个页面时，选择T最大的页面。</p>
-</li>
-<li><p>Clock置换算法：也叫最近未用算法NRU（Not RecentlyUsed）。该算法为每个页面设置一位访问位，将内存中的所有页面都通过链接指针链成一个循环队列。当某页被访问时，其访问位置“1”。在选择一页淘汰时，就检查其访问位，如果是“0”，就选择该页换出；若为“1”，则重新置为“0”，暂不换出该页，在循环队列中检查下一个页面，直到访问位为“0”的页面为止。由于该算法只有一位访问位，只能用它表示该页是否已经使用过，而置换时是将未使用过的页面换出去，所以把该算法称为最近未用算法。</p>
-</li>
-<li><p>最少使用置换算法LFU：该算法选择最近时期使用最少的页面作为淘汰页。</p>
-</li>
-</ul>
-
-                                                                                
-                                        </div>
-                                        
-                                            <div class="article-info article-info-index">
-                                                
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/os/">os</a></li></ul>
 	</div>
 
 
