@@ -193,6 +193,124 @@
 
 
   
+    <article id="post-Java-简易服务器的实现" class="article article-type-post" itemscope itemprop="blogPost">
+    <script>
+        $("html").niceScroll({
+            cursorcolor: "#2a2929",
+            cursoropacitymax: 1,
+            touchbehavior: false,
+            cursorwidth: "6px",
+            cursorborder: "5",
+            cursorborderradius: "0px",
+            autohidemode: true
+        });
+    </script>
+    
+        <div class="article-meta">
+            <a href="/2016/11/06/Java-简易服务器的实现/" class="article-date">
+  	<time datetime="2016-11-06T13:16:52.000Z" itemprop="datePublished">2016-11-06</time>
+</a>
+
+        </div>
+        
+            <div class="article-inner">
+                
+                    <input type="hidden" class="isFancy" />
+                    
+                        
+                            <header class="article-header">
+                                
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/06/Java-简易服务器的实现/">Java 简易服务器的实现</a>
+    </h1>
+  
+
+
+                            </header>
+                            
+                                    
+                                        <div class="article-entry" itemprop="articleBody">
+                                            
+                                                    <!--02-->
+                                                    <p class="toc-button">目录</p>
+<div id="toc" class="toc-article" style="display:none;">
+    
+</div>
+<script>
+    $(function(){
+
+        var width = document.body.scrollWidth;
+        if (width <=550) {
+             $(".toc-button").css("display","none");
+        }
+        $(".toc-button").hover(function(){
+            var top = $(this).get(0).offsetTop-$(".toc-article").height()/2;
+            $(".toc-article").css({
+                top:top +"px"
+            });
+            $("#toc").show(1000,function(){});
+           // $("#toc").animate({width:500;},3000);
+        },function(){
+
+        });
+        $(".toc-article").hover(function(){
+
+        },function(){
+            $("#toc").hide(1000,function(){});
+        });
+    })
+</script>
+
+                                                        
+                                                            
+                                                                
+                                                                            <p>使用telnet客户端测试。telnet客户端windows默认是禁掉的，需要设置： 控制面板 &gt; 程序 &gt; 打开或关闭Windows功能 &gt; Telnet客户端 &gt; OK 。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"><span class="keyword">import</span> java.io.InputStream;</div><div class="line"><span class="keyword">import</span> java.io.OutputStream;</div><div class="line"><span class="keyword">import</span> java.io.PrintWriter;</div><div class="line"><span class="keyword">import</span> java.net.ServerSocket;</div><div class="line"><span class="keyword">import</span> java.net.Socket;</div><div class="line"><span class="keyword">import</span> java.util.Scanner;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadedEchoServer</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">		ServerSocket s = <span class="keyword">null</span>;</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			<span class="keyword">int</span> i = <span class="number">1</span>;</div><div class="line">			s = <span class="keyword">new</span> ServerSocket(<span class="number">8189</span>);</div><div class="line"></div><div class="line">			System.out.println(<span class="string">"Server Started"</span>);</div><div class="line">			<span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</div><div class="line">				Socket incoming = s.accept();</div><div class="line">				System.out.println(<span class="string">"incoming :"</span> + i);</div><div class="line">				Runnable r = <span class="keyword">new</span> ThreadEchoHandler(incoming,i);</div><div class="line">				Thread t = <span class="keyword">new</span> Thread(r);</div><div class="line">				t.start();</div><div class="line">				i++;</div><div class="line">			&#125;</div><div class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;<span class="keyword">finally</span>&#123;</div><div class="line">			s.close();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * This class handles the client input for one server socket connection</div><div class="line"> */</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ThreadEchoHandler</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="keyword">private</span> Socket incoming;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> uid;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">ThreadEchoHandler</span><span class="params">(Socket i,<span class="keyword">int</span> id)</span> </span>&#123;</div><div class="line">		incoming = i;</div><div class="line">		uid = id;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="comment">// TODO Auto-generated method stub</span></div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			InputStream inStream = incoming.getInputStream();</div><div class="line">			OutputStream outStream = incoming.getOutputStream();</div><div class="line"></div><div class="line">			Scanner in = <span class="keyword">new</span> Scanner(inStream);</div><div class="line">			PrintWriter out = <span class="keyword">new</span> PrintWriter(outStream, <span class="keyword">true</span>);</div><div class="line">			</div><div class="line">			out.println(<span class="string">"Welcome "</span>+uid+<span class="string">"! Print \"BYE\" to exit ."</span>);</div><div class="line">			<span class="keyword">boolean</span> done = <span class="keyword">false</span>;</div><div class="line"></div><div class="line">			<span class="keyword">while</span> (!done &amp;&amp; in.hasNextLine()) &#123;</div><div class="line">				String line = in.nextLine();			            <span class="comment">// client</span></div><div class="line">				System.out.println(<span class="string">"["</span>+uid+<span class="string">"] said :"</span>+line);	    <span class="comment">// server</span></div><div class="line">				out.println(<span class="string">"Echo: "</span> + line);</div><div class="line">				<span class="keyword">if</span> (line.trim().equals(<span class="string">"BYE"</span>)) &#123;</div><div class="line">					done = <span class="keyword">true</span>;</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line"></div><div class="line">			in.close();</div><div class="line">			out.close();</div><div class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">			<span class="comment">// TODO Auto-generated catch block</span></div><div class="line">			e.printStackTrace();</div><div class="line">		&#125; <span class="keyword">finally</span> &#123;</div><div class="line">			<span class="keyword">try</span> &#123;</div><div class="line">				System.out.println(uid+<span class="string">" has exit ."</span>);</div><div class="line">				incoming.close();</div><div class="line">			&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">				<span class="comment">// TODO Auto-generated catch block</span></div><div class="line">				e.printStackTrace();</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>客户端输入：</p>
+<ol>
+<li>telnet localhost 8189</li>
+<li>输入测试内容，带回显</li>
+<li>“BYE”退出</li>
+</ol>
+</blockquote>
+
+                                                                                
+                                        </div>
+                                        
+                                            <div class="article-info article-info-index">
+                                                
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+	</div>
+
+
+                                                    
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/work/">work</a>
+	</div>
+
+
+                                                        
+                                                                <div class="clearfix"></div>
+                                            </div>
+                                            
+            </div>
+            
+                    
+                                <!-- 多说评论框 start -->
+                                
+</article>
+
+<!--
+
+-->
+<!--
+
+-->
+
+  
     <article id="post-Java中-RandomAccessFile-用法" class="article article-type-post" itemscope itemprop="blogPost">
     <script>
         $("html").niceScroll({
@@ -1871,209 +1989,6 @@
                                                     
 	<div class="article-category tagcloud">
 	<a class="article-category-link" href="/categories/life/">life</a>
-	</div>
-
-
-                                                        
-                                                                <div class="clearfix"></div>
-                                            </div>
-                                            
-            </div>
-            
-                    
-                                <!-- 多说评论框 start -->
-                                
-</article>
-
-<!--
-
--->
-<!--
-
--->
-
-  
-    <article id="post-TCP的那些事儿" class="article article-type-post" itemscope itemprop="blogPost">
-    <script>
-        $("html").niceScroll({
-            cursorcolor: "#2a2929",
-            cursoropacitymax: 1,
-            touchbehavior: false,
-            cursorwidth: "6px",
-            cursorborder: "5",
-            cursorborderradius: "0px",
-            autohidemode: true
-        });
-    </script>
-    
-        <div class="article-meta">
-            <a href="/2016/10/24/TCP的那些事儿/" class="article-date">
-  	<time datetime="2016-10-24T14:21:33.000Z" itemprop="datePublished">2016-10-24</time>
-</a>
-
-        </div>
-        
-            <div class="article-inner">
-                
-                    <input type="hidden" class="isFancy" />
-                    
-                        
-                            <header class="article-header">
-                                
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/24/TCP的那些事儿/">TCP的那些事儿</a>
-    </h1>
-  
-
-
-                            </header>
-                            
-                                    
-                                        <div class="article-entry" itemprop="articleBody">
-                                            
-                                                    <!--02-->
-                                                    <p class="toc-button">目录</p>
-<div id="toc" class="toc-article" style="display:none;">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP-头格式"><span class="toc-number">1.</span> <span class="toc-text">TCP 头格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP-状态机"><span class="toc-number">2.</span> <span class="toc-text">TCP 状态机</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据传输中的-Sequence-Number"><span class="toc-number">3.</span> <span class="toc-text">数据传输中的 Sequence Number</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP-重传机制"><span class="toc-number">4.</span> <span class="toc-text">TCP 重传机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#超时重传机制"><span class="toc-number">4.1.</span> <span class="toc-text">超时重传机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#快速重传机制"><span class="toc-number">4.2.</span> <span class="toc-text">快速重传机制</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SACK-方法"><span class="toc-number">5.</span> <span class="toc-text">SACK 方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Duplicate-SACK-–-重复收到数据的问题"><span class="toc-number">6.</span> <span class="toc-text">Duplicate SACK – 重复收到数据的问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#示例一：ACK丢包"><span class="toc-number">6.1.</span> <span class="toc-text">示例一：ACK丢包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#示例二，网络延误"><span class="toc-number">6.2.</span> <span class="toc-text">示例二，网络延误</span></a></li></ol></li></ol>
-</div>
-<script>
-    $(function(){
-
-        var width = document.body.scrollWidth;
-        if (width <=550) {
-             $(".toc-button").css("display","none");
-        }
-        $(".toc-button").hover(function(){
-            var top = $(this).get(0).offsetTop-$(".toc-article").height()/2;
-            $(".toc-article").css({
-                top:top +"px"
-            });
-            $("#toc").show(1000,function(){});
-           // $("#toc").animate({width:500;},3000);
-        },function(){
-
-        });
-        $(".toc-article").hover(function(){
-
-        },function(){
-            $("#toc").hide(1000,function(){});
-        });
-    })
-</script>
-
-                                                        
-                                                            
-                                                                
-                                                                            <h2 id="TCP-头格式"><a href="#TCP-头格式" class="headerlink" title="TCP 头格式"></a>TCP 头格式</h2><p><img src="http://coolshell.cn/wp-content/uploads/2014/05/TCP-Header-01.jpg" alt="pic"></p>
-<ul>
-<li><p>TCP的包是没有IP地址的，那是IP层上的事。但是有源端口和目标端口。</p>
-</li>
-<li><p>一个TCP连接需要四个元组来表示是同一个连接（src_ip, src_port, dst_ip, dst_port）准确说是五元组，还有一个是协议。但因为这里只是说TCP协议，所以，这里我只说四元组。</p>
-</li>
-</ul>
-<p>注意上图中的四个非常重要的内容：</p>
-<ul>
-<li><strong>Sequence Number</strong>是包的序号，用来解决<strong>网络包乱序（reordering）</strong>问题。</li>
-<li><strong>Acknowledgement Number</strong>就是ACK——用于确认收到，用来解决<strong>不丢包</strong>的问题。</li>
-<li><strong>Window</strong>又叫Advertised-Window，也就是著名的滑动窗口（Sliding Window），用于解决<strong>流控</strong>的。</li>
-<li><strong>TCP Flag</strong>，也就是包的类型，主要是用于<strong>操控TCP的状态机</strong>的。</li>
-</ul>
-<p><img src="http://coolshell.cn/wp-content/uploads/2014/05/TCP-Header-02.jpg" alt="pic"></p>
-<h2 id="TCP-状态机"><a href="#TCP-状态机" class="headerlink" title="TCP 状态机"></a>TCP 状态机</h2><p>其实，<strong>网络上的传输是没有连接的，包括TCP也是一样的</strong>。而TCP所谓的“连接”，其实只不过是在通讯的双方维护一个“连接状态”，让它看上去好像有连接一样。所以，TCP的状态变换是非常重要的。</p>
-<p>下面是：“TCP协议的状态机” 和 “TCP建链接”、“TCP断链接”、“传数据” 的对照图：</p>
-<p><img src="http://coolshell.cn/wp-content/uploads/2014/05/tcpfsm.png" alt="pic"></p>
-<p><img src="http://coolshell.cn/wp-content/uploads/2014/05/tcp_open_close.jpg" alt="pic"></p>
-<ul>
-<li><p><strong>对于建链接的3次握手</strong>，主要是要初始化Sequence Number 的初始值。通信的双方要互相通知对方自己的初始化的Sequence Number（缩写为ISN：Inital Sequence Number）——所以叫SYN，全称Synchronize Sequence Numbers。也就上图中的 x 和 y。这个号要作为以后的数据通信的序号，以保证应用层接收到的数据不会因为网络上的传输的问题而乱序（TCP会用这个序号来拼接数据）。</p>
-</li>
-<li><p><strong>对于4次挥手</strong>，其实仔细看是2次，因为TCP是全双工的，所以，发送方和接收方都需要Fin和Ack。只不过，有一方是被动的，所以看上去就成了所谓的4次挥手。如果两边同时断连接，那就会就进入到CLOSING状态，然后到达TIME_WAIT状态。下图是双方同时断连接的示意图（同样可以对照着TCP状态机看）：</p>
-</li>
-</ul>
-<p><strong>两端同时断开连接</strong></p>
-<p><img src="http://coolshell.cn/wp-content/uploads/2014/05/tcpclosesimul.png" alt="pic"></p>
-<p>另外，还有接事情需要注意下：</p>
-<ul>
-<li><strong>关于建连接时SYN超时。</strong></li>
-</ul>
-<p>试想一下，如果server端接到了clien发的SYN后回了SYN-ACK后client掉线了，server端没有收到client回来的ACK，那么，这个连接处于一个中间状态，即没成功，也没失败。于是，server端如果在一定时间内没有收到的TCP会重发SYN-ACK。在Linux下，默认重试次数为5次，重试的间隔时间从1s开始每次都翻售，5次的重试时间间隔为1s, 2s, 4s, 8s, 16s，总共31s，第5次发出后还要等32s都知道第5次也超时了，所以，总共需要 1s + 2s + 4s+ 8s+ 16s + 32s = 2^6 -1 = 63s，TCP才会把断开这个连接。</p>
-<ul>
-<li><strong>关于SYN Flood攻击。</strong></li>
-</ul>
-<p>一些恶意的人就为此制造了SYN Flood攻击——给服务器发了一个SYN后，就下线了，于是服务器需要默认等63s才会断开连接，这样，攻击者就可以把服务器的syn连接的队列耗尽，让正常的连接请求不能处理。于是，Linux下给了一个叫<strong>tcp_syncookies</strong>的参数来应对这个事——当SYN队列满了后，TCP会通过源地址端口、目标地址端口和时间戳打造出一个特别的Sequence Number发回去（又叫cookie），如果是攻击者则不会有响应，如果是正常连接，则会把这个 SYN Cookie发回来，然后服务端可以通过cookie建连接（即使你不在SYN队列中）。请注意，<strong>请先千万别用tcp_syncookies来处理正常的大负载的连接的情况</strong>。因为，synccookies是妥协版的TCP协议，并不严谨。对于正常的请求，你应该调整三个TCP参数可供你选择，第一个是：tcp_synack_retries 可以用他来减少重试次数；第二个是：tcp_max_syn_backlog，可以增大SYN连接数；第三个是：tcp_abort_on_overflow 处理不过来干脆就直接拒绝连接了。</p>
-<ul>
-<li><strong>关于ISN的初始化。</strong></li>
-</ul>
-<p>ISN是不能hard code的，不然会出问题的——比如：如果连接建好后始终用1来做ISN，如果client发了30个segment过去，但是网络断了，于是 client重连，又用了1做ISN，但是之前连接的那些包到了，于是就被当成了新连接的包，此时，client的Sequence Number 可能是3，而Server端认为client端的这个号是30了。全乱了。RFC793中说，ISN会和一个假的时钟绑在一起，这个时钟会在每4微秒对ISN做加一操作，直到超过2^32，又从0开始。这样，一个ISN的周期大约是4.55个小时。因为，我们假设我们的TCP Segment在网络上的存活时间不会超过Maximum Segment Lifetime（缩写为MSL – Wikipedia语条），所以，只要MSL的值小于4.55小时，那么，我们就不会重用到ISN。</p>
-<ul>
-<li><strong>关于 MSL 和 TIME_WAIT。</strong></li>
-</ul>
-<p>通过上面的ISN的描述，相信你也知道MSL是怎么来的了。我们注意到，在TCP的状态图中，从TIME_WAIT状态到CLOSED状态，有一个超时设置，这个超时设置是 2*MSL（RFC793定义了MSL为2分钟，Linux设置成了30s）为什么要这有TIME_WAIT？为什么不直接给转成CLOSED状态呢？主要有两个原因：1）TIME_WAIT确保有足够的时间让对端收到了ACK，如果被动关闭的那方没有收到Ack，就会触发被动端重发Fin，一来一去正好2个MSL，2）有足够的时间让这个连接不会跟后面的连接混在一起（你要知道，有些自做主张的路由器会缓存IP数据包，如果连接被重用了，那么这些延迟收到的包就有可能会跟新连接混在一起）。你可以看看这篇文章《TIME_WAIT and its design implications for protocols and scalable client server systems》</p>
-<ul>
-<li><strong>关于TIME_WAIT数量太多。</strong></li>
-</ul>
-<p>从上面的描述我们可以知道，TIME_WAIT是个很重要的状态，但是如果在大并发的短链接下，TIME_WAIT 就会太多，这也会消耗很多系统资源。只要搜一下，你就会发现，十有八九的处理方式都是教你设置两个参数，一个叫<strong>tcp_tw_reuse</strong>，另一个叫<strong>tcp_tw_recycle</strong>的参数，这两个参数默认值都是被关闭的，后者recyle比前者resue更为激进，resue要温柔一些。另外，如果使用tcp_tw_reuse，必需设置tcp_timestamps=1，否则无效。这里，你一定要注意，打开这两个参数会有比较大的坑—可能会让TCP连接出一些诡异的问题（因为如上述一样，如果不等待超时重用连接的话，新的连接可能会建不上。正如官方文档上说的一样“It should not be changed without advice/request of technical experts”）。</p>
-<blockquote>
-<ol>
-<li><strong>关于tcp_tw_reuse。</strong>官方文档上说tcp_tw_reuse 加上tcp_timestamps（又叫PAWS, for Protection Against Wrapped Sequence Numbers）可以保证协议的角度上的安全，但是你需要tcp_timestamps在两边都被打开（你可以读一下tcp_twsk_unique的源码 ）。我个人估计还是有一些场景会有问题。</li>
-<li><strong>关于tcp_tw_recycle。</strong>如果是tcp_tw_recycle被打开了话，会假设对端开启了tcp_timestamps，然后会去比较时间戳，如果时间戳变大了，就可以重用。但是，如果对端是一个NAT网络的话（如：一个公司只用一个IP出公网）或是对端的IP被另一台重用了，这个事就复杂了。建链接的SYN可能就被直接丢掉了（你可能会看到connection time out的错误）（如果你想观摩一下Linux的内核代码，请参看源码 tcp_timewait_state_process）。</li>
-<li><strong>关于tcp_max_tw_buckets。</strong>这个是控制并发的TIME_WAIT的数量，默认值是180000，如果超限，那么，系统会把多的给destory掉，然后在日志里打一个警告（如：time wait bucket table overflow），官网文档说这个参数是用来对抗DDoS攻击的。也说的默认值180000并不小。这个还是需要根据实际情况考虑。</li>
-</ol>
-</blockquote>
-<p>同样，使用tcp_tw_reuse和tcp_tw_recycle来解决TIME_WAIT的问题是非常非常危险的，因为这两个参数违反了TCP协议（RFC 1122）。</p>
-<p>其实，TIME_WAIT表示的是你主动断连接，所以，这就是所谓的“不作死不会死”。试想，如果让对端断连接，那么这个破问题就是对方的了。另外，如果你的服务器是于HTTP服务器，那么设置一个HTTP的KeepAlive有多重要（浏览器会重用一个TCP连接来处理多个HTTP请求），然后让客户端去断链接（你要小心，浏览器可能会非常贪婪，他们不到万不得已不会主动断连接）。</p>
-<h2 id="数据传输中的-Sequence-Number"><a href="#数据传输中的-Sequence-Number" class="headerlink" title="数据传输中的 Sequence Number"></a>数据传输中的 Sequence Number</h2><p>下图是从Wireshark中截了个我在访问coolshell.cn时的有数据传输的图给你看一下，SeqNum是怎么变的。（使用Wireshark菜单中的Statistics -&gt;Flow Graph）</p>
-<p><img src="http://coolshell.cn/wp-content/uploads/2014/05/tcp_data_seq_num.jpg" alt="pic"></p>
-<p>可以看到，<strong>SeqNum的增加是和传输的字节数相关的</strong>。上图中，三次握手后，来了两个Len:1440的包，而第二个包的SeqNum就成了1441。然后第一个ACK回的是1441，表示第一个1440收到了。</p>
-<p><strong>注意：</strong>如果用Wireshark抓包程序看3次握手，你会发现SeqNum总是为0，不是这样的，Wireshark为了显示更友好，使用了Relative SeqNum——相对序号，你只要在右键菜单中的protocol preference 中取消掉就可以看到“Absolute SeqNum”了。</p>
-<h2 id="TCP-重传机制"><a href="#TCP-重传机制" class="headerlink" title="TCP 重传机制"></a>TCP 重传机制</h2><p>TCP要保证所有的数据包都可以到达，所以，必需要有重传机制。</p>
-<p>注意，接收端给发送端的Ack确认只会确认最后一个连续的包，比如，发送端发了1,2,3,4,5一共五份数据，接收端收到了1，2，于是回ack 3，然后收到了4（注意此时3没收到），此时的TCP会怎么办？我们要知道，因为正如前面所说的，<strong>SeqNum和Ack是以字节数为单位，所以ack的时候，不能跳着确认，只能确认最大的连续收到的包</strong>，不然，发送端就以为之前的都收到了。</p>
-<h3 id="超时重传机制"><a href="#超时重传机制" class="headerlink" title="超时重传机制"></a>超时重传机制</h3><p>一种是不回ack，死等3，当发送方发现收不到3的ack超时后，会重传3。一旦接收方收到3后，会ack 回 4——意味着3和4都收到了。</p>
-<p>但是，这种方式会有比较严重的问题，那就是因为要死等3，所以会导致4和5即便已经收到了，而发送方也完全不知道发生了什么事，因为没有收到Ack，所以，发送方可能会悲观地认为也丢了，所以有可能也会导致4和5的重传。</p>
-<p><strong>对此有两种选择：</strong></p>
-<ul>
-<li>一种是仅重传timeout的包。也就是第3份数据。</li>
-<li>另一种是重传timeout后所有的数据，也就是第3，4，5这三份数据。</li>
-</ul>
-<h3 id="快速重传机制"><a href="#快速重传机制" class="headerlink" title="快速重传机制"></a>快速重传机制</h3><p>于是，TCP引入了一种叫<strong>Fast Retransmit</strong> 的算法，不以时间驱动，而以数据驱动重传。也就是说，如果，包没有连续到达，就ack最后那个可能被丢了的包，如果发送方连续收到3次相同的ack，就重传。Fast Retransmit的好处是不用等timeout了再重传。</p>
-<p>比如：如果发送方发出了1，2，3，4，5份数据，第一份先到送了，于是就ack回2，结果2因为某些原因没收到，3到达了，于是还是ack回2，后面的4和5都到了，但是还是ack回2，因为2还是没有收到，于是发送端收到了三个ack=2的确认，知道了2还没有到，于是就马上重转2。然后，接收端收到了2，此时因为3，4，5都收到了，于是ack回6。示意图如下：</p>
-<p><img src="http://coolshell.cn/wp-content/uploads/2014/05/FASTIncast021.png" alt="pic"></p>
-<p>Fast Retransmit只解决了一个问题，就是timeout的问题，它依然面临一个艰难的选择，就是，是重传之前的一个还是重传所有的问题。对于上面的示例来说，是重传#2呢还是重传#2，#3，#4，#5呢？因为发送端并不清楚这连续的3个ack(2)是谁传回来的？也许发送端发了20份数据，是#6，#10，#20传来的呢。这样，发送端很有可能要重传从2到20的这堆数据（这就是某些TCP的实际的实现）。可见，这是一把双刃剑。</p>
-<h2 id="SACK-方法"><a href="#SACK-方法" class="headerlink" title="SACK 方法"></a>SACK 方法</h2><p>另外一种更好的方式叫：<strong>Selective Acknowledgment (SACK)</strong>（参看RFC 2018），这种方式需要在TCP头里加一个SACK的东西，ACK还是Fast Retransmit的ACK，SACK则是汇报收到的数据碎版。参看下图：</p>
-<p><img src="http://coolshell.cn/wp-content/uploads/2014/05/tcp_sack_example-900x507.jpg" alt="pic"></p>
-<p>这样，在发送端就可以根据回传的SACK来知道哪些数据到了，哪些没有到。于是就优化了Fast Retransmit的算法。当然，这个协议需要两边都支持。在 Linux下，可以通过<strong>tcp_sack</strong>参数打开这个功能（Linux 2.4后默认打开）。</p>
-<p>这里还需要注意一个问题——<strong>接收方Reneging，所谓Reneging的意思就是接收方有权把已经报给发送端SACK里的数据给丢了</strong>。这样干是不被鼓励的，因为这个事会把问题复杂化了，但是，接收方这么做可能会有些极端情况，比如要把内存给别的更重要的东西。所以，<strong>发送方也不能完全依赖SACK，还是要依赖ACK，并维护Time-Out，如果后续的ACK没有增长，那么还是要把SACK的东西重传，另外，接收端这边永远不能把SACK的包标记为Ack。</strong></p>
-<p>注意：SACK会消费发送方的资源，试想，如果一个攻击者给数据发送方发一堆SACK的选项，这会导致发送方开始要重传甚至遍历已经发出的数据，这会消耗很多发送端的资源。详细的东西请参看《TCP SACK的性能权衡》</p>
-<h2 id="Duplicate-SACK-–-重复收到数据的问题"><a href="#Duplicate-SACK-–-重复收到数据的问题" class="headerlink" title="Duplicate SACK – 重复收到数据的问题"></a>Duplicate SACK – 重复收到数据的问题</h2><p>Duplicate SACK又称D-SACK，<strong>其主要使用了SACK来告诉发送方有哪些数据被重复接收了。</strong>RFC-2883 里有详细描述和示例。下面举几个例子（来源于RFC-2883）</p>
-<p>D-SACK使用了SACK的第一个段来做标志，</p>
-<ul>
-<li>如果SACK的第一个段的范围被ACK所覆盖，那么就是D-SACK</li>
-<li>如果SACK的第一个段的范围被SACK的第二个段覆盖，那么就是D-SACK</li>
-</ul>
-<h3 id="示例一：ACK丢包"><a href="#示例一：ACK丢包" class="headerlink" title="示例一：ACK丢包"></a>示例一：ACK丢包</h3><p>下面的示例中，丢了两个ACK，所以，发送端重传了第一个数据包（3000-3499），于是接收端发现重复收到，于是回了一个SACK=3000-3500，因为ACK都到了4000意味着收到了4000之前的所有数据，所以这个SACK就是D-SACK——旨在告诉发送端我收到了重复的数据，而且我们的发送端还知道，数据包没有丢，丢的是ACK包。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function">Transmitted  Received    ACK Sent</span></div><div class="line">Segment      <span class="title">Segment</span>     <span class="params">(Including SACK Blocks)</span></div><div class="line"> </div><div class="line">3000-3499    3000-3499   3500 <span class="params">(ACK dropped)</span></div><div class="line">3500-3999    3500-3999   4000 <span class="params">(ACK dropped)</span></div><div class="line">3000-3499    3000-3499   4000, SACK=<span class="number">3000</span>-<span class="number">3500</span></div></pre></td></tr></table></figure>
-<h3 id="示例二，网络延误"><a href="#示例二，网络延误" class="headerlink" title="示例二，网络延误"></a>示例二，网络延误</h3><p>下面的示例中，网络包（1000-1499）被网络给延误了，导致发送方没有收到ACK，而后面到达的三个包触发了“Fast Retransmit算法”，所以重传，但重传时，被延误的包又到了，所以，回了一个SACK=1000-1500，因为ACK已到了3000，所以，这个SACK是D-SACK——标识收到了重复的包。</p>
-<p>这个案例下，发送端知道之前因为“Fast Retransmit算法”触发的重传不是因为发出去的包丢了，也不是因为回应的ACK包丢了，而是因为网络延时了。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function">Transmitted    Received    ACK Sent</span></div><div class="line">Segment        <span class="title">Segment</span>     <span class="params">(Including SACK Blocks)</span></div><div class="line"> </div><div class="line">500-999        500-999     1000</div><div class="line">1000-1499      <span class="params">(delayed)</span></div><div class="line">1500-1999      1500-1999   1000, SACK=<span class="number">1500</span>-<span class="number">2000</span></div><div class="line"><span class="number">2000</span>-<span class="number">2499</span>      <span class="number">2000</span>-<span class="number">2499</span>   <span class="number">1000</span>, SACK=<span class="number">1500</span>-<span class="number">2500</span></div><div class="line"><span class="number">2500</span>-<span class="number">2999</span>      <span class="number">2500</span>-<span class="number">2999</span>   <span class="number">1000</span>, SACK=<span class="number">1500</span>-<span class="number">3000</span></div><div class="line"><span class="number">1000</span>-<span class="number">1499</span>      <span class="number">1000</span>-<span class="number">1499</span>   <span class="number">3000</span></div><div class="line">               <span class="number">1000</span>-<span class="number">1499</span>   <span class="number">3000</span>, SACK=<span class="number">1000</span>-<span class="number">1500</span></div></pre></td></tr></table></figure>
-<p><strong>可见，引入了D-SACK，有这么几个好处：</strong></p>
-<blockquote>
-<p>1）可以让发送方知道，是发出去的包丢了，还是回来的ACK包丢了。<br>2）是不是自己的timeout太小了，导致重传。<br>3）网络上出现了先发的包后到的情况（又称reordering）<br>4）网络上是不是把我的数据包给复制了。</p>
-</blockquote>
-<p>知道这些东西可以很好得帮助TCP了解网络情况，从而可以更好的做网络上的流控。</p>
-
-                                                                                
-                                        </div>
-                                        
-                                            <div class="article-info article-info-index">
-                                                
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/计算机网络/">计算机网络</a></li></ul>
-	</div>
-
-
-                                                    
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/work/">work</a>
 	</div>
 
 
