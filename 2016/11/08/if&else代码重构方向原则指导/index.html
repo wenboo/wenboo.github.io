@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="baidu-site-verification" content="6fea7fc7276fc383ec5b2080c662f076"/>
+  
+  <title>if&amp;else代码重构方向原则指导 | Hi~Welcome to Wenboo&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="几天前的一次上线，脑残手抖不小心写了bug，虽然组里的老大没有说什么，但心里面很是难过。同事说我之所以写虫子是因为我讨厌if/else，这个习惯不好。的确，if/else可以帮助我们很方便的写出流程控制代码，简洁明了，这个条件做什么，那个条件做什么，说得很清楚。说真的，我从来不反对if/else，从经验上看，越复杂的业务场景下，代码写的越简单单一，通常越不容易出错。以结果为导向的现代项目管理方式，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="if&else代码重构方向原则指导">
+<meta property="og:url" content="http://wenboo.github.io/2016/11/08/if&else代码重构方向原则指导/index.html">
+<meta property="og:site_name" content="Hi~Welcome to Wenboo's Blog">
+<meta property="og:description" content="几天前的一次上线，脑残手抖不小心写了bug，虽然组里的老大没有说什么，但心里面很是难过。同事说我之所以写虫子是因为我讨厌if/else，这个习惯不好。的确，if/else可以帮助我们很方便的写出流程控制代码，简洁明了，这个条件做什么，那个条件做什么，说得很清楚。说真的，我从来不反对if/else，从经验上看，越复杂的业务场景下，代码写的越简单单一，通常越不容易出错。以结果为导向的现代项目管理方式，">
+<meta property="og:updated_time" content="2016-11-08T14:18:44.583Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="if&else代码重构方向原则指导">
+<meta name="twitter:description" content="几天前的一次上线，脑残手抖不小心写了bug，虽然组里的老大没有说什么，但心里面很是难过。同事说我之所以写虫子是因为我讨厌if/else，这个习惯不好。的确，if/else可以帮助我们很方便的写出流程控制代码，简洁明了，这个条件做什么，那个条件做什么，说得很清楚。说真的，我从来不反对if/else，从经验上看，越复杂的业务场景下，代码写的越简单单一，通常越不容易出错。以结果为导向的现代项目管理方式，">
+  
+    <link rel="alternative" href="/atom.xml" title="Hi~Welcome to Wenboo&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/leaves.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="http://kiritor.github.io/js/jquery1.8.2.min.js"></script>
+  <script src="http://kiritor.github.io/js/jquery.nicescroll.js"></script>
+  <script src="http://kiritor.github.io/js/jquery.qrcode.min.js"></script>
+  <script src="/js/ug-theme-default.js"></script>
+  <script src="/js/unitegallery.js"></script>
+</head>
+
+<body>
+
+  <div id="container">
+    <div class="left-col">
+    
+<div class="overlay"></div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</script>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img src="https://static.pexels.com/photos/8263/pexels-photo-large.jpg" class="js-avatar">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/" class="alluraregular">Cheng</a></h1>
+		</hgroup>
+        <!--
+		
+        -->
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/categories/work">工作日志</a></li>
+				        
+							<li><a href="/categories/life">点滴生活</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/wenboo" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/u/1749019950" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="#" title="rss">rss</a>
+					        
+								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/wenboo" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/c/" style="font-size: 17.5px;">c</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/os/" style="font-size: 12.5px;">os</a> <a href="/tags/tool/" style="font-size: 10px;">tool</a> <a href="/tags/微机原理/" style="font-size: 15px;">微机原理</a> <a href="/tags/计算机网络/" style="font-size: 17.5px;">计算机网络</a>
+					</div>
+				</section>
+				
+
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">弹吉他中写代码的</div>
+				</section>
+				
+			</div>
+		</div>
+		<div id="busuanzi">
+		您是访问的第 <span id="busuanzi_value_site_pv"></span> 个小伙伴
+		</span>
+		</div>
+	</header>
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Cheng</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="https://static.pexels.com/photos/8263/pexels-photo-large.jpg" class="js-avatar">
+				<hgroup>
+				  <h1 class="header-author">Cheng</h1>
+				</hgroup>
+			</div>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/categories/work">工作日志</a></li>
+		        
+					<li><a href="/categories/life">点滴生活</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/wenboo" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/u/1749019950" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="#" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/wenboo" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>
+	</div>
+</nav>
+
+	  <!--是否开启最近通知-->
+	  
+	  <div class="recent">
+    人生事长难遂人愿，且看明月又有几回圆
+</div>
+
+	  
+      <div class="body-wrap"><article id="post-if&amp;else代码重构方向原则指导" class="article article-type-post" itemscope itemprop="blogPost">
+    <script>
+        $("html").niceScroll({
+            cursorcolor: "#2a2929",
+            cursoropacitymax: 1,
+            touchbehavior: false,
+            cursorwidth: "6px",
+            cursorborder: "5",
+            cursorborderradius: "0px",
+            autohidemode: true
+        });
+    </script>
+    
+        <div class="article-meta">
+            <a href="/2016/11/08/if&else代码重构方向原则指导/" class="article-date">
+  	<time datetime="2016-11-08T14:04:56.000Z" itemprop="datePublished">2016-11-08</time>
+</a>
+
+        </div>
+        
+            <div class="article-inner">
+                
+                    <input type="hidden" class="isFancy" />
+                    
+                        
+                            <header class="article-header">
+                                
+  
+    <h1 class="article-title" itemprop="name">
+      if&amp;else代码重构方向原则指导
+    </h1>
+  
+
+
+                            </header>
+                            
+                                <div class="article-info article-info-post">
+                                    
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+	</div>
+
+
+                                        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/work/">work</a>
+	</div>
+
+
+                                            <div class="clearfix"></div>
+                                </div>
+                                
+                                    
+                                        <div class="article-entry" itemprop="articleBody">
+                                            
+                                                    <!--02-->
+                                                    <p class="toc-button">目录</p>
+<div id="toc" class="toc-article" style="display:none;">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#重构初体验：反射"><span class="toc-number">1.</span> <span class="toc-text">重构初体验：反射</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重构初体验：所谓模式"><span class="toc-number">2.</span> <span class="toc-text">重构初体验：所谓模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重构初体验：Java8对模式设计的精简"><span class="toc-number">3.</span> <span class="toc-text">重构初体验：Java8对模式设计的精简</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li></ol>
+</div>
+<script>
+    $(function(){
+
+        var width = document.body.scrollWidth;
+        if (width <=550) {
+             $(".toc-button").css("display","none");
+        }
+        $(".toc-button").hover(function(){
+            var top = $(this).get(0).offsetTop-$(".toc-article").height()/2;
+            $(".toc-article").css({
+                top:top +"px"
+            });
+            $("#toc").show(1000,function(){});
+           // $("#toc").animate({width:500;},3000);
+        },function(){
+
+        });
+        $(".toc-article").hover(function(){
+
+        },function(){
+            $("#toc").hide(1000,function(){});
+        });
+    })
+</script>
+
+                                                        
+                                                            
+                                                                
+                                                                            <p>几天前的一次上线，脑残手抖不小心写了bug，虽然组里的老大没有说什么，但心里面很是难过。同事说我之所以写虫子是因为我讨厌if/else，这个习惯不好。的确，if/else可以帮助我们很方便的写出流程控制代码，简洁明了，这个条件做什么，那个条件做什么，说得很清楚。说真的，我从来不反对if/else，从经验上看，越复杂的业务场景下，代码写的越简单单一，通常越不容易出错。以结果为导向的现代项目管理方式，这是一种很有效实践经验。</p>
+<p>同事说的没错，我的确很讨厌if/else。这个习惯很大程度是受Thoughtworks一位咨询师朋友影响，他经常在我耳边唠叨，写代码要干净，要简洁，要灵活多变，不要固守城规，不要动不动就if/else，switch/case。初入it领域，我一直把这句话奉为经典。在以后的学习工作中也时刻提醒自己要让自己的代码尽可能的看起来简洁，不失灵活。不喜欢if/else并不意味着拒绝它，该使用的时候必要使用，比如函数接口入参check，处理异常分支逻辑流程等。通常能不用分支语句，我尽量不会使用，因为我觉得if/else很丑，每每看到if/else代码，总会以挑剔的眼光看待它，想想能不能重构的更好。大多数时候，关于什么好的代码，大家的意见往往分歧很大，每个人都有各自的想法，审查你代码的人可能会选择另一种实现方式，这并不能说明谁对谁错。</p>
+<p>OO设计遵循SOLID(单一功能、开闭原则、里氏替换、接口隔离以及依赖反转)原则，使用这个原则去审视if/else，可能会发现很多问题，比如不符合单一原则，它本身就像一团浆糊，融合了各种作料，黏糊糊的很不干净；比如不符合开闭原则，每新增一种场景，就需要修改源文件增加一条分支语句，业务逻辑复杂些若有1000种场景就得有1000个分支流，这种情况下代码不仅仅恶心问题了，效率上也存在很大问题。由此可见，if/else虽然简单方便，但不恰当的使用会给编码代码带来非常痛苦的体验。针对这种恶心的if/else分支，我们当然首先想到的去重构它–在不改变代码外部功能特征的前提下对代码内部逻辑进行调整和优化，但，如何做呢？前段时间在项目中正好遇到一个恶心的if/else例子，想在这篇博客里和大家分享一下去除if/else重构的历程。</p>
+<p>##if/else的恶瘤##</p>
+<p>有句话说的好：好文章是改出来，同样，好的代码也肯定是重构出来的，因为没有哪个软件工程师能够拍着胸脯保证在项目之初代码设计这块，就考虑到了所有需求变化可能性的扩展。随着项目的不断成长，业务逻辑变的越来越复杂，代码也开始变的越来越多，原有的设计可能不再满足需求，那么此时必须要重构。就系统整体架构而言，重构可能需要很大的改动，可能在架构流程上需要评审；就功能内代码层次而言，这种重构在我们编码过程中随时可以进行，类似于if/else，swicth/case这种代码的重构也属于这种类型。今天我们要重构的if/else源码如下所示，针对不同的status code，CountRecoder对象会执行不同的set方法，为不同内部属性赋值。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> CountRecoder <span class="title">getCountRecoder</span><span class="params">(List countEntries)</span> </span>&#123;</div><div class="line">    CountRecoder countRecoder = <span class="keyword">new</span> CountRecoder();</div><div class="line">    <span class="keyword">for</span> (CountEntry countEntry : countEntries) &#123;</div><div class="line">        <span class="keyword">if</span> (<span class="number">1</span> == countEntry.getCode()) &#123;</div><div class="line">            countRecoder.setCountOfFirstStage(countEntry.getCount());</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="number">2</span> == countEntry.getCode()) &#123;</div><div class="line">            countRecoder.setCountOfSecondStage(countEntry.getCount());</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="number">3</span> == countEntry.getCode()) &#123;</div><div class="line">            countRecoder.setCountOfThirdtage(countEntry.getCount());</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="number">4</span> == countEntry.getCode()) &#123;</div><div class="line">            countRecoder.setCountOfForthtage(countEntry.getCount());</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="number">5</span> == countEntry.getCode()) &#123;</div><div class="line">            countRecoder.setCountOfFirthStage(countEntry.getCount());</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="number">6</span> == countEntry.getCode()) &#123;</div><div class="line">            countRecoder.setCountOfSixthStage(countEntry.getCount());</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> countRecoder;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>CountRecoder对象是一个简单的Java Bean，用于保存一天之中六种状态分别对应的数据条目，提供了get和set方法。CountEntry是对应数据库中每种状态的数据条目记录，包含状态code和以及count两个字段, 我们可以使用mybatis实现数据库记录和java对象之间的转换。上面getCountRecoder的方法实现了将list转换为CountRecoder的功能。</p>
+<p>看到这段代码，想必已经有很多人要呵呵了，啥都不说了，直接回炉重构吧。重构是门艺术，Martin flow曾写过一本书《重构改变代码之道》，里面详细的记录了重构的方法论，感兴趣的朋友可以阅读一下。说到重构，通常我们在重构中会遇到一个问题，那就是如何能够保证重构的代码不改变原有的外部功能特征 ？经过TDD训练的朋友应该知道答案，那就是单元测试，重构之前要写单元测试，准确的来说应该是补单元测试，毕竟TDD的核心理念是测试驱动开发。对于今天博客中分享的例子，因为代码逻辑比较简单，所以偷了懒，省却了单元测试的历程。</p>
+<h2 id="重构初体验：反射"><a href="#重构初体验：反射" class="headerlink" title="重构初体验：反射"></a>重构初体验：反射</h2><p>要重构上面的代码，对设计模式精通的人可以立马可以看出来这是使用策略模式/状态模式的绝佳场景，将策略模式稍微变换，工厂模式应该也是ok的，当然也有些人会选择使用反射。对于这些方法，这里不一一列出，主要想讲一下使用反射和工厂模式如何解决消除if/else问题，那先说反射吧，代码如下所示：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> Map methodsMap = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line"></div><div class="line"><span class="keyword">static</span> &#123;</div><div class="line">    methodsMap.put(<span class="number">1</span>, <span class="string">"setCountOfFirstStage"</span>);</div><div class="line">    methodsMap.put(<span class="number">2</span>, <span class="string">"setCountOfSecondStage"</span>);</div><div class="line">    methodsMap.put(<span class="number">3</span>, <span class="string">"setCountOfThirdtage"</span>);</div><div class="line">    methodsMap.put(<span class="number">4</span>, <span class="string">"setCountOfForthtage"</span>);</div><div class="line">    methodsMap.put(<span class="number">5</span>, <span class="string">"setCountOfFirthStage"</span>);</div><div class="line">    methodsMap.put(<span class="number">6</span>, <span class="string">"setCountOfSixthStage"</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> CountRecoder <span class="title">getCountRecoderByReflect</span><span class="params">(List countEntries)</span> </span>&#123;</div><div class="line">    CountRecoder countRecoder = <span class="keyword">new</span> CountRecoder();</div><div class="line">    countEntries.stream().forEach(countEntry -&gt; fillCount(countRecoder, countEntry));</div><div class="line">    <span class="keyword">return</span> countRecoder;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">fillCount</span><span class="params">(CountRecoder shippingOrderCountDto, CountEntry countEntry)</span> </span>&#123;</div><div class="line">    String name = methodsMap.get(countEntry.getCode());</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        Method declaredMethod = CountRecoder.class.getMethod(name, Integer.class);</div><div class="line">        declaredMethod.invoke(shippingOrderCountDto, countEntry.getCount());</div><div class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">        System.out.println(e);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="重构初体验：所谓模式"><a href="#重构初体验：所谓模式" class="headerlink" title="重构初体验：所谓模式"></a>重构初体验：所谓模式</h2><p>使用反射去掉if/else的原理很简单，使用HashMap建立状态码和需要调用的方法的方法名之间的映射关系，对于每个CountEntry，首先取出状态码，然后根据状态码获得相应的要调用方法的方法名，然后使用java的反射机制就可以实现对应方法的调用了。本例中使用反射的确可以帮助我们完美的去掉if/else的身影，但是，众所周知，反射效率很低，在高并发的条件下，反射绝对不是一个良好的选择。除去反射这种方法，能想到的就剩下使用策略模式或者与其类似的状态模式，以及工厂模式了，我们以工厂模式为例，经典的架构UML架构图通常由三个组成要素：</p>
+<ul>
+<li>抽象产品角色：通常是一个抽象类或者接口，里面定义了抽象方法</li>
+<li>具体产品角色：具体产品的实现类，继承或是实现抽象策略类，通常由一个或多个组成类组成。</li>
+<li>工厂角色：持有抽象产品类的引用，负责动态运行时产品的选择和构建</li>
+</ul>
+<p>策略模式的架构图和工厂模式非常类似，不过在策略模式里执行的对象不叫产品，叫策略。在本例中，这里的产品是虚拟产品，它是服务类性质的接口或者实现。Ok，按照工厂模式的思路重构我们的代码，我们首先定义一个抽象产品接口FillCountService，里面定义产品的行为方法fillCount，代码如下所示：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">FillCountService</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">fillCount</span><span class="params">(CountRecoder countRecoder, <span class="keyword">int</span> count)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>接着我们需要分别实现这六种服务类型的产品，在每种产品中封装不同的服务算法，具体的代码如下所示：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">FirstStageService</span> <span class="keyword">implements</span> <span class="title">FillCountService</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fillCount</span><span class="params">(CountRecoder countRecoder, <span class="keyword">int</span> count)</span> </span>&#123;</div><div class="line">        countRecoder.setCountOfFirstStage(count);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SecondStageService</span> <span class="keyword">implements</span> <span class="title">FillCountService</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fillCount</span><span class="params">(CountRecoder countRecoder, <span class="keyword">int</span> count)</span> </span>&#123;</div><div class="line">        countRecoder.setCountOfSecondStage(count);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ThirdStageService</span> <span class="keyword">implements</span> <span class="title">FillCountService</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fillCount</span><span class="params">(CountRecoder countRecoder, <span class="keyword">int</span> count)</span> </span>&#123;</div><div class="line">        countRecoder.setCountOfThirdtage(count);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ForthStageService</span> <span class="keyword">implements</span> <span class="title">FillCountService</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fillCount</span><span class="params">(CountRecoder countRecoder, <span class="keyword">int</span> count)</span> </span>&#123;</div><div class="line">        countRecoder.setCountOfForthtage(count);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">FirthStageService</span> <span class="keyword">implements</span> <span class="title">FillCountService</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fillCount</span><span class="params">(CountRecoder countRecoder, <span class="keyword">int</span> count)</span> </span>&#123;</div><div class="line">        countRecoder.setCountOfFirthStage(count);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SixthStageService</span> <span class="keyword">implements</span> <span class="title">FillCountService</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fillCount</span><span class="params">(CountRecoder countRecoder, <span class="keyword">int</span> count)</span> </span>&#123;</div><div class="line">        countRecoder.setCountOfSixthStage(count);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>紧接着，我们需要是实现工厂角色，在工厂内需要实现产品的动态选择算法，使用HashMap维护状态code和具体产品的对象之间的映射关系，<br>就可以非常容易的实现这一点，具体代码如下所示：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FillCountServieFactory</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Map fillCountServiceMap = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line"></div><div class="line">    <span class="keyword">static</span> &#123;</div><div class="line">        fillCountServiceMap.put(<span class="number">1</span>, <span class="keyword">new</span> FirstStageService());</div><div class="line">        fillCountServiceMap.put(<span class="number">2</span>, <span class="keyword">new</span> SecondStageService());</div><div class="line">        fillCountServiceMap.put(<span class="number">3</span>, <span class="keyword">new</span> ThirdStageService());</div><div class="line">        fillCountServiceMap.put(<span class="number">4</span>, <span class="keyword">new</span> ForthStageService());</div><div class="line">        fillCountServiceMap.put(<span class="number">5</span>, <span class="keyword">new</span> FirthStageService());</div><div class="line">        fillCountServiceMap.put(<span class="number">6</span>, <span class="keyword">new</span> SixthStageService());</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> FillCountService <span class="title">getFillCountStrategy</span><span class="params">(<span class="keyword">int</span> statusCode)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> fillCountServiceMap.get(statusCode);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>客户端在具体使用的时候就变的很简单，那getCountRecoder方法就可以用下面的代码实现:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> CountRecoder <span class="title">getCountRecoder</span><span class="params">(List countEntries)</span> </span>&#123;</div><div class="line">    CountRecoder countRecoder = <span class="keyword">new</span> CountRecoder();</div><div class="line">    countEntries.stream().forEach(countEntry -&gt; </div><div class="line">            FillCountServieFactory.getFillCountStrategy(countEntry.getCode())</div><div class="line">                    .fillCount(countRecoder, countEntry.getCount()));</div><div class="line">    <span class="keyword">return</span> countRecoder;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="重构初体验：Java8对模式设计的精简"><a href="#重构初体验：Java8对模式设计的精简" class="headerlink" title="重构初体验：Java8对模式设计的精简"></a>重构初体验：Java8对模式设计的精简</h2><p>和反射一样使用设计模式也同样完美的去除了if/else，但是不得不引入大量的具体服务实现类，同时程序中出现大量的模板代码，使得我们程序看起来很不干净，幸好Java 8之后引入了Functional Interface，我们可以使用lambda表达式来去除这些模板代码。将一个接口变为Functional interface，可以通过在接口上添加FunctionalInterface注解实现，代码如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@FunctionalInterface</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">FillCountService</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">fillCount</span><span class="params">(CountRecoder countRecoder, <span class="keyword">int</span> count)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>那么具体的服务实现类就可以使用一个简单的lambda表达式代替，原先的FirstStageService类对象就可以使用下面的表达式代替：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(countRecoder, count) -&gt; countRecoder.setCountOfFirstStage(count)</div></pre></td></tr></table></figure></p>
+<p>那么工厂类中的代码就可以变为：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FillCountServieFactory</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Map&lt;Integer, FillCountService&gt; fillCountServiceMap = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line"></div><div class="line">    <span class="keyword">static</span> &#123;</div><div class="line">        fillCountServiceMap.put(<span class="number">1</span>, (countRecoder, count) -&gt; countRecoder.setCountOfFirstStage(count));</div><div class="line">        fillCountServiceMap.put(<span class="number">2</span>, (countRecoder, count) -&gt; countRecoder.setCountOfSecondStage(count));</div><div class="line">        fillCountServiceMap.put(<span class="number">3</span>, (countRecoder, count) -&gt; countRecoder.setCountOfThirdtage(count));</div><div class="line">        fillCountServiceMap.put(<span class="number">4</span>, (countRecoder, count) -&gt; countRecoder.setCountOfForthtage(count));</div><div class="line">        fillCountServiceMap.put(<span class="number">5</span>, (countRecoder, count) -&gt; countRecoder.setCountOfFirthStage(count));</div><div class="line">        fillCountServiceMap.put(<span class="number">6</span>, (countRecoder, count) -&gt; countRecoder.setCountOfSixthStage(count));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> FillCountService <span class="title">getFillCountStrategy</span><span class="params">(<span class="keyword">int</span> statusCode)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> fillCountServiceMap.get(statusCode);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这样我们的代码就重构完毕了，当然了还是有些不完美，程序中的魔法数字不利于阅读理解，可以使用易读的常量标识它们，在这里就不做过多说明了。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Craig Larman曾经说过软件开发最重要的设计工具不是什么技术，而是一颗在设计原则方面训练有素的头脑。重构的最终结果不一定会让代码变少，相反还有可能增加程序的复杂度和抽象性，就本例中的if/else而言，确实如此。我非常赞同我的一位朋友说的话，做技术要有追求，没错if/else可以在代码中工作的挺好，也可以很容易的被接替者所理解，但是我们可以有更好的选择，因为简单的代码也可以变得很精彩。多勤多思，也许有一天真的就可以达到Craig所说的在设计原则方面拥有训练有素的头脑，谁说不是这样呢？加油吧。</p>
+
+                                                                                
+                                        </div>
+                                        
+            </div>
+            
+                <div id="socialShare" style="margin-left:40px;display:none;">
+                </div>
+                <script>
+                    $(function() {
+                        var width = document.body.scrollWidth;
+                        if (width > 550) {
+                            $("#socialShare").css("display", "block");
+                            $("#socialShare").socialShare({
+                                content: 'Nice!不错的资源...',
+                                url: window.location.href,
+                                titile: ''
+                            });
+                        }
+                    });
+                </script>
+                
+                    
+                        
+<nav id="article-nav">
+  
+  
+    <a href="/2016/11/06/Java-简易服务器的实现/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Java 简易服务器的实现</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+
+                            
+                                <!-- 多说评论框 start -->
+                                
+                                    <div class="ds-thread" data-thread-key="post-if&amp;else代码重构方向原则指导" data-title="if&amp;else代码重构方向原则指导" data-url="http://wenboo.github.io/2016/11/08/if&amp;else代码重构方向原则指导/"></div>
+                                    <!-- 多说评论框 end -->
+                                    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+                                    <script type="text/javascript">
+                                        var duoshuoQuery = {
+                                            short_name: "kiritor"
+                                        };
+                                        (function() {
+                                            var ds = document.createElement('script');
+                                            ds.type = 'text/javascript';
+                                            ds.async = true;
+                                            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                                            ds.charset = 'UTF-8';
+                                            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+                                        })();
+                                    </script>
+                                    <!-- 多说公共JS代码 end -->
+                                    
+</article>
+
+<!--
+
+    <div style="width:100%;background-color:#fff;">
+        <div id="uyan_frame" style="margin:auto 10px 10px 10px;"></div>
+    </div>
+    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2017540"></script>
+    
+-->
+<!--
+
+-->
+
+</div>
+      <!--<footer id="footer">
+
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Cheng
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+		
+    </div>
+  <script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','m5RW4BUQrJ_r-CYKAksH','2.0.0');
+</script>
+  </div>
+</footer>
+-->
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/mobile.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/prefixfree.js"></script>
+
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div id="totop" style="position:fixed;bottom:150px;right:50px;cursor: pointer;z-index:9999;opacity: 100%;">
+    <a title="返回顶部" style="opacity: 100%;">
+        <img src="/img/scrollup.png" />
+    </a>
+</div>
+
+<script src="/js/totop.js"></script>
+<script src="/js/share.js"></script>
+
+  </div>
+</body>
+</html>
