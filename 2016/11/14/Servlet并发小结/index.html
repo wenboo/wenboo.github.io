@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="baidu-site-verification" content="6fea7fc7276fc383ec5b2080c662f076"/>
+  
+  <title>Servlet并发小结 | Hi~Welcome to Wenboo&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Servelet的特点：单实例多线程Servlet（struts类似）的生命周期是由Web容器负责的,当客户端第一次请求Servlet时,容器负责初始化Servlet,也就是实例化这个Servlet 类。以后这个实例就负责多个客户端的请求,一般不会再实例化一个Servlet类,也就是有多个线程在使用这个实例。Servlet之所以比CGI效率高就是因为Servlet是多线程的。
+Servlet采用多">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Servlet并发小结">
+<meta property="og:url" content="http://wenboo.github.io/2016/11/14/Servlet并发小结/index.html">
+<meta property="og:site_name" content="Hi~Welcome to Wenboo's Blog">
+<meta property="og:description" content="Servelet的特点：单实例多线程Servlet（struts类似）的生命周期是由Web容器负责的,当客户端第一次请求Servlet时,容器负责初始化Servlet,也就是实例化这个Servlet 类。以后这个实例就负责多个客户端的请求,一般不会再实例化一个Servlet类,也就是有多个线程在使用这个实例。Servlet之所以比CGI效率高就是因为Servlet是多线程的。
+Servlet采用多">
+<meta property="og:updated_time" content="2016-11-14T12:57:35.665Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Servlet并发小结">
+<meta name="twitter:description" content="Servelet的特点：单实例多线程Servlet（struts类似）的生命周期是由Web容器负责的,当客户端第一次请求Servlet时,容器负责初始化Servlet,也就是实例化这个Servlet 类。以后这个实例就负责多个客户端的请求,一般不会再实例化一个Servlet类,也就是有多个线程在使用这个实例。Servlet之所以比CGI效率高就是因为Servlet是多线程的。
+Servlet采用多">
+  
+    <link rel="alternative" href="/atom.xml" title="Hi~Welcome to Wenboo&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/leaves.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="http://kiritor.github.io/js/jquery1.8.2.min.js"></script>
+  <script src="http://kiritor.github.io/js/jquery.nicescroll.js"></script>
+  <script src="http://kiritor.github.io/js/jquery.qrcode.min.js"></script>
+  <script src="/js/ug-theme-default.js"></script>
+  <script src="/js/unitegallery.js"></script>
+</head>
+
+<body>
+
+  <div id="container">
+    <div class="left-col">
+    
+<div class="overlay"></div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</script>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img src="https://static.pexels.com/photos/8263/pexels-photo-large.jpg" class="js-avatar">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/" class="alluraregular">Cheng</a></h1>
+		</hgroup>
+        <!--
+		
+        -->
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/categories/work">工作日志</a></li>
+				        
+							<li><a href="/categories/life">点滴生活</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/wenboo" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/u/1749019950" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="#" title="rss">rss</a>
+					        
+								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/wenboo" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/c/" style="font-size: 16px;">c</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/os/" style="font-size: 12px;">os</a> <a href="/tags/tool/" style="font-size: 10px;">tool</a> <a href="/tags/微机原理/" style="font-size: 14px;">微机原理</a> <a href="/tags/计算机网络/" style="font-size: 18px;">计算机网络</a>
+					</div>
+				</section>
+				
+
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">弹吉他中写代码的</div>
+				</section>
+				
+			</div>
+		</div>
+		<div id="busuanzi">
+		您是访问的第 <span id="busuanzi_value_site_pv"></span> 个小伙伴
+		</span>
+		</div>
+	</header>
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Cheng</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="https://static.pexels.com/photos/8263/pexels-photo-large.jpg" class="js-avatar">
+				<hgroup>
+				  <h1 class="header-author">Cheng</h1>
+				</hgroup>
+			</div>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/categories/work">工作日志</a></li>
+		        
+					<li><a href="/categories/life">点滴生活</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/wenboo" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/u/1749019950" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="#" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/wenboo" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>
+	</div>
+</nav>
+
+	  <!--是否开启最近通知-->
+	  
+	  <div class="recent">
+    人生事长难遂人愿，且看明月又有几回圆
+</div>
+
+	  
+      <div class="body-wrap"><article id="post-Servlet并发小结" class="article article-type-post" itemscope itemprop="blogPost">
+    <script>
+        $("html").niceScroll({
+            cursorcolor: "#2a2929",
+            cursoropacitymax: 1,
+            touchbehavior: false,
+            cursorwidth: "6px",
+            cursorborder: "5",
+            cursorborderradius: "0px",
+            autohidemode: true
+        });
+    </script>
+    
+        <div class="article-meta">
+            <a href="/2016/11/14/Servlet并发小结/" class="article-date">
+  	<time datetime="2016-11-14T12:56:56.000Z" itemprop="datePublished">2016-11-14</time>
+</a>
+
+        </div>
+        
+            <div class="article-inner">
+                
+                    <input type="hidden" class="isFancy" />
+                    
+                        
+                            <header class="article-header">
+                                
+  
+    <h1 class="article-title" itemprop="name">
+      Servlet并发小结
+    </h1>
+  
+
+
+                            </header>
+                            
+                                <div class="article-info article-info-post">
+                                    
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/计算机网络/">计算机网络</a></li></ul>
+	</div>
+
+
+                                        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/work/">work</a>
+	</div>
+
+
+                                            <div class="clearfix"></div>
+                                </div>
+                                
+                                    
+                                        <div class="article-entry" itemprop="articleBody">
+                                            
+                                                    <!--02-->
+                                                    <p class="toc-button">目录</p>
+<div id="toc" class="toc-article" style="display:none;">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Servelet的特点：单实例多线程"><span class="toc-number">1.</span> <span class="toc-text">Servelet的特点：单实例多线程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程不安全"><span class="toc-number">2.</span> <span class="toc-text">线程不安全</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何使Servlet安全"><span class="toc-number">3.</span> <span class="toc-text">如何使Servlet安全</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Servlet编程规范"><span class="toc-number">4.</span> <span class="toc-text">Servlet编程规范</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小结"><span class="toc-number">5.</span> <span class="toc-text">小结</span></a></li></ol>
+</div>
+<script>
+    $(function(){
+
+        var width = document.body.scrollWidth;
+        if (width <=550) {
+             $(".toc-button").css("display","none");
+        }
+        $(".toc-button").hover(function(){
+            var top = $(this).get(0).offsetTop-$(".toc-article").height()/2;
+            $(".toc-article").css({
+                top:top +"px"
+            });
+            $("#toc").show(1000,function(){});
+           // $("#toc").animate({width:500;},3000);
+        },function(){
+
+        });
+        $(".toc-article").hover(function(){
+
+        },function(){
+            $("#toc").hide(1000,function(){});
+        });
+    })
+</script>
+
+                                                        
+                                                            
+                                                                
+                                                                            <h2 id="Servelet的特点：单实例多线程"><a href="#Servelet的特点：单实例多线程" class="headerlink" title="Servelet的特点：单实例多线程"></a>Servelet的特点：单实例多线程</h2><p>Servlet（struts类似）的生命周期是由Web容器负责的,当客户端第一次请求Servlet时,容器负责初始化Servlet,也就是实例化这个Servlet 类。以后这个实例就负责多个客户端的请求,一般不会再实例化一个Servlet类,也就是有多个线程在使用这个实例。Servlet之所以比CGI效率高就是因为Servlet是多线程的。</p>
+<p>Servlet采用多线程来处理多个请求同时访问，Servelet容器维护了一个线程池来服务请求。线程池实际上是等待执行代码的一组线程叫做工作者线程(WorkerThread)，Servlet容器使用一个调度线程来管理工作者线程(DispatcherThread)。当容器收到一个访问Servlet的请求，调度者线程从线程池中选出一个工作者线程，将请求传递给该线程，然后由该线程来执行Servlet的service方法。当这个线程正在执行的时候，容器收到另外一个请求，调度者线程将从池中选出另外一个工作者线程来服务新的请求，容器并不关心这个请求是否访问的是同一个Servlet还是另外一个Servlet。当容器同时收到对同一Servlet的多个请求，那这个Servlet的service方法将在多线程中并发的执行。</p>
+<p> Servlet容器默认采用单实例多线程的方式来处理请求，这样减少产生Servlet实例的开销，提升了对请求的响应时间。对于Tomcat可以在server.xml中通过<connector>元素设置线程池中线程的数目。就实现来说：调度者线程类所担负的责任如其名字，该类的责任是调度线程，只需要利用自己的属性完成自己的责任。所以该类是承担了责任的，并且该类的责任又集中到唯一的单体对象中。而其他对象又依赖于该特定对象所承担的责任，我们就需要得到该特定对象。那该类就是一个单例模式的实现了。</connector></p>
+<h2 id="线程不安全"><a href="#线程不安全" class="headerlink" title="线程不安全"></a>线程不安全</h2><p>这就导致了Servlet里的实例变量是线程不安全的,多个线程（多个客户端的请求）共享这些实例变量，一个线程对这些实例变量的改变会影响其它线程的取值，<br>Servlet规范已经声明Servlet不是线程安全的,包括jsp,Servlet,javabean等。</p>
+<ul>
+<li><p>实例变量：是在堆中分配的,并被属于该实例的所有线程共享，所以不是线程安全的。</p>
+</li>
+<li><p>静态变量：不是线程安全的。</p>
+</li>
+<li><p>局部变量：方法中的局部变量是不会影响线程安全的,因为他们是在栈上分配空间,而且每个线程都有自己私有的栈空间</p>
+</li>
+</ul>
+<h2 id="如何使Servlet安全"><a href="#如何使Servlet安全" class="headerlink" title="如何使Servlet安全"></a>如何使Servlet安全</h2><ul>
+<li>实现 SingleThreadModel 接口(单线程模型，效率太低，一般不使用)</li>
+</ul>
+<blockquote>
+<p>该接口指定了系统如何处理对同一个Servlet的调用。如果一个Servlet被这个接口指定，那么在这个Servlet中的service方法将不会有两个线程被同时执行，当然也就不存在线程安全的问题。这种方法只要继承这个接口就行了</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">XXXXX</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> <span class="keyword">implements</span> <span class="title">SingleThreadModel</span> </span>&#123;  </div><div class="line">                            <span class="comment">// …………  </span></div><div class="line">             &#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>同步对共享数据的操作(效率太低，一般不使用)</li>
+</ul>
+<blockquote>
+<p>使用synchronized 关键字能保证一次只有一个线程可以访问被保护的区段，在本文中可以通过同步块操作来保证Servlet的线程安全。同步后的代码如下</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">XXXXXX</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;  </div><div class="line">                          <span class="comment">//…………  </span></div><div class="line">                          <span class="keyword">synchronized</span> (<span class="keyword">this</span>)&#123;XXXX&#125;  </div><div class="line">           &#125;</div></pre></td></tr></table></figure>
+<h2 id="Servlet编程规范"><a href="#Servlet编程规范" class="headerlink" title="Servlet编程规范"></a>Servlet编程规范</h2><ul>
+<li>避免使用实例变量<br>线程安全问题还有些是由实例变量造成的，只要在Servlet里面的任何方法里面都不使用实例变量，那么该Servlet就是线程安全的。即将参数变量本地化。多线程并不共享局部变量.所以我们要尽可能的在servlet中使用局部变量。</li>
+</ul>
+<ul>
+<li>属性的线程安全：ServletContext，HttpSession，ServletRequest对象中属性<br><strong>ServletContext：</strong>（线程是不安全的）<pre><code>ServletContext是可以多线程同时读/写属性的，线程是不安全的。要对属性的读写进行同步处理或者进行深度Clone()。所以在Servlet上下文中尽可能少量保存会被修改（写）的数据，可以采取其他方式在多个Servlet中共享，比方我们可以使用单例模式来处理共享数据。
+**HttpSession：**（线程是不安全的）
+HttpSession对象在用户会话期间存在，只能在处理属于同一个Session的请求的线程中被访问，因此Session对象的属性访问理论上是线程安全的。当用户打开多个同属于一个进程的浏览器窗口，在这些窗口的访问属于同一个Session，会出现多次请求，需要多个工作线程来处理请求，可能造成同时多线程读写属性。这时我们需要对属性的读写进行同步处理：使用同步块Synchronized和使用读/写器来解决。
+**ServletRequest：**（线程是安全的）
+对于每一个请求，由一个工作线程来执行，都会创建有一个新的ServletRequest对象，所以ServletRequest对象只能在一个线程中被访问。ServletRequest是线程安全的。ServletRequest对  象在service方法的范围内是有效的，不要试图在service方法结束后仍然保存请求对象的引用。
+</code></pre></li>
+</ul>
+<ul>
+<li><p>不要在Servlet中创建自己的线程来完成某个功能<br>Servlet本身就是多线程的，在Servlet中再创建线程，将导致执行情况复杂化，出现多线程安全问题。</p>
+</li>
+<li><p>在多个servlet中对外部对象(比方文件)进行修改操作一定要加锁，做到互斥的访问</p>
+</li>
+<li><p>使用同步的集合类<br>使用Vector代替ArrayList，使用Hashtable代替HashMap。</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ServletMain</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span></span>&#123;</div><div class="line"><span class="keyword">private</span> String strTest1; <span class="comment">// 实例变量,线程不安全,只读（客户线程不能改变其值）可用，否则不能使用。</span></div><div class="line"> </div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String strTest2 = <span class="string">"TEST"</span>; <span class="comment">// 静态变量,但只读，线程安全，可用。</span></div><div class="line">   </div><div class="line"><span class="keyword">private</span> Config config; <span class="comment">// 实例变量,如果是只读，线程安全，可用。</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> <span class="keyword">throws</span> ServletException </span>&#123;</div><div class="line">  String strTest3; <span class="comment">// 局部变量，线程安全</span></div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p> 对上面的三种方法进行测试，可以表明用它们都能设计出线程安全的Servlet程序。但是，如果一个Servlet实现了SingleThreadModel接口，Servlet引擎将<strong>为每个新的请求创建一个单独的Servlet实例</strong>，这将引起大量的系统开销。SingleThreadModel在Servlet2.4中<strong>已不再提倡使用</strong>；同样如果在程序中<strong>使用同步</strong>来保护要使用的共享的数据，也会使系统的<strong>性能大大下降</strong>。这是因为被同步的代码块在同一时刻只能有一个线程执行它，使得其同时处理客户请求的吞吐量降低，而且很多客户处于阻塞状态。另外为保证主存内容和线程的工作内存中的数据的一致性，要频繁地刷新缓存,这也会大大地影响系统的性能。所以在实际的开发中也<strong>应避免或最小化Servlet 中的同步代码</strong>；在Serlet中<strong>避免使用实例变量</strong>是保证Servlet线程安全的最佳选择。从Java 内存模型也可以知道，方法中的临时变量是在栈上分配空间，而且每个线程都有自己私有的栈空间，所以它们不会影响线程的安全。</p>
+<p> Servlet的线程安全问题只有<strong>在大量的并发访问时</strong>才会显现出来，并且很难发现，因此在编写Servlet程序时要特别注意。线程安全问题主要是由实例变量造成的，因此在Servlet中应避免使用实例变量。如果应用程序设计无法避免使用实例变量，那么使用同步来保护要使用的实例变量，但为保证系统的最佳性能，应该同步可用性最小的代码路径。</p>
+
+                                                                                
+                                        </div>
+                                        
+            </div>
+            
+                <div id="socialShare" style="margin-left:40px;display:none;">
+                </div>
+                <script>
+                    $(function() {
+                        var width = document.body.scrollWidth;
+                        if (width > 550) {
+                            $("#socialShare").css("display", "block");
+                            $("#socialShare").socialShare({
+                                content: 'Nice!不错的资源...',
+                                url: window.location.href,
+                                titile: ''
+                            });
+                        }
+                    });
+                </script>
+                
+                    
+                        
+<nav id="article-nav">
+  
+  
+    <a href="/2016/11/08/if&else代码重构方向原则指导/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">if&amp;else代码重构方向原则指导</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+
+                            
+                                <!-- 多说评论框 start -->
+                                
+                                    <div class="ds-thread" data-thread-key="post-Servlet并发小结" data-title="Servlet并发小结" data-url="http://wenboo.github.io/2016/11/14/Servlet并发小结/"></div>
+                                    <!-- 多说评论框 end -->
+                                    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+                                    <script type="text/javascript">
+                                        var duoshuoQuery = {
+                                            short_name: "kiritor"
+                                        };
+                                        (function() {
+                                            var ds = document.createElement('script');
+                                            ds.type = 'text/javascript';
+                                            ds.async = true;
+                                            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                                            ds.charset = 'UTF-8';
+                                            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+                                        })();
+                                    </script>
+                                    <!-- 多说公共JS代码 end -->
+                                    
+</article>
+
+<!--
+
+    <div style="width:100%;background-color:#fff;">
+        <div id="uyan_frame" style="margin:auto 10px 10px 10px;"></div>
+    </div>
+    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2017540"></script>
+    
+-->
+<!--
+
+-->
+
+</div>
+      <!--<footer id="footer">
+
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Cheng
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+		
+    </div>
+  <script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','m5RW4BUQrJ_r-CYKAksH','2.0.0');
+</script>
+  </div>
+</footer>
+-->
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/mobile.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/prefixfree.js"></script>
+
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div id="totop" style="position:fixed;bottom:150px;right:50px;cursor: pointer;z-index:9999;opacity: 100%;">
+    <a title="返回顶部" style="opacity: 100%;">
+        <img src="/img/scrollup.png" />
+    </a>
+</div>
+
+<script src="/js/totop.js"></script>
+<script src="/js/share.js"></script>
+
+  </div>
+</body>
+</html>
