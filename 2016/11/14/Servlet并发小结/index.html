@@ -14,7 +14,7 @@ Servlet采用多">
 <meta property="og:site_name" content="Hi~Welcome to Wenboo's Blog">
 <meta property="og:description" content="Servelet的特点：单实例多线程Servlet（struts类似）的生命周期是由Web容器负责的,当客户端第一次请求Servlet时,容器负责初始化Servlet,也就是实例化这个Servlet 类。以后这个实例就负责多个客户端的请求,一般不会再实例化一个Servlet类,也就是有多个线程在使用这个实例。Servlet之所以比CGI效率高就是因为Servlet是多线程的。
 Servlet采用多">
-<meta property="og:updated_time" content="2016-11-14T12:57:35.665Z">
+<meta property="og:updated_time" content="2016-11-14T13:03:33.096Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Servlet并发小结">
 <meta name="twitter:description" content="Servelet的特点：单实例多线程Servlet（struts类似）的生命周期是由Web容器负责的,当客户端第一次请求Servlet时,容器负责初始化Servlet,也就是实例化这个Servlet 类。以后这个实例就负责多个客户端的请求,一般不会再实例化一个Servlet类,也就是有多个线程在使用这个实例。Servlet之所以比CGI效率高就是因为Servlet是多线程的。
@@ -312,13 +312,9 @@ Servlet采用多">
 <li>避免使用实例变量<br>线程安全问题还有些是由实例变量造成的，只要在Servlet里面的任何方法里面都不使用实例变量，那么该Servlet就是线程安全的。即将参数变量本地化。多线程并不共享局部变量.所以我们要尽可能的在servlet中使用局部变量。</li>
 </ul>
 <ul>
-<li>属性的线程安全：ServletContext，HttpSession，ServletRequest对象中属性<br><strong>ServletContext：</strong>（线程是不安全的）<pre><code>ServletContext是可以多线程同时读/写属性的，线程是不安全的。要对属性的读写进行同步处理或者进行深度Clone()。所以在Servlet上下文中尽可能少量保存会被修改（写）的数据，可以采取其他方式在多个Servlet中共享，比方我们可以使用单例模式来处理共享数据。
-**HttpSession：**（线程是不安全的）
-HttpSession对象在用户会话期间存在，只能在处理属于同一个Session的请求的线程中被访问，因此Session对象的属性访问理论上是线程安全的。当用户打开多个同属于一个进程的浏览器窗口，在这些窗口的访问属于同一个Session，会出现多次请求，需要多个工作线程来处理请求，可能造成同时多线程读写属性。这时我们需要对属性的读写进行同步处理：使用同步块Synchronized和使用读/写器来解决。
-**ServletRequest：**（线程是安全的）
-对于每一个请求，由一个工作线程来执行，都会创建有一个新的ServletRequest对象，所以ServletRequest对象只能在一个线程中被访问。ServletRequest是线程安全的。ServletRequest对  象在service方法的范围内是有效的，不要试图在service方法结束后仍然保存请求对象的引用。
-</code></pre></li>
+<li>属性的线程安全：ServletContext，HttpSession，ServletRequest对象中属性</li>
 </ul>
+<p>ServletContext：（线程是不安全的）<br>        ServletContext是可以多线程同时读/写属性的，线程是不安全的。要对属性的读写进行同步处理或者进行深度Clone()。所以在Servlet上下文中尽可能少量保存会被修改（写）的数据，可以采取其他方式在多个Servlet中共享，比方我们可以使用单例模式来处理共享数据。<br>        HttpSession：（线程是不安全的）<br>        HttpSession对象在用户会话期间存在，只能在处理属于同一个Session的请求的线程中被访问，因此Session对象的属性访问理论上是线程安全的。当用户打开多个同属于一个进程的浏览器窗口，在这些窗口的访问属于同一个Session，会出现多次请求，需要多个工作线程来处理请求，可能造成同时多线程读写属性。这时我们需要对属性的读写进行同步处理：使用同步块Synchronized和使用读/写器来解决。<br>        ServletRequest：（线程是安全的）<br>        对于每一个请求，由一个工作线程来执行，都会创建有一个新的ServletRequest对象，所以ServletRequest对象只能在一个线程中被访问。ServletRequest是线程安全的。ServletRequest对  象在service方法的范围内是有效的，不要试图在service方法结束后仍然保存请求对象的引用。</p>
 <ul>
 <li><p>不要在Servlet中创建自己的线程来完成某个功能<br>Servlet本身就是多线程的，在Servlet中再创建线程，将导致执行情况复杂化，出现多线程安全问题。</p>
 </li>
