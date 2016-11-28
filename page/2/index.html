@@ -193,6 +193,138 @@
 
 
   
+    <article id="post-为什么Java中1000-1000为false而100-100为true" class="article article-type-post" itemscope itemprop="blogPost">
+    <script>
+        $("html").niceScroll({
+            cursorcolor: "#2a2929",
+            cursoropacitymax: 1,
+            touchbehavior: false,
+            cursorwidth: "6px",
+            cursorborder: "5",
+            cursorborderradius: "0px",
+            autohidemode: true
+        });
+    </script>
+    
+        <div class="article-meta">
+            <a href="/2016/10/31/为什么Java中1000-1000为false而100-100为true/" class="article-date">
+  	<time datetime="2016-10-31T13:59:42.000Z" itemprop="datePublished">2016-10-31</time>
+</a>
+
+        </div>
+        
+            <div class="article-inner">
+                
+                    <input type="hidden" class="isFancy" />
+                    
+                        
+                            <header class="article-header">
+                                
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/31/为什么Java中1000-1000为false而100-100为true/">为什么Java中1000==1000为false而100==100为true</a>
+    </h1>
+  
+
+
+                            </header>
+                            
+                                    
+                                        <div class="article-entry" itemprop="articleBody">
+                                            
+                                                    <!--02-->
+                                                    <p class="toc-button">目录</p>
+<div id="toc" class="toc-article" style="display:none;">
+    
+</div>
+<script>
+    $(function(){
+
+        var width = document.body.scrollWidth;
+        if (width <=550) {
+             $(".toc-button").css("display","none");
+        }
+        $(".toc-button").hover(function(){
+            var top = $(this).get(0).offsetTop-$(".toc-article").height()/2;
+            $(".toc-article").css({
+                top:top +"px"
+            });
+            $("#toc").show(1000,function(){});
+           // $("#toc").animate({width:500;},3000);
+        },function(){
+
+        });
+        $(".toc-article").hover(function(){
+
+        },function(){
+            $("#toc").hide(1000,function(){});
+        });
+    })
+</script>
+
+                                                        
+                                                            
+                                                                
+                                                                            <p>这是一个挺有意思的讨论话题。</p>
+<p>如果你运行下面的代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Integer a = <span class="number">1000</span>, b = <span class="number">1000</span>;</div><div class="line">System.out.println(a == b);<span class="comment">//1 Integer c = 100, d = 100;  </span></div><div class="line">System.out.println(c == d);<span class="comment">//2</span></div></pre></td></tr></table></figure>
+<p>你会得到：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">false</span></div><div class="line"><span class="keyword">true</span></div></pre></td></tr></table></figure>
+<p><strong>基本知识：</strong>我们知道，如果两个引用指向同一个对象，用==表示它们是相等的。如果两个引用指向不同的对象，用==表示它们是不相等的，即使它们的内容相同。</p>
+<p>因此，后面一条语句也应该是false 。</p>
+<p>这就是它有趣的地方了。如果你看去看 Integer.Java 类，你会发现有一个内部私有类，IntegerCache.java，它缓存了从-128到127之间的所有的整数对象。</p>
+<p><strong>所以事情就成了，所有的小整数在内部缓存，然后当我们声明类似</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Integer c = <span class="number">100</span>;</div></pre></td></tr></table></figure>
+<p>的时候，它实际上在内部做的是：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Integer i = Integer.valueOf(<span class="number">100</span>);</div></pre></td></tr></table></figure>
+<p>现在，如果我们去看valueOf()方法，我们可以看到：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Integer <span class="title">valueOf</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (i &gt;= IntegerCache.low &amp;&amp; i</div><div class="line">    <span class="keyword">return</span> IntegerCache.cache[i + (-IntegerCache.low)];</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Integer(i);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果值的范围在-128到127之间，它就从高速缓存返回实例。所以</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Integer c = <span class="number">100</span>, d = <span class="number">100</span>;</div></pre></td></tr></table></figure>
+<p>指向了同一个对象。这就是为什么我们写：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">System.out.println(c == d);</div></pre></td></tr></table></figure>
+<p>我们可以得到true。</p>
+<p><strong>现在你可能会问，为什么这里需要缓存？</strong></p>
+<p>合乎逻辑的理由是，在此范围内的“小”整数使用率比大整数要高，因此，使用相同的底层对象是有价值的，可以减少潜在的内存占用。</p>
+<p>然而，通过反射API你会误用此功能。</p>
+<p><strong>运行下面的代码，享受它的魅力吧</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> NoSuchFieldException, </span></div><div class="line">IllegalAccessException &#123;</div><div class="line">    Class cache = Integer.class.getDeclaredClasses()[<span class="number">0</span>]; <span class="comment">//1 </span></div><div class="line">    Field myCache = cache.getDeclaredField(<span class="string">"cache"</span>); <span class="comment">//2 </span></div><div class="line">    myCache.setAccessible(<span class="keyword">true</span>);<span class="comment">//3 </span></div><div class="line">    Integer[] newCache = (Integer[]) myCache.get(cache); <span class="comment">//4 </span></div><div class="line">    newCache[<span class="number">132</span>] = newCache[<span class="number">133</span>]; <span class="comment">//5 </span></div><div class="line">    <span class="keyword">int</span> a = <span class="number">2</span>;</div><div class="line">    <span class="keyword">int</span> b = a + a;</div><div class="line">    System.out.printf(<span class="string">"%d + %d = %d"</span>, a, a, b); <span class="comment">// </span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+                                                                                
+                                        </div>
+                                        
+                                            <div class="article-info article-info-index">
+                                                
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+	</div>
+
+
+                                                    
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/work/">work</a>
+	</div>
+
+
+                                                        
+                                                                <div class="clearfix"></div>
+                                            </div>
+                                            
+            </div>
+            
+                    
+                                <!-- 多说评论框 start -->
+                                
+</article>
+
+<!--
+
+-->
+<!--
+
+-->
+
+  
     <article id="post-阿里面试回来，想和Java程序员谈一谈" class="article article-type-post" itemscope itemprop="blogPost">
     <script>
         $("html").niceScroll({
@@ -2141,159 +2273,6 @@
                                                 
 	<div class="article-tag tagcloud">
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/计算机网络/">计算机网络</a></li></ul>
-	</div>
-
-
-                                                    
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/work/">work</a>
-	</div>
-
-
-                                                        
-                                                                <div class="clearfix"></div>
-                                            </div>
-                                            
-            </div>
-            
-                    
-                                <!-- 多说评论框 start -->
-                                
-</article>
-
-<!--
-
--->
-<!--
-
--->
-
-  
-    <article id="post-保持冷静，节制使用JSON" class="article article-type-post" itemscope itemprop="blogPost">
-    <script>
-        $("html").niceScroll({
-            cursorcolor: "#2a2929",
-            cursoropacitymax: 1,
-            touchbehavior: false,
-            cursorwidth: "6px",
-            cursorborder: "5",
-            cursorborderradius: "0px",
-            autohidemode: true
-        });
-    </script>
-    
-        <div class="article-meta">
-            <a href="/2016/10/22/保持冷静，节制使用JSON/" class="article-date">
-  	<time datetime="2016-10-22T14:21:23.000Z" itemprop="datePublished">2016-10-22</time>
-</a>
-
-        </div>
-        
-            <div class="article-inner">
-                
-                    <input type="hidden" class="isFancy" />
-                    
-                        
-                            <header class="article-header">
-                                
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/22/保持冷静，节制使用JSON/">保持冷静，节制使用JSON</a>
-    </h1>
-  
-
-
-                            </header>
-                            
-                                    
-                                        <div class="article-entry" itemprop="articleBody">
-                                            
-                                                    <!--02-->
-                                                    <p class="toc-button">目录</p>
-<div id="toc" class="toc-article" style="display:none;">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-JSON-是文本，它效率不高"><span class="toc-number">1.</span> <span class="toc-text">1. JSON 是文本，它效率不高</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-JSON-在数据库中不要求数据结构。因此数据质量差"><span class="toc-number">2.</span> <span class="toc-text">2. JSON 在数据库中不要求数据结构。因此数据质量差</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-每一个文档都是键值对-那你就疯了"><span class="toc-number">3.</span> <span class="toc-text">3. 每一个文档都是键值对? 那你就疯了 !</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-总结"><span class="toc-number">4.</span> <span class="toc-text">4. 总结</span></a></li></ol>
-</div>
-<script>
-    $(function(){
-
-        var width = document.body.scrollWidth;
-        if (width <=550) {
-             $(".toc-button").css("display","none");
-        }
-        $(".toc-button").hover(function(){
-            var top = $(this).get(0).offsetTop-$(".toc-article").height()/2;
-            $(".toc-article").css({
-                top:top +"px"
-            });
-            $("#toc").show(1000,function(){});
-           // $("#toc").animate({width:500;},3000);
-        },function(){
-
-        });
-        $(".toc-article").hover(function(){
-
-        },function(){
-            $("#toc").hide(1000,function(){});
-        });
-    })
-</script>
-
-                                                        
-                                                            
-                                                                
-                                                                            <p><img src="http://static.oschina.net/uploads/space/2016/1018/113427_49fs_2903254.png" alt="pic"></p>
-<p><strong>JSON (JavaScript Object Notation)</strong> 是一种轻量级的数据交换格式。它容易被人们阅读和编写，也容易被软件所读取和生成。如下是用JSON描述的一份客户数据。它能很好的用在交换和集成商。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="string">"Name"</span> : <span class="string">"Jane Smith"</span>,</div><div class="line">    <span class="string">"DOB"</span>  : <span class="string">"1990-01-30"</span>,</div><div class="line">    <span class="string">"Billing"</span> : [</div><div class="line">        &#123;</div><div class="line">            <span class="string">"type"</span>    : <span class="string">"visa"</span>,</div><div class="line">            <span class="string">"cardnum"</span> : <span class="string">"5827-2842-2847-3909"</span>,</div><div class="line">            <span class="string">"expiry"</span>  : <span class="string">"2019-03"</span></div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            <span class="string">"type"</span>    : <span class="string">"master"</span>,</div><div class="line">            <span class="string">"cardnum"</span> : <span class="string">"6274-2542-5847-3949"</span>,</div><div class="line">            <span class="string">"expiry"</span>  : <span class="string">"2018-12"</span></div><div class="line">        &#125;</div><div class="line">    ],</div><div class="line">   <span class="string">"address"</span>: </div><div class="line">      &#123;</div><div class="line">  <span class="string">"street"</span>  : <span class="string">"9462, Fillmore"</span>,</div><div class="line">  <span class="string">"city"</span>    : <span class="string">"San Francisco"</span>,</div><div class="line">            <span class="string">"state"</span>   : <span class="string">"California"</span>,</div><div class="line">            <span class="string">"zip"</span>     : <span class="number">94401</span></div><div class="line">      &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>目前使用还不错。如果只把JSON用在应用程序中不同层级间的数据交换上，那还好。而当人们开始要将其作为一种数据库存储格式来使用时，就不好了。当我第一次遇到将JSON作为一种数据库中的数据格式时，感到非常惊奇，因为数据库要花费不少代价，每一条记录里面键和值都要存，而且每次查询都要进行处理。在我的演讲和文章里面，已经有许多人提过这个问题了。</p>
-<p><strong>以下是经常会遇到的异议:</strong></p>
-<blockquote>
-<ol>
-<li><p>JSON 是文本，它效率不高。</p>
-</li>
-<li><p>JSON 没有没有可执行结构，毫无数据质量可言。</p>
-</li>
-<li><p>每一个文档（行）都得是键值对?你肯定是疯了才会这样做。</p>
-</li>
-</ol>
-</blockquote>
-<p>让我们一个一个讨论这些异议。</p>
-<h2 id="1-JSON-是文本，它效率不高"><a href="#1-JSON-是文本，它效率不高" class="headerlink" title="1. JSON 是文本，它效率不高"></a>1. JSON 是文本，它效率不高</h2><p>RDBMS十分高效。RDBMS有一种成本意识: 空间，时间，时空，甚至一切。与RDBMS存储格式相比，JSON效率低下。</p>
-<ul>
-<li>所有的数据都是字符形式的JSON需要转换处理。</li>
-<li>即使数值数据也存储在文本中。</li>
-<li>每个值在每个文档中都带有其键名称（键值）。需要更多的存储和处理。</li>
-<li>允许表示复杂的结构，导致运行时开销。</li>
-<li>官方支持小集数据类型。无小数，无时间戳记等。</li>
-</ul>
-<p><strong>在数据库中使用JSON意味着:</strong></p>
-<ul>
-<li>数据库引擎必须理解每个文档的模式并处理它们，而不是处理常规元组和属性（行和列）。</li>
-<li>必须解析和处理JSON中每个键值的数据类型</li>
-<li>JSON可能是XML的一个精减的版本，但它仍然很庞大。</li>
-</ul>
-<p>有这么多低效率的缺陷，为什么还有数据库使用JSON作为数据模型呢？或者说实现JSON数据类型呢？</p>
-<p>的确。JSON作为数据交换格式被发明，现在是公共API——数据集成场景的首选格式。大多数设备，大多数软件层可以以JSON的形式消费和产品数据。以JSON存储和发布数据意味着，除了下面的优点之外，API和应用程序还可以在他们熟悉的介质中与数据库交互。你必须考虑N层应用程序效率，而不是将其与元组插入和更新进行比较。大多数RDBMS现在已经将JSON添加为数据类型。随着JSON使用量的增长，存储和处理效率将会提高。</p>
-<h2 id="2-JSON-在数据库中不要求数据结构。因此数据质量差"><a href="#2-JSON-在数据库中不要求数据结构。因此数据质量差" class="headerlink" title="2. JSON 在数据库中不要求数据结构。因此数据质量差"></a>2. JSON 在数据库中不要求数据结构。因此数据质量差</h2><p>自从JSON数据库不要求任何结构。不管是有意，还是无意，应用程序都可以插入任何格式的数据了，只要这些数据是有效的JSON。</p>
-<p>基于JSON的数据库倾向于“读取模式“。也就是说，读者有责任去理解和翻译每一个文档或查询结果的模式。查询语言，如N1QL ，就有很多文档本身的自解读功能。</p>
-<p>已经提到过的一些工具，如Ottoman 和 Mongoose可以帮你去验证一个给定的JSON是否违反了已定义的结构。尽管对将数据加载进JSON数据库来说，这不是一个好的安全装置，但是在应用层对数据的正确控制可以帮助你提高数据的一致性。</p>
-<p>另一方面，灵活性，JSON的内嵌结构可以帮助你在一个单独的JSON文档中匹配对象数据。</p>
-<p>使用JSON也可以避免对象关系映射的开销。应用程序的规范和修改对象。为了在关系模式中存储这些数据，你需要在多个关系中规范这些数据，把它们存储在离散的表中。当你需要重建对象时，你需要在这些表中连接数据，构建返回对象。而对象关系映射层（如Hibernate自动完成这个过程），你仍然会消耗性能，因为你为每步执行了多个查询。</p>
-<p>通过对象在JSON的分层内嵌结构中的表示，避免了很多对象关系映射的消耗。</p>
-<p><img src="http://static.oschina.net/uploads/space/2016/1018/113822_VAkX_2903254.png" alt="pic"></p>
-<h2 id="3-每一个文档都是键值对-那你就疯了"><a href="#3-每一个文档都是键值对-那你就疯了" class="headerlink" title="3. 每一个文档都是键值对? 那你就疯了 !"></a>3. 每一个文档都是键值对? 那你就疯了 !</h2><p>不过现在的结果是瓶颈已经被转移啦。瓶颈已经从数据库核心性能移向了数据库灵活性和应用程序开发的迭代变更管理。<br>80，90年代RDBMS被用于许多的应用和用例中，最重要的是RDBMS能跟上发展脚步还有硬件的更新。它能适用于高时速，新指令，多内核，大内存的硬件更新。随着业务的增长，对应用程序的自动化多进程要求越来越高。而且一些应用程序越来越受欢迎和有价值，企业当然就希望它能做得更多。业务应用程序开始从后台自动化到真正的业务变更驱动程序。<br>RDBMS虽然擅长于做许多事情，但是从未改变过自己。所面临的问题都是组织和技术方面的问题。</p>
-<p>RDBMS使用“写入模式”方法。模式决定了创建表的时间，在每个插入，更新，合并处检查。更改表结构通常涉及多个相关字段，多个应用程序，需要测试所有相关模块。</p>
-<p>使用ALTER在表中添加列，更改数据类型需要对表的数据进行校验是否都符合要更改的数据类型，若有不符合的会导致应用程序和业务计划停机。如果你需要一个列来存储不同类型的数据或结构，那你就太不走运了。针对这种情况，系统已经尝试通过允许用户在线添加列来缓解小子集的问题。</p>
-<p>如果使用JSON格式通过键值来存储数据，您可以避免在写入时强制执行模式。当文档被查询处理引擎或应用程序读取时，它们必须阅读和解释文档。应用程序通常会对文档进行版本化管理以便他们知道在文档本身的模式发展过程中会发生什么。查询语言（如N1QL，SQL ++）将扩展到文件内部处理更灵活的模式。</p>
-<h2 id="4-总结"><a href="#4-总结" class="headerlink" title="4. 总结"></a>4. 总结</h2><p>这是模拟数据在关系模型和JSON中的比较：</p>
-<p><img src="http://static.oschina.net/uploads/space/2016/1018/113928_nGqw_2903254.png" alt="pic"></p>
-
-                                                                                
-                                        </div>
-                                        
-                                            <div class="article-info article-info-index">
-                                                
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
 	</div>
 
 

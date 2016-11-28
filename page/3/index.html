@@ -193,6 +193,159 @@
 
 
   
+    <article id="post-保持冷静，节制使用JSON" class="article article-type-post" itemscope itemprop="blogPost">
+    <script>
+        $("html").niceScroll({
+            cursorcolor: "#2a2929",
+            cursoropacitymax: 1,
+            touchbehavior: false,
+            cursorwidth: "6px",
+            cursorborder: "5",
+            cursorborderradius: "0px",
+            autohidemode: true
+        });
+    </script>
+    
+        <div class="article-meta">
+            <a href="/2016/10/22/保持冷静，节制使用JSON/" class="article-date">
+  	<time datetime="2016-10-22T14:21:23.000Z" itemprop="datePublished">2016-10-22</time>
+</a>
+
+        </div>
+        
+            <div class="article-inner">
+                
+                    <input type="hidden" class="isFancy" />
+                    
+                        
+                            <header class="article-header">
+                                
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/22/保持冷静，节制使用JSON/">保持冷静，节制使用JSON</a>
+    </h1>
+  
+
+
+                            </header>
+                            
+                                    
+                                        <div class="article-entry" itemprop="articleBody">
+                                            
+                                                    <!--02-->
+                                                    <p class="toc-button">目录</p>
+<div id="toc" class="toc-article" style="display:none;">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-JSON-是文本，它效率不高"><span class="toc-number">1.</span> <span class="toc-text">1. JSON 是文本，它效率不高</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-JSON-在数据库中不要求数据结构。因此数据质量差"><span class="toc-number">2.</span> <span class="toc-text">2. JSON 在数据库中不要求数据结构。因此数据质量差</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-每一个文档都是键值对-那你就疯了"><span class="toc-number">3.</span> <span class="toc-text">3. 每一个文档都是键值对? 那你就疯了 !</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-总结"><span class="toc-number">4.</span> <span class="toc-text">4. 总结</span></a></li></ol>
+</div>
+<script>
+    $(function(){
+
+        var width = document.body.scrollWidth;
+        if (width <=550) {
+             $(".toc-button").css("display","none");
+        }
+        $(".toc-button").hover(function(){
+            var top = $(this).get(0).offsetTop-$(".toc-article").height()/2;
+            $(".toc-article").css({
+                top:top +"px"
+            });
+            $("#toc").show(1000,function(){});
+           // $("#toc").animate({width:500;},3000);
+        },function(){
+
+        });
+        $(".toc-article").hover(function(){
+
+        },function(){
+            $("#toc").hide(1000,function(){});
+        });
+    })
+</script>
+
+                                                        
+                                                            
+                                                                
+                                                                            <p><img src="http://static.oschina.net/uploads/space/2016/1018/113427_49fs_2903254.png" alt="pic"></p>
+<p><strong>JSON (JavaScript Object Notation)</strong> 是一种轻量级的数据交换格式。它容易被人们阅读和编写，也容易被软件所读取和生成。如下是用JSON描述的一份客户数据。它能很好的用在交换和集成商。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="string">"Name"</span> : <span class="string">"Jane Smith"</span>,</div><div class="line">    <span class="string">"DOB"</span>  : <span class="string">"1990-01-30"</span>,</div><div class="line">    <span class="string">"Billing"</span> : [</div><div class="line">        &#123;</div><div class="line">            <span class="string">"type"</span>    : <span class="string">"visa"</span>,</div><div class="line">            <span class="string">"cardnum"</span> : <span class="string">"5827-2842-2847-3909"</span>,</div><div class="line">            <span class="string">"expiry"</span>  : <span class="string">"2019-03"</span></div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            <span class="string">"type"</span>    : <span class="string">"master"</span>,</div><div class="line">            <span class="string">"cardnum"</span> : <span class="string">"6274-2542-5847-3949"</span>,</div><div class="line">            <span class="string">"expiry"</span>  : <span class="string">"2018-12"</span></div><div class="line">        &#125;</div><div class="line">    ],</div><div class="line">   <span class="string">"address"</span>: </div><div class="line">      &#123;</div><div class="line">  <span class="string">"street"</span>  : <span class="string">"9462, Fillmore"</span>,</div><div class="line">  <span class="string">"city"</span>    : <span class="string">"San Francisco"</span>,</div><div class="line">            <span class="string">"state"</span>   : <span class="string">"California"</span>,</div><div class="line">            <span class="string">"zip"</span>     : <span class="number">94401</span></div><div class="line">      &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>目前使用还不错。如果只把JSON用在应用程序中不同层级间的数据交换上，那还好。而当人们开始要将其作为一种数据库存储格式来使用时，就不好了。当我第一次遇到将JSON作为一种数据库中的数据格式时，感到非常惊奇，因为数据库要花费不少代价，每一条记录里面键和值都要存，而且每次查询都要进行处理。在我的演讲和文章里面，已经有许多人提过这个问题了。</p>
+<p><strong>以下是经常会遇到的异议:</strong></p>
+<blockquote>
+<ol>
+<li><p>JSON 是文本，它效率不高。</p>
+</li>
+<li><p>JSON 没有没有可执行结构，毫无数据质量可言。</p>
+</li>
+<li><p>每一个文档（行）都得是键值对?你肯定是疯了才会这样做。</p>
+</li>
+</ol>
+</blockquote>
+<p>让我们一个一个讨论这些异议。</p>
+<h2 id="1-JSON-是文本，它效率不高"><a href="#1-JSON-是文本，它效率不高" class="headerlink" title="1. JSON 是文本，它效率不高"></a>1. JSON 是文本，它效率不高</h2><p>RDBMS十分高效。RDBMS有一种成本意识: 空间，时间，时空，甚至一切。与RDBMS存储格式相比，JSON效率低下。</p>
+<ul>
+<li>所有的数据都是字符形式的JSON需要转换处理。</li>
+<li>即使数值数据也存储在文本中。</li>
+<li>每个值在每个文档中都带有其键名称（键值）。需要更多的存储和处理。</li>
+<li>允许表示复杂的结构，导致运行时开销。</li>
+<li>官方支持小集数据类型。无小数，无时间戳记等。</li>
+</ul>
+<p><strong>在数据库中使用JSON意味着:</strong></p>
+<ul>
+<li>数据库引擎必须理解每个文档的模式并处理它们，而不是处理常规元组和属性（行和列）。</li>
+<li>必须解析和处理JSON中每个键值的数据类型</li>
+<li>JSON可能是XML的一个精减的版本，但它仍然很庞大。</li>
+</ul>
+<p>有这么多低效率的缺陷，为什么还有数据库使用JSON作为数据模型呢？或者说实现JSON数据类型呢？</p>
+<p>的确。JSON作为数据交换格式被发明，现在是公共API——数据集成场景的首选格式。大多数设备，大多数软件层可以以JSON的形式消费和产品数据。以JSON存储和发布数据意味着，除了下面的优点之外，API和应用程序还可以在他们熟悉的介质中与数据库交互。你必须考虑N层应用程序效率，而不是将其与元组插入和更新进行比较。大多数RDBMS现在已经将JSON添加为数据类型。随着JSON使用量的增长，存储和处理效率将会提高。</p>
+<h2 id="2-JSON-在数据库中不要求数据结构。因此数据质量差"><a href="#2-JSON-在数据库中不要求数据结构。因此数据质量差" class="headerlink" title="2. JSON 在数据库中不要求数据结构。因此数据质量差"></a>2. JSON 在数据库中不要求数据结构。因此数据质量差</h2><p>自从JSON数据库不要求任何结构。不管是有意，还是无意，应用程序都可以插入任何格式的数据了，只要这些数据是有效的JSON。</p>
+<p>基于JSON的数据库倾向于“读取模式“。也就是说，读者有责任去理解和翻译每一个文档或查询结果的模式。查询语言，如N1QL ，就有很多文档本身的自解读功能。</p>
+<p>已经提到过的一些工具，如Ottoman 和 Mongoose可以帮你去验证一个给定的JSON是否违反了已定义的结构。尽管对将数据加载进JSON数据库来说，这不是一个好的安全装置，但是在应用层对数据的正确控制可以帮助你提高数据的一致性。</p>
+<p>另一方面，灵活性，JSON的内嵌结构可以帮助你在一个单独的JSON文档中匹配对象数据。</p>
+<p>使用JSON也可以避免对象关系映射的开销。应用程序的规范和修改对象。为了在关系模式中存储这些数据，你需要在多个关系中规范这些数据，把它们存储在离散的表中。当你需要重建对象时，你需要在这些表中连接数据，构建返回对象。而对象关系映射层（如Hibernate自动完成这个过程），你仍然会消耗性能，因为你为每步执行了多个查询。</p>
+<p>通过对象在JSON的分层内嵌结构中的表示，避免了很多对象关系映射的消耗。</p>
+<p><img src="http://static.oschina.net/uploads/space/2016/1018/113822_VAkX_2903254.png" alt="pic"></p>
+<h2 id="3-每一个文档都是键值对-那你就疯了"><a href="#3-每一个文档都是键值对-那你就疯了" class="headerlink" title="3. 每一个文档都是键值对? 那你就疯了 !"></a>3. 每一个文档都是键值对? 那你就疯了 !</h2><p>不过现在的结果是瓶颈已经被转移啦。瓶颈已经从数据库核心性能移向了数据库灵活性和应用程序开发的迭代变更管理。<br>80，90年代RDBMS被用于许多的应用和用例中，最重要的是RDBMS能跟上发展脚步还有硬件的更新。它能适用于高时速，新指令，多内核，大内存的硬件更新。随着业务的增长，对应用程序的自动化多进程要求越来越高。而且一些应用程序越来越受欢迎和有价值，企业当然就希望它能做得更多。业务应用程序开始从后台自动化到真正的业务变更驱动程序。<br>RDBMS虽然擅长于做许多事情，但是从未改变过自己。所面临的问题都是组织和技术方面的问题。</p>
+<p>RDBMS使用“写入模式”方法。模式决定了创建表的时间，在每个插入，更新，合并处检查。更改表结构通常涉及多个相关字段，多个应用程序，需要测试所有相关模块。</p>
+<p>使用ALTER在表中添加列，更改数据类型需要对表的数据进行校验是否都符合要更改的数据类型，若有不符合的会导致应用程序和业务计划停机。如果你需要一个列来存储不同类型的数据或结构，那你就太不走运了。针对这种情况，系统已经尝试通过允许用户在线添加列来缓解小子集的问题。</p>
+<p>如果使用JSON格式通过键值来存储数据，您可以避免在写入时强制执行模式。当文档被查询处理引擎或应用程序读取时，它们必须阅读和解释文档。应用程序通常会对文档进行版本化管理以便他们知道在文档本身的模式发展过程中会发生什么。查询语言（如N1QL，SQL ++）将扩展到文件内部处理更灵活的模式。</p>
+<h2 id="4-总结"><a href="#4-总结" class="headerlink" title="4. 总结"></a>4. 总结</h2><p>这是模拟数据在关系模型和JSON中的比较：</p>
+<p><img src="http://static.oschina.net/uploads/space/2016/1018/113928_nGqw_2903254.png" alt="pic"></p>
+
+                                                                                
+                                        </div>
+                                        
+                                            <div class="article-info article-info-index">
+                                                
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+	</div>
+
+
+                                                    
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/work/">work</a>
+	</div>
+
+
+                                                        
+                                                                <div class="clearfix"></div>
+                                            </div>
+                                            
+            </div>
+            
+                    
+                                <!-- 多说评论框 start -->
+                                
+</article>
+
+<!--
+
+-->
+<!--
+
+-->
+
+  
     <article id="post-计算机网络术语" class="article article-type-post" itemscope itemprop="blogPost">
     <script>
         $("html").niceScroll({
@@ -1634,189 +1787,6 @@
                                                 
 	<div class="article-tag tagcloud">
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/">c</a></li></ul>
-	</div>
-
-
-                                                    
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/work/">work</a>
-	</div>
-
-
-                                                        
-                                                                <div class="clearfix"></div>
-                                            </div>
-                                            
-            </div>
-            
-                    
-                                <!-- 多说评论框 start -->
-                                
-</article>
-
-<!--
-
--->
-<!--
-
--->
-
-  
-    <article id="post-Java多线程面试题及回答" class="article article-type-post" itemscope itemprop="blogPost">
-    <script>
-        $("html").niceScroll({
-            cursorcolor: "#2a2929",
-            cursoropacitymax: 1,
-            touchbehavior: false,
-            cursorwidth: "6px",
-            cursorborder: "5",
-            cursorborderradius: "0px",
-            autohidemode: true
-        });
-    </script>
-    
-        <div class="article-meta">
-            <a href="/2016/10/17/Java多线程面试题及回答/" class="article-date">
-  	<time datetime="2016-10-17T14:15:26.000Z" itemprop="datePublished">2016-10-17</time>
-</a>
-
-        </div>
-        
-            <div class="article-inner">
-                
-                    <input type="hidden" class="isFancy" />
-                    
-                        
-                            <header class="article-header">
-                                
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/17/Java多线程面试题及回答/">Java多线程面试题及回答</a>
-    </h1>
-  
-
-
-                            </header>
-                            
-                                    
-                                        <div class="article-entry" itemprop="articleBody">
-                                            
-                                                    <!--02-->
-                                                    <p class="toc-button">目录</p>
-<div id="toc" class="toc-article" style="display:none;">
-    
-</div>
-<script>
-    $(function(){
-
-        var width = document.body.scrollWidth;
-        if (width <=550) {
-             $(".toc-button").css("display","none");
-        }
-        $(".toc-button").hover(function(){
-            var top = $(this).get(0).offsetTop-$(".toc-article").height()/2;
-            $(".toc-article").css({
-                top:top +"px"
-            });
-            $("#toc").show(1000,function(){});
-           // $("#toc").animate({width:500;},3000);
-        },function(){
-
-        });
-        $(".toc-article").hover(function(){
-
-        },function(){
-            $("#toc").hide(1000,function(){});
-        });
-    })
-</script>
-
-                                                        
-                                                            
-                                                                
-                                                                            <ul>
-<li><strong>现在有T1、T2、T3三个线程，你怎样保证T2在T1执行完后执行，T3在T2执行完后执行？</strong></li>
-</ul>
-<p>这个线程问题通常会在第一轮或电话面试阶段被问到，目的是检测你对”join”方法是否熟悉。这个多线程问题比较简单，可以用join方法实现。</p>
-<ul>
-<li><strong>在Java中Lock接口比synchronized块的优势是什么？你需要实现一个高效的缓存，它允许多个用户读，但只允许一个用户写，以此来保持它的完整性，你会怎样去实现它？</strong></li>
-</ul>
-<p>lock接口在多线程和并发编程中最大的优势是它们为读和写分别提供了锁，它能满足你写像ConcurrentHashMap这样的高性能数据结构和有条件的阻塞。Java线程面试的问题越来越会根据面试者的回答来提问。我强烈建议在你去参加多线程的面试之前认真读一下Locks，因为当前其大量用于构建电子交易终统的客户端缓存和交易连接空间。</p>
-<ul>
-<li><strong>在java中wait和sleep方法的不同？</strong></li>
-</ul>
-<p>通常会在电话面试中经常被问到的Java线程面试问题。最大的不同是在等待时wait会释放锁，而sleep一直持有锁。Wait通常被用于线程间交互，sleep通常被用于暂停执行。</p>
-<ul>
-<li><strong>用Java实现阻塞队列</strong></li>
-</ul>
-<p>这是一个相对艰难的多线程面试问题，它能达到很多的目的。第一，它可以检测侯选者是否能实际的用Java线程写程序；第二，可以检测侯选者对并发场景的理解，并且你可以根据这个问很多问题。如果他用wait()和notify()方法来实现阻塞队列，你可以要求他用最新的Java 5中的并发类来再写一次。</p>
-<ul>
-<li><strong>用Java写代码来解决生产者—消费者问题</strong></li>
-</ul>
-<p>与上面的问题很类似，但这个问题更经典，有些时候面试都会问下面的问题。在Java中怎么解决生产者——消费者问题，当然有很多解决方法，我已经分享了一种用阻塞队列实现的方法。有些时候他们甚至会问怎么实现哲学家进餐问题。</p>
-<ul>
-<li><strong>用Java编程一个会导致死锁的程序，你将怎么解决？</strong></li>
-</ul>
-<p>这是我最喜欢的Java线程面试问题，因为即使死锁问题在写多线程并发程序时非常普遍，但是很多侯选者并不能写deadlock free code（无死锁代码？），他们很挣扎。只要告诉他们，你有N个资源和N个线程，并且你需要所有的资源来完成一个操作。为了简单这里的n可以替换为2，越大的数据会使问题看起来更复杂。通过避免Java中的死锁来得到关于死锁的更多信息。</p>
-<ul>
-<li><strong>什么是原子操作，Java中的原子操作是什么？</strong></li>
-</ul>
-<p>非常简单的java线程面试问题，接下来的问题是你需要同步一个原子操作。</p>
-<ul>
-<li><strong>Java中的volatile关键是什么作用？怎样使用它？在Java中它跟synchronized方法有什么不同？</strong></li>
-</ul>
-<p>自从Java 5和Java内存模型改变以后，基于volatile关键字的线程问题越来越流行。应该准备好回答关于volatile变量怎样在并发环境中确保可见性、顺序性和一致性。</p>
-<ul>
-<li><strong>什么是竞争条件？你怎样发现和解决竞争？</strong></li>
-</ul>
-<p>这是一道出现在多线程面试的高级阶段的问题。大多数的面试官会问最近你遇到的竞争条件，以及你是怎么解决的。有些时间他们会写简单的代码，然后让你检测出代码的竞争条件。可以参考我之前发布的关于Java竞争条件的文章。在我看来这是最好的java线程面试问题之一，它可以确切的检测候选者解决竞争条件的经验，or writing code which is free of data race or any other race condition。关于这方面最好的书是《Concurrency practices in Java》。</p>
-<ul>
-<li><strong>你将如何使用thread dump？你将如何分析Thread dump？</strong></li>
-</ul>
-<p>在UNIX中你可以使用kill -3，然后thread dump将会打印日志，在windows中你可以使用”CTRL+Break”。非常简单和专业的线程面试问题，但是如果他问你怎样分析它，就会很棘手。</p>
-<ul>
-<li><strong>为什么我们调用start()方法时会执行run()方法，为什么我们不能直接调用run()方法？</strong></li>
-</ul>
-<p>这是另一个非常经典的java多线程面试问题。这也是我刚开始写线程程序时候的困惑。现在这个问题通常在电话面试或者是在初中级Java面试的第一轮被问到。这个问题的回答应该是这样的，当你调用start()方法时你将创建新的线程，并且执行在run()方法里的代码。但是如果你直接调用run()方法，它不会创建新的线程也不会执行调用线程的代码。阅读我之前写的《start与run方法的区别》这篇文章来获得更多信息。</p>
-<ul>
-<li><strong>Java中你怎样唤醒一个阻塞的线程？</strong></li>
-</ul>
-<p>这是个关于线程和阻塞的棘手的问题，它有很多解决方法。如果线程遇到了IO阻塞，我并且不认为有一种方法可以中止线程。如果线程因为调用wait()、sleep()、或者join()方法而导致的阻塞，你可以中断线程，并且通过抛出InterruptedException来唤醒它。我之前写的《How to deal with blocking methods in java》有很多关于处理线程阻塞的信息。</p>
-<ul>
-<li><strong>在Java中CycliBarriar和CountdownLatch有什么区别？</strong></li>
-</ul>
-<p>这个线程问题主要用来检测你是否熟悉JDK5中的并发包。这两个的区别是CyclicBarrier可以重复使用已经通过的障碍，而CountdownLatch不能重复使用。</p>
-<ul>
-<li><strong>什么是不可变对象，它对写并发应用有什么帮助？</strong></li>
-</ul>
-<p>另一个多线程经典面试问题，并不直接跟线程有关，但间接帮助很多。这个java面试问题可以变的非常棘手，如果他要求你写一个不可变对象，或者问你为什么String是不可变的。</p>
-<ul>
-<li><strong>你在多线程环境中遇到的共同的问题是什么？你是怎么解决它的？</strong></li>
-</ul>
-<p>多线程和并发程序中常遇到的有Memory-interface、竞争条件、死锁、活锁和饥饿。问题是没有止境的，如果你弄错了，将很难发现和调试。这是大多数基于面试的，而不是基于实际应用的Java线程问题。</p>
-<hr>
-<p><strong>补充的其它几个问题：</strong></p>
-<ul>
-<li>在java中绿色线程和本地线程区别？</li>
-<li>线程与进程的区别？</li>
-<li>什么是多线程中的上下文切换？</li>
-<li>死锁与活锁的区别，死锁与馅饼的区别？</li>
-<li>Java中用到的线程调度算法是什么？</li>
-<li>在Java中什么是线程调度？</li>
-<li>在线程中你怎么处理不可捕捉异常？</li>
-<li>什么是线程组，为什么在Java中不推荐使用？</li>
-<li>为什么使用Executor框架比使用应用创建和管理线程好？</li>
-<li>在Java中Executor和Executors的区别？</li>
-<li>如何在Windows和Linux上查找哪个线程使用的CPU时间最长？</li>
-</ul>
-
-                                                                                
-                                        </div>
-                                        
-                                            <div class="article-info article-info-index">
-                                                
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
 	</div>
 
 
