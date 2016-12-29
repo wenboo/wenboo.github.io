@@ -6,30 +6,14 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://wenboo.github.io">
-  <title>Java SQLite 学习 | Hi~Welcome to Wenboo&#39;s Blog</title>
+  <title>Category: 随笔 | Hi~Welcome to Wenboo&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="安装在 Java 程序中使用 SQLite 之前，我们需要确保机器上已经有 SQLite JDBC Driver 驱动程序和 Java。可以查看 Java 教程了解如何在计算机上安装 Java。现在，我们来看看如何在机器上安装 SQLite JDBC 驱动程序。
-
-从 sqlite-jdbc库下载 sqlite-jdbc-(VERSION).jar 的最新版本。
-
-在您的 class 路径中添加下">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Java SQLite 学习">
-<meta property="og:url" content="http://wenboo.github.io/2016/10/23/Java-SQLite-学习/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hi~Welcome to Wenboo's Blog">
+<meta property="og:url" content="http://wenboo.github.io/categories/随笔/index.html">
 <meta property="og:site_name" content="Hi~Welcome to Wenboo's Blog">
-<meta property="og:description" content="安装在 Java 程序中使用 SQLite 之前，我们需要确保机器上已经有 SQLite JDBC Driver 驱动程序和 Java。可以查看 Java 教程了解如何在计算机上安装 Java。现在，我们来看看如何在机器上安装 SQLite JDBC 驱动程序。
-
-从 sqlite-jdbc库下载 sqlite-jdbc-(VERSION).jar 的最新版本。
-
-在您的 class 路径中添加下">
-<meta property="og:updated_time" content="2016-10-23T09:29:31.057Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java SQLite 学习">
-<meta name="twitter:description" content="安装在 Java 程序中使用 SQLite 之前，我们需要确保机器上已经有 SQLite JDBC Driver 驱动程序和 Java。可以查看 Java 教程了解如何在计算机上安装 Java。现在，我们来看看如何在机器上安装 SQLite JDBC 驱动程序。
-
-从 sqlite-jdbc库下载 sqlite-jdbc-(VERSION).jar 的最新版本。
-
-在您的 class 路径中添加下">
+<meta name="twitter:title" content="Hi~Welcome to Wenboo's Blog">
   
     <link rel="alternative" href="/atom.xml" title="Hi~Welcome to Wenboo&#39;s Blog" type="application/atom+xml">
   
@@ -149,63 +133,36 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Java-SQLite-学习" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      Java SQLite 学习
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2016" class="archive-year">2016</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2016/11/28/15个Java多线程面试题目/" class="archive-article-date">
+  	<time datetime="2016-11-28T13:21:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-11-28</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2016/11/28/15个Java多线程面试题目/">15个Java多线程面试题目</a>
     </h1>
   
 
-        <a href="/2016/10/23/Java-SQLite-学习/" class="archive-article-date">
-  	<time datetime="2016-10-23T09:28:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-23</time>
-</a>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>在 Java 程序中使用 SQLite 之前，我们需要确保机器上已经有 SQLite JDBC Driver 驱动程序和 Java。可以查看 Java 教程了解如何在计算机上安装 Java。现在，我们来看看如何在机器上安装 SQLite JDBC 驱动程序。</p>
-<ul>
-<li><p>从 <a href="https://bitbucket.org/xerial/sqlite-jdbc/downloads" target="_blank" rel="external">sqlite-jdbc</a>库下载 sqlite-jdbc-(VERSION).jar 的最新版本。</p>
-</li>
-<li><p>在您的 class 路径中添加下载的 jar 文件 sqlite-jdbc-(VERSION).jar，或者在 -classpath 选项中使用它，这将在后面的实例中进行讲解。</p>
-</li>
-</ul>
-<h2 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h2><p>下面的 Java 程序显示了如何连接到一个现有的数据库。如果数据库不存在，那么它就会被创建，最后将返回一个数据库对象。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.sql.*;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SQLiteJDBC</span></span></div><div class="line">&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">( String args[] )</span></span></div><div class="line">  &#123;</div><div class="line">    Connection c = <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">      Class.forName(<span class="string">"org.sqlite.JDBC"</span>);</div><div class="line">      c = DriverManager.getConnection(<span class="string">"jdbc:sqlite:test.db"</span>);</div><div class="line">    &#125; <span class="keyword">catch</span> ( Exception e ) &#123;</div><div class="line">      System.err.println( e.getClass().getName() + <span class="string">": "</span> + e.getMessage() );</div><div class="line">      System.exit(<span class="number">0</span>);</div><div class="line">    &#125;</div><div class="line">    System.out.println(<span class="string">"Opened database successfully"</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>现在，让我们来编译和运行上面的程序，在当前目录中创建我们的数据库 test.db。您可以根据需要改变路径。我们假设当前路径下可用的 JDBC 驱动程序的版本是 sqlite-jdbc-3.7.2.jar。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$javac SQLiteJDBC.java</div><div class="line">$java -classpath <span class="string">".:sqlite-jdbc-3.7.2.jar"</span> SQLiteJDBC</div><div class="line">Open database successfully</div></pre></td></tr></table></figure>
-<p>如果您想要使用 Windows 机器，可以按照下列所示编译和运行您的代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$javac SQLiteJDBC.java</div><div class="line">$java -classpath <span class="string">".;sqlite-jdbc-3.7.2.jar"</span> SQLiteJDBC</div><div class="line">Opened database successfully</div></pre></td></tr></table></figure>
-<h2 id="创建表单"><a href="#创建表单" class="headerlink" title="创建表单"></a>创建表单</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.sql.*;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SQLiteJDBC</span></span></div><div class="line">&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">( String args[] )</span></span></div><div class="line">  &#123;</div><div class="line">    Connection c = <span class="keyword">null</span>;</div><div class="line">    Statement stmt = <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">      Class.forName(<span class="string">"org.sqlite.JDBC"</span>);</div><div class="line">      c = DriverManager.getConnection(<span class="string">"jdbc:sqlite:test.db"</span>);</div><div class="line">      System.out.println(<span class="string">"Opened database successfully"</span>);</div><div class="line"></div><div class="line">      stmt = c.createStatement();</div><div class="line">      String sql = <span class="string">"CREATE TABLE COMPANY "</span> +</div><div class="line">                   <span class="string">"(ID INT PRIMARY KEY     NOT NULL,"</span> +</div><div class="line">                   <span class="string">" NAME           TEXT    NOT NULL, "</span> + </div><div class="line">                   <span class="string">" AGE            INT     NOT NULL, "</span> + </div><div class="line">                   <span class="string">" ADDRESS        CHAR(50), "</span> + </div><div class="line">                   <span class="string">" SALARY         REAL)"</span>; </div><div class="line">      stmt.executeUpdate(sql);</div><div class="line">      stmt.close();</div><div class="line">      c.close();</div><div class="line">    &#125; <span class="keyword">catch</span> ( Exception e ) &#123;</div><div class="line">      System.err.println( e.getClass().getName() + <span class="string">": "</span> + e.getMessage() );</div><div class="line">      System.exit(<span class="number">0</span>);</div><div class="line">    &#125;</div><div class="line">    System.out.println(<span class="string">"Table created successfully"</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>上述程序编译和执行时，它会在 test.db 中创建 COMPANY 表，最终文件列表如下所示：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">-rw-r--r--. <span class="number">1</span> root root <span class="number">3201128</span> Jan <span class="number">22</span> <span class="number">19</span>:<span class="number">04</span> sqlite-jdbc-<span class="number">3.7</span>.2.jar</div><div class="line">-rw-r--r--. <span class="number">1</span> root root    <span class="number">1506</span> May  <span class="number">8</span> <span class="number">05</span>:<span class="number">43</span> SQLiteJDBC.class</div><div class="line">-rw-r--r--. <span class="number">1</span> root root     <span class="number">832</span> May  <span class="number">8</span> <span class="number">05</span>:<span class="number">42</span> SQLiteJDBC.java</div><div class="line">-rw-r--r--. <span class="number">1</span> root root    <span class="number">3072</span> May  <span class="number">8</span> <span class="number">05</span>:<span class="number">43</span> test.db</div></pre></td></tr></table></figure>
-<h2 id="INSERT-操作"><a href="#INSERT-操作" class="headerlink" title="INSERT 操作"></a>INSERT 操作</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.sql.*;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SQLiteJDBC</span></span></div><div class="line">&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">( String args[] )</span></span></div><div class="line">  &#123;</div><div class="line">    Connection c = <span class="keyword">null</span>;</div><div class="line">    Statement stmt = <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">      Class.forName(<span class="string">"org.sqlite.JDBC"</span>);</div><div class="line">      c = DriverManager.getConnection(<span class="string">"jdbc:sqlite:test.db"</span>);</div><div class="line">      c.setAutoCommit(<span class="keyword">false</span>);</div><div class="line">      System.out.println(<span class="string">"Opened database successfully"</span>);</div><div class="line"></div><div class="line">      stmt = c.createStatement();</div><div class="line">      String sql = <span class="string">"INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) "</span> +</div><div class="line">                   <span class="string">"VALUES (1, 'Paul', 32, 'California', 20000.00 );"</span>; </div><div class="line">      stmt.executeUpdate(sql);</div><div class="line"></div><div class="line">      sql = <span class="string">"INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) "</span> +</div><div class="line">            <span class="string">"VALUES (2, 'Allen', 25, 'Texas', 15000.00 );"</span>; </div><div class="line">      stmt.executeUpdate(sql);</div><div class="line"></div><div class="line">      sql = <span class="string">"INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) "</span> +</div><div class="line">            <span class="string">"VALUES (3, 'Teddy', 23, 'Norway', 20000.00 );"</span>; </div><div class="line">      stmt.executeUpdate(sql);</div><div class="line"></div><div class="line">      sql = <span class="string">"INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) "</span> +</div><div class="line">            <span class="string">"VALUES (4, 'Mark', 25, 'Rich-Mond ', 65000.00 );"</span>; </div><div class="line">      stmt.executeUpdate(sql);</div><div class="line"></div><div class="line">      stmt.close();</div><div class="line">      c.commit();</div><div class="line">      c.close();</div><div class="line">    &#125; <span class="keyword">catch</span> ( Exception e ) &#123;</div><div class="line">      System.err.println( e.getClass().getName() + <span class="string">": "</span> + e.getMessage() );</div><div class="line">      System.exit(<span class="number">0</span>);</div><div class="line">    &#125;</div><div class="line">    System.out.println(<span class="string">"Records created successfully"</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>上述程序编译和执行时，它会在 COMPANY 表中创建给定记录，并会显示以下两行：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Opened database successfully</div><div class="line">Records created successfully</div></pre></td></tr></table></figure>
-<h2 id="SELECT-操作"><a href="#SELECT-操作" class="headerlink" title="SELECT 操作"></a>SELECT 操作</h2><p>下面的 Java 程序显示了如何从前面创建的 COMPANY 表中获取并显示记录：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.sql.*;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SQLiteJDBC</span></span></div><div class="line">&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">( String args[] )</span></span></div><div class="line">  &#123;</div><div class="line">    Connection c = <span class="keyword">null</span>;</div><div class="line">    Statement stmt = <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">      Class.forName(<span class="string">"org.sqlite.JDBC"</span>);</div><div class="line">      c = DriverManager.getConnection(<span class="string">"jdbc:sqlite:test.db"</span>);</div><div class="line">      c.setAutoCommit(<span class="keyword">false</span>);</div><div class="line">      System.out.println(<span class="string">"Opened database successfully"</span>);</div><div class="line"></div><div class="line">      stmt = c.createStatement();</div><div class="line">      ResultSet rs = stmt.executeQuery( <span class="string">"SELECT * FROM COMPANY;"</span> );</div><div class="line">      <span class="keyword">while</span> ( rs.next() ) &#123;</div><div class="line">         <span class="keyword">int</span> id = rs.getInt(<span class="string">"id"</span>);</div><div class="line">         String  name = rs.getString(<span class="string">"name"</span>);</div><div class="line">         <span class="keyword">int</span> age  = rs.getInt(<span class="string">"age"</span>);</div><div class="line">         String  address = rs.getString(<span class="string">"address"</span>);</div><div class="line">         <span class="keyword">float</span> salary = rs.getFloat(<span class="string">"salary"</span>);</div><div class="line">         System.out.println( <span class="string">"ID = "</span> + id );</div><div class="line">         System.out.println( <span class="string">"NAME = "</span> + name );</div><div class="line">         System.out.println( <span class="string">"AGE = "</span> + age );</div><div class="line">         System.out.println( <span class="string">"ADDRESS = "</span> + address );</div><div class="line">         System.out.println( <span class="string">"SALARY = "</span> + salary );</div><div class="line">         System.out.println();</div><div class="line">      &#125;</div><div class="line">      rs.close();</div><div class="line">      stmt.close();</div><div class="line">      c.close();</div><div class="line">    &#125; <span class="keyword">catch</span> ( Exception e ) &#123;</div><div class="line">      System.err.println( e.getClass().getName() + <span class="string">": "</span> + e.getMessage() );</div><div class="line">      System.exit(<span class="number">0</span>);</div><div class="line">    &#125;</div><div class="line">    System.out.println(<span class="string">"Operation done successfully"</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>上述程序编译和执行时，它会产生以下结果：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">Opened database successfully</div><div class="line">ID = <span class="number">1</span></div><div class="line">NAME = Paul</div><div class="line">AGE = <span class="number">32</span></div><div class="line">ADDRESS = California</div><div class="line">SALARY = <span class="number">20000.0</span></div><div class="line"></div><div class="line">ID = <span class="number">2</span></div><div class="line">NAME = Allen</div><div class="line">AGE = <span class="number">25</span></div><div class="line">ADDRESS = Texas</div><div class="line">SALARY = <span class="number">15000.0</span></div><div class="line"></div><div class="line">ID = <span class="number">3</span></div><div class="line">NAME = Teddy</div><div class="line">AGE = <span class="number">23</span></div><div class="line">ADDRESS = Norway</div><div class="line">SALARY = <span class="number">20000.0</span></div><div class="line"></div><div class="line">ID = <span class="number">4</span></div><div class="line">NAME = Mark</div><div class="line">AGE = <span class="number">25</span></div><div class="line">ADDRESS = Rich-Mond</div><div class="line">SALARY = <span class="number">65000.0</span></div><div class="line"></div><div class="line">Operation done successfully</div></pre></td></tr></table></figure>
-<h2 id="UPDATE-操作"><a href="#UPDATE-操作" class="headerlink" title="UPDATE 操作"></a>UPDATE 操作</h2><p>下面的 Java 代码显示了如何使用 UPDATE 语句来更新任何记录，然后从 COMPANY 表中获取并显示更新的记录：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.sql.*;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SQLiteJDBC</span></span></div><div class="line">&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">( String args[] )</span></span></div><div class="line">  &#123;</div><div class="line">    Connection c = <span class="keyword">null</span>;</div><div class="line">    Statement stmt = <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">      Class.forName(<span class="string">"org.sqlite.JDBC"</span>);</div><div class="line">      c = DriverManager.getConnection(<span class="string">"jdbc:sqlite:test.db"</span>);</div><div class="line">      c.setAutoCommit(<span class="keyword">false</span>);</div><div class="line">      System.out.println(<span class="string">"Opened database successfully"</span>);</div><div class="line"></div><div class="line">      stmt = c.createStatement();</div><div class="line">      String sql = <span class="string">"UPDATE COMPANY set SALARY = 25000.00 where ID=1;"</span>;</div><div class="line">      stmt.executeUpdate(sql);</div><div class="line">      c.commit();</div><div class="line"></div><div class="line">      ResultSet rs = stmt.executeQuery( <span class="string">"SELECT * FROM COMPANY;"</span> );</div><div class="line">      <span class="keyword">while</span> ( rs.next() ) &#123;</div><div class="line">         <span class="keyword">int</span> id = rs.getInt(<span class="string">"id"</span>);</div><div class="line">         String  name = rs.getString(<span class="string">"name"</span>);</div><div class="line">         <span class="keyword">int</span> age  = rs.getInt(<span class="string">"age"</span>);</div><div class="line">         String  address = rs.getString(<span class="string">"address"</span>);</div><div class="line">         <span class="keyword">float</span> salary = rs.getFloat(<span class="string">"salary"</span>);</div><div class="line">         System.out.println( <span class="string">"ID = "</span> + id );</div><div class="line">         System.out.println( <span class="string">"NAME = "</span> + name );</div><div class="line">         System.out.println( <span class="string">"AGE = "</span> + age );</div><div class="line">         System.out.println( <span class="string">"ADDRESS = "</span> + address );</div><div class="line">         System.out.println( <span class="string">"SALARY = "</span> + salary );</div><div class="line">         System.out.println();</div><div class="line">      &#125;</div><div class="line">      rs.close();</div><div class="line">      stmt.close();</div><div class="line">      c.close();</div><div class="line">    &#125; <span class="keyword">catch</span> ( Exception e ) &#123;</div><div class="line">      System.err.println( e.getClass().getName() + <span class="string">": "</span> + e.getMessage() );</div><div class="line">      System.exit(<span class="number">0</span>);</div><div class="line">    &#125;</div><div class="line">    System.out.println(<span class="string">"Operation done successfully"</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>上述程序编译和执行时，它会产生以下结果：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">Opened database successfully</div><div class="line">ID = <span class="number">1</span></div><div class="line">NAME = Paul</div><div class="line">AGE = <span class="number">32</span></div><div class="line">ADDRESS = California</div><div class="line">SALARY = <span class="number">25000.0</span></div><div class="line"></div><div class="line">ID = <span class="number">2</span></div><div class="line">NAME = Allen</div><div class="line">AGE = <span class="number">25</span></div><div class="line">ADDRESS = Texas</div><div class="line">SALARY = <span class="number">15000.0</span></div><div class="line"></div><div class="line">ID = <span class="number">3</span></div><div class="line">NAME = Teddy</div><div class="line">AGE = <span class="number">23</span></div><div class="line">ADDRESS = Norway</div><div class="line">SALARY = <span class="number">20000.0</span></div><div class="line"></div><div class="line">ID = <span class="number">4</span></div><div class="line">NAME = Mark</div><div class="line">AGE = <span class="number">25</span></div><div class="line">ADDRESS = Rich-Mond</div><div class="line">SALARY = <span class="number">65000.0</span></div><div class="line"></div><div class="line">Operation done successfully</div></pre></td></tr></table></figure>
-<h2 id="DELETE-操作"><a href="#DELETE-操作" class="headerlink" title="DELETE 操作"></a>DELETE 操作</h2><p>下面的 Java 代码显示了如何使用 DELETE 语句删除任何记录，然后从 COMPANY 表中获取并显示剩余的记录：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.sql.*;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SQLiteJDBC</span></span></div><div class="line">&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">( String args[] )</span></span></div><div class="line">  &#123;</div><div class="line">    Connection c = <span class="keyword">null</span>;</div><div class="line">    Statement stmt = <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">      Class.forName(<span class="string">"org.sqlite.JDBC"</span>);</div><div class="line">      c = DriverManager.getConnection(<span class="string">"jdbc:sqlite:test.db"</span>);</div><div class="line">      c.setAutoCommit(<span class="keyword">false</span>);</div><div class="line">      System.out.println(<span class="string">"Opened database successfully"</span>);</div><div class="line"></div><div class="line">      stmt = c.createStatement();</div><div class="line">      String sql = <span class="string">"DELETE from COMPANY where ID=2;"</span>;</div><div class="line">      stmt.executeUpdate(sql);</div><div class="line">      c.commit();</div><div class="line"></div><div class="line">      ResultSet rs = stmt.executeQuery( <span class="string">"SELECT * FROM COMPANY;"</span> );</div><div class="line">      <span class="keyword">while</span> ( rs.next() ) &#123;</div><div class="line">         <span class="keyword">int</span> id = rs.getInt(<span class="string">"id"</span>);</div><div class="line">         String  name = rs.getString(<span class="string">"name"</span>);</div><div class="line">         <span class="keyword">int</span> age  = rs.getInt(<span class="string">"age"</span>);</div><div class="line">         String  address = rs.getString(<span class="string">"address"</span>);</div><div class="line">         <span class="keyword">float</span> salary = rs.getFloat(<span class="string">"salary"</span>);</div><div class="line">         System.out.println( <span class="string">"ID = "</span> + id );</div><div class="line">         System.out.println( <span class="string">"NAME = "</span> + name );</div><div class="line">         System.out.println( <span class="string">"AGE = "</span> + age );</div><div class="line">         System.out.println( <span class="string">"ADDRESS = "</span> + address );</div><div class="line">         System.out.println( <span class="string">"SALARY = "</span> + salary );</div><div class="line">         System.out.println();</div><div class="line">      &#125;</div><div class="line">      rs.close();</div><div class="line">      stmt.close();</div><div class="line">      c.close();</div><div class="line">    &#125; <span class="keyword">catch</span> ( Exception e ) &#123;</div><div class="line">      System.err.println( e.getClass().getName() + <span class="string">": "</span> + e.getMessage() );</div><div class="line">      System.exit(<span class="number">0</span>);</div><div class="line">    &#125;</div><div class="line">    System.out.println(<span class="string">"Operation done successfully"</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>上述程序编译和执行时，它会产生以下结果：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">Opened database successfully</div><div class="line">ID = <span class="number">1</span></div><div class="line">NAME = Paul</div><div class="line">AGE = <span class="number">32</span></div><div class="line">ADDRESS = California</div><div class="line">SALARY = <span class="number">25000.0</span></div><div class="line"></div><div class="line">ID = <span class="number">3</span></div><div class="line">NAME = Teddy</div><div class="line">AGE = <span class="number">23</span></div><div class="line">ADDRESS = Norway</div><div class="line">SALARY = <span class="number">20000.0</span></div><div class="line"></div><div class="line">ID = <span class="number">4</span></div><div class="line">NAME = Mark</div><div class="line">AGE = <span class="number">25</span></div><div class="line">ADDRESS = Rich-Mond</div><div class="line">SALARY = <span class="number">65000.0</span></div><div class="line"></div><div class="line">Operation done successfully</div></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
 		<ul class="article-tag-list">
@@ -217,98 +174,24 @@
 		</ul>
 	</div>
 
-      
+          
 	<div class="article-category tagcloud">
 	<i class="icon-book icon"></i>
-	<a class="article-category-link" href="/categories/work/">work</a>
+	<a class="article-category-link" href="/categories/随笔/">随笔</a>
 	</div>
 
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://wenboo.github.io/2016/10/23/Java-SQLite-学习/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2016/10/24/TCP的那些事儿/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          TCP的那些事儿
-        
-      </div>
-    </a>
   
   
-    <a href="/2016/10/23/Socket-和-ServerSocket-学习/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Socket 和 ServerSocket 学习</div>
-      <i class="icon-circle-right"></i>
-    </a>
+    </div></section>
   
-</nav>
 
-
-
-
-
-
-
+    
 
 
           </div>
@@ -331,10 +214,10 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
 		isTag: false,
-		isCategory: false,
+		isCategory: true,
 		open_in_new: false,
 		root: "/",
 		innerArchive: true
