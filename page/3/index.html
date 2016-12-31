@@ -159,6 +159,333 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-HTTP协议学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/22/HTTP协议学习/">HTTP协议学习</a>
+    </h1>
+  
+
+        <a href="/2016/10/22/HTTP协议学习/" class="archive-article-date">
+  	<time datetime="2016-10-22T15:17:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-22</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="什么是-HTTP-协议"><a href="#什么是-HTTP-协议" class="headerlink" title="什么是 HTTP 协议"></a>什么是 HTTP 协议</h2><p>HTTP协议是指计算机通信网络中两台计算机之间进行通信所必须共同遵守的规定或规则，超文本传输协议(HTTP)是一种通信协议，它允许将超文本标记语言(HTML)文档从Web服务器传送到客户端的浏览器。目前我们使用的是HTTP/1.1版本。</p>
+<h2 id="Web服务器、浏览器、代理服务器"><a href="#Web服务器、浏览器、代理服务器" class="headerlink" title="Web服务器、浏览器、代理服务器"></a>Web服务器、浏览器、代理服务器</h2><p>当我们打开浏览器，在地址栏中输入URL，然后我们就看到了网页。原理是怎样的呢？实际上我们输入URL后，我们的浏览器给Web服务器发送了一个Request,Web服务器接到Request后进行处理，生成相应的Response，然后发送给浏览器，浏览器解析Response中的HTML,这样我们就看到了网页，过程如下图所示:</p>
+<p><img src="http://pic002.cnblogs.com/images/2012/263119/2012020910422542.png" alt="pic"></p>
+<p>我们的Request有可能是经过了代理服务器，最后才到达Web服务器的。过程如下图所示:</p>
+<p><img src="http://pic002.cnblogs.com/images/2012/263119/2012020910491417.png" alt="pic"></p>
+<p>代理服务器就是网络信息的中转站，有什么功能呢？</p>
+<ul>
+<li><p>提高访问速度， 大多数的代理服务器都有缓存功能</p>
+</li>
+<li><p>突破限制， 也就是FQ了</p>
+</li>
+<li><p>隐藏身份</p>
+</li>
+</ul>
+<h2 id="URL-详解"><a href="#URL-详解" class="headerlink" title="URL 详解"></a>URL 详解</h2><p> <strong>URL(Uniform Resource Locator)</strong> 地址用于描述一个网络上的资源,  基本格式如下:</p>
+<blockquote>
+<p>schema://host[:port#]/path/…/[?query-string][#anchor]</p>
+</blockquote>
+<ul>
+<li>scheme               指定低层使用的协议(例如：http, https, ftp)</li>
+<li>host                   HTTP服务器的IP地址或者域名</li>
+<li>port                 HTTP服务器的默认端口是80，这种情况下端口号可以省略。如果使用了别的端口，必须指明，例如 <a href="http://www.cnblogs.com:8080/" target="_blank" rel="external">http://www.cnblogs.com:8080/</a></li>
+<li>path                   访问资源的路径</li>
+<li>query-string       发送给http服务器的数据</li>
+<li>anchor             锚</li>
+</ul>
+<p><strong>URL 的一个例子</strong></p>
+<blockquote>
+<p><a href="http://www.mywebsite.com/sj/test/test.aspx?name=sviergn&amp;x=true#stuff" target="_blank" rel="external">http://www.mywebsite.com/sj/test/test.aspx?name=sviergn&amp;x=true#stuff</a></p>
+<p>Schema:                 http<br>host:                   www.mywebsite.com<br>path:                   /sj/test/test.aspx<br>Query String:           name=sviergn&amp;x=true<br>Anchor:                 stuff</p>
+</blockquote>
+<h2 id="HTTP-协议是无状态的"><a href="#HTTP-协议是无状态的" class="headerlink" title="HTTP 协议是无状态的"></a>HTTP 协议是无状态的</h2><p>HTTP协议是无状态的，同一个客户端的这次请求和上次请求是没有对应关系，对HTTP服务器来说，它并不知道这两个请求来自同一个客户端。 为了解决这个问题，Web程序引入了Cookie机制来维护状态。</p>
+<h2 id="打开一个网页需要浏览器发送很多次Request"><a href="#打开一个网页需要浏览器发送很多次Request" class="headerlink" title="打开一个网页需要浏览器发送很多次Request"></a>打开一个网页需要浏览器发送很多次Request</h2><ol>
+<li><p>当你在浏览器输入URL <a href="http://www.cnblogs.com" target="_blank" rel="external">http://www.cnblogs.com</a> 的时候，浏览器发送一个Request去获取 <a href="http://www.cnblogs.com" target="_blank" rel="external">http://www.cnblogs.com</a> 的html.  服务器把Response发送回给浏览器.</p>
+</li>
+<li><p>浏览器分析Response中的 HTML，发现其中引用了很多其他文件，比如图片，CSS文件，JS文件。通过fiddler等抓包工具可以看到，请求资源文件往往是在访问html之后。</p>
+</li>
+<li><p>浏览器会自动再次发送Request去获取图片，CSS文件，或者JS文件。</p>
+</li>
+<li><p>等所有的文件都下载成功后。 网页就被显示出来了。</p>
+</li>
+</ol>
+<h2 id="HTTP-消息结构"><a href="#HTTP-消息结构" class="headerlink" title="HTTP 消息结构"></a>HTTP 消息结构</h2><p>先看Request 消息的结构,   Request 消息分为3部分，第一部分叫Request line, 第二部分叫Request header, 第三部分是body. header和body之间有个空行， 结构如下图：</p>
+<p><img src="http://pic002.cnblogs.com/images/2012/263119/2012020914293943.png" alt="pic"></p>
+<p>第一行中的Method表示请求方法,比如”POST”,”GET”,  Path-to-resoure表示请求的资源， Http/version-number 表示HTTP协议的版本号</p>
+<p>当使用的是”GET” 方法的时候， body是为空的。</p>
+<p>比如我们打开博客园首页的request 如下:</p>
+<blockquote>
+<p>GET <a href="http://www.cnblogs.com/" target="_blank" rel="external">http://www.cnblogs.com/</a> HTTP/1.1<br>Host: www.cnblogs.com</p>
+</blockquote>
+<p>抽象的东西，难以理解，老感觉是虚的， 所谓眼见为实, 实际见到的东西，我们才能理解和记忆。 我们今天用Fiddler，实际的看看Request和Response。</p>
+<p>下面我们打开Fiddler 捕捉一个博客园登录的Request 然后分析下它的结构, 在Inspectors tab下以Raw的方式可以看到完整的Request的消息，如下图：</p>
+<p><img src="http://pic002.cnblogs.com/images/2012/263119/2012022009421183.png" alt="pic"></p>
+<p>我们再看Response消息的结构, 和Request消息的结构基本一样。 同样也分为三部分,第一部分叫Response line, 第二部分叫Response header，第三部分是body. header和body之间也有个空行,  结构如下图：</p>
+<p><img src="http://pic002.cnblogs.com/images/2012/263119/2012021309365350.png" alt="pic"></p>
+<p>HTTP/version-number表示HTTP协议的版本号，  status-code 和message 请看下节[状态代码]的详细解释。</p>
+<p>我们用Fiddler 捕捉一个博客园首页的Response然后分析下它的结构, 在Inspectors tab下以Raw的方式可以看到完整的Response的消息，如下图：</p>
+<p><img src="http://pic002.cnblogs.com/images/2012/263119/2012022009373182.png" alt="pic"></p>
+<h2 id="Get和Post方法的区别"><a href="#Get和Post方法的区别" class="headerlink" title="Get和Post方法的区别"></a>Get和Post方法的区别</h2><p>Http协议定义了很多与服务器交互的方法，最基本的有4种，分别是GET,POST,PUT,DELETE. 一个URL地址用于描述一个网络上的资源，而HTTP中的GET, POST, PUT, DELETE就对应着对这个资源的查，改，增，删4个操作。 我们最常见的就是GET和POST了。GET一般用于获取/查询资源信息，而POST一般用于更新资源信息.</p>
+<p><strong>我们看看GET和POST的区别</strong></p>
+<ol>
+<li><p>GET提交的数据会放在URL之后，以?分割URL和传输数据，参数之间以&amp;相连，如EditPosts.aspx?name=test1&amp;id=123456。 POST方法是把提交的数据放在HTTP包的Body中。</p>
+</li>
+<li><p>GET提交的数据大小有限制（因为浏览器对URL的长度有限制），而POST方法提交的数据没有限制。</p>
+</li>
+<li><p>GET方式需要使用Request.QueryString来取得变量的值，而POST方式通过Request.Form来获取变量的值。</p>
+</li>
+<li><p>GET方式提交数据，会带来安全问题，比如一个登录页面，通过GET方式提交数据时，用户名和密码将出现在URL上，如果页面可以被缓存或者其他人可以访问这台机器，就可以从历史记录获得该用户的账号和密码。</p>
+</li>
+</ol>
+<h2 id="状态码"><a href="#状态码" class="headerlink" title="状态码"></a>状态码</h2><p>Response 消息中的第一行叫做状态行，由HTTP协议版本号， 状态码， 状态消息 三部分组成。</p>
+<p>状态码用来告诉HTTP客户端,HTTP服务器是否产生了预期的Response.</p>
+<p>HTTP/1.1中定义了5类状态码， 状态码由三位数字组成，第一个数字定义了响应的类别：</p>
+<ul>
+<li><p>1XX  提示信息 - 表示请求已被成功接收，继续处理</p>
+</li>
+<li><p>2XX  成功 - 表示请求已被成功接收，理解，接受</p>
+</li>
+<li><p>3XX  重定向 - 要完成请求必须进行更进一步的处理</p>
+</li>
+<li><p>4XX  客户端错误 -  请求有语法错误或请求无法实现</p>
+</li>
+<li><p>5XX  服务器端错误 -   服务器未能实现合法的请求</p>
+</li>
+</ul>
+<p><strong>看看一些常见的状态码</strong></p>
+<blockquote>
+<p>200 OK</p>
+</blockquote>
+<p>最常见的就是成功响应状态码200了， 这表明该请求被成功地完成，所请求的资源发送回客户端</p>
+<p>如下图， 打开博客园首页：</p>
+<p><img src="http://pic002.cnblogs.com/images/2012/263119/2012021114423456.png" alt="pic"></p>
+<blockquote>
+<p>302 Found</p>
+</blockquote>
+<p>重定向，新的URL会在response 中的Location中返回，浏览器将会自动使用新的URL发出新的Request</p>
+<p>例如在IE中输入， <a href="http://www.google.com" target="_blank" rel="external">http://www.google.com</a>. HTTP服务器会返回302， IE取到Response中Location header的新URL, 又重新发送了一个Request。</p>
+<p><img src="http://pic002.cnblogs.com/images/2012/263119/2012021115280744.png" alt="pic"></p>
+<blockquote>
+<p>304 Not Modified</p>
+</blockquote>
+<p>代表上次的文档已经被缓存了， 还可以继续使用，</p>
+<p>例如打开博客园首页, 发现很多Response 的status code 都是304。</p>
+<p><img src="http://pic002.cnblogs.com/images/2012/263119/2012021115064471.png" alt="pic"></p>
+<p>提示：　如果你不想使用本地缓存可以用Ctrl+F5 强制刷新页面</p>
+<blockquote>
+<p>400 Bad Request  客户端请求与语法错误，不能被服务器所理解</p>
+<p>403 Forbidden 服务器收到请求，但是拒绝提供服务</p>
+<p>404 Not Found<br>请求资源不存在（输错了URL）</p>
+</blockquote>
+<p>比如在IE中输入一个错误的URL， <a href="http://www.cnblogs.com/tesdf.aspx" target="_blank" rel="external">http://www.cnblogs.com/tesdf.aspx</a></p>
+<p><img src="http://pic002.cnblogs.com/images/2012/263119/2012021114534541.png" alt="pic"></p>
+<blockquote>
+<p>500 Internal Server Error 服务器发生了不可预期的错误</p>
+<p>503 Server Unavailable 服务器当前不能处理客户端的请求，一段时间后可能恢复正常</p>
+</blockquote>
+<h2 id="HTTP-Request-Header"><a href="#HTTP-Request-Header" class="headerlink" title="HTTP Request Header"></a>HTTP Request Header</h2><p>使用Fiddler 能很方便的查看Reques header, 点击Inspectors tab -&gt;Request tab-&gt; headers  如下图所示：</p>
+<p><img src="http://pic002.cnblogs.com/images/2012/263119/2012021116181545.png" alt="pic"></p>
+<p>header 有很多，比较难以记忆，我们也按照Fiddler那样把header 进行分类，这样比较清晰也容易记忆。</p>
+<h2 id="Cache-头域"><a href="#Cache-头域" class="headerlink" title="Cache 头域"></a>Cache 头域</h2><blockquote>
+<p>If-Modified-Since</p>
+</blockquote>
+<p>作用： 把浏览器端缓存页面的最后修改时间发送到服务器去，服务器会把这个时间与服务器上实际文件的最后修改时间进行对比。如果时间一致，那么返回304，客户端就直接使用本地缓存文件。如果时间不一致，就会返回200和新的文件内容。客户端接到之后，会丢弃旧文件，把新文件缓存起来，并显示在浏览器中。<br>（前端发布时需要文件的时间戳，原理如上，通过比较时间，请求新的文件）</p>
+<p>例如：If-Modified-Since: Thu, 09 Feb 2012 09:07:57 GMT</p>
+<p><strong>实例如下图</strong></p>
+<p><img src="http://pic002.cnblogs.com/images/2012/263119/2012021322503738.png" alt="pic"></p>
+<blockquote>
+<p>If-None-Match</p>
+</blockquote>
+<p>作用: If-None-Match和ETag一起工作，工作原理是在HTTP Response中添加ETag信息。 当用户再次请求该资源时，将在HTTP Request 中加入If-None-Match信息(ETag的值)。如果服务器验证资源的ETag没有改变（该资源没有更新），将返回一个304状态告诉客户端使用本地缓存文件。否则将返回200状态和新的资源和Etag.  使用这样的机制将提高网站的性能</p>
+<p>例如: If-None-Match: “03f2b33c0bfcc1:0”</p>
+<p><strong>实例如下图</strong></p>
+<p><img src="http://pic002.cnblogs.com/images/2012/263119/2012021117041918.png" alt="pic"></p>
+<blockquote>
+<p>Pragma</p>
+</blockquote>
+<p>作用： 防止页面被缓存， 在HTTP/1.1版本中，它和Cache-Control:no-cache作用一模一样</p>
+<p>Pargma只有一个用法， 例如： Pragma: no-cache</p>
+<p>注意: 在HTTP/1.0版本中，只实现了Pragema:no-cache, 没有实现Cache-Control</p>
+<blockquote>
+<p>Cache-Control</p>
+</blockquote>
+<p>作用: 这个是非常重要的规则。 这个用来指定Response-Request遵循的缓存机制。各个指令含义如下</p>
+<p>Cache-Control:Public   可以被任何缓存所缓存（）</p>
+<p>Cache-Control:Private     内容只缓存到私有缓存中</p>
+<p>Cache-Control:no-cache  所有内容都不会被缓存</p>
+<h2 id="Client-头域"><a href="#Client-头域" class="headerlink" title="Client 头域"></a>Client 头域</h2><blockquote>
+<p>Accept</p>
+</blockquote>
+<p>作用： 浏览器端可以接受的媒体类型,</p>
+<p>例如：  Accept: text/html  代表浏览器可以接受服务器回发的类型为 text/html  也就是我们常说的html文档,</p>
+<p>如果服务器无法返回text/html类型的数据,服务器应该返回一个406错误(non acceptable)</p>
+<p>通配符 * 代表任意类型</p>
+<p>例如  Accept: <em>/</em>  代表浏览器可以处理所有类型,(一般浏览器发给服务器都是发这个)</p>
+<blockquote>
+<p>Accept-Encoding：</p>
+</blockquote>
+<p>作用： 浏览器申明自己接收的编码方法，通常指定压缩方法，是否支持压缩，支持什么压缩方法（gzip，deflate），（注意：这不是只字符编码）;</p>
+<p>例如： Accept-Encoding: gzip, deflate</p>
+<blockquote>
+<p>Accept-Language</p>
+</blockquote>
+<p>作用： 浏览器申明自己接收的语言。 </p>
+<p>语言跟字符集的区别：中文是语言，中文有多种字符集，比如big5，gb2312，gbk等等；</p>
+<p>例如： Accept-Language: en-us</p>
+<blockquote>
+<p>User-Agent</p>
+</blockquote>
+<p>作用：告诉HTTP服务器， 客户端使用的操作系统和浏览器的名称和版本.</p>
+<p>我们上网登陆论坛的时候，往往会看到一些欢迎信息，其中列出了你的操作系统的名称和版本，你所使用的浏览器的名称和版本，这往往让很多人感到很神奇，实际上，服务器应用程序就是从User-Agent这个请求报头域中获取到这些信息User-Agent请求报头域允许客户端将它的操作系统、浏览器和其它属性告诉服务器。</p>
+<p>例如： User-Agent: Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.0; CIBA; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729; .NET4.0C; InfoPath.2; .NET4.0E)</p>
+<blockquote>
+<p>Accept-Charset</p>
+</blockquote>
+<p>作用：浏览器申明自己接收的字符集，这就是本文前面介绍的各种字符集和字符编码，如gb2312，utf-8（通常我们说Charset包括了相应的字符编码方案）。</p>
+<h2 id="Cookie-Login-头域"><a href="#Cookie-Login-头域" class="headerlink" title="Cookie/Login 头域"></a>Cookie/Login 头域</h2><p>Cookie:</p>
+<p>作用： 最重要的header, 将cookie的值发送给HTTP 服务器</p>
+<h2 id="Entity头域"><a href="#Entity头域" class="headerlink" title="Entity头域"></a>Entity头域</h2><blockquote>
+<p>Content-Length</p>
+</blockquote>
+<p>作用：发送给HTTP服务器数据的长度。</p>
+<p>例如： Content-Length: 38</p>
+<blockquote>
+<p>Content-Type</p>
+</blockquote>
+<p>作用：</p>
+<p>例如：Content-Type: application/x-www-form-urlencoded</p>
+<h2 id="Miscellaneous-头域"><a href="#Miscellaneous-头域" class="headerlink" title="Miscellaneous 头域"></a>Miscellaneous 头域</h2><p>Referer:</p>
+<p>作用： 提供了Request的上下文信息的服务器，告诉服务器我是从哪个链接过来的，比如从我主页上链接到一个朋友那里，他的服务器就能够从HTTP Referer中统计出每天有多少用户点击我主页上的链接访问他的网站。</p>
+<p>例如: Referer:<a href="http://translate.google.cn/?hl=zh-cn&amp;tab=wT" target="_blank" rel="external">http://translate.google.cn/?hl=zh-cn&amp;tab=wT</a></p>
+<h2 id="Transport-头域"><a href="#Transport-头域" class="headerlink" title="Transport 头域"></a>Transport 头域</h2><blockquote>
+<p>Connection</p>
+</blockquote>
+<p>例如：　Connection: keep-alive   当一个网页打开完成后，客户端和服务器之间用于传输HTTP数据的TCP连接不会关闭，如果客户端再次访问这个服务器上的网页，会继续使用这一条已经建立的连接</p>
+<p>例如：  Connection: close  代表一个Request完成后，客户端和服务器之间用于传输HTTP数据的TCP连接会关闭， 当客户端再次发送Request，需要重新建立TCP连接。</p>
+<blockquote>
+<p>Host（发送请求时，该报头域是必需的）</p>
+</blockquote>
+<p>作用: 请求报头域主要用于指定被请求资源的Internet主机和端口号，它通常从HTTP URL中提取出来的</p>
+<p>例如: 我们在浏览器中输入：<a href="http://www.guet.edu.cn/index.html" target="_blank" rel="external">http://www.guet.edu.cn/index.html</a></p>
+<p>浏览器发送的请求消息中，就会包含Host请求报头域，如下：</p>
+<p>Host：<a href="http://www.guet.edu.cn" target="_blank" rel="external">http://www.guet.edu.cn</a></p>
+<p>此处使用缺省端口号80，若指定了端口号，则变成：Host：指定端口号</p>
+<h2 id="HTTP-Response-Header"><a href="#HTTP-Response-Header" class="headerlink" title="HTTP Response Header"></a>HTTP Response Header</h2><p>同样使用Fiddler 查看Response header, 点击Inspectors tab -&gt;Response tab-&gt; headers  如下图所示：</p>
+<p><img src="http://pic002.cnblogs.com/images/2012/263119/2012021116212815.png" alt="pic"></p>
+<p>我们也按照Fiddler那样把header 进行分类，这样比较清晰也容易记忆。</p>
+<h2 id="Entity头域-1"><a href="#Entity头域-1" class="headerlink" title="Entity头域"></a>Entity头域</h2><blockquote>
+<p>ETag</p>
+</blockquote>
+<p>作用:  和If-None-Match 配合使用。 （实例请看上节中If-None-Match的实例）</p>
+<p>例如: ETag: “03f2b33c0bfcc1:0”</p>
+<blockquote>
+<p>Last-Modified:</p>
+</blockquote>
+<p>作用： 用于指示资源的最后修改日期和时间。（实例请看上节的If-Modified-Since的实例）</p>
+<p>例如: Last-Modified: Wed, 21 Dec 2011 09:09:10 GMT</p>
+<blockquote>
+<p>Content-Type</p>
+</blockquote>
+<p>作用：WEB服务器告诉浏览器自己响应的对象的类型和字符集,</p>
+<p>例如:</p>
+<p>Content-Type: text/html; charset=utf-8</p>
+<p>Content-Type:text/html;charset=GB2312</p>
+<p>Content-Type: image/jpeg</p>
+<blockquote>
+<p>Content-Length</p>
+</blockquote>
+<p>指明实体正文的长度，以字节方式存储的十进制数字来表示。在数据下行的过程中，Content-Length的方式要预先在服务器中缓存所有数据，然后所有数据再一股脑儿地发给客户端。</p>
+<p>例如: Content-Length: 19847</p>
+<blockquote>
+<p>Content-Encoding</p>
+</blockquote>
+<p>WEB服务器表明自己使用了什么压缩方法（gzip，deflate）压缩响应中的对象。</p>
+<p>例如：Content-Encoding：gzip</p>
+<blockquote>
+<p>Content-Language</p>
+</blockquote>
+<p>作用： WEB服务器告诉浏览器自己响应的对象的语言者</p>
+<p>例如： Content-Language:da</p>
+<h2 id="Miscellaneous-头域-1"><a href="#Miscellaneous-头域-1" class="headerlink" title="Miscellaneous 头域"></a>Miscellaneous 头域</h2><blockquote>
+<p>Server:</p>
+</blockquote>
+<p>作用：指明HTTP服务器的软件信息</p>
+<p>例如:Server: Microsoft-IIS/7.5</p>
+<blockquote>
+<p>X-AspNet-Version:</p>
+</blockquote>
+<p>作用：如果网站是用ASP.NET开发的，这个header用来表示ASP.NET的版本</p>
+<p>例如: X-AspNet-Version: 4.0.30319</p>
+<blockquote>
+<p>X-Powered-By:</p>
+</blockquote>
+<p>作用：表示网站是用什么技术开发的</p>
+<p>例如： X-Powered-By: ASP.NET</p>
+<h2 id="Transport头域"><a href="#Transport头域" class="headerlink" title="Transport头域"></a>Transport头域</h2><p>Connection</p>
+<p>例如：　Connection: keep-alive   当一个网页打开完成后，客户端和服务器之间用于传输HTTP数据的TCP连接不会关闭，如果客户端再次访问这个服务器上的网页，会继续使用这一条已经建立的连接</p>
+<p>例如：  Connection: close  代表一个Request完成后，客户端和服务器之间用于传输HTTP数据的TCP连接会关闭， 当客户端再次发送Request，需要重新建立TCP连接。</p>
+<h2 id="Location头域"><a href="#Location头域" class="headerlink" title="Location头域"></a>Location头域</h2><p>Location</p>
+<p>作用： 用于重定向一个新的位置, 包含新的URL地址</p>
+<h2 id="HTTP协议是无状态的和Connection-keep-alive的区别"><a href="#HTTP协议是无状态的和Connection-keep-alive的区别" class="headerlink" title="HTTP协议是无状态的和Connection: keep-alive的区别"></a>HTTP协议是无状态的和Connection: keep-alive的区别</h2><p>无状态是指协议对于事务处理没有记忆能力，服务器不知道客户端是什么状态。从另一方面讲，打开一个服务器上的网页和你之前打开这个服务器上的网页之间没有任何联系。</p>
+<p>HTTP是一个无状态的面向连接的协议，无状态不代表HTTP不能保持TCP连接，更不能代表HTTP使用的是UDP协议（无连接）。</p>
+<p>从HTTP/1.1起，默认都开启了Keep-Alive，保持连接特性，简单地说，当一个网页打开完成后，客户端和服务器之间用于传输HTTP数据的TCP连接不会关闭，如果客户端再次访问这个服务器上的网页，会继续使用这一条已经建立的连接。</p>
+<p> Keep-Alive不会永久保持连接，它有一个保持时间，可以在不同的服务器软件（如Apache）中设定这个时间。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list">
+			 
+        <li class="article-tag-list-item">
+        	<a href="javascript:void(0)" class="article-tag-list-link color1">计算机网络</a>
+        </li>
+      
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<i class="icon-book icon"></i>
+	<a class="article-category-link" href="/categories/work/">work</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/10/22/HTTP协议学习/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-保持冷静，节制使用JSON" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1216,131 +1543,6 @@
 
 
   
-    <article id="post-sizeof()用法汇总" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/17/sizeof()用法汇总/">sizeof()用法汇总</a>
-    </h1>
-  
-
-        <a href="/2016/10/17/sizeof()用法汇总/" class="archive-article-date">
-  	<time datetime="2016-10-17T14:28:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-17</time>
-</a>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li><strong>与strlen()比较</strong></li>
-</ul>
-<p>strlen()计算字符数组的字符数，以”\0”为结束判断，不计算为’\0’的数组元素。<br>sizeof计算数据（包括数组、变量、类型、结构体等）所占内存空间，用字节数表示。</p>
-<hr>
-<ul>
-<li><strong>指针与静态数组的sizeof操作</strong></li>
-</ul>
-<p>指针均可看为变量类型的一种。所有指针变量的sizeof 操作结果均为4。<br>注意：int <em>p; sizeof(p)=4;<br>但sizeof(</em>p)相当于sizeof(int); 对于静态数组，sizeof可直接计算数组大小；</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> a[<span class="number">10</span>];<span class="keyword">char</span> b[]=<span class="string">"hello"</span>;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>sizeof(a)等于4*10=40;<br>sizeof(b)等于6;</p>
-</blockquote>
-<p>注意：数组做型参时，数组名称当作指针使用</p>
-<blockquote>
-<p>void  fun(char p[])<br>{sizeof(p)等于4}    </p>
-</blockquote>
-<p><strong>经典问题：</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">double</span>* (*a)[<span class="number">3</span>][<span class="number">6</span>]; </div><div class="line"><span class="built_in">cout</span>&lt;&lt;<span class="keyword">sizeof</span>(a)&lt;&lt;<span class="built_in">endl</span>; <span class="comment">// 4 a为指针</span></div><div class="line"><span class="built_in">cout</span>&lt;&lt;<span class="keyword">sizeof</span>(*a)&lt;&lt;<span class="built_in">endl</span>; <span class="comment">// 72 *a为一个有3*6个指针元素的数组</span></div><div class="line"><span class="built_in">cout</span>&lt;&lt;<span class="keyword">sizeof</span>(**a)&lt;&lt;<span class="built_in">endl</span>; <span class="comment">// 24 **a为数组一维的6个指针</span></div><div class="line"><span class="built_in">cout</span>&lt;&lt;<span class="keyword">sizeof</span>(***a)&lt;&lt;<span class="built_in">endl</span>; <span class="comment">// 4 ***a为一维的第一个指针</span></div><div class="line"><span class="built_in">cout</span>&lt;&lt;<span class="keyword">sizeof</span>(****a)&lt;&lt;<span class="built_in">endl</span>; <span class="comment">// 8 ****a为一个double变量</span></div></pre></td></tr></table></figure>
-<p><strong>问题解析：</strong></p>
-<p>a是一个很奇怪的定义，它表示一个指向double<em>[3][6]类型数组的指针。既然是指针，所以sizeof(a)就是4。<br>既然a是执行double</em>[3][6]类型的指针，<em>a就表示一个double</em>[3][6]的多维数组类型，因此sizeof(<em>a)=3</em>6<em>sizeof(double</em>)=72。同样的，<em> </em> a表示一个double<em>[6]类型的数组，所以sizeof(</em> <em> a)=6</em>sizeof  (double<em>)=24。</em> <em> </em> a就表示其中的一个元素，也就是double<em>了，所以sizeof(</em> <em> </em> a)=4。至于<em> </em> <em> </em> a，就是一个double了，所以sizeof(<em> </em> <em> </em> a)=sizeof(double)=8。</p>
-<hr>
-<ul>
-<li><strong>格式的写法</strong></li>
-</ul>
-<p>sizeof操作符，对变量或对象可以不加括号，但若是类型，须加括号。</p>
-<hr>
-<ul>
-<li><strong>使用sizeof时string的注意事项</strong></li>
-</ul>
-<blockquote>
-<p>string s=”hello”;<br>sizeof(s)等于string类的大小，sizeof(s.c_str())得到的是与字符串长度。</p>
-</blockquote>
-<hr>
-<ul>
-<li><strong>union 与struct的空间计算</strong></li>
-</ul>
-<p><strong>总体上遵循两个原则：</strong></p>
-<blockquote>
-<ul>
-<li>整体空间是占用空间最大的成员（的类型）所占字节数的整倍数</li>
-<li>数据对齐原则：内存按结构成员的先后顺序排列，当排到该成员变量时，其前面已摆放的空间大小必须是该成员类型大小的整倍数，如果不够则补齐，以此向后类推</li>
-</ul>
-</blockquote>
-<p><strong>注意：</strong>数组按照单个变量一个一个的摆放，而不是看成整体。如果成员中有自定义的类、结构体，也要注意数组问题。</p>
-<p><strong>例：</strong>因为对齐问题使结构体的sizeof变得比较复杂，看下面的例子：(默认对齐方式下)<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">struct</span> s1</div><div class="line">&#123;</div><div class="line"><span class="keyword">char</span> a;</div><div class="line"><span class="keyword">double</span> b;</div><div class="line"><span class="keyword">int</span> c;</div><div class="line"><span class="keyword">char</span> d; </div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">struct</span> s2</div><div class="line">&#123;</div><div class="line"><span class="keyword">char</span> a;</div><div class="line"><span class="keyword">char</span> b;</div><div class="line"><span class="keyword">int</span> c;</div><div class="line"><span class="keyword">double</span> d;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="built_in">cout</span>&lt;&lt;<span class="keyword">sizeof</span>(s1)&lt;&lt;<span class="built_in">endl</span>; <span class="comment">// 24</span></div><div class="line"><span class="built_in">cout</span>&lt;&lt;<span class="keyword">sizeof</span>(s2)&lt;&lt;<span class="built_in">endl</span>; <span class="comment">// 16</span></div></pre></td></tr></table></figure></p>
-<p>同样是两个char类型，一个int类型，一个double类型，但是因为对齐问题，导致他们的大小不同。计算结构体大小可以采用元素摆放法，我举例子说明一下：首先，CPU判断结构体的对界，根据上一节的结论，s1和s2的对界都取最大的元素类型，也就是double类型的对界8。然后开始摆放每个元素。</p>
-<p>  对于s1，首先把a放到8的对界，假定是0，此时下一个空闲的地址是1，但是下一个元素d是double类型，要放到8的对界上，离1最接近的地址是8了，所以d被放在了8，此时下一个空闲地址变成了16，下一个元素c的对界是4，16可以满足，所以c放在了16，此时下一个空闲地址变成了20，下一个元素d需要对界1，也正好落在对界上，所以d放在了20，结构体在地址21处结束。由于s1的大小需要是8的倍数，所以21-23的空间被保留，s1的大小变成了24。</p>
-<p>  对于s2，首先把a放到8的对界，假定是0，此时下一个空闲地址是1，下一个元素的对界也是1，所以b摆放在1，下一个空闲地址变成了2；下一个元素c的对界是4，所以取离2最近的地址4摆放c，下一个空闲地址变成了8，下一个元素d的对界是8，所以d摆放在8，所有元素摆放完毕，结构体在15处结束，占用总空间为16，正好是8的倍数。</p>
-<p> 这里有个陷阱，对于结构体中的结构体成员，不要认为它的对齐方式就是他的大小，看下面的例子：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">struct</span> s1</div><div class="line">&#123;</div><div class="line"><span class="keyword">char</span> a[<span class="number">8</span>];</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">struct</span> s2</div><div class="line">&#123;</div><div class="line"><span class="keyword">double</span> d;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">struct</span> s3</div><div class="line">&#123;</div><div class="line">s1 s;</div><div class="line"><span class="keyword">char</span> a;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">struct</span> s4</div><div class="line">&#123;</div><div class="line">s2 s;</div><div class="line"><span class="keyword">char</span> a; </div><div class="line">&#125;;</div><div class="line"><span class="built_in">cout</span>&lt;&lt;<span class="keyword">sizeof</span>(s1)&lt;&lt;<span class="built_in">endl</span>; <span class="comment">// 8</span></div><div class="line"><span class="built_in">cout</span>&lt;&lt;<span class="keyword">sizeof</span>(s2)&lt;&lt;<span class="built_in">endl</span>; <span class="comment">// 8</span></div><div class="line"><span class="built_in">cout</span>&lt;&lt;<span class="keyword">sizeof</span>(s3)&lt;&lt;<span class="built_in">endl</span>; <span class="comment">// 9</span></div><div class="line"><span class="built_in">cout</span>&lt;&lt;<span class="keyword">sizeof</span>(s4)&lt;&lt;<span class="built_in">endl</span>; <span class="comment">// 16;</span></div></pre></td></tr></table></figure>
-<p>s1和s2大小虽然都是8，但是s1的对齐方式是1，s2是8（double），所以在s3和s4中才有这样的差异。</p>
-<p>所以，在自己定义结构体的时候，如果空间紧张的话，最好考虑对齐因素来排列结构体里的元素。</p>
-<p>补充：不要让double干扰你的位域 </p>
-<p>在结构体和类中，可以使用位域来规定某个成员所能占用的空间，所以使用位域能在一定程度上节省结构体占用的空间。不过考虑下面的代码：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">struct</span> s1 </div><div class="line">&#123; </div><div class="line">　<span class="keyword">int</span> i: <span class="number">8</span>; </div><div class="line">　<span class="keyword">int</span> j: <span class="number">4</span>; </div><div class="line">　<span class="keyword">double</span> b; </div><div class="line">　<span class="keyword">int</span> a:<span class="number">3</span>; </div><div class="line">&#125;; </div><div class="line"></div><div class="line"><span class="keyword">struct</span> s2 </div><div class="line">&#123; </div><div class="line">　<span class="keyword">int</span> i; </div><div class="line">　<span class="keyword">int</span> j; </div><div class="line">　<span class="keyword">double</span> b; </div><div class="line">　<span class="keyword">int</span> a; </div><div class="line">&#125;; </div><div class="line"></div><div class="line"><span class="keyword">struct</span> s3 </div><div class="line">&#123; </div><div class="line">　<span class="keyword">int</span> i; </div><div class="line">　<span class="keyword">int</span> j; </div><div class="line">　<span class="keyword">int</span> a; </div><div class="line">　<span class="keyword">double</span> b; </div><div class="line">&#125;; </div><div class="line"></div><div class="line"><span class="keyword">struct</span> s4 </div><div class="line">&#123; </div><div class="line">　<span class="keyword">int</span> i: <span class="number">8</span>; </div><div class="line">　<span class="keyword">int</span> j: <span class="number">4</span>; </div><div class="line">　<span class="keyword">int</span> a:<span class="number">3</span>; </div><div class="line">　<span class="keyword">double</span> b; </div><div class="line">&#125;; </div><div class="line"></div><div class="line"><span class="built_in">cout</span>&lt;&lt;<span class="keyword">sizeof</span>(s1)&lt;&lt;<span class="built_in">endl</span>; <span class="comment">// 24 </span></div><div class="line"><span class="built_in">cout</span>&lt;&lt;<span class="keyword">sizeof</span>(s2)&lt;&lt;<span class="built_in">endl</span>; <span class="comment">// 24 </span></div><div class="line"><span class="built_in">cout</span>&lt;&lt;<span class="keyword">sizeof</span>(s3)&lt;&lt;<span class="built_in">endl</span>; <span class="comment">// 24 </span></div><div class="line"><span class="built_in">cout</span>&lt;&lt;<span class="keyword">sizeof</span>(s4)&lt;&lt;<span class="built_in">endl</span>; <span class="comment">// 16</span></div></pre></td></tr></table></figure>
-<p>可以看到，有double存在会干涉到位域（sizeof的算法参考上一节），所以使用位域的的时候，最好把float类型和double类型放在程序的开始或者最后。</p>
-<p><strong>相关常数：</strong> </p>
-<blockquote>
-<p>sizeof int:4<br>sizeof short:2<br>sizeof long:4<br>sizeof float:4<br>sizeof double:8<br>sizeof char:1<br>sizeof p:4<br>sizeof WORD:2<br>sizeof DWORD:4</p>
-</blockquote>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list">
-			 
-        <li class="article-tag-list-item">
-        	<a href="javascript:void(0)" class="article-tag-list-link color2">c</a>
-        </li>
-      
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<i class="icon-book icon"></i>
-	<a class="article-category-link" href="/categories/work/">work</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/10/17/sizeof()用法汇总/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
@@ -1488,10 +1690,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="color5">微机原理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="color1">计算机网络</a>
               </li>
              
@@ -1501,6 +1699,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="color3">os</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="color5">微机原理</a>
               </li>
             
             <div class="clearfix"></div>
