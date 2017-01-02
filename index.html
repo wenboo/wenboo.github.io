@@ -167,6 +167,111 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-程序员对内存的理解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/02/程序员对内存的理解/">程序员对内存的理解</a>
+    </h1>
+  
+
+        
+        <a href="/2017/01/02/程序员对内存的理解/" class="archive-article-date">
+  	<time datetime="2017-01-02T11:10:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在C和C++语言开发中，指针、内存一直是学习的重点。因为C语言作为一种偏底层的中低级语言，提供了大量的内存直接操作的方法，这一方面使程序的灵活度最大化，同时也为bug埋下很多隐患。因此，无论如何，我们都要对内存有一个清晰的理解。</p>
+<p><strong>1. 对内的分配</strong></p>
+<p>32位操作系统支持4GB内存的连续访问，但通常把内存分为两个2GB的空间，每个进程在运行时最大可以使用2GB的私有内存（0x00000000—0x7FFFFFFF）。即理论上支持如下的大数组：</p>
+<blockquote>
+<p>char szBuffer[2<em>1024</em>1024*1024];</p>
+</blockquote>
+<p>当然，由于在实际运行时，程序还有代码段、临时变量段、动态内存申请等，实际上是不可能用到上述那么大的数组的。至于高端的2GB内存地址（0x80000000—0xFFFFFFFF），操作系统一般内部保留使用，即供操作系统内核代码使用。在Windows和Linux平台上，一些动态链接库（Windows的dll，Linux的so）以及ocx控件等，由于是跨进程服务的，因此一般也在高2GB内存空间运行。</p>
+<p>可以看到，每个进程都能看到自己的2GB内存以及系统的2GB内存，但是不同进程之间是无法彼此看到对方的。当然，操作系统在底层做了很多工作，比如磁盘上的虚拟内存交换（请看下以标题），不同的内存块动态映射等等。</p>
+<p><strong>2. 虚拟内存</strong></p>
+<p>虚拟内存的基本思想是：用廉价但缓慢的磁盘来扩充快速却昂贵的内存。在一定时刻，程序实际需要使用的虚拟内存区段的内容就被载入物理内存中。当物理内存中的数据有一段时间未被使用，它们就可能被转移到硬盘中，节省下来的物理内存空间用于载入需要使用的其他数据。</p>
+<p>在进程执行过程中，操作系统负责具体细节，使每个进程都以为自己拥有整个地址空间的独家访问权。这个幻觉是通过“虚拟内存”实现的。所有进程共享机器的物理内存，当内存使用完时就用磁盘保存数据。在进程运行时，数据在磁盘和内存之间来回移动。内存管理硬件负责把虚拟地址翻译为物理地址，并让一个进程始终运行于系统的真正内存中，应用程序员只看到虚拟地址，并不知道自己的进程在磁盘与内存之间来回切换。</p>
+<p>从潜在的可能性上说，与进程有关的所有内存都将被系统所使用，如果该进程可能不会马上运行（可能它的优先级低，也可能是它处于睡眠状态），操作系统可以暂时取回所有分配给它的物理内存资源，将该进程的所有相关信息都备份到磁盘上。</p>
+<p>  进程只能操作位于物理内存中的页面。当进程引用一个不在物理内存中的页面时，MMU就会产生一个页错误。内存对此事做出响应，并判断该引用是否有效。如果无效，内核向进程发出一个“segmentation violation（段违规）”的信号，内核从磁盘取回该页，换入内存中，一旦页面进入内存，进程便被解锁，可以重新运行——进程本身并不知道它曾经因为页面换入事件等待了一会。</p>
+<p><strong>3. 内存的使用</strong></p>
+<p>对于程序员，我们最重要的是能理解不同进程间私有内存空间的含义。C和C++的编译器把私有内存分为3块：基栈、浮动栈和堆。如下图：</p>
+<p><img src="http://images.cnblogs.com/cnblogs_com/iuices/201111/201111242150462923.jpg"></p>
+<blockquote>
+<p>基栈：也叫静态存储区，这是编译器在编译期间就已经固定下来必须要使用的内存，如程序的代码段、静态变量、全局变量、const常量等。</p>
+<p>浮动栈：很多书上称为“栈”，就是程序开始运行，随着函数、对象的一段执行，函数内部变量、对象的内部成员变量开始动态占用内存，浮动栈一般都有生命周期，函数结束或者对象析构，其对应的浮动栈空间的就拆除了，这部分内容总是变来变去，内存占用也不是固定，因此叫浮动栈。</p>
+<p>堆：C和C++语言都支持动态内存申请，即程序运行期可以自由申请内存，这部分内存就是在堆空间申请的。堆位于2GB的最顶端，自上向下分配，这是避免和浮动栈混到一起，不好管理。我们用到malloc和new都是从堆空间申请的内存，new比malloc多了对象的支持，可以自动调用构造函数。另外，new创建对象，其成员变量位于堆里面。</p>
+</blockquote>
+<p>我们来看一个例子：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> n = <span class="number">100</span>;</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">Func</span><span class="params">(<span class="keyword">void</span>)</span></span></div><div class="line"> </div><div class="line">&#123;</div><div class="line">    <span class="keyword">char</span> ch = <span class="number">0</span>;</div><div class="line">    <span class="keyword">char</span>* pBuff = (<span class="keyword">char</span>*)<span class="built_in">malloc</span>(<span class="number">10</span>);</div><div class="line">    <span class="comment">//…</span></div><div class="line"> </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这个函数如果运行，其中n由于是全局静态变量，位于基栈，i和pBuff这两个函数内部变量，i位于浮动栈，而pBuff指向的由malloc分配的内存区，则位于堆栈。</p>
+<p>在内存理解上，最著名的例子就是线程启动时的参数传递。</p>
+<p>函数启动一个线程，很多时候需要向线程传参数，但是线程是异步启动的，即很可能启动函数已经退出了，而线程函数都还没有正式开始运行，因此，绝不能用启动函数的内部变量给线程传参。道理很简单，函数的内部变量在浮动栈，但函数退出时，浮动栈自动拆除，内存空间已经被释放了。当线程启动时，按照给的参数指针去查询变量，实际上是在读一块无效的内存区域，程序会因此而崩溃。</p>
+<p>那怎么办呢？我们应该直接用malloc函数给需要传递的参数分配一块内存区域，将指针传入线程，线程收到后使用，最后线程退出时，free释放。</p>
+<p>我们来看例子：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//这个结构体就是参数表</span></div><div class="line"> </div><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> _CListen_ListenAcceptTask_Param_ </div><div class="line">&#123; </div><div class="line">    Linux_Win_SOCKET m_nSocket; </div><div class="line">    <span class="comment">//其他参量… …</span></div><div class="line">&#125;SCListenAcceptTaskParam; </div><div class="line"> </div><div class="line"><span class="comment">//习惯性写法，设置结构体后，立即声明结构体的尺寸，为后续malloc提供方便</span></div><div class="line"><span class="keyword">const</span> ULONG SCListenAcceptTaskParamSize=<span class="keyword">sizeof</span>(SCListenAcceptTaskParam); </div><div class="line"> </div><div class="line"><span class="comment">//这里接收到连接请求，申请参数区域，将关键信息带入参数区域，帮助后续线程工作。</span></div><div class="line"><span class="keyword">bool</span> CListen::ListenTaskCallback(<span class="keyword">void</span>* pCallParam,<span class="keyword">int</span>&amp; nStatus) </div><div class="line">&#123; </div><div class="line"> </div><div class="line">    <span class="comment">//正常的函数逻辑… …</span></div><div class="line">    <span class="comment">//假定s是accept到的socket，需要传入后续线程工作</span></div><div class="line">    <span class="comment">//在此准备一块参数区域，从远堆上申请</span></div><div class="line">    SCListenAcceptTaskParam* pParam=(SCListenAcceptTaskParam*) <span class="built_in">malloc</span>(SCListenAcceptTaskParamSize); </div><div class="line"> </div><div class="line">    <span class="comment">//给参数区域赋值</span></div><div class="line">    pParam-&gt;m_nSocket=s; </div><div class="line">    <span class="comment">//此处启动线程，将pParam传递给线程… …</span></div><div class="line">    <span class="comment">//正常的函数逻辑… …</span></div><div class="line"> </div><div class="line">&#125; </div><div class="line"> </div><div class="line"><span class="comment">//这是线程函数，负责处理上文accept到的socket </span></div><div class="line"><span class="keyword">bool</span> CListen::ListenAcceptTask(<span class="keyword">void</span>* pCallParam,<span class="keyword">int</span>&amp; nStatus) </div><div class="line">&#123; </div><div class="line"> </div><div class="line">    <span class="comment">//第一句话就是强制指针类型转换，获得外界传入的参数区域</span></div><div class="line">    SCListenAcceptTaskParam* pParam= (SCListenAcceptTaskParam*)pCallParam; </div><div class="line"> </div><div class="line">    <span class="comment">//正常的函数逻辑… …</span></div><div class="line">    <span class="comment">//退出前，必须要做的工作，确保资源不被泄露</span></div><div class="line">    close(pParam-&gt;m_nSocket); <span class="comment">//关闭socket </span></div><div class="line">    <span class="built_in">free</span>(pCallParam); <span class="comment">// free传入的参数区域</span></div><div class="line">    <span class="comment">//… … </span></div><div class="line"> </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>4. 内存bug</strong></p>
+<p>无规则的滥用内存和指针会导致大量的bug，程序员应该对内存的使用保持高度的敏感性和警惕性，谨慎地使用内存资源。</p>
+<p>使用内存时最容易出现的bug是：</p>
+<p>(1) 坏指针值错误：在指针赋值之前就用它来引用内存，或者向库函数传送一个坏指针，第三种可能导致坏指针的原因是对指针进行释放之后再访问它的内容。可以修改free语句，在指针释放之后再将它置为空值。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">free</span>(p); p = <span class="literal">NULL</span>;</div></pre></td></tr></table></figure>
+<p>这样，如果在指针释放之后继续使用该指针，至少程序能在终止之前进行信息转储。</p>
+<p>(2) 改写（overwrite）错误：越过数组边界写入数据，在动态分配的内存两端之外写入数据，或改写一些堆管理数据结构（在动态分配内存之前的区域写入数据就很容易发生这种情况）</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">p = <span class="built_in">malloc</span>(<span class="number">256</span>); p[<span class="number">-1</span>] = <span class="number">0</span>; p[<span class="number">256</span>] = <span class="number">0</span>;</div></pre></td></tr></table></figure>
+<p>(3) 指针释放引起的错误：释放同一个内存块两次，或释放一块未曾使用malloc分配的内存，或释放仍在使用中的内存，或释放一个无效的指针。一个极为常见的与释放内存有关的错误就是在for(p=start;p=p-&gt;next)这样的循环中迭代一个链表，并在循环体内使用free(p)语句。这样，在下一次循环迭代时，程序就会对已经释放的指针进行解除引用操作，从而导致不可预料的结果。</p>
+<p>我们可以这样迭代：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">struct</span> node *p, *tart, *temp;</div><div class="line"><span class="keyword">for</span>(p = start; p ; p = temp)</div><div class="line">&#123;</div><div class="line">    temp = p-&gt;next;</div><div class="line">    <span class="built_in">free</span>(p);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list">
+			 
+        <li class="article-tag-list-item">
+        	<a href="javascript:void(0)" class="article-tag-list-link color3">内存</a>
+        </li>
+      
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<i class="icon-book icon"></i>
+	<a class="article-category-link" href="/categories/cm/">cm</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/01/02/程序员对内存的理解/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-2016年末总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1020,170 +1125,6 @@
 
 
   
-    <article id="post-Java中的String-StringBuilder和StringBuffer" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/03/Java中的String-StringBuilder和StringBuffer/">Java中的String StringBuilder和StringBuffer</a>
-    </h1>
-  
-
-        
-        <a href="/2016/11/03/Java中的String-StringBuilder和StringBuffer/" class="archive-article-date">
-  	<time datetime="2016-11-03T13:57:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-11-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="String对象的创建"><a href="#String对象的创建" class="headerlink" title="String对象的创建"></a>String对象的创建</h2><p> 1、关于类对象的创建，很普通的一种方式就是利用构造器，String类也不例外：String s=new String(“Hello world”); 问题是参数”Hello world”是什么东西，也是字符串对象吗?莫非用字符串对象创建一个字符串对象?</p>
-<p> 2、当然，String类对象还有一种大家都很喜欢的创建方式：String s=”Hello world”; 但是有点怪呀，怎么与基本数据类型的赋值操作（int i=1）很像?</p>
-<ul>
-<li><p>Java class文件结构 和常量池</p>
-<p>我们知道，Java程序要运行，首先需要编译器将源代码文件编译成字节码文件(也就是.class文件)。然后在由JVM解释执行。</p>
-<p>   class文件是8位字节的二进制流 。这些二进制流的涵义由一些紧凑的有意义的项 组成。比如class字节流中最开始的4个字节组成的项叫做魔数 (magic)，其意义在于分辨class文件(值为0xCAFEBABE)与非class文件。class字节流大致结构如下图左侧。</p>
-</li>
-</ul>
-<p><img src="http://dl.iteye.com/upload/picture/pic/50015/1f7bd098-2b41-3f95-b129-460190f351ba.gif" alt="pic"></p>
-<p>其中，在class文件中有一个非常重要的项——常量池 。这个常量池专门放置源代码中的符号信息(并且不同的符号信息放置在不同标志的常量表中)。如上图右侧是HelloWorld代码中的常量表（HelloWorld代码如下），其中有四个不同类型的常量表(四个不同的常量池入口)。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span></span>&#123;  </div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">hello</span><span class="params">()</span></span>&#123;  </div><div class="line">        System.out.println(<span class="string">"Hello world"</span>);  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>通过上图可见，代码中的”Hello world”字符串字面值被编译之后，可以清楚的看到存放在了class常量池中的字符串常量表中(上图右侧红框区域)。</p>
-<ul>
-<li>JVM运行class文件</li>
-</ul>
-<p>源代码编译成class文件之后，JVM就要运行这个class文件。它首先会用类装载器加载进class文件。然后需要创建许多内存数据结构来存放class文件中的字节数据。比如class文件对应的类信息数据、常量池结构、方法中的二进制指令序列、类方法与字段的描述信息等等。当然，在运行的时候，还需要为方法创建栈帧等。这么多的内存结构当然需要管理，JVM会把这些东西都组织到几个“运行时数据区 ”中。这里面就有我们经常说的“方法区 ”、“堆 ”、“Java栈 ”等。</p>
-<p>上面我们提到了，在Java源代码中的每一个字面值字符串，都会在编译成class文件阶段，形成标志号 为8(CONSTANT_String_info)的常量表 。 当JVM加载 class文件的时候，会为对应的常量池建立一个内存数据结构，并存放在方法区中。同时JVM会自动为CONSTANT_String_info常量表 的字符串常量字面值 在堆中 创建 新的String对象(intern字符串 对象，又叫拘留字符串对象)。然后把CONSTANT_String_info常量表的入口地址转变成这个堆中String对象的直接地址(常量池解析)。</p>
-<p> 这里很关键的就是这个拘留字符串对象 。源代码中所有相同字面值的字符串常量只可能建立唯一一个拘留字符串对象。 实际上JVM是通过一个记录了拘留字符串引用的内部数据结构来维持这一特性的。在Java程序中，可以调用String的intern()方法来使得一个常规字符串对象成为拘留字符串对象。我们会在后面介绍这个方法的。</p>
-<ul>
-<li>操作码助忆符指令 </li>
-</ul>
-<p>有了上面阐述的两个知识前提，下面我们将根据二进制指令来区别两种字符串对象的创建方式：</p>
-<p> (1) String s=new String(“Hello world”);编译成class文件后的指令(在myeclipse中查看)</p>
-<p> <strong>Class字节码指令集代码</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">0  new java.lang.String [15]  //在堆中分配一个String类对象的空间，并将该对象的地址堆入操作数栈。  </div><div class="line">3  dup //复制操作数栈顶数据，并压入操作数栈。该指令使得操作数栈中有两个String对象的引用值。  </div><div class="line">4  ldc &lt;String &quot;Hello world&quot;&gt; [17] //将常量池中的字符串常量&quot;Hello world&quot;指向的堆中拘留String对象的地址压入操作数栈  </div><div class="line">6  invokespecial java.lang.String(java.lang.String) [19] //调用String的初始化方法，弹出操作数栈栈顶的两个对象地址，用拘留String对象的值初始化new指令创建的String对象，然后将这个对象的引用压入操作数栈  </div><div class="line">9  astore_1 [s] // 弹出操作数栈顶数据存放在局部变量区的第一个位置上。此时存放的是new指令创建出的，已经被初始化的String对象的地址 （此时的栈顶值弹出存入局部变量中去)。</div></pre></td></tr></table></figure>
-<p><strong>注意</strong></p>
-<blockquote>
-<p>这里有个dup指令。其作用就是复制之前分配的Java.lang.String空间的引用并压入栈顶。那么这里为什么需要这样么做呢？因为invokespecial指令通过[15]这个常量池入口寻找到了java.lang.String()构造方法，构造方法虽然找到了。但是必须还得知道是谁的构造方法，所以要将之前分配的空间的应用压入栈顶让invokespecial命令应用才知道原来这个构造方法是刚才创建的那个引用的，调用完成之后将栈顶的值弹出。之后调用astore_1将此时的栈顶值弹出存入局部变量中去。</p>
-</blockquote>
-<p> 事实上，在运行这段指令之前，JVM就已经为”Hello world”在堆中创建了一个拘留字符串( 值得注意的是：如果源程序中还有一个”Hello world”字符串常量，那么他们都对应了同一个堆中的拘留字符串)。然后用这个拘留字符串的值来初始化堆中用new指令创建出来的新的String对象，局部变量s实际上存储的是new出来的堆对象地址。 大家注意了，此时在JVM管理的堆中，有两个相同字符串值的String对象：一个是拘留字符串对象，一个是new新建的字符串对象。如果还有一条创建语句String s1=new String(“Hello world”)；堆中有几个值为”Hello world”的字符串呢? 答案是3个。</p>
-<p>(2)将String s=”Hello world”;编译成class文件后的指令:</p>
-<p><strong>Class字节码指令集代码</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">0  ldc &lt;String &quot;Hello world&quot;&gt; [15]//将常量池中的字符串常量&quot;Hello world&quot;指向的堆中拘留String对象的地址压入操作数栈  </div><div class="line">2  astore_1 [str] // 弹出操作数栈顶数据存放在局部变量区的第一个位置上。此时存放的是拘留字符串对象在堆中的地址</div></pre></td></tr></table></figure>
-<p>和上面的创建指令有很大的不同，局部变量s存储的是早已创建好的拘留字符串的堆地址(没有new 的对象了)。 大家好好想想，如果还有一条穿件语句String s1=”Hello word”；此时堆中有几个值为”Hello world”的字符串呢?答案是1个。那么局部变量s与s1存储的地址是否相同呢？</p>
-<p><strong>总结</strong></p>
-<ul>
-<li>关于字符串相等关系的争论</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//代码1  </span></div><div class="line">String sa=<span class="keyword">new</span> String(<span class="string">"Hello world"</span>);            </div><div class="line">String sb=<span class="keyword">new</span> String(<span class="string">"Hello world"</span>);      </div><div class="line">System.out.println(sa==sb);  <span class="comment">// false       </span></div><div class="line"><span class="comment">//代码2    </span></div><div class="line">String sc=<span class="string">"Hello world"</span>;    </div><div class="line">String sd=<span class="string">"Hello world"</span>;  </div><div class="line">System.out.println(sc==sd);  <span class="comment">// true</span></div></pre></td></tr></table></figure>
-<p>  <strong>代码1</strong>中局部变量sa,sb中存储的是JVM在堆中new出来的两个String对象的内存地址。虽然这两个String对象的值(char[]存放的字符序列)都是”Hello world”。 因此”==”比较的是两个不同的堆地址。</p>
-<p>  <strong>代码2</strong>中局部变量sc,sd中存储的也是地址，但却都是常量池中”Hello world”指向的堆的唯一的那个拘留字符串对象的地址 。自然相等了。</p>
-<ul>
-<li>字符串“+”操作的内幕</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//代码1  </span></div><div class="line">String sa = <span class="string">"ab"</span>;                                          </div><div class="line">String sb = <span class="string">"cd"</span>;                                       </div><div class="line">String sab=sa+sb;                                      </div><div class="line">String s=<span class="string">"abcd"</span>;  </div><div class="line">System.out.println(sab==s); <span class="comment">// false  </span></div><div class="line"><span class="comment">//代码2  </span></div><div class="line">String sc=<span class="string">"ab"</span>+<span class="string">"cd"</span>;  </div><div class="line">String sd=<span class="string">"abcd"</span>;  </div><div class="line">System.out.println(sc==sd); <span class="comment">//true</span></div></pre></td></tr></table></figure>
-<p><strong>代码1</strong> 中局部变量sa,sb存储的是堆中两个拘留字符串对象的地址。而当执行sa+sb时，JVM首先会在堆中创建一个StringBuilder类，同时用sa指向的拘留字符串对象完成初始化，然后调用append方法完成对sb所指向的拘留字符串的合并操作，接着调用StringBuilder的toString()方法在堆中创建一个String对象，最后将刚生成的String对象的堆地址存放在局部变量sab中。而局部变量s存储的是常量池中”abcd”所对应的拘留字符串对象的地址。 sab与s地址当然不一样了。这里要注意了，代码1的堆中实际上有五个字符串对象：三个拘留字符串对象、一个String对象和一个StringBuilder对象。</p>
-<p><strong>代码2</strong>中”ab”+”cd”会直接在编译期就合并成常量”abcd”， 因此相同字面值常量”abcd”所对应的是同一个拘留字符串对象，自然地址也就相同。</p>
-<h2 id="String、StringBuffer、StringBuilder"><a href="#String、StringBuffer、StringBuilder" class="headerlink" title="String、StringBuffer、StringBuilder"></a>String、StringBuffer、StringBuilder</h2><blockquote>
-<p>String(JDK1.0时代) 不可变字符序列</p>
-<p>StringBuffer(JDK1.0) 线程安全的可变字符序列</p>
-<p>StringBuilder(JDK1.5) 非线程安全的可变字符序列</p>
-</blockquote>
-<ul>
-<li>StringBuffer与String的可变性问题</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//String   </span></div><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">String</span>  </span></div><div class="line">&#123;  </div><div class="line">        <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">char</span> value[];  </div><div class="line">  </div><div class="line">         <span class="function"><span class="keyword">public</span> <span class="title">String</span><span class="params">(String original)</span> </span>&#123;  </div><div class="line">              <span class="comment">// 把原字符串original切分成字符数组并赋给value[];  </span></div><div class="line">         &#125;  </div><div class="line">&#125;  </div><div class="line">  </div><div class="line"><span class="comment">//StringBuffer   </span></div><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">StringBuffer</span> <span class="keyword">extends</span> <span class="title">AbstractStringBuilder</span>  </span></div><div class="line">&#123;  </div><div class="line">         <span class="keyword">char</span> value[]; <span class="comment">//继承了父类AbstractStringBuilder中的value[]  </span></div><div class="line">         <span class="function"><span class="keyword">public</span> <span class="title">StringBuffer</span><span class="params">(String str)</span> </span>&#123;  </div><div class="line">                 <span class="keyword">super</span>(str.length() + <span class="number">16</span>); <span class="comment">//继承父类的构造器，并创建一个大小为str.length()+16的value[]数组  </span></div><div class="line">                 append(str); <span class="comment">//将str切分成字符序列并加入到value[]中  </span></div><div class="line">        &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>String和StringBuffer中的value[]都用于存储字符序列。但是</p>
-<p><strong>(1) String中的是常量(final)数组，只能被赋值一次。</strong> </p>
-<p> 比如：new String(“abc”)使得value[]={‘a’,’b’,’c’}(查看jdk String 就是这么实现的)，之后这个String对象中的value[]再也不能改变了。这也正是大家常说的，String是不可变的原因。</p>
-<p> 注意：这个对初学者来说有个误区，有人说String str1=new String(“abc”); str1=new String(“cba”);不是改变了字符串str1吗？那么你有必要先搞懂对象引用和对象本身的区别。这里我简单的说明一下，对象本身指的是存放在堆空间中的该对象的实例数据(非静态非常量字段)。而对象引用指的是堆中对象本身所存放的地址，一般方法区和Java栈中存储的都是对象引用，而非对象本身的数据。</p>
-<p><strong>(2) StringBuffer中的value[]就是一个很普通的数组，而且可以通过append()方法将新字符串加入value[]末尾。这样也就改变了value[]的内容和大小了。</strong></p>
-<p>比如：new StringBuffer(“abc”)使得value[]={‘a’,’b’,’c’,’’,’’…}(注意构造的长度是str.length()+16)。如果再将这个对象append(“abc”)，那么这个对象中的value[]={‘a’,’b’,’c’,’a’,’b’,’c’,’’….}。这也就是为什么大家说 StringBuffer是可变字符串 的涵义了。从这一点也可以看出，StringBuffer中的value[]完全可以作为字符串的缓冲区功能。<strong>其累加性能是很不错的</strong>，在后面我们会进行比较。</p>
-<p>总结，讨论String和StringBuffer可不可变。本质上是指对象中的value[]字符数组可不可变，而不是对象引用可不可变。</p>
-<ul>
-<li>StringBuffer与StringBuilder的线程安全性问题 </li>
-</ul>
-<p>StringBuffer和StringBuilder可以算是双胞胎了，这两者的方法没有很大区别。但在线程安全性方面，StringBuffer允许多线程进行字符操作。这是因为在源代码中StringBuffer的很多方法都被关键字synchronized 修饰了，而StringBuilder没有。</p>
-<p>有多线程编程经验的程序员应该知道synchronized。这个关键字是为线程同步机制 设定的。简要阐述一下synchronized的含义：</p>
-<blockquote>
-<p>每一个类对象都对应一把锁，当某个线程A调用类对象O中的synchronized方法M时，必须获得对象O的锁才能够执行M方法，否则线程A阻塞。一旦线程A开始执行M方法，将独占对象O的锁。使得其它需要调用O对象的M方法的线程阻塞。只有线程A执行完毕，释放锁后。那些阻塞线程才有机会重新调用M方法。这就是解决线程同步问题的锁机制。</p>
-</blockquote>
-<p>了解了synchronized的含义以后，大家可能都会有这个感觉。多线程编程中StringBuffer比StringBuilder要安全多了 ，事实确实如此。如果有多个线程需要对同一个字符串缓冲区进行操作的时候，StringBuffer应该是不二选择。</p>
-<p>注意：是不是String也不安全呢？事实上不存在这个问题，String是不可变的。线程对于堆中指定的一个String对象只能读取，无法修改。试问：还有什么不安全的呢？ </p>
-<h2 id="String和StringBuffer的效率问题"><a href="#String和StringBuffer的效率问题" class="headerlink" title="String和StringBuffer的效率问题"></a>String和StringBuffer的效率问题</h2><p>首先说明一点：StringBuffer和StringBuilder可谓双胞胎，StringBuilder是1.5新引入的，其前身就是StringBuffer。StringBuilder的效率比StringBuffer稍高，如果不考虑线程安全，StringBuilder应该是首选。另外，JVM运行程序主要的时间耗费是在创建对象和回收对象上。</p>
-<p>我们用下面的代码运行1W次字符串的连接操作，测试String,StringBuffer所运行的时间。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//测试代码  </span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RunTime</span></span>&#123;  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;  </div><div class="line">           ● 测试代码位置<span class="number">1</span>  </div><div class="line">          <span class="keyword">long</span> beginTime=System.currentTimeMillis();  </div><div class="line">          <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10000</span>;i++)&#123;  </div><div class="line">                 ● 测试代码位置<span class="number">2</span>  </div><div class="line">          &#125;  </div><div class="line">          <span class="keyword">long</span> endTime=System.currentTimeMillis();  </div><div class="line">          System.out.println(endTime-beginTime);     </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><strong>(1) String常量与String变量的”+”操作比较</strong> </p>
-<p>测试①代码：<br>(测试代码位置1)  String str=””;<br>(测试代码位置2)  str=”Heart”+”Raid”;<br>[耗时：  0ms]</p>
-<p>测试②代码<br>(测试代码位置1)<br>String s1=”Heart”;<br>String s2=”Raid”;<br>String str=””;<br>(测试代码位置2)<br>str=s1+s2;<br>[耗时：  15—16ms]</p>
-<blockquote>
-<p>结论：String常量的“+连接”  稍优于  String变量的“+连接”。</p>
-<p>原因：测试①的”Heart”+”Raid”在编译阶段就已经连接起来，形成了一个字符串常量”HeartRaid”，并指向堆中的拘留字符串对象。运行时只需要将”HeartRaid”指向的拘留字符串对象地址取出1W次，存放在局部变量str中。这确实不需要什么时间。<br>               测试②中局部变量s1和s2存放的是两个不同的拘留字符串对象的地址。然后会通过下面三个步骤完成“+连接”：<br>                                1、StringBuilder temp=new StringBuilder(s1)，<br>                                2、temp.append(s2);<br>                                3、str=temp.toString();<br>               我们发现，虽然在中间的时候也用到了append()方法，但是在开始和结束的时候分别创建了StringBuilder和String对象。可想而知：调用1W次，是不是就创建了1W次这两种对象呢？不划算。<br>     但是，String变量的”+连接”操作比String常量的”+连接”操作使用的更加广泛。 这一点是不言而喻的。</p>
-</blockquote>
-<p><strong>(2)String对象的”累+”连接操作与StringBuffer对象的append()累和连接操作比较。</strong></p>
-<p>测试①代码：<br>(代码位置1)<br>String s1=”Heart”;<br>String s=””;<br>(代码位置2)<br>s=s+s1;<br>[耗时：  4200—4500ms]</p>
-<p>测试②代码<br>(代码位置1)<br>String s1=”Heart”;<br>StringBuffer sb=new StringBuffer();<br>(代码位置2)<br>sb.append(s1);<br>[耗时：  0ms(当循环100000次的时候，耗时大概16—31ms)]</p>
-<blockquote>
-<p>结论：大量字符串累加时，StringBuffer的append()效率远好于String对象的”累+”连接 </p>
-<p>原因：测试① 中的s=s+s1，JVM会利用首先创建一个StringBuilder，并利用append方法完成s和s1所指向的字符串对象值的合并操作，接着调用StringBuilder的 toString()方法在堆中创建一个新的String对象，其值为刚才字符串的合并结果。而局部变量s指向了新创建的String对象。<br>                  因为String对象中的value[]是不能改变的，每一次合并后字符串值都需要创建一个新的String对象来存放。循环1W次自然需要创建1W个String对象和1W个StringBuilder对象，效率低就可想而知了。<br>测试②中sb.append(s1);只需要将自己的value[]数组不停的扩大来存放s1即可。循环过程中无需在堆中创建任何新的对象。效率高就不足为奇了。    </p>
-</blockquote>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
-<li><p>在编译阶段就能够确定的字符串常量，完全没有必要创建String或StringBuffer对象。直接使用字符串常量的”+”连接操作效率最高。</p>
-</li>
-<li><p>StringBuffer对象的append效率要高于String对象的”+”连接操作。</p>
-</li>
-<li><p>不停的创建对象是程序低效的一个重要原因。那么相同的字符串值能否在堆中只创建一个String对象那。显然拘留字符串能够做到这一点，除了程序中的字符串常量会被JVM自动创建拘留字符串之外，调用String的intern()方法也能做到这一点。当调用intern()时，如果常量池中已经有了当前String的值，那么返回这个常量指向拘留对象的地址。如果没有，则将String值加入常量池中，并创建一个新的拘留字符串对象。</p>
-</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list">
-			 
-        <li class="article-tag-list-item">
-        	<a href="javascript:void(0)" class="article-tag-list-link color5">java</a>
-        </li>
-      
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<i class="icon-book icon"></i>
-	<a class="article-category-link" href="/categories/work/">work</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/11/03/Java中的String-StringBuilder和StringBuffer/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1284,6 +1225,14 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="color2">c</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="color5">微机原理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="color5">java</a>
               </li>
              
@@ -1296,15 +1245,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="color2">c</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="color3">os</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="color5">微机原理</a>
+                <a href="javascript:void(0)" class="color3">内存</a>
               </li>
             
             <div class="clearfix"></div>
