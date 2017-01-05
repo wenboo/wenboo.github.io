@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Hi~Welcome to Wenboo's Blog">
 <meta property="og:description" content="用static修饰的方法，无须产生类的实例对象就可以调用该方法。没有static修饰的方法，需要产生一个类的实例对象才可以调用该方法。main方法必须要static来修饰，是因为main方法是Java解释器调用的，那时候还没有任何对象产生。
 1mainID = (*env)-&amp;gt;GetStaticMethodID(env, mainClass, &quot;main&quot;,&quot;([Ljava/lang/Str">
-<meta property="og:updated_time" content="2017-01-03T14:55:19.076Z">
+<meta property="og:updated_time" content="2017-01-05T14:07:31.881Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java中main函数为什么要加static">
 <meta name="twitter:description" content="用static修饰的方法，无须产生类的实例对象就可以调用该方法。没有static修饰的方法，需要产生一个类的实例对象才可以调用该方法。main方法必须要static来修饰，是因为main方法是Java解释器调用的，那时候还没有任何对象产生。
@@ -195,6 +195,7 @@
         <p>用static修饰的方法，无须产生类的实例对象就可以调用该方法。没有static修饰的方法，需要产生一个类的实例对象才可以调用该方法。main方法必须要static来修饰，是因为main方法是Java解释器调用的，那时候还没有任何对象产生。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mainID = (*env)-&gt;GetStaticMethodID(env, mainClass, <span class="string">"main"</span>,<span class="string">"([Ljava/lang/String;)V"</span>);</div></pre></td></tr></table></figure>
 <p>这是jvm启动时的代码，直接去找static的，参数为String数组的main方法。</p>
+<a id="more"></a>
 <hr>
 <p>Java在加载JVM的时候会先加载jdk的一些环境变量，例如jre的路径、jvm的路径等，这些过程都是由C语言实现的。代码位于hotspot\src\share\tools\launcher下面java.c</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">main(<span class="keyword">int</span> argc, <span class="keyword">char</span> ** argv)</div><div class="line">&#123;</div><div class="line">    <span class="keyword">char</span> *jarfile = <span class="number">0</span>;</div><div class="line">    <span class="keyword">char</span> *classname = <span class="number">0</span>;</div><div class="line">    <span class="keyword">char</span> *s = <span class="number">0</span>;</div><div class="line">    <span class="keyword">char</span> *main_class = NULL;</div><div class="line">    <span class="keyword">int</span> ret;</div><div class="line">    InvocationFunctions ifn;</div><div class="line">    jlong start, end;</div><div class="line">    <span class="keyword">char</span> jrepath[MAXPATHLEN], jvmpath[MAXPATHLEN];</div><div class="line">    <span class="keyword">char</span> ** original_argv = argv;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (getenv(<span class="string">"_JAVA_LAUNCHER_DEBUG"</span>) != <span class="number">0</span>) &#123;</div><div class="line">        _launcher_debug = JNI_TRUE;</div><div class="line">        printf(<span class="string">"----_JAVA_LAUNCHER_DEBUG----\n"</span>);</div><div class="line">    &#125;</div><div class="line">    &#123;</div><div class="line">      <span class="keyword">int</span> i;</div><div class="line">      original_argv = (<span class="keyword">char</span>**)JLI_MemAlloc(sizeof(<span class="keyword">char</span>*)*(argc+<span class="number">1</span>));</div><div class="line">      <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; argc+<span class="number">1</span>; i++)</div><div class="line">        original_argv[i] = argv[i];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    CreateExecutionEnvironment(&amp;argc, &amp;argv,</div><div class="line">                               jrepath, sizeof(jrepath),</div><div class="line">                               jvmpath, sizeof(jvmpath),</div><div class="line">                               original_argv);</div><div class="line"></div><div class="line">    printf(<span class="string">"Using java runtime at: %s\n"</span>, jrepath);</div><div class="line"></div><div class="line">    ifn.CreateJavaVM = <span class="number">0</span>;</div><div class="line">    ifn.GetDefaultJavaVMInitArgs = <span class="number">0</span>;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (_launcher_debug)</div><div class="line">      start = CounterGet();</div><div class="line">    <span class="keyword">if</span> (!LoadJavaVM(jvmpath, &amp;ifn)) &#123;</div><div class="line">      exit(<span class="number">6</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> (_launcher_debug) &#123;</div><div class="line">      end   = CounterGet();</div><div class="line">      printf(<span class="string">"%ld micro seconds to LoadJavaVM\n"</span>,</div><div class="line">             (<span class="keyword">long</span>)(jint)Counter2Micros(end-start));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -353,7 +354,7 @@
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"wenboo-hexo"};
+	var duoshuoQuery = {short_name:"wenboo"};
 	(function() {
 		var ds = document.createElement('script');
 		ds.type = 'text/javascript';ds.async = true;
@@ -472,10 +473,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
               </li>
              
@@ -484,15 +481,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">main</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">os</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">main</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">wireshark</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -20,7 +20,7 @@
 1.针对wireshark最常用的自然是针对IP地址的过滤。其中有几种情况：
 （1）对源地址为192.168.0.1的包的过滤，即抓取源地址满足要求的包。　　 表达式为：ip.src == 192.168.0.1
 （2）对目的地址为192.168.0.1的包">
-<meta property="og:updated_time" content="2017-01-05T12:37:17.866Z">
+<meta property="og:updated_time" content="2017-01-05T14:07:18.946Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="wireshark 实用过滤表达式（针对ip、协议、端口、长度和内容）">
 <meta name="twitter:description" content="首先说几个最常用的关键字，“eq” 和 “==”等同，可以使用 “and” 表示并且，“or”表示或者。“!” 和 “not” 都表示取反。
@@ -204,6 +204,7 @@
 <p>（2）对目的地址为192.168.0.1的包的过滤，即抓取目的地址满足要求的包。<br>　　 表达式为：ip.dst == 192.168.0.1</p>
 <p>（3）对源或者目的地址为192.168.0.1的包的过滤，即抓取满足源或者目的地址的ip地址是192.168.0.1的包。<br>　　 表达式为：ip.addr == 192.168.0.1,或者 ip.src == 192.168.0.1 or ip.dst == 192.168.0.1</p>
 <p>（4）要排除以上的数据包，我们只需要将其用括号囊括，然后使用 “!” 即可。<br>　　 表达式为：!(表达式)</p>
+<a id="more"></a>
 <p><strong>2.针对协议的过滤</strong></p>
 <p>（1）仅仅需要捕获某种协议的数据包，表达式很简单仅仅需要把协议的名字输入即可。<br>     表达式为：http</p>
 <p>（2）需要捕获多种协议的数据包，也只需对协议进行逻辑组合即可。<br>　　 表达式为：http or telnet （多种协议加上逻辑符号的组合即可）</p>
@@ -335,7 +336,7 @@
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"wenboo-hexo"};
+	var duoshuoQuery = {short_name:"wenboo"};
 	(function() {
 		var ds = document.createElement('script');
 		ds.type = 'text/javascript';ds.async = true;
@@ -454,10 +455,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
               </li>
              
@@ -466,15 +463,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">main</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">os</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">main</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">wireshark</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
               </li>
              
               <li class="article-tag-list-item">

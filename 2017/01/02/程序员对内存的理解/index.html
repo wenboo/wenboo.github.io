@@ -8,23 +8,17 @@
   <link rel="dns-prefetch" href="http://wenboo.github.io">
   <title>程序员对内存的理解 | Hi~Welcome to Wenboo&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在C和C++语言开发中，指针、内存一直是学习的重点。因为C语言作为一种偏底层的中低级语言，提供了大量的内存直接操作的方法，这一方面使程序的灵活度最大化，同时也为bug埋下很多隐患。因此，无论如何，我们都要对内存有一个清晰的理解。
-1. 对内的分配
-32位操作系统支持4GB内存的连续访问，但通常把内存分为两个2GB的空间，每个进程在运行时最大可以使用2GB的私有内存（0x00000000—0x7FF">
+  <meta name="description" content="在C和C++语言开发中，指针、内存一直是学习的重点。因为C语言作为一种偏底层的中低级语言，提供了大量的内存直接操作的方法，这一方面使程序的灵活度最大化，同时也为bug埋下很多隐患。因此，无论如何，我们都要对内存有一个清晰的理解。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="程序员对内存的理解">
 <meta property="og:url" content="http://wenboo.github.io/2017/01/02/程序员对内存的理解/index.html">
 <meta property="og:site_name" content="Hi~Welcome to Wenboo's Blog">
-<meta property="og:description" content="在C和C++语言开发中，指针、内存一直是学习的重点。因为C语言作为一种偏底层的中低级语言，提供了大量的内存直接操作的方法，这一方面使程序的灵活度最大化，同时也为bug埋下很多隐患。因此，无论如何，我们都要对内存有一个清晰的理解。
-1. 对内的分配
-32位操作系统支持4GB内存的连续访问，但通常把内存分为两个2GB的空间，每个进程在运行时最大可以使用2GB的私有内存（0x00000000—0x7FF">
+<meta property="og:description" content="在C和C++语言开发中，指针、内存一直是学习的重点。因为C语言作为一种偏底层的中低级语言，提供了大量的内存直接操作的方法，这一方面使程序的灵活度最大化，同时也为bug埋下很多隐患。因此，无论如何，我们都要对内存有一个清晰的理解。">
 <meta property="og:image" content="http://images.cnblogs.com/cnblogs_com/iuices/201111/201111242150462923.jpg">
-<meta property="og:updated_time" content="2017-01-02T11:30:12.872Z">
+<meta property="og:updated_time" content="2017-01-05T14:08:12.841Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="程序员对内存的理解">
-<meta name="twitter:description" content="在C和C++语言开发中，指针、内存一直是学习的重点。因为C语言作为一种偏底层的中低级语言，提供了大量的内存直接操作的方法，这一方面使程序的灵活度最大化，同时也为bug埋下很多隐患。因此，无论如何，我们都要对内存有一个清晰的理解。
-1. 对内的分配
-32位操作系统支持4GB内存的连续访问，但通常把内存分为两个2GB的空间，每个进程在运行时最大可以使用2GB的私有内存（0x00000000—0x7FF">
+<meta name="twitter:description" content="在C和C++语言开发中，指针、内存一直是学习的重点。因为C语言作为一种偏底层的中低级语言，提供了大量的内存直接操作的方法，这一方面使程序的灵活度最大化，同时也为bug埋下很多隐患。因此，无论如何，我们都要对内存有一个清晰的理解。">
 <meta name="twitter:image" content="http://images.cnblogs.com/cnblogs_com/iuices/201111/201111242150462923.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hi~Welcome to Wenboo&#39;s Blog" type="application/atom+xml">
@@ -198,6 +192,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>在C和C++语言开发中，指针、内存一直是学习的重点。因为C语言作为一种偏底层的中低级语言，提供了大量的内存直接操作的方法，这一方面使程序的灵活度最大化，同时也为bug埋下很多隐患。因此，无论如何，我们都要对内存有一个清晰的理解。</p>
+<a id="more"></a>
 <p><strong>1. 对内的分配</strong></p>
 <p>32位操作系统支持4GB内存的连续访问，但通常把内存分为两个2GB的空间，每个进程在运行时最大可以使用2GB的私有内存（0x00000000—0x7FFFFFFF）。即理论上支持如下的大数组：</p>
 <blockquote>
@@ -359,7 +354,7 @@
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"wenboo-hexo"};
+	var duoshuoQuery = {short_name:"wenboo"};
 	(function() {
 		var ds = document.createElement('script');
 		ds.type = 'text/javascript';ds.async = true;
@@ -478,10 +473,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
               </li>
              
@@ -490,15 +481,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">main</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">os</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">main</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">wireshark</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
               </li>
              
               <li class="article-tag-list-item">
