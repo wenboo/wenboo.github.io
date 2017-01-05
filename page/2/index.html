@@ -167,19 +167,19 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-Java-简易服务器的实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Java简易服务器的实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/06/Java-简易服务器的实现/">Java 简易服务器的实现</a>
+      <a class="article-title" href="/2016/11/06/Java简易服务器的实现/">Java 简易服务器的实现</a>
     </h1>
   
 
         
-        <a href="/2016/11/06/Java-简易服务器的实现/" class="archive-article-date">
+        <a href="/2016/11/06/Java简易服务器的实现/" class="archive-article-date">
   	<time datetime="2016-11-06T13:16:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-11-06</time>
 </a>
         
@@ -188,16 +188,9 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>使用telnet客户端测试。telnet客户端windows默认是禁掉的，需要设置： 控制面板 &gt; 程序 &gt; 打开或关闭Windows功能 &gt; Telnet客户端 &gt; OK 。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"><span class="keyword">import</span> java.io.InputStream;</div><div class="line"><span class="keyword">import</span> java.io.OutputStream;</div><div class="line"><span class="keyword">import</span> java.io.PrintWriter;</div><div class="line"><span class="keyword">import</span> java.net.ServerSocket;</div><div class="line"><span class="keyword">import</span> java.net.Socket;</div><div class="line"><span class="keyword">import</span> java.util.Scanner;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadedEchoServer</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">		ServerSocket s = <span class="keyword">null</span>;</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			<span class="keyword">int</span> i = <span class="number">1</span>;</div><div class="line">			s = <span class="keyword">new</span> ServerSocket(<span class="number">8189</span>);</div><div class="line"></div><div class="line">			System.out.println(<span class="string">"Server Started"</span>);</div><div class="line">			<span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</div><div class="line">				Socket incoming = s.accept();</div><div class="line">				System.out.println(<span class="string">"incoming :"</span> + i);</div><div class="line">				Runnable r = <span class="keyword">new</span> ThreadEchoHandler(incoming,i);</div><div class="line">				Thread t = <span class="keyword">new</span> Thread(r);</div><div class="line">				t.start();</div><div class="line">				i++;</div><div class="line">			&#125;</div><div class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;<span class="keyword">finally</span>&#123;</div><div class="line">			s.close();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * This class handles the client input for one server socket connection</div><div class="line"> */</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ThreadEchoHandler</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="keyword">private</span> Socket incoming;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> uid;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">ThreadEchoHandler</span><span class="params">(Socket i,<span class="keyword">int</span> id)</span> </span>&#123;</div><div class="line">		incoming = i;</div><div class="line">		uid = id;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="comment">// TODO Auto-generated method stub</span></div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			InputStream inStream = incoming.getInputStream();</div><div class="line">			OutputStream outStream = incoming.getOutputStream();</div><div class="line"></div><div class="line">			Scanner in = <span class="keyword">new</span> Scanner(inStream);</div><div class="line">			PrintWriter out = <span class="keyword">new</span> PrintWriter(outStream, <span class="keyword">true</span>);</div><div class="line">			</div><div class="line">			out.println(<span class="string">"Welcome "</span>+uid+<span class="string">"! Print \"BYE\" to exit ."</span>);</div><div class="line">			<span class="keyword">boolean</span> done = <span class="keyword">false</span>;</div><div class="line"></div><div class="line">			<span class="keyword">while</span> (!done &amp;&amp; in.hasNextLine()) &#123;</div><div class="line">				String line = in.nextLine();			            <span class="comment">// client</span></div><div class="line">				System.out.println(<span class="string">"["</span>+uid+<span class="string">"] said :"</span>+line);	    <span class="comment">// server</span></div><div class="line">				out.println(<span class="string">"Echo: "</span> + line);</div><div class="line">				<span class="keyword">if</span> (line.trim().equals(<span class="string">"BYE"</span>)) &#123;</div><div class="line">					done = <span class="keyword">true</span>;</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line"></div><div class="line">			in.close();</div><div class="line">			out.close();</div><div class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">			<span class="comment">// TODO Auto-generated catch block</span></div><div class="line">			e.printStackTrace();</div><div class="line">		&#125; <span class="keyword">finally</span> &#123;</div><div class="line">			<span class="keyword">try</span> &#123;</div><div class="line">				System.out.println(uid+<span class="string">" has exit ."</span>);</div><div class="line">				incoming.close();</div><div class="line">			&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">				<span class="comment">// TODO Auto-generated catch block</span></div><div class="line">				e.printStackTrace();</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>客户端输入：</p>
-<ol>
-<li>telnet localhost 8189</li>
-<li>输入测试内容，带回显</li>
-<li>“BYE”退出</li>
-</ol>
-</blockquote>
-
+        
+          <a class="article-more-a" href="/2016/11/06/Java简易服务器的实现/#more">more >></a>
+        
       
 
       
@@ -222,7 +215,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/work/" class="article-tag-list-link color5">work</a>
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
         		</li>
       		
 		</ul>
@@ -231,7 +224,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2016/11/06/Java-简易服务器的实现/">展开全文 >></a>
+          <a class="article-more-a" href="/2016/11/06/Java简易服务器的实现/">展开全文 >></a>
         </p>
       
 
@@ -1100,19 +1093,19 @@
 
 
   
-    <article id="post-Java-集合类问题集" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Java集合类问题集" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/26/Java-集合类问题集/">Java 集合类问题集</a>
+      <a class="article-title" href="/2016/10/26/Java集合类问题集/">Java 集合类问题集</a>
     </h1>
   
 
         
-        <a href="/2016/10/26/Java-集合类问题集/" class="archive-article-date">
+        <a href="/2016/10/26/Java集合类问题集/" class="archive-article-date">
   	<time datetime="2016-10-26T13:52:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-26</time>
 </a>
         
@@ -1274,7 +1267,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2016/10/26/Java-集合类问题集/">展开全文 >></a>
+          <a class="article-more-a" href="/2016/10/26/Java集合类问题集/">展开全文 >></a>
         </p>
       
 

@@ -6,18 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://wenboo.github.io">
-  <title>if&amp;else代码重构方向原则指导 | Hi~Welcome to Wenboo&#39;s Blog</title>
+  <title>Java 集合类问题集 | Hi~Welcome to Wenboo&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="几天前的一次上线，脑残手抖不小心写了bug，虽然组里的老大没有说什么，但心里面很是难过。同事说我之所以写虫子是因为我讨厌if/else，这个习惯不好。的确，if/else可以帮助我们很方便的写出流程控制代码，简洁明了，这个条件做什么，那个条件做什么，说得很清楚。说真的，我从来不反对if/else，从经验上看，越复杂的业务场景下，代码写的越简单单一，通常越不容易出错。以结果为导向的现代项目管理方式，">
+  <meta name="description" content="1.Java集合框架是什么？说出一些集合框架的优点？每种编程语言中都有集合，最初的Java版本包含几种集合类：Vector、Stack、HashTable和Array。随着集合的广泛使用，Java1.2提出了囊括所有集合接口、实现和算法的集合框架。在保证线程安全的情况下使用泛型和并发集合类，Java已经经历了很久。它还包括在Java并发包中，阻塞接口以及它们的实现。集合框架的部分优点如下：
+（1）">
 <meta property="og:type" content="article">
-<meta property="og:title" content="if&else代码重构方向原则指导">
-<meta property="og:url" content="http://wenboo.github.io/2016/11/08/if&else代码重构方向原则指导/index.html">
+<meta property="og:title" content="Java 集合类问题集">
+<meta property="og:url" content="http://wenboo.github.io/2016/10/26/Java集合类问题集/index.html">
 <meta property="og:site_name" content="Hi~Welcome to Wenboo's Blog">
-<meta property="og:description" content="几天前的一次上线，脑残手抖不小心写了bug，虽然组里的老大没有说什么，但心里面很是难过。同事说我之所以写虫子是因为我讨厌if/else，这个习惯不好。的确，if/else可以帮助我们很方便的写出流程控制代码，简洁明了，这个条件做什么，那个条件做什么，说得很清楚。说真的，我从来不反对if/else，从经验上看，越复杂的业务场景下，代码写的越简单单一，通常越不容易出错。以结果为导向的现代项目管理方式，">
-<meta property="og:updated_time" content="2017-01-05T14:49:30.899Z">
+<meta property="og:description" content="1.Java集合框架是什么？说出一些集合框架的优点？每种编程语言中都有集合，最初的Java版本包含几种集合类：Vector、Stack、HashTable和Array。随着集合的广泛使用，Java1.2提出了囊括所有集合接口、实现和算法的集合框架。在保证线程安全的情况下使用泛型和并发集合类，Java已经经历了很久。它还包括在Java并发包中，阻塞接口以及它们的实现。集合框架的部分优点如下：
+（1）">
+<meta property="og:updated_time" content="2016-10-26T13:54:02.679Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="if&else代码重构方向原则指导">
-<meta name="twitter:description" content="几天前的一次上线，脑残手抖不小心写了bug，虽然组里的老大没有说什么，但心里面很是难过。同事说我之所以写虫子是因为我讨厌if/else，这个习惯不好。的确，if/else可以帮助我们很方便的写出流程控制代码，简洁明了，这个条件做什么，那个条件做什么，说得很清楚。说真的，我从来不反对if/else，从经验上看，越复杂的业务场景下，代码写的越简单单一，通常越不容易出错。以结果为导向的现代项目管理方式，">
+<meta name="twitter:title" content="Java 集合类问题集">
+<meta name="twitter:description" content="1.Java集合框架是什么？说出一些集合框架的优点？每种编程语言中都有集合，最初的Java版本包含几种集合类：Vector、Stack、HashTable和Array。随着集合的广泛使用，Java1.2提出了囊括所有集合接口、实现和算法的集合框架。在保证线程安全的情况下使用泛型和并发集合类，Java已经经历了很久。它还包括在Java并发包中，阻塞接口以及它们的实现。集合框架的部分优点如下：
+（1）">
   
     <link rel="alternative" href="/atom.xml" title="Hi~Welcome to Wenboo&#39;s Blog" type="application/atom+xml">
   
@@ -169,59 +172,146 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-if&amp;else代码重构方向原则指导" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Java集合类问题集" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      if&amp;else代码重构方向原则指导
+      Java 集合类问题集
     </h1>
   
 
         
-        <a href="/2016/11/08/if&else代码重构方向原则指导/" class="archive-article-date">
-  	<time datetime="2016-11-08T14:04:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-11-08</time>
+        <a href="/2016/10/26/Java集合类问题集/" class="archive-article-date">
+  	<time datetime="2016-10-26T13:52:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-26</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>几天前的一次上线，脑残手抖不小心写了bug，虽然组里的老大没有说什么，但心里面很是难过。同事说我之所以写虫子是因为我讨厌if/else，这个习惯不好。的确，if/else可以帮助我们很方便的写出流程控制代码，简洁明了，这个条件做什么，那个条件做什么，说得很清楚。说真的，我从来不反对if/else，从经验上看，越复杂的业务场景下，代码写的越简单单一，通常越不容易出错。以结果为导向的现代项目管理方式，这是一种很有效实践经验。</p>
-<p>同事说的没错，我的确很讨厌if/else。这个习惯很大程度是受Thoughtworks一位咨询师朋友影响，他经常在我耳边唠叨，写代码要干净，要简洁，要灵活多变，不要固守城规，不要动不动就if/else，switch/case。初入it领域，我一直把这句话奉为经典。在以后的学习工作中也时刻提醒自己要让自己的代码尽可能的看起来简洁，不失灵活。不喜欢if/else并不意味着拒绝它，该使用的时候必要使用，比如函数接口入参check，处理异常分支逻辑流程等。通常能不用分支语句，我尽量不会使用，因为我觉得if/else很丑，每每看到if/else代码，总会以挑剔的眼光看待它，想想能不能重构的更好。大多数时候，关于什么好的代码，大家的意见往往分歧很大，每个人都有各自的想法，审查你代码的人可能会选择另一种实现方式，这并不能说明谁对谁错。</p>
-<a id="more"></a>
-<p>OO设计遵循SOLID(单一功能、开闭原则、里氏替换、接口隔离以及依赖反转)原则，使用这个原则去审视if/else，可能会发现很多问题，比如不符合单一原则，它本身就像一团浆糊，融合了各种作料，黏糊糊的很不干净；比如不符合开闭原则，每新增一种场景，就需要修改源文件增加一条分支语句，业务逻辑复杂些若有1000种场景就得有1000个分支流，这种情况下代码不仅仅恶心问题了，效率上也存在很大问题。由此可见，if/else虽然简单方便，但不恰当的使用会给编码代码带来非常痛苦的体验。针对这种恶心的if/else分支，我们当然首先想到的去重构它–在不改变代码外部功能特征的前提下对代码内部逻辑进行调整和优化，但，如何做呢？前段时间在项目中正好遇到一个恶心的if/else例子，想在这篇博客里和大家分享一下去除if/else重构的历程。</p>
-<p><strong>if/else的恶瘤</strong></p>
-<p>有句话说的好：好文章是改出来，同样，好的代码也肯定是重构出来的，因为没有哪个软件工程师能够拍着胸脯保证在项目之初代码设计这块，就考虑到了所有需求变化可能性的扩展。随着项目的不断成长，业务逻辑变的越来越复杂，代码也开始变的越来越多，原有的设计可能不再满足需求，那么此时必须要重构。就系统整体架构而言，重构可能需要很大的改动，可能在架构流程上需要评审；就功能内代码层次而言，这种重构在我们编码过程中随时可以进行，类似于if/else，swicth/case这种代码的重构也属于这种类型。今天我们要重构的if/else源码如下所示，针对不同的status code，CountRecoder对象会执行不同的set方法，为不同内部属性赋值。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> CountRecoder <span class="title">getCountRecoder</span><span class="params">(List countEntries)</span> </span>&#123;</div><div class="line">    CountRecoder countRecoder = <span class="keyword">new</span> CountRecoder();</div><div class="line">    <span class="keyword">for</span> (CountEntry countEntry : countEntries) &#123;</div><div class="line">        <span class="keyword">if</span> (<span class="number">1</span> == countEntry.getCode()) &#123;</div><div class="line">            countRecoder.setCountOfFirstStage(countEntry.getCount());</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="number">2</span> == countEntry.getCode()) &#123;</div><div class="line">            countRecoder.setCountOfSecondStage(countEntry.getCount());</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="number">3</span> == countEntry.getCode()) &#123;</div><div class="line">            countRecoder.setCountOfThirdtage(countEntry.getCount());</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="number">4</span> == countEntry.getCode()) &#123;</div><div class="line">            countRecoder.setCountOfForthtage(countEntry.getCount());</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="number">5</span> == countEntry.getCode()) &#123;</div><div class="line">            countRecoder.setCountOfFirthStage(countEntry.getCount());</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="number">6</span> == countEntry.getCode()) &#123;</div><div class="line">            countRecoder.setCountOfSixthStage(countEntry.getCount());</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> countRecoder;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>CountRecoder对象是一个简单的Java Bean，用于保存一天之中六种状态分别对应的数据条目，提供了get和set方法。CountEntry是对应数据库中每种状态的数据条目记录，包含状态code和以及count两个字段, 我们可以使用mybatis实现数据库记录和java对象之间的转换。上面getCountRecoder的方法实现了将list转换为CountRecoder的功能。</p>
-<p>看到这段代码，想必已经有很多人要呵呵了，啥都不说了，直接回炉重构吧。重构是门艺术，Martin flow曾写过一本书《重构改变代码之道》，里面详细的记录了重构的方法论，感兴趣的朋友可以阅读一下。说到重构，通常我们在重构中会遇到一个问题，那就是如何能够保证重构的代码不改变原有的外部功能特征 ？经过TDD训练的朋友应该知道答案，那就是单元测试，重构之前要写单元测试，准确的来说应该是补单元测试，毕竟TDD的核心理念是测试驱动开发。对于今天博客中分享的例子，因为代码逻辑比较简单，所以偷了懒，省却了单元测试的历程。</p>
-<p><strong>重构初体验：反射</strong></p>
-<p>要重构上面的代码，对设计模式精通的人可以立马可以看出来这是使用策略模式/状态模式的绝佳场景，将策略模式稍微变换，工厂模式应该也是ok的，当然也有些人会选择使用反射。对于这些方法，这里不一一列出，主要想讲一下使用反射和工厂模式如何解决消除if/else问题，那先说反射吧，代码如下所示：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> Map methodsMap = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line"></div><div class="line"><span class="keyword">static</span> &#123;</div><div class="line">    methodsMap.put(<span class="number">1</span>, <span class="string">"setCountOfFirstStage"</span>);</div><div class="line">    methodsMap.put(<span class="number">2</span>, <span class="string">"setCountOfSecondStage"</span>);</div><div class="line">    methodsMap.put(<span class="number">3</span>, <span class="string">"setCountOfThirdtage"</span>);</div><div class="line">    methodsMap.put(<span class="number">4</span>, <span class="string">"setCountOfForthtage"</span>);</div><div class="line">    methodsMap.put(<span class="number">5</span>, <span class="string">"setCountOfFirthStage"</span>);</div><div class="line">    methodsMap.put(<span class="number">6</span>, <span class="string">"setCountOfSixthStage"</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> CountRecoder <span class="title">getCountRecoderByReflect</span><span class="params">(List countEntries)</span> </span>&#123;</div><div class="line">    CountRecoder countRecoder = <span class="keyword">new</span> CountRecoder();</div><div class="line">    countEntries.stream().forEach(countEntry -&gt; fillCount(countRecoder, countEntry));</div><div class="line">    <span class="keyword">return</span> countRecoder;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">fillCount</span><span class="params">(CountRecoder shippingOrderCountDto, CountEntry countEntry)</span> </span>&#123;</div><div class="line">    String name = methodsMap.get(countEntry.getCode());</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        Method declaredMethod = CountRecoder.class.getMethod(name, Integer.class);</div><div class="line">        declaredMethod.invoke(shippingOrderCountDto, countEntry.getCount());</div><div class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">        System.out.println(e);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><strong>重构初体验：所谓模式</strong></p>
-<p>使用反射去掉if/else的原理很简单，使用HashMap建立状态码和需要调用的方法的方法名之间的映射关系，对于每个CountEntry，首先取出状态码，然后根据状态码获得相应的要调用方法的方法名，然后使用java的反射机制就可以实现对应方法的调用了。本例中使用反射的确可以帮助我们完美的去掉if/else的身影，但是，众所周知，反射效率很低，在高并发的条件下，反射绝对不是一个良好的选择。除去反射这种方法，能想到的就剩下使用策略模式或者与其类似的状态模式，以及工厂模式了，我们以工厂模式为例，经典的架构UML架构图通常由三个组成要素：</p>
-<p>1) 抽象产品角色：通常是一个抽象类或者接口，里面定义了抽象方法<br>2) 具体产品角色：具体产品的实现类，继承或是实现抽象策略类，通常由一个或多个组成类组成。<br>3) 工厂角色：持有抽象产品类的引用，负责动态运行时产品的选择和构建</p>
-<p>策略模式的架构图和工厂模式非常类似，不过在策略模式里执行的对象不叫产品，叫策略。在本例中，这里的产品是虚拟产品，它是服务类性质的接口或者实现。Ok，按照工厂模式的思路重构我们的代码，我们首先定义一个抽象产品接口FillCountService，里面定义产品的行为方法fillCount，代码如下所示：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">FillCountService</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">fillCount</span><span class="params">(CountRecoder countRecoder, <span class="keyword">int</span> count)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>接着我们需要分别实现这六种服务类型的产品，在每种产品中封装不同的服务算法，具体的代码如下所示：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">FirstStageService</span> <span class="keyword">implements</span> <span class="title">FillCountService</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fillCount</span><span class="params">(CountRecoder countRecoder, <span class="keyword">int</span> count)</span> </span>&#123;</div><div class="line">        countRecoder.setCountOfFirstStage(count);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SecondStageService</span> <span class="keyword">implements</span> <span class="title">FillCountService</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fillCount</span><span class="params">(CountRecoder countRecoder, <span class="keyword">int</span> count)</span> </span>&#123;</div><div class="line">        countRecoder.setCountOfSecondStage(count);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ThirdStageService</span> <span class="keyword">implements</span> <span class="title">FillCountService</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fillCount</span><span class="params">(CountRecoder countRecoder, <span class="keyword">int</span> count)</span> </span>&#123;</div><div class="line">        countRecoder.setCountOfThirdtage(count);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ForthStageService</span> <span class="keyword">implements</span> <span class="title">FillCountService</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fillCount</span><span class="params">(CountRecoder countRecoder, <span class="keyword">int</span> count)</span> </span>&#123;</div><div class="line">        countRecoder.setCountOfForthtage(count);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">FirthStageService</span> <span class="keyword">implements</span> <span class="title">FillCountService</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fillCount</span><span class="params">(CountRecoder countRecoder, <span class="keyword">int</span> count)</span> </span>&#123;</div><div class="line">        countRecoder.setCountOfFirthStage(count);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SixthStageService</span> <span class="keyword">implements</span> <span class="title">FillCountService</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fillCount</span><span class="params">(CountRecoder countRecoder, <span class="keyword">int</span> count)</span> </span>&#123;</div><div class="line">        countRecoder.setCountOfSixthStage(count);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>紧接着，我们需要是实现工厂角色，在工厂内需要实现产品的动态选择算法，使用HashMap维护状态code和具体产品的对象之间的映射关系，就可以非常容易的实现这一点，具体代码如下所示：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FillCountServieFactory</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Map fillCountServiceMap = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line"></div><div class="line">    <span class="keyword">static</span> &#123;</div><div class="line">        fillCountServiceMap.put(<span class="number">1</span>, <span class="keyword">new</span> FirstStageService());</div><div class="line">        fillCountServiceMap.put(<span class="number">2</span>, <span class="keyword">new</span> SecondStageService());</div><div class="line">        fillCountServiceMap.put(<span class="number">3</span>, <span class="keyword">new</span> ThirdStageService());</div><div class="line">        fillCountServiceMap.put(<span class="number">4</span>, <span class="keyword">new</span> ForthStageService());</div><div class="line">        fillCountServiceMap.put(<span class="number">5</span>, <span class="keyword">new</span> FirthStageService());</div><div class="line">        fillCountServiceMap.put(<span class="number">6</span>, <span class="keyword">new</span> SixthStageService());</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> FillCountService <span class="title">getFillCountStrategy</span><span class="params">(<span class="keyword">int</span> statusCode)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> fillCountServiceMap.get(statusCode);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>客户端在具体使用的时候就变的很简单，那getCountRecoder方法就可以用下面的代码实现:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> CountRecoder <span class="title">getCountRecoder</span><span class="params">(List countEntries)</span> </span>&#123;</div><div class="line">    CountRecoder countRecoder = <span class="keyword">new</span> CountRecoder();</div><div class="line">    countEntries.stream().forEach(countEntry -&gt; </div><div class="line">            FillCountServieFactory.getFillCountStrategy(countEntry.getCode())</div><div class="line">                    .fillCount(countRecoder, countEntry.getCount()));</div><div class="line">    <span class="keyword">return</span> countRecoder;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><strong>重构初体验：Java8对模式设计的精简</strong></p>
-<p>和反射一样使用设计模式也同样完美的去除了if/else，但是不得不引入大量的具体服务实现类，同时程序中出现大量的模板代码，使得我们程序看起来很不干净，幸好Java 8之后引入了Functional Interface，我们可以使用lambda表达式来去除这些模板代码。将一个接口变为Functional interface，可以通过在接口上添加FunctionalInterface注解实现，代码如下所示：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@FunctionalInterface</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">FillCountService</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">fillCount</span><span class="params">(CountRecoder countRecoder, <span class="keyword">int</span> count)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>那么具体的服务实现类就可以使用一个简单的lambda表达式代替，原先的FirstStageService类对象就可以使用下面的表达式代替：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(countRecoder, count) -&gt; countRecoder.setCountOfFirstStage(count)</div></pre></td></tr></table></figure>
-<p>那么工厂类中的代码就可以变为：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FillCountServieFactory</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Map&lt;Integer, FillCountService&gt; fillCountServiceMap = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line"></div><div class="line">    <span class="keyword">static</span> &#123;</div><div class="line">        fillCountServiceMap.put(<span class="number">1</span>, (countRecoder, count) -&gt; countRecoder.setCountOfFirstStage(count));</div><div class="line">        fillCountServiceMap.put(<span class="number">2</span>, (countRecoder, count) -&gt; countRecoder.setCountOfSecondStage(count));</div><div class="line">        fillCountServiceMap.put(<span class="number">3</span>, (countRecoder, count) -&gt; countRecoder.setCountOfThirdtage(count));</div><div class="line">        fillCountServiceMap.put(<span class="number">4</span>, (countRecoder, count) -&gt; countRecoder.setCountOfForthtage(count));</div><div class="line">        fillCountServiceMap.put(<span class="number">5</span>, (countRecoder, count) -&gt; countRecoder.setCountOfFirthStage(count));</div><div class="line">        fillCountServiceMap.put(<span class="number">6</span>, (countRecoder, count) -&gt; countRecoder.setCountOfSixthStage(count));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> FillCountService <span class="title">getFillCountStrategy</span><span class="params">(<span class="keyword">int</span> statusCode)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> fillCountServiceMap.get(statusCode);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这样我们的代码就重构完毕了，当然了还是有些不完美，程序中的魔法数字不利于阅读理解，可以使用易读的常量标识它们，在这里就不做过多说明了。</p>
-<p><strong>总结</strong></p>
-<p>Craig Larman曾经说过软件开发最重要的设计工具不是什么技术，而是一颗在设计原则方面训练有素的头脑。重构的最终结果不一定会让代码变少，相反还有可能增加程序的复杂度和抽象性，就本例中的if/else而言，确实如此。我非常赞同我的一位朋友说的话，做技术要有追求，没错if/else可以在代码中工作的挺好，也可以很容易的被接替者所理解，但是我们可以有更好的选择，因为简单的代码也可以变得很精彩。多勤多思，也许有一天真的就可以达到Craig所说的在设计原则方面拥有训练有素的头脑，谁说不是这样呢？加油吧。</p>
+        <h2 id="1-Java集合框架是什么？说出一些集合框架的优点？"><a href="#1-Java集合框架是什么？说出一些集合框架的优点？" class="headerlink" title="1.Java集合框架是什么？说出一些集合框架的优点？"></a>1.Java集合框架是什么？说出一些集合框架的优点？</h2><p>每种编程语言中都有集合，最初的Java版本包含几种集合类：Vector、Stack、HashTable和Array。随着集合的广泛使用，Java1.2提出了囊括所有集合接口、实现和算法的集合框架。在保证线程安全的情况下使用泛型和并发集合类，Java已经经历了很久。它还包括在Java并发包中，阻塞接口以及它们的实现。<strong>集合框架的部分优点如下：</strong></p>
+<p>（1）使用核心集合类降低开发成本，而非实现我们自己的集合类。</p>
+<p>（2）随着使用经过严格测试的集合框架类，代码质量会得到提高。</p>
+<p>（3）通过使用JDK附带的集合类，可以降低代码维护成本。</p>
+<p>（4）复用性和可操作性。</p>
+<h2 id="2-集合框架中的泛型有什么优点？"><a href="#2-集合框架中的泛型有什么优点？" class="headerlink" title="2.集合框架中的泛型有什么优点？"></a>2.集合框架中的泛型有什么优点？</h2><p>Java1.5引入了泛型，所有的集合接口和实现都大量地使用它。泛型允许我们为集合提供一个可以容纳的对象类型，因此，如果你添加其它类型的任何元素，它会在编译时报错。这避免了在运行时出现ClassCastException，因为你将会在编译时得到报错信息。泛型也使得代码整洁，我们不需要使用显式转换和instanceOf操作符。它也给运行时带来好处，因为不会产生类型检查的字节码指令。</p>
+<h2 id="3-Java集合框架的基础接口有哪些？"><a href="#3-Java集合框架的基础接口有哪些？" class="headerlink" title="3.Java集合框架的基础接口有哪些？"></a>3.Java集合框架的基础接口有哪些？</h2><ul>
+<li><p><strong>Collection</strong>为集合层级的根接口。一个集合代表一组对象，这些对象即为它的元素。Java平台不提供这个接口任何直接的实现。</p>
+</li>
+<li><p><strong>Set</strong>是一个不能包含重复元素的集合。这个接口对数学集合抽象进行建模，被用来代表集合，就如一副牌。</p>
+</li>
+<li><p><strong>List</strong>是一个有序集合，可以包含重复元素。你可以通过它的索引来访问任何元素。List更像长度动态变换的数组。</p>
+</li>
+<li><p><strong>Map</strong>是一个将key映射到value的对象.一个Map不能包含重复的key：每个key最多只能映射一个value。</p>
+</li>
+<li><p>一些其它的接口有Queue、Dequeue、SortedSet、SortedMap和ListIterator。</p>
+</li>
+</ul>
+<h2 id="4-为何Collection不从Cloneable和Serializable接口继承？"><a href="#4-为何Collection不从Cloneable和Serializable接口继承？" class="headerlink" title="4.为何Collection不从Cloneable和Serializable接口继承？"></a>4.为何Collection不从Cloneable和Serializable接口继承？</h2><p>Collection接口指定一组对象，对象即为它的元素。如何维护这些元素由Collection的具体实现决定。例如，一些如List的Collection实现允许重复的元素，而其它的如Set就不允许。很多Collection实现有一个公有的clone方法。然而，把它放到集合的所有实现中也是没有意义的。这是因为Collection是一个抽象表现。重要的是实现。</p>
+<p>当与具体实现打交道的时候，克隆或序列化的语义和含义才发挥作用。所以，具体实现应该决定如何对它进行克隆或序列化，或它是否可以被克隆或序列化。</p>
+<p>在所有的实现中授权克隆和序列化，最终导致更少的灵活性和更多的限制。特定的实现应该决定它是否可以被克隆和序列化。</p>
+<h2 id="5-为何Map接口不继承Collection接口？"><a href="#5-为何Map接口不继承Collection接口？" class="headerlink" title="5.为何Map接口不继承Collection接口？"></a>5.为何Map接口不继承Collection接口？</h2><p>尽管Map接口和它的实现也是集合框架的一部分，但Map不是集合，集合也不是Map。因此，Map继承Collection毫无意义，反之亦然。</p>
+<p>如果Map继承Collection接口，那么元素去哪儿？Map包含key-value对，它提供抽取key或value列表集合的方法，但是它不适合“一组对象”规范。</p>
+<h2 id="6-Iterator是什么？"><a href="#6-Iterator是什么？" class="headerlink" title="6.Iterator是什么？"></a>6.Iterator是什么？</h2><p>Iterator接口提供遍历任何Collection的接口。我们可以从一个Collection中使用迭代器方法来获取迭代器实例。迭代器取代了Java集合框架中的Enumeration。迭代器允许调用者在迭代过程中移除元素。</p>
+<h2 id="7-Enumeration和Iterator接口的区别？"><a href="#7-Enumeration和Iterator接口的区别？" class="headerlink" title="7.Enumeration和Iterator接口的区别？"></a>7.Enumeration和Iterator接口的区别？</h2><p>Enumeration的速度是Iterator的两倍，也使用更少的内存。Enumeration是非常基础的，也满足了基础的需要。但是，与Enumeration相比，Iterator更加安全，因为当一个集合正在被遍历的时候，它会阻止其它线程去修改集合。</p>
+<p>迭代器取代了Java集合框架中的Enumeration。迭代器允许调用者从集合中移除元素，而Enumeration不能做到。为了使它的功能更加清晰，迭代器方法名已经经过改善。</p>
+<h2 id="8-为何没有像Iterator-add-这样的方法，向集合中添加元素？"><a href="#8-为何没有像Iterator-add-这样的方法，向集合中添加元素？" class="headerlink" title="8.为何没有像Iterator.add()这样的方法，向集合中添加元素？"></a>8.为何没有像Iterator.add()这样的方法，向集合中添加元素？</h2><p>语义不明，已知的是，Iterator的协议不能确保迭代的次序。然而要注意，ListIterator没有提供一个add操作，它要确保迭代的顺序。</p>
+<h2 id="9-为何迭代器没有一个方法可以直接获取下一个元素，而不需要移动游标？"><a href="#9-为何迭代器没有一个方法可以直接获取下一个元素，而不需要移动游标？" class="headerlink" title="9.为何迭代器没有一个方法可以直接获取下一个元素，而不需要移动游标？"></a>9.为何迭代器没有一个方法可以直接获取下一个元素，而不需要移动游标？</h2><p>它可以在当前Iterator的顶层实现，但是它用得很少，如果将它加到接口中，每个继承都要去实现它，这没有意义。</p>
+<h2 id="10-Iterater和ListIterator之间有什么区别？"><a href="#10-Iterater和ListIterator之间有什么区别？" class="headerlink" title="10.Iterater和ListIterator之间有什么区别？"></a>10.Iterater和ListIterator之间有什么区别？</h2><p>（1）我们可以使用Iterator来遍历Set和List集合，而ListIterator只能遍历List。</p>
+<p>（2）Iterator只可以向前遍历，而LIstIterator可以双向遍历。</p>
+<p>（3）ListIterator从Iterator接口继承，然后添加了一些额外的功能，比如添加一个元素、替换一个元素、获取前面或后面元素的索引位置。</p>
+<h2 id="11-遍历一个List有哪些不同的方式？"><a href="#11-遍历一个List有哪些不同的方式？" class="headerlink" title="11.遍历一个List有哪些不同的方式？"></a>11.遍历一个List有哪些不同的方式？</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">List&lt;String&gt; strList = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line"><span class="comment">//使用for-each循环</span></div><div class="line"><span class="keyword">for</span>(String obj : strList)&#123;</div><div class="line">  System.out.println(obj);</div><div class="line">&#125;</div><div class="line"><span class="comment">//using iterator</span></div><div class="line">Iterator&lt;String&gt; it = strList.iterator();</div><div class="line"><span class="keyword">while</span>(it.hasNext())&#123;</div><div class="line">  String obj = it.next();</div><div class="line">  System.out.println(obj);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>使用迭代器更加线程安全，因为它可以确保，在当前遍历的集合元素被更改的时候，它会抛出ConcurrentModificationException。</p>
+<h2 id="12-通过迭代器fail-fast属性，你明白了什么？"><a href="#12-通过迭代器fail-fast属性，你明白了什么？" class="headerlink" title="12.通过迭代器fail-fast属性，你明白了什么？"></a>12.通过迭代器fail-fast属性，你明白了什么？</h2><p>每次我们尝试获取下一个元素的时候，Iterator fail-fast属性检查当前集合结构里的任何改动。如果发现任何改动，它抛出ConcurrentModificationException。Collection中所有Iterator的实现都是按fail-fast来设计的（ConcurrentHashMap和CopyOnWriteArrayList这类并发集合类除外）。</p>
+<h2 id="13-fail-fast与fail-safe有什么区别？"><a href="#13-fail-fast与fail-safe有什么区别？" class="headerlink" title="13.fail-fast与fail-safe有什么区别？"></a>13.fail-fast与fail-safe有什么区别？</h2><p>Iterator的fail-fast属性与当前的集合共同起作用，因此它不会受到集合中任何改动的影响。Java.util包中的所有集合类都被设计为fail-fast的，而java.util.concurrent中的集合类都为fail-safe的。Fail-fast迭代器抛出ConcurrentModificationException，而fail-safe迭代器从不抛出ConcurrentModificationException。</p>
+<h2 id="14-在迭代一个集合的时候，如何避免ConcurrentModificationException？"><a href="#14-在迭代一个集合的时候，如何避免ConcurrentModificationException？" class="headerlink" title="14.在迭代一个集合的时候，如何避免ConcurrentModificationException？"></a>14.在迭代一个集合的时候，如何避免ConcurrentModificationException？</h2><p>在遍历一个集合的时候，我们可以使用并发集合类来避免ConcurrentModificationException，比如使用CopyOnWriteArrayList，而不是ArrayList。</p>
+<h2 id="15-为何Iterator接口没有具体的实现？"><a href="#15-为何Iterator接口没有具体的实现？" class="headerlink" title="15.为何Iterator接口没有具体的实现？"></a>15.为何Iterator接口没有具体的实现？</h2><p>Iterator接口定义了遍历集合的方法，但它的实现则是集合实现类的责任。每个能够返回用于遍历的Iterator的集合类都有它自己的Iterator实现内部类。</p>
+<p>这就允许集合类去选择迭代器是fail-fast还是fail-safe的。比如，ArrayList迭代器是fail-fast的，而CopyOnWriteArrayList迭代器是fail-safe的。</p>
+<h2 id="16-UnsupportedOperationException是什么？"><a href="#16-UnsupportedOperationException是什么？" class="headerlink" title="16.UnsupportedOperationException是什么？"></a>16.UnsupportedOperationException是什么？</h2><p>UnsupportedOperationException是用于表明操作不支持的异常。在JDK类中已被大量运用，在集合框架java.util.Collections.UnmodifiableCollection将会在所有add和remove操作中抛出这个异常。</p>
+<h2 id="17-在Java中，HashMap是如何工作的？"><a href="#17-在Java中，HashMap是如何工作的？" class="headerlink" title="17.在Java中，HashMap是如何工作的？"></a>17.在Java中，HashMap是如何工作的？</h2><p>HashMap在Map.Entry静态内部类实现中存储key-value对。HashMap使用哈希算法，在put和get方法中，它使用hashCode()和equals()方法。当我们通过传递key-value对调用put方法的时候，HashMap使用Key hashCode()和哈希算法来找出存储key-value对的索引。Entry存储在LinkedList中，所以如果存在entry，它使用equals()方法来检查传递的key是否已经存在，如果存在，它会覆盖value，如果不存在，它会创建一个新的entry然后保存。当我们通过传递key调用get方法时，它再次使用hashCode()来找到数组中的索引，然后使用equals()方法找出正确的Entry，然后返回它的值。</p>
+<p>其它关于HashMap比较重要的问题是容量、负荷系数和阀值调整。HashMap默认的初始容量是32，负荷系数是0.75。阀值是为负荷系数乘以容量，无论何时我们尝试添加一个entry，如果map的大小比阀值大的时候，HashMap会对map的内容进行重新哈希，且使用更大的容量。容量总是2的幂，所以如果你知道你需要存储大量的key-value对，比如缓存从数据库里面拉取的数据，使用正确的容量和负荷系数对HashMap进行初始化是个不错的做法。</p>
+<h2 id="18-hashCode-和equals-方法有何重要性？"><a href="#18-hashCode-和equals-方法有何重要性？" class="headerlink" title="18.hashCode()和equals()方法有何重要性？"></a>18.hashCode()和equals()方法有何重要性？</h2><p>HashMap使用Key对象的hashCode()和equals()方法去决定key-value对的索引。当我们试着从HashMap中获取值的时候，这些方法也会被用到。如果这些方法没有被正确地实现，在这种情况下，两个不同Key也许会产生相同的hashCode()和equals()输出，HashMap将会认为它们是相同的，然后覆盖它们，而非把它们存储到不同的地方。同样的，所有不允许存储重复数据的集合类都使用hashCode()和equals()去查找重复，所以正确实现它们非常重要。equals()和hashCode()的实现<strong>应该遵循以下规则：</strong></p>
+<p>（1）如果o1.equals(o2)，那么o1.hashCode() == o2.hashCode()总是为true的。</p>
+<p>（2）如果o1.hashCode() == o2.hashCode()，并不意味着o1.equals(o2)会为true。</p>
+<h2 id="19-我们能否使用任何类作为Map的key？"><a href="#19-我们能否使用任何类作为Map的key？" class="headerlink" title="19.我们能否使用任何类作为Map的key？"></a>19.我们能否使用任何类作为Map的key？</h2><p>我们可以使用任何类作为Map的key，然而在使用它们之前，需要考虑以下几点：</p>
+<p>（1）如果类重写了equals()方法，它也应该重写hashCode()方法。</p>
+<p>（2）类的所有实例需要遵循与equals()和hashCode()相关的规则。请参考之前提到的这些规则。</p>
+<p>（3）如果一个类没有使用equals()，你不应该在hashCode()中使用它。</p>
+<p>（4）用户自定义key类的最佳实践是使之为不可变的，这样，hashCode()值可以被缓存起来，拥有更好的性能。不可变的类也可以确保hashCode()和equals()在未来不会改变，这样就会解决与可变相关的问题了。</p>
+<p>比如，有一个类MyKey，在HashMap中使用它。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//传递给MyKey的name参数被用于equals()和hashCode()中</span></div><div class="line">MyKey key = <span class="keyword">new</span> MyKey(<span class="string">'Pankaj'</span>); <span class="comment">//assume hashCode=1234</span></div><div class="line">myHashMap.put(key, <span class="string">'Value'</span>);</div><div class="line"><span class="comment">// 以下的代码会改变key的hashCode()和equals()值</span></div><div class="line">key.setName(<span class="string">'Amit'</span>); <span class="comment">//assume new hashCode=7890</span></div><div class="line"><span class="comment">//下面会返回null，因为HashMap会尝试查找存储同样索引的key，而key已被改变了，匹配失败，返回null</span></div><div class="line">myHashMap.get(<span class="keyword">new</span> MyKey(<span class="string">'Pankaj'</span>));</div></pre></td></tr></table></figure>
+<p>那就是为何String和Integer被作为HashMap的key大量使用。</p>
+<h2 id="20-Map接口提供了哪些不同的集合视图？"><a href="#20-Map接口提供了哪些不同的集合视图？" class="headerlink" title="20.Map接口提供了哪些不同的集合视图？"></a>20.Map接口提供了哪些不同的集合视图？</h2><p>Map接口提供三个集合视图：</p>
+<p>（1）<strong>Set keyset()</strong>：返回map中包含的所有key的一个Set视图。集合是受map支持的，map的变化会在集合中反映出来，反之亦然。当一个迭代器正在遍历一个集合时，若map被修改了（除迭代器自身的移除操作以外），迭代器的结果会变为未定义。集合支持通过Iterator的Remove、Set.remove、removeAll、retainAll和clear操作进行元素移除，从map中移除对应的映射。它不支持add和addAll操作。</p>
+<p>（2）<strong>Collection values()</strong>：返回一个map中包含的所有value的一个Collection视图。这个collection受map支持的，map的变化会在collection中反映出来，反之亦然。当一个迭代器正在遍历一个collection时，若map被修改了（除迭代器自身的移除操作以外），迭代器的结果会变为未定义。集合支持通过Iterator的Remove、Set.remove、removeAll、retainAll和clear操作进行元素移除，从map中移除对应的映射。它不支持add和addAll操作。</p>
+<p>（3）<strong>Set<map.entry<k,v>&gt; entrySet()</map.entry<k,v></strong>：返回一个map钟包含的所有映射的一个集合视图。这个集合受map支持的，map的变化会在collection中反映出来，反之亦然。当一个迭代器正在遍历一个集合时，若map被修改了（除迭代器自身的移除操作，以及对迭代器返回的entry进行setValue外），迭代器的结果会变为未定义。集合支持通过Iterator的Remove、Set.remove、removeAll、retainAll和clear操作进行元素移除，从map中移除对应的映射。它不支持add和addAll操作。</p>
+<h2 id="21-HashMap和HashTable有何不同？"><a href="#21-HashMap和HashTable有何不同？" class="headerlink" title="21.HashMap和HashTable有何不同？"></a>21.HashMap和HashTable有何不同？</h2><ul>
+<li>HashMap允许key和value为null，而HashTable不允许。</li>
+<li>HashTable是同步的，而HashMap不是。所以HashMap适合单线程环境，HashTable适合多线程环境。</li>
+<li>在Java1.4中引入了LinkedHashMap，HashMap的一个子类，假如你想要遍历顺序，你很容易从HashMap转向LinkedHashMap，但是HashTable不是这样的，它的顺序是不可预知的。</li>
+<li>HashMap提供对key的Set进行遍历，因此它是fail-fast的，但HashTable提供对key的Enumeration进行遍历，它不支持fail-fast。</li>
+<li>HashTable被认为是个遗留的类，如果你寻求在迭代的时候修改Map，你应该使用CocurrentHashMap。</li>
+</ul>
+<h2 id="22-如何决定选用HashMap还是TreeMap？"><a href="#22-如何决定选用HashMap还是TreeMap？" class="headerlink" title="22.如何决定选用HashMap还是TreeMap？"></a>22.如何决定选用HashMap还是TreeMap？</h2><p>对于在Map中插入、删除和定位元素这类操作，HashMap是最好的选择。然而，假如你需要对一个有序的key集合进行遍历，TreeMap是更好的选择。基于你的collection的大小，也许向HashMap中添加元素会更快，将map换为TreeMap进行有序key的遍历。</p>
+<h2 id="23-ArrayList和Vector有何异同点？"><a href="#23-ArrayList和Vector有何异同点？" class="headerlink" title="23.ArrayList和Vector有何异同点？"></a>23.ArrayList和Vector有何异同点？</h2><p><strong>ArrayList和Vector在很多时候都很类似。</strong></p>
+<p>（1）两者都是基于索引的，内部由一个数组支持。</p>
+<p>（2）两者维护插入的顺序，我们可以根据插入顺序来获取元素。</p>
+<p>（3）ArrayList和Vector的迭代器实现都是fail-fast的。</p>
+<p>（4）ArrayList和Vector两者允许null值，也可以使用索引值对元素进行随机访问。</p>
+<p><strong>以下是ArrayList和Vector的不同点。</strong></p>
+<p>（1）Vector是同步的，而ArrayList不是。然而，如果你寻求在迭代的时候对列表进行改变，你应该使用CopyOnWriteArrayList。</p>
+<p>（2）ArrayList比Vector快，它因为有同步，不会过载。</p>
+<p>（3）ArrayList更加通用，因为我们可以使用Collections工具类轻易地获取同步列表和只读列表。</p>
+<h2 id="24-Array和ArrayList有何区别？什么时候更适合用Array？"><a href="#24-Array和ArrayList有何区别？什么时候更适合用Array？" class="headerlink" title="24.Array和ArrayList有何区别？什么时候更适合用Array？"></a>24.Array和ArrayList有何区别？什么时候更适合用Array？</h2><p>Array可以容纳基本类型和对象，而ArrayList只能容纳对象。</p>
+<p>Array是指定大小的，而ArrayList大小是固定的。</p>
+<p>Array没有提供ArrayList那么多功能，比如addAll、removeAll和iterator等。尽管ArrayList明显是更好的选择，但也有些时候Array比较好用。</p>
+<p>（1）<strong>如果列表的大小已经指定，大部分情况下是存储和遍历它们。</strong></p>
+<p>（2）<strong>对于遍历基本数据类型，尽管Collections使用自动装箱来减轻编码任务，在指定大小的基本类型的列表上工作也会变得很慢。</strong></p>
+<p>（3）<strong>如果你要使用多维数组，使用[][]比List<list<>&gt;更容易。</list<></strong></p>
+<h2 id="25-ArrayList和LinkedList有何区别？"><a href="#25-ArrayList和LinkedList有何区别？" class="headerlink" title="25.ArrayList和LinkedList有何区别？"></a>25.ArrayList和LinkedList有何区别？</h2><p><strong>ArrayList和LinkedList两者都实现了List接口，但是它们之间有些不同。</strong></p>
+<p>（1）ArrayList是由Array所支持的基于一个索引的数据结构，所以它提供对元素的随机访问，复杂度为O(1)，但LinkedList存储一系列的节点数据，每个节点都与前一个和下一个节点相连接。所以，尽管有使用索引获取元素的方法，内部实现是从起始点开始遍历，遍历到索引的节点然后返回元素，时间复杂度为O(n)，比ArrayList要慢。</p>
+<p>（2）与ArrayList相比，在LinkedList中插入、添加和删除一个元素会更快，因为在一个元素被插入到中间的时候，不会涉及改变数组的大小，或更新索引。</p>
+<p>（3）LinkedList比ArrayList消耗更多的内存，因为LinkedList中的每个节点存储了前后节点的引用。</p>
+<h2 id="26-哪些集合类提供对元素的随机访问？"><a href="#26-哪些集合类提供对元素的随机访问？" class="headerlink" title="26.哪些集合类提供对元素的随机访问？"></a>26.哪些集合类提供对元素的随机访问？</h2><p>ArrayList、HashMap、TreeMap和HashTable类提供对元素的随机访问。</p>
+<p>##27.EnumSet是什么？##</p>
+<p>java.util.EnumSet是使用枚举类型的集合实现。当集合创建时，枚举集合中的所有元素必须来自单个指定的枚举类型，可以是显示的或隐示的。EnumSet是不同步的，不允许值为null的元素。它也提供了一些有用的方法，比如copyOf(Collection c)、of(E first,E…rest)和complementOf(EnumSet s)。</p>
+<p>##28.哪些集合类是线程安全的？##</p>
+<p>Vector、HashTable、Properties和Stack是同步类，所以它们是线程安全的，可以在多线程环境下使用。Java1.5并发API包括一些集合类，允许迭代时修改，因为它们都工作在集合的克隆上，所以它们在多线程环境中是安全的。</p>
+<p>##29.并发集合类是什么？##</p>
+<p>Java1.5并发包（java.util.concurrent）包含线程安全集合类，允许在迭代时修改集合。迭代器被设计为fail-fast的，会抛出ConcurrentModificationException。一部分类为：CopyOnWriteArrayList、 ConcurrentHashMap、CopyOnWriteArraySet。</p>
+<p>##30.BlockingQueue是什么？##</p>
+<p>Java.util.concurrent.BlockingQueue是一个队列，在进行检索或移除一个元素的时候，它会等待队列变为非空；当在添加一个元素时，它会等待队列中的可用空间。BlockingQueue接口是Java集合框架的一部分，主要用于实现生产者-消费者模式。我们不需要担心等待生产者有可用的空间，或消费者有可用的对象，因为它都在BlockingQueue的实现类中被处理了。Java提供了集中BlockingQueue的实现，比如ArrayBlockingQueue、LinkedBlockingQueue、PriorityBlockingQueue,、SynchronousQueue等。</p>
+<p>##31.队列和栈是什么，列出它们的区别？##</p>
+<p>栈和队列两者都被用来预存储数据。java.util.Queue是一个接口，它的实现类在Java并发包中。队列允许先进先出（FIFO）检索元素，但并非总是这样。Deque接口允许从两端检索元素。</p>
+<p>栈与队列很相似，但它允许对元素进行后进先出（LIFO）进行检索。</p>
+<p>Stack是一个扩展自Vector的类，而Queue是一个接口。</p>
+<p>##32.Collections类是什么？##</p>
+<p>Java.util.Collections是一个工具类仅包含静态方法，它们操作或返回集合。它包含操作集合的多态算法，返回一个由指定集合支持的新集合和其它一些内容。这个类包含集合框架算法的方法，比如折半搜索、排序、混编和逆序等。</p>
+<p>##33.Comparable和Comparator接口是什么？##</p>
+<p>如果我们想使用Array或Collection的排序方法时，需要在自定义类里实现Java提供Comparable接口。Comparable接口有compareTo(T OBJ)方法，它被排序方法所使用。我们应该重写这个方法，如果“this”对象比传递的对象参数更小、相等或更大时，它返回一个负整数、0或正整数。但是，在大多数实际情况下，我们想根据不同参数进行排序。比如，作为一个CEO，我想对雇员基于薪资进行排序，一个HR想基于年龄对他们进行排序。这就是我们需要使用Comparator接口的情景，因为Comparable.compareTo(Object o)方法实现只能基于一个字段进行排序，我们不能根据对象排序的需要选择字段。Comparator接口的compare(Object o1, Object o2)方法的实现需要传递两个对象参数，若第一个参数比第二个小，返回负整数；若第一个等于第二个，返回0；若第一个比第二个大，返回正整数。</p>
+<p>##34.Comparable和Comparator接口有何区别？##</p>
+<p>Comparable和Comparator接口被用来对对象集合或者数组进行排序。Comparable接口被用来提供对象的自然排序，我们可以使用它来提供基于单个逻辑的排序。</p>
+<p>Comparator接口被用来提供不同的排序算法，我们可以选择需要使用的Comparator来对给定的对象集合进行排序。</p>
+<p>##35.我们如何对一组对象进行排序？##</p>
+<p>如果我们需要对一个对象数组进行排序，我们可以使用Arrays.sort()方法。如果我们需要排序一个对象列表，我们可以使用Collection.sort()方法。两个类都有用于自然排序（使用Comparable）或基于标准的排序（使用Comparator）的重载方法sort()。Collections内部使用数组排序方法，所有它们两者都有相同的性能，只是Collections需要花时间将列表转换为数组。</p>
+<p>##36.当一个集合被作为参数传递给一个函数时，如何才可以确保函数不能修改它？##</p>
+<p>在作为参数传递之前，我们可以使用Collections.unmodifiableCollection(Collection c)方法创建一个只读集合，这将确保改变集合的任何操作都会抛出UnsupportedOperationException。</p>
+<p>##37.我们如何从给定集合那里创建一个synchronized的集合？##</p>
+<p>我们可以使用Collections.synchronizedCollection(Collection c)根据指定集合来获取一个synchronized（线程安全的）集合。</p>
+<p>##38.集合框架里实现的通用算法有哪些？##</p>
+<p>Java集合框架提供常用的算法实现，比如排序和搜索。Collections类包含这些方法实现。大部分算法是操作List的，但一部分对所有类型的集合都是可用的。部分算法有排序、搜索、混编、最大最小值。</p>
+<p>##39.大写的O是什么？举几个例子？##</p>
+<p>大写的O描述的是，就数据结构中的一系列元素而言，一个算法的性能。Collection类就是实际的数据结构，我们通常基于时间、内存和性能，使用大写的O来选择集合实现。比如：例子1：ArrayList的get(index i)是一个常量时间操作，它不依赖list中元素的数量。所以它的性能是O(1)。例子2：一个对于数组或列表的线性搜索的性能是O(n)，因为我们需要遍历所有的元素来查找需要的元素。</p>
+<p>##40.与Java集合框架相关的有哪些最好的实践？##</p>
+<p>（1）根据需要选择正确的集合类型。比如，如果指定了大小，我们会选用Array而非ArrayList。如果我们想根据插入顺序遍历一个Map，我们需要使用TreeMap。如果我们不想重复，我们应该使用Set。</p>
+<p>（2）一些集合类允许指定初始容量，所以如果我们能够估计到存储元素的数量，我们可以使用它，就避免了重新哈希或大小调整。</p>
+<p>（3）基于接口编程，而非基于实现编程，它允许我们后来轻易地改变实现。</p>
+<p>（4）总是使用类型安全的泛型，避免在运行时出现ClassCastException。</p>
+<p>（5）使用JDK提供的不可变类作为Map的key，可以避免自己实现hashCode()和equals()。</p>
+<p>（6）尽可能使用Collections工具类，或者获取只读、同步或空的集合，而非编写自己的实现。它将会提供代码重用性，它有着更好的稳定性和可维护性。</p>
 
       
 
@@ -247,7 +337,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
+        			<a href="/categories/work/" class="article-tag-list-link color5">work</a>
         		</li>
       		
 		</ul>
@@ -302,7 +392,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://wenboo.github.io/2016/11/08/if&else代码重构方向原则指导/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://wenboo.github.io/2016/10/26/Java集合类问题集/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -316,18 +406,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2016/11/14/Servlet并发小结/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2016/10/26/应该知道的Linux技巧/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Servlet并发小结
+          应该知道的Linux技巧
         
       </div>
     </a>
   
   
-    <a href="/2016/11/06/Java简易服务器的实现/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Java 简易服务器的实现</div>
+    <a href="/2016/10/24/开发团队的效率/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">开发团队的效率</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -341,7 +431,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="if&amp;else代码重构方向原则指导" data-title="if&amp;else代码重构方向原则指导" data-url="http://wenboo.github.io/2016/11/08/if&amp;else代码重构方向原则指导/"></div>
+	<div class="ds-thread" data-thread-key="Java集合类问题集" data-title="Java 集合类问题集" data-url="http://wenboo.github.io/2016/10/26/Java集合类问题集/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
