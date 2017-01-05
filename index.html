@@ -245,19 +245,19 @@
 
 
   
-    <article id="post-java中main函数为什么要加static" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Java中main函数为什么要加static" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/03/java中main函数为什么要加static/">java中main函数为什么要加static</a>
+      <a class="article-title" href="/2017/01/03/Java中main函数为什么要加static/">java中main函数为什么要加static</a>
     </h1>
   
 
         
-        <a href="/2017/01/03/java中main函数为什么要加static/" class="archive-article-date">
+        <a href="/2017/01/03/Java中main函数为什么要加static/" class="archive-article-date">
   	<time datetime="2017-01-03T14:42:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-03</time>
 </a>
         
@@ -269,7 +269,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mainID = (*env)-&gt;GetStaticMethodID(env, mainClass, <span class="string">"main"</span>,<span class="string">"([Ljava/lang/String;)V"</span>);</div></pre></td></tr></table></figure>
 <p>这是jvm启动时的代码，直接去找static的，参数为String数组的main方法。</p>
         
-          <a class="article-more-a" href="/2017/01/03/java中main函数为什么要加static/#more">more >></a>
+          <a class="article-more-a" href="/2017/01/03/Java中main函数为什么要加static/#more">more >></a>
         
       
 
@@ -304,7 +304,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/01/03/java中main函数为什么要加static/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/01/03/Java中main函数为什么要加static/">展开全文 >></a>
         </p>
       
 
@@ -632,58 +632,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ul>
-<li>init() </li>
-<li>service() </li>
-<li>destroy() </li>
-<li>getServletConfig() </li>
-<li>getServletInfo() </li>
-</ul>
-<p><strong>Servlet容器默认是采用单实例多线程的方式处理多个请求的：</strong></p>
-<ol>
-<li>当web服务器启动的时候（或客户端发送请求到服务器时），Servlet就被加载并实例化（只存在一个Servlet实例）;</li>
-<li>容器初始化Servlet。主要就是读取配置文件（例如tomcat，可以通过servlet.xml的设置线程池中线程数目，初始化线程池；通过web.xml，初始化每个参数值等等）；</li>
-<li>当请求到达时，Servlet容器通过调度线程（Dispatchaer Thread）调度它管理下的线程池中等待执行的线程（Worker Thread）给请求者；</li>
-<li>线程执行Servlet的service方法；</li>
-<li>请求结束，放回线程池，等到被调用； </li>
-</ol>
-<blockquote>
-<p>  Servlet单实例，减少了产生servlet的开销； </p>
-<p>  Servlet容器并不关心到达的Servlet请求访问的是否是同一个Servlet还是另一个Servlet，直接分配给它一个新的线程；如果是同一个Servlet的多个请求，那么Servlet的service方法将在多线程中并发的执行；</p>
-<p>  每一个请求由ServletRequest对象来接受请求，由ServletResponse对象来响应该请求； 同一个Servlet的的多个请求到来时，可能发生多线程同时访问同一资源的情况，数据可能变的不一致，可能会因为线程安全问题发生错误。</p>
-</blockquote>
-<ul>
-<li><p>实现 SingleThreadModel 接口 即：管理servlet</p>
-<p>如果一个Servlet被这个接口指定,那么在这个Servlet中的service方法将不会有两个线程被同时执行，当然也就不存在线程安全的问题；</p>
-</li>
-<li><p>同步对共享数据的操作 即：管理被访问的资源</p>
-<p>使用sy nchronized 关键字能保证一次只有一个线程可以访问被保护的区段，Servlet可以通过同步块   操作来保证线程的安全。ServletRequest对象是线程安全的，但是ServletContext和HttpSession不是   线程安全的；要使用同步的集合类： Vector代替ArrayList，HsahTable代替HashMap；</p>
-</li>
-<li><p>避免使用实例变量（成员变量）</p>
-<p>线程安全问题是由实例变量造成的，只要在Servlet里面的任何方法里面都不使用实例变量，那么该Servlet就是线程安全的。</p>
-</li>
-</ul>
-<p>对上面的三种方法进行测试，可以表明用它们都能设计出线程安全的Servlet程序。但是，如果一个Servlet实现了SingleThreadModel接口，Servlet引擎将为每个新的请求创建一个单独的Servlet实例，这将引起大量的系统开销。SingleThreadModel在Servlet2.4中已不再提倡使用；同样如果在程序中使用同步来保护要使用的共享的数据，也会使系统的性能大大下降。这是因为被同步的代码块在同一时刻只能有一个线程执行它，使得其同时处理客户请求的吞吐量降低，而且很多客户处于阻塞状态。另外为保证主存内容和线程的工作内存中的数据的一致性，要频繁地刷新缓存,这也会大大地影响系统的性能。所以在实际的开发中也应避免或最小化 Servlet 中的同步代码；在Serlet中避免使用实例变量是保证Servlet线程安全的最佳选择。从Java 内存模型也可以知道，方法中的临时变量是在栈上分配空间，而且每个线程都有自己私有的栈空间，所以它们不会影响线程的安全。</p>
-<p>Servlet的线程安全问题只有在大量的并发访问时才会显现出来，并且很难发现，因此在编写Servlet程序时要特别注意。线程安全问题主要是由实例变量造成的,因此在Servlet中应避免使用实例变量。如果应用程序设计无法避免使用实例变量，那么使用同步来保护要使用的实例变量，但为保证系统的最佳性能，应该同步可用性最小的代码路径。</p>
-<ul>
-<li>init() 在Servlet实例化后，Servlet容器会调用init()方法来初始化该对象，主要是为了让Servlet对象在处理客户请求前可以完成一些初始化工作，例如：建立数据库的连接，获取配置信息等。对于每一个Servlet实例，init()方法只能被调用一次。init()方法有一个类型为ServletConfig的参数，Servlet容器通过这个参数向Servlet传递配置信息。Servlet使用ServletConfig对象从Web应用程序的配置信息中获取以名-值对形式提供的初始化参数。另外，在Servlet中，还可以通过ServletConfig对象获取描述Servlet运行环境的ServletContext对象，使用该对象，Servlet可以和它的Servlet容器进行通信。</li>
-</ul>
-<ul>
-<li>Service() 容器调用service()方法来处理客户端的请求。要注意的是，在service()方法被容器调用之前，必须确保init()方法正确完成。容器会构造一个表示客户端请求信息的请求对象（类型为ServletRequest）和一个用于对客户端进行响应的响应对象（类型为ServletResponse）作为参数传递给service()。在service()方法中，Servlet对象通过ServletRequest对象得到客户端的相关信息和请求信息，在对请求进行处理后，调用ServletResponse对象的方法设置响应信息。</li>
-</ul>
-<ul>
-<li>destroy() 当容器检测到一个Servlet对象应该从服务中被移除的时候，容器会调用该对象的destroy()方法，以便让Servlet对象可以释放它所使用的资源，保存数据到持久存储设备中，例如将内存中的数据保存到数据库中，关闭数据库的连接等。当需要释放内存或者容器关闭时，容器就会调用Servlet对象的destroy()方法，在Servlet容器调用destroy()方法前，如果还有其他的线程正在service()方法中执行容器会等待这些线程执行完毕或者等待服务器设定的超时值到达。一旦Servlet对象的destroy()方法被调用，容器不回再把请求发送给该对象。如果需要改Servlet再次为客户端服务，容器将会重新产生一个Servlet对象来处理客户端的请求。在destroy()方法调用之后，容器会释放这个Servlet对象，在随后的时间内，该对象会被java的垃圾收集器所回收。</li>
-</ul>
-<ul>
-<li>getServletConfig() 该方法返回容器调用init()方法时传递给Servlet对象的ServletConfig对象，ServletConfig对象包含了Servlet的初始化参数。</li>
-</ul>
-<ul>
-<li>getServletInfo() 返回一个String类型的字符串，其中包括了关于Servlet的信息，例如，作者、版本和版权。该方法返回的应该是纯文本字符串，而不是任何类型的标记。
-　 
-　 
-　 </li>
-</ul>
-
+        <p><strong>Servlet中的五种接口：</strong></p>
+<p>1.init()<br>2.service()<br>3.destroy()<br>4.getServletConfig()<br>5.getServletInfo() </p>
+        
+          <a class="article-more-a" href="/2016/11/14/Servlet接口的五种方法介绍/#more">more >></a>
+        
       
 
       
@@ -696,7 +649,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">计算机网络</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">java,tomcat</a>
         		</li>
       		
 		</ul>
@@ -708,7 +661,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/work/" class="article-tag-list-link color5">work</a>
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
         		</li>
       		
 		</ul>
@@ -735,19 +688,19 @@
 
 
   
-    <article id="post-Servlet必知细节" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Servlet必须知道的细节" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/14/Servlet必知细节/">Servlet必知细节</a>
+      <a class="article-title" href="/2016/11/14/Servlet必须知道的细节/">Servlet必知细节</a>
     </h1>
   
 
         
-        <a href="/2016/11/14/Servlet必知细节/" class="archive-article-date">
+        <a href="/2016/11/14/Servlet必须知道的细节/" class="archive-article-date">
   	<time datetime="2016-11-14T13:08:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-11-14</time>
 </a>
         
@@ -796,7 +749,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2016/11/14/Servlet必知细节/">展开全文 >></a>
+          <a class="article-more-a" href="/2016/11/14/Servlet必须知道的细节/">展开全文 >></a>
         </p>
       
 
@@ -834,51 +787,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Servelet的特点：单实例多线程"><a href="#Servelet的特点：单实例多线程" class="headerlink" title="Servelet的特点：单实例多线程"></a>Servelet的特点：单实例多线程</h2><p>Servlet（struts类似）的生命周期是由Web容器负责的,当客户端第一次请求Servlet时,容器负责初始化Servlet,也就是实例化这个Servlet 类。以后这个实例就负责多个客户端的请求,一般不会再实例化一个Servlet类,也就是有多个线程在使用这个实例。Servlet之所以比CGI效率高就是因为Servlet是多线程的。</p>
+        <p><strong>Servelet的特点：单实例多线程</strong></p>
+<p>Servlet（struts类似）的生命周期是由Web容器负责的,当客户端第一次请求Servlet时,容器负责初始化Servlet,也就是实例化这个Servlet 类。以后这个实例就负责多个客户端的请求,一般不会再实例化一个Servlet类,也就是有多个线程在使用这个实例。Servlet之所以比CGI效率高就是因为Servlet是多线程的。</p>
 <p>Servlet采用多线程来处理多个请求同时访问，Servelet容器维护了一个线程池来服务请求。线程池实际上是等待执行代码的一组线程叫做工作者线程(WorkerThread)，Servlet容器使用一个调度线程来管理工作者线程(DispatcherThread)。当容器收到一个访问Servlet的请求，调度者线程从线程池中选出一个工作者线程，将请求传递给该线程，然后由该线程来执行Servlet的service方法。当这个线程正在执行的时候，容器收到另外一个请求，调度者线程将从池中选出另外一个工作者线程来服务新的请求，容器并不关心这个请求是否访问的是同一个Servlet还是另外一个Servlet。当容器同时收到对同一Servlet的多个请求，那这个Servlet的service方法将在多线程中并发的执行。</p>
-<p> Servlet容器默认采用单实例多线程的方式来处理请求，这样减少产生Servlet实例的开销，提升了对请求的响应时间。对于Tomcat可以在server.xml中通过<connector>元素设置线程池中线程的数目。就实现来说：调度者线程类所担负的责任如其名字，该类的责任是调度线程，只需要利用自己的属性完成自己的责任。所以该类是承担了责任的，并且该类的责任又集中到唯一的单体对象中。而其他对象又依赖于该特定对象所承担的责任，我们就需要得到该特定对象。那该类就是一个单例模式的实现了。</connector></p>
-<h2 id="线程不安全"><a href="#线程不安全" class="headerlink" title="线程不安全"></a>线程不安全</h2><p>这就导致了Servlet里的实例变量是线程不安全的,多个线程（多个客户端的请求）共享这些实例变量，一个线程对这些实例变量的改变会影响其它线程的取值，<br>Servlet规范已经声明Servlet不是线程安全的,包括jsp,Servlet,javabean等。</p>
-<ul>
-<li><p>实例变量：是在堆中分配的,并被属于该实例的所有线程共享，所以不是线程安全的。</p>
-</li>
-<li><p>静态变量：不是线程安全的。</p>
-</li>
-<li><p>局部变量：方法中的局部变量是不会影响线程安全的,因为他们是在栈上分配空间,而且每个线程都有自己私有的栈空间</p>
-</li>
-</ul>
-<h2 id="如何使Servlet安全"><a href="#如何使Servlet安全" class="headerlink" title="如何使Servlet安全"></a>如何使Servlet安全</h2><ul>
-<li>实现 SingleThreadModel 接口(单线程模型，效率太低，一般不使用)</li>
-</ul>
-<blockquote>
-<p>该接口指定了系统如何处理对同一个Servlet的调用。如果一个Servlet被这个接口指定，那么在这个Servlet中的service方法将不会有两个线程被同时执行，当然也就不存在线程安全的问题。这种方法只要继承这个接口就行了</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">XXXXX</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> <span class="keyword">implements</span> <span class="title">SingleThreadModel</span> </span>&#123;  </div><div class="line">                            <span class="comment">// …………  </span></div><div class="line">             &#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>同步对共享数据的操作(效率太低，一般不使用)</li>
-</ul>
-<blockquote>
-<p>使用synchronized 关键字能保证一次只有一个线程可以访问被保护的区段，在本文中可以通过同步块操作来保证Servlet的线程安全。同步后的代码如下</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">XXXXXX</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;  </div><div class="line">                          <span class="comment">//…………  </span></div><div class="line">                          <span class="keyword">synchronized</span> (<span class="keyword">this</span>)&#123;XXXX&#125;  </div><div class="line">           &#125;</div></pre></td></tr></table></figure>
-<h2 id="Servlet编程规范"><a href="#Servlet编程规范" class="headerlink" title="Servlet编程规范"></a>Servlet编程规范</h2><ul>
-<li>避免使用实例变量<br>线程安全问题还有些是由实例变量造成的，只要在Servlet里面的任何方法里面都不使用实例变量，那么该Servlet就是线程安全的。即将参数变量本地化。多线程并不共享局部变量.所以我们要尽可能的在servlet中使用局部变量。</li>
-</ul>
-<ul>
-<li>属性的线程安全：ServletContext，HttpSession，ServletRequest对象中属性</li>
-</ul>
-<p>ServletContext：（线程是不安全的）<br>        ServletContext是可以多线程同时读/写属性的，线程是不安全的。要对属性的读写进行同步处理或者进行深度Clone()。所以在Servlet上下文中尽可能少量保存会被修改（写）的数据，可以采取其他方式在多个Servlet中共享，比方我们可以使用单例模式来处理共享数据。<br>        HttpSession：（线程是不安全的）<br>        HttpSession对象在用户会话期间存在，只能在处理属于同一个Session的请求的线程中被访问，因此Session对象的属性访问理论上是线程安全的。当用户打开多个同属于一个进程的浏览器窗口，在这些窗口的访问属于同一个Session，会出现多次请求，需要多个工作线程来处理请求，可能造成同时多线程读写属性。这时我们需要对属性的读写进行同步处理：使用同步块Synchronized和使用读/写器来解决。<br>        ServletRequest：（线程是安全的）<br>        对于每一个请求，由一个工作线程来执行，都会创建有一个新的ServletRequest对象，所以ServletRequest对象只能在一个线程中被访问。ServletRequest是线程安全的。ServletRequest对  象在service方法的范围内是有效的，不要试图在service方法结束后仍然保存请求对象的引用。</p>
-<ul>
-<li><p>不要在Servlet中创建自己的线程来完成某个功能<br>Servlet本身就是多线程的，在Servlet中再创建线程，将导致执行情况复杂化，出现多线程安全问题。</p>
-</li>
-<li><p>在多个servlet中对外部对象(比方文件)进行修改操作一定要加锁，做到互斥的访问</p>
-</li>
-<li><p>使用同步的集合类<br>使用Vector代替ArrayList，使用Hashtable代替HashMap。</p>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ServletMain</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span></span>&#123;</div><div class="line"><span class="keyword">private</span> String strTest1; <span class="comment">// 实例变量,线程不安全,只读（客户线程不能改变其值）可用，否则不能使用。</span></div><div class="line"> </div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String strTest2 = <span class="string">"TEST"</span>; <span class="comment">// 静态变量,但只读，线程安全，可用。</span></div><div class="line">   </div><div class="line"><span class="keyword">private</span> Config config; <span class="comment">// 实例变量,如果是只读，线程安全，可用。</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> <span class="keyword">throws</span> ServletException </span>&#123;</div><div class="line">  String strTest3; <span class="comment">// 局部变量，线程安全</span></div><div class="line">  &#125;</div></pre></td></tr></table></figure>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p> 对上面的三种方法进行测试，可以表明用它们都能设计出线程安全的Servlet程序。但是，如果一个Servlet实现了SingleThreadModel接口，Servlet引擎将<strong>为每个新的请求创建一个单独的Servlet实例</strong>，这将引起大量的系统开销。SingleThreadModel在Servlet2.4中<strong>已不再提倡使用</strong>；同样如果在程序中<strong>使用同步</strong>来保护要使用的共享的数据，也会使系统的<strong>性能大大下降</strong>。这是因为被同步的代码块在同一时刻只能有一个线程执行它，使得其同时处理客户请求的吞吐量降低，而且很多客户处于阻塞状态。另外为保证主存内容和线程的工作内存中的数据的一致性，要频繁地刷新缓存,这也会大大地影响系统的性能。所以在实际的开发中也<strong>应避免或最小化Servlet 中的同步代码</strong>；在Serlet中<strong>避免使用实例变量</strong>是保证Servlet线程安全的最佳选择。从Java 内存模型也可以知道，方法中的临时变量是在栈上分配空间，而且每个线程都有自己私有的栈空间，所以它们不会影响线程的安全。</p>
-<p> Servlet的线程安全问题只有<strong>在大量的并发访问时</strong>才会显现出来，并且很难发现，因此在编写Servlet程序时要特别注意。线程安全问题主要是由实例变量造成的，因此在Servlet中应避免使用实例变量。如果应用程序设计无法避免使用实例变量，那么使用同步来保护要使用的实例变量，但为保证系统的最佳性能，应该同步可用性最小的代码路径。</p>
-
+<p>Servlet容器默认采用单实例多线程的方式来处理请求，这样减少产生Servlet实例的开销，提升了对请求的响应时间。对于Tomcat可以在server.xml中通过<Connector>元素设置线程池中线程的数目。就实现来说：调度者线程类所担负的责任如其名字，该类的责任是调度线程，只需要利用自己的属性完成自己的责任。所以该类是承担了责任的，并且该类的责任又集中到唯一的单体对象中。而其他对象又依赖于该特定对象所承担的责任，我们就需要得到该特定对象。那该类就是一个单例模式的实现了。</p>
+        
+          <a class="article-more-a" href="/2016/11/14/Servlet并发小结/#more">more >></a>
+        
       
 
       
@@ -891,7 +806,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">计算机网络</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">tomcat</a>
         		</li>
       		
 		</ul>
@@ -903,7 +818,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/work/" class="article-tag-list-link color5">work</a>
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
         		</li>
       		
 		</ul>
@@ -1127,11 +1042,15 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color2">c</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">c</a>
+                <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1143,7 +1062,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
+                <a href="javascript:void(0)" class="js-tag color5">main</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">java,tomcat</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1152,10 +1079,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">javaweb,tomcat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">main</a>
               </li>
              
               <li class="article-tag-list-item">

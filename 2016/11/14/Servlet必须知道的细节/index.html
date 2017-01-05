@@ -6,14 +6,30 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://wenboo.github.io">
-  <title>Tag: javaweb,tomcat | Hi~Welcome to Wenboo&#39;s Blog</title>
+  <title>Servlet必知细节 | Hi~Welcome to Wenboo&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hi~Welcome to Wenboo's Blog">
-<meta property="og:url" content="http://wenboo.github.io/tags/javaweb-tomcat/index.html">
+  <meta name="description" content="servlet接口关系
+生命周期方法
+init(),service(),destroy()为三个生命周期方法(life-cycle methods),所谓生命周期方法，就是在Servlet生命周期过程中，某个特定阶段必定要执行的方法。
+通常情况下，tomcat启动时，并没有立刻创建Servlet对象，而是客户端第一次访问这个servlet所配置的映射目录时，由tomcat构造servlet对象，调">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Servlet必知细节">
+<meta property="og:url" content="http://wenboo.github.io/2016/11/14/Servlet必须知道的细节/index.html">
 <meta property="og:site_name" content="Hi~Welcome to Wenboo's Blog">
+<meta property="og:description" content="servlet接口关系
+生命周期方法
+init(),service(),destroy()为三个生命周期方法(life-cycle methods),所谓生命周期方法，就是在Servlet生命周期过程中，某个特定阶段必定要执行的方法。
+通常情况下，tomcat启动时，并没有立刻创建Servlet对象，而是客户端第一次访问这个servlet所配置的映射目录时，由tomcat构造servlet对象，调">
+<meta property="og:image" content="http://img.blog.csdn.net/20150413193259283?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjgxNDUwNg==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20150413193654125">
+<meta property="og:updated_time" content="2016-11-14T13:17:01.737Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hi~Welcome to Wenboo's Blog">
+<meta name="twitter:title" content="Servlet必知细节">
+<meta name="twitter:description" content="servlet接口关系
+生命周期方法
+init(),service(),destroy()为三个生命周期方法(life-cycle methods),所谓生命周期方法，就是在Servlet生命周期过程中，某个特定阶段必定要执行的方法。
+通常情况下，tomcat启动时，并没有立刻创建Servlet对象，而是客户端第一次访问这个servlet所配置的映射目录时，由tomcat构造servlet对象，调">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20150413193259283?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjgxNDUwNg==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
   
     <link rel="alternative" href="/atom.xml" title="Hi~Welcome to Wenboo&#39;s Blog" type="application/atom+xml">
   
@@ -165,71 +181,172 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Servlet必须知道的细节" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/11/17/Tomcat启动过程原理详解/" class="archive-article-date">
-  	<time datetime="2016-11-17T13:59:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-11-17</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/11/17/Tomcat启动过程原理详解/">Tomcat启动过程原理详解</a>
+    <h1 class="article-title" itemprop="name">
+      Servlet必知细节
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2016/11/14/Servlet必须知道的细节/" class="archive-article-date">
+  	<time datetime="2016-11-14T13:08:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-11-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="servlet接口关系"><a href="#servlet接口关系" class="headerlink" title="servlet接口关系"></a>servlet接口关系</h2><p><img src="http://img.blog.csdn.net/20150413193259283?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjgxNDUwNg==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="pic"></p>
+<h2 id="生命周期方法"><a href="#生命周期方法" class="headerlink" title="生命周期方法"></a>生命周期方法</h2><p><img src="http://img.blog.csdn.net/20150413193654125" alt="pic"></p>
+<p>init(),service(),destroy()为三个生命周期方法(life-cycle methods),所谓生命周期方法，就是在Servlet生命周期过程中，某个特定阶段必定要执行的方法。</p>
+<p>通常情况下，tomcat启动时，并没有立刻创建Servlet对象，而是客户端第一次访问这个servlet所配置的映射目录时，由tomcat构造servlet对象，调用init方法，同时执行service。以后再访问，不会执行init方法，直接调用service，当tomcat重启或者正常关闭时调用destory方法。那么，init为客户端第一次访问时所用，service为客户端每<br>次访问时所用，并且要知道每调用一次servlet对象的service方法，就创建一个了新线程。destory为tomcat正常关闭时所调用。</p>
+<p><strong>通过上面描述我们可以知道，Servlet只有在第一次访问的时候创建，以后不创建了，那么Servlet就是单例的了。Servlet是单例多线程。</strong></p>
+<p>我们写一个servlet，并不需要实现顶层接口Servlet，只需要继承HttpServlet，并且实现doGet和doPost方法即可了。</p>
+<p>Servlet接口的提出，就是为了解决基于请求-响应模型的数据处理，并没有涉及HTTP协议及相关API，GenericServlet是 实现接口的通用Servlet,也没有提供与 HTTP协议<br>相关 API ，而在HttpServlet中引入与 协议相关 API 。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">javaweb,tomcat</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">计算机网络</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/network/" class="article-tag-list-link color3">network</a>
+        			<a href="/categories/work/" class="article-tag-list-link color5">work</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://wenboo.github.io/2016/11/14/Servlet必须知道的细节/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2016/11/14/Servlet接口的五种方法介绍/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Servlet接口的五种方法介绍
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2016/11/14/Servlet并发小结/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Servlet并发小结</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Servlet必须知道的细节" data-title="Servlet必知细节" data-url="http://wenboo.github.io/2016/11/14/Servlet必须知道的细节/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"wenboo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
   
 
-    
+
 
 
           </div>
@@ -252,9 +369,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		root: "/",
