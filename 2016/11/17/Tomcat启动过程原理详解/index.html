@@ -14,7 +14,7 @@
 <meta property="og:url" content="http://wenboo.github.io/2016/11/17/Tomcat启动过程原理详解/index.html">
 <meta property="og:site_name" content="Hi~Welcome to Wenboo's Blog">
 <meta property="og:description" content="基于Java的Web 应用程序是 servlet、JSP 页面、静态页面、类和其他资源的集合，它们可以用标准方式打包，并运行在来自多个供应商的多个容器。Web 应用程序存在于结构化层次结构的目录中，该层次结构是由 Java Servlet 规范定义的。Web 应用程序的根目录包含直接存储或存储在子文件夹中的所有公共资源，比如图像、HTML 页面等。构成：Web应用由Web组件(一组Java类库)、">
-<meta property="og:updated_time" content="2017-01-05T14:08:24.081Z">
+<meta property="og:updated_time" content="2017-01-05T14:26:41.507Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Tomcat启动过程原理详解">
 <meta name="twitter:description" content="基于Java的Web 应用程序是 servlet、JSP 页面、静态页面、类和其他资源的集合，它们可以用标准方式打包，并运行在来自多个供应商的多个容器。Web 应用程序存在于结构化层次结构的目录中，该层次结构是由 Java Servlet 规范定义的。Web 应用程序的根目录包含直接存储或存储在子文件夹中的所有公共资源，比如图像、HTML 页面等。构成：Web应用由Web组件(一组Java类库)、">
@@ -191,50 +191,31 @@
       
         <p>基于Java的Web 应用程序是 servlet、JSP 页面、静态页面、类和其他资源的集合，它们可以用标准方式打包，并运行在来自多个供应商的多个容器。Web 应用程序存在于结构化层次结构的目录中，该层次结构是由 Java Servlet 规范定义的。Web 应用程序的根目录包含直接存储或存储在子文件夹中的所有公共资源，比如图像、HTML 页面等。构成：Web应用由Web组件(一组Java类库)、html文件，静态资源文件（如图像）、帮助类和库组成。</p>
 <a id="more"></a>
-<h2 id="Tomcat-Server的组成部分"><a href="#Tomcat-Server的组成部分" class="headerlink" title="Tomcat Server的组成部分"></a>Tomcat Server的组成部分</h2><ul>
-<li><p>Server<br>一个Server 就是一个容器</p>
-</li>
-<li><p>Service<br>它由一个或者多个Connector组成，以及一个Engine，负责处理所有Connector所获得的客户请求</p>
-</li>
-<li><p>Connector<br>一个Connector将在某个指定端口上侦听客户请求，并将获得的请求交给Engine来处理，从Engine处获得回应并返回客户。Tomcat有两个典型的Connector，一个直接侦听来自browser的http请求，一个侦听来自其它WebServer的请求：</p>
-<ul>
-<li><strong>Coyote Http/1.1 Connector</strong> 在端口8080处侦听来自客户browser的http请求</li>
-<li><strong>Coyote JK2 Connector</strong> 在端口8009处侦听来自其它WebServer(Apache)的servlet/jsp代理请求</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p>Engine<br>Engine下可以配置多个虚拟主机VirtualHost，每个虚拟主机都有一个域名。当Engine获得一个请求时，它把该请求匹配到某个Host上，然后把该请求交给该Host来处理。Engine有一个默认虚拟主机，当请求无法匹配到任何一个Host上的时候，将交给该默认Host来处理。</p>
-</li>
-<li><p>Host<br>代表一个Virtual Host，虚拟主机，每个虚拟主机和某个网络域名Domain Name相匹配。每个虚拟主机下都可以部署(deploy)一个或者多个Web App，每个Web App对应于一个Context，有一个ContextPath。当Host获得一个请求时，将把该请求匹配到某个Context上，然后把该请求交给该Context来处理。匹配的方法是“最长匹配”，所以一个path==””的Context将成为该Host的默认Context，所有无法和其它Context的路径名匹配的请求都将最终和该默认Context匹配。</p>
-</li>
-<li><p>Context<br>一个Context对应于一个Web Application，一个Web Application由一个或者多个Servlet组成。Context在创建的时候将根据配置文件conf/web.xml和WEB-INF/web.xml载入Servlet类。当Context获得请求时，将在自己的映射表(mappingtable)中寻找相匹配的Servlet类,如果找到，则执行该类，获得请求的回应，并返回。</p>
-</li>
-</ul>
-<h2 id="Context的部署配置文件web-xml的说明"><a href="#Context的部署配置文件web-xml的说明" class="headerlink" title="Context的部署配置文件web.xml的说明"></a>Context的部署配置文件web.xml的说明</h2><ul>
-<li>一个Context对应于一个Web App，每个Web App是由一个或者多个servlet组成的</li>
-<li>当一个Web App被初始化的时候，它将用自己的ClassLoader对象载入“部署配置文件web.xml”中定义的每个servlet类</li>
-<li>它首先载入在$CATALINA_HOME/conf/web.xml中部署的servlet类，然后载入在自己的Web App根目录下的WEB-INF/web.xml中部署的servlet类</li>
-</ul>
+<p><strong>Tomcat Server的组成部分</strong></p>
+<p><strong>1.Server</strong></p>
+<p>一个Server 就是一个容器</p>
+<p><strong>2.Service</strong></p>
+<p>它由一个或者多个Connector组成，以及一个Engine，负责处理所有Connector所获得的客户请求</p>
+<p><strong>3.Connector</strong></p>
+<p>一个Connector将在某个指定端口上侦听客户请求，并将获得的请求交给Engine来处理，从Engine处获得回应并返回客户。Tomcat有两个典型的Connector，一个直接侦听来自browser的http请求，一个侦听来自其它WebServer的请求：</p>
+<blockquote>
+<p>Coyote Http/1.1 Connector 在端口8080处侦听来自客户browser的http请求<br>Coyote JK2 Connector 在端口8009处侦听来自其它WebServer(Apache)的servlet/jsp代理请求</p>
+</blockquote>
+<p><strong>4.Engine</strong></p>
+<p>Engine下可以配置多个虚拟主机VirtualHost，每个虚拟主机都有一个域名。当Engine获得一个请求时，它把该请求匹配到某个Host上，然后把该请求交给该Host来处理。Engine有一个默认虚拟主机，当请求无法匹配到任何一个Host上的时候，将交给该默认Host来处理。</p>
+<p><strong>5.Host</strong></p>
+<p>代表一个Virtual Host，虚拟主机，每个虚拟主机和某个网络域名Domain Name相匹配。每个虚拟主机下都可以部署(deploy)一个或者多个Web App，每个Web App对应于一个Context，有一个ContextPath。当Host获得一个请求时，将把该请求匹配到某个Context上，然后把该请求交给该Context来处理。匹配的方法是“最长匹配”，所以一个path==””的Context将成为该Host的默认Context，所有无法和其它Context的路径名匹配的请求都将最终和该默认Context匹配。</p>
+<p><strong>6.Context</strong></p>
+<p>一个Context对应于一个Web Application，一个Web Application由一个或者多个Servlet组成。Context在创建的时候将根据配置文件conf/web.xml和WEB-INF/web.xml载入Servlet类。当Context获得请求时，将在自己的映射表(mappingtable)中寻找相匹配的Servlet类,如果找到，则执行该类，获得请求的回应，并返回。</p>
+<p><strong>Context的部署配置文件web.xml的说明</strong></p>
+<p>1) 一个Context对应于一个Web App，每个Web App是由一个或者多个servlet组成的</p>
+<p>2) 当一个Web App被初始化的时候，它将用自己的ClassLoader对象载入“部署配置文件web.xml”中定义的每个servlet类</p>
+<p>3) 它首先载入在$CATALINA_HOME/conf/web.xml中部署的servlet类，然后载入在自己的Web App根目录下的WEB-INF/web.xml中部署的servlet类</p>
 <p>web.xml文件有两部分：servlet类定义和servlet映射定义。每个被载入的servlet类都有一个名字，且被填入该Context的映射表(mappingtable)中，和某种URLPATTERN对应。当该Context获得请求时，将查询mapping table，找到被请求的servlet，并执行以获得请求回应。</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">web-app</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 概述： 该文件是所有的WEB APP共用的部署配置文件， 每当一个WEB APP</span></div><div class="line">被DEPLOY，该文件都将先被处理，然后才是WEB APP自己的/WEB-INF/web.xml --&gt;</div><div class="line"><span class="comment">&lt;!-- +-------------------------+ --&gt;</span></div><div class="line"><span class="comment">&lt;!-- | servlet类定义部分 | --&gt;</span></div><div class="line"><span class="comment">&lt;!-- +-------------------------+ --&gt;</span></div><div class="line"><span class="comment">&lt;!-- DefaultServlet</span></div><div class="line">当用户的HTTP请求无法匹配任何一个servlet的时候，该servlet被执行</div><div class="line">URL PATTERN MAPPING : / --&gt;</div><div class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>default<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span></div><div class="line">org.apache.catalina.servlets.DefaultServlet</div><div class="line"><span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">init-param</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>debug<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>0<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">init-param</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>listings<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">load-on-startup</span>&gt;</span>1<span class="tag">&lt;/<span class="name">load-on-startup</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- InvokerServlet</span></div><div class="line">处理一个WEB APP中的匿名servlet 当一个servlet被编写并编译放入</div><div class="line">/WEB-INF/classes/中，却没有在/WEB-INF/web.xml中定义的时候</div><div class="line">该servlet被调用，把匿名servlet映射成/servlet/ClassName的形式</div><div class="line">URL PATTERN MAPPING : /servlet/* --&gt;</div><div class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>invoker<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>org.apache.catalina.servlets.InvokerServlet <span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>debug<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>0<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></div><div class="line">   <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">load-on-startup</span>&gt;</span>2<span class="tag">&lt;/<span class="name">load-on-startup</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- JspServlet</span></div><div class="line">当请求的是一个JSP页面的时候（*.jsp）该servlet被调用</div><div class="line">它是一个JSP编译器，将请求的JSP页面编译成为servlet再执行</div><div class="line">URL PATTERN MAPPING : *.jsp --&gt;</div><div class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>jsp<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>org.apache.jasper.servlet.JspServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>logVerbosityLevel<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>WARNING<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></div><div class="line"> <span class="tag">&lt;<span class="name">load-on-startup</span>&gt;</span>3<span class="tag">&lt;/<span class="name">load-on-startup</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- +---------------------------+ --&gt;</span></div><div class="line"><span class="comment">&lt;!-- | servlet映射定义部分 | --&gt;</span></div><div class="line"><span class="comment">&lt;!-- +---------------------------+ --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>default<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>invoker<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/servlet/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>jsp<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>*.jsp<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- +------------------------+ --&gt;</span></div><div class="line"><span class="comment">&lt;!-- | 其它部分，略去先 | --&gt;</span></div><div class="line"><span class="comment">&lt;!-- +------------------------+ --&gt;</span></div><div class="line">... ... ... ...</div><div class="line"><span class="tag">&lt;/<span class="name">web-app</span>&gt;</span></div></pre></td></tr></table></figure>
-<h2 id="Tomcat-Server处理一个http请求的过程"><a href="#Tomcat-Server处理一个http请求的过程" class="headerlink" title="Tomcat Server处理一个http请求的过程"></a>Tomcat Server处理一个http请求的过程</h2><p>假设来自客户的请求为：</p>
-<p><a href="http://localhost:8080/wsota/wsota_index.jsp" target="_blank" rel="external">http://localhost:8080/wsota/wsota_index.jsp</a></p>
-<ol>
-<li>请求被发送到本机端口8080，被在那里侦听的Coyote HTTP/1.1 Connector获得</li>
-<li>Connector把该请求交给它所在的Service的Engine来处理，并等待来自Engine的回应</li>
-<li>Engine获得请求localhost/wsota/wsota_index.jsp，匹配它所拥有的所有虚拟主机Host</li>
-<li>Engine匹配到名为localhost的Host（即使匹配不到也把请求交给该Host处理，因为该Host被定义为该Engine的默认主机）</li>
-<li>localhost Host获得请求/wsota/wsota_index.jsp，匹配它所拥有的所有Context</li>
-<li>Host匹配到路径为/wsota的Context（如果匹配不到就把该请求交给路径名为””的Context去处理）</li>
-<li>path=”/wsota”的Context获得请求/wsota_index.jsp，在它的mapping table中寻找对应的servlet</li>
-<li>Context匹配到URL PATTERN为*.jsp的servlet，对应于JspServlet类</li>
-<li>构造HttpServletRequest对象和HttpServletResponse对象，作为参数调用JspServlet的doGet或doPost方法</li>
-<li>Context把执行完了之后的HttpServletResponse对象返回给Host</li>
-<li>Host把HttpServletResponse对象返回给Engine</li>
-<li>Engine把HttpServletResponse对象返回给Connector</li>
-<li>Connector把HttpServletResponse对象返回给客户Browser</li>
-</ol>
+<p><strong>Tomcat Server处理一个http请求的过程</strong></p>
+<p>假设来自客户的请求为：<br><a href="http://localhost:8080/wsota/wsota_index.jsp" target="_blank" rel="external">http://localhost:8080/wsota/wsota_index.jsp</a></p>
+<p>1.请求被发送到本机端口8080，被在那里侦听的Coyote HTTP/1.1 Connector获得<br>2.Connector把该请求交给它所在的Service的Engine来处理，并等待来自Engine的回应<br>3.Engine获得请求localhost/wsota/wsota_index.jsp，匹配它所拥有的所有虚拟主机Host<br>4.Engine匹配到名为localhost的Host（即使匹配不到也把请求交给该Host处理，因为该Host被定义为该Engine的默认主机）<br>5.localhost Host获得请求/wsota/wsota_index.jsp，匹配它所拥有的所有Context<br>6.Host匹配到路径为/wsota的Context（如果匹配不到就把该请求交给路径名为””的Context去处理）<br>7.path=”/wsota”的Context获得请求/wsota_index.jsp，在它的mapping table中寻找对应的servlet<br>8.Context匹配到URL PATTERN为*.jsp的servlet，对应于JspServlet类<br>9.构造HttpServletRequest对象和HttpServletResponse对象，作为参数调用JspServlet的doGet或doPost方法<br>10.Context把执行完了之后的HttpServletResponse对象返回给Host<br>11.Host把HttpServletResponse对象返回给Engine<br>12.Engine把HttpServletResponse对象返回给Connector<br>13.Connector把HttpServletResponse对象返回给客户Browser</p>
 
       
 
@@ -248,7 +229,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">计算机网络</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">javaweb,tomcat</a>
         		</li>
       		
 		</ul>
@@ -469,11 +450,11 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">c</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color2">c</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -490,6 +471,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">os</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">javaweb,tomcat</a>
               </li>
              
               <li class="article-tag-list-item">
