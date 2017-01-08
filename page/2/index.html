@@ -262,23 +262,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="RandomAccessFile"><a href="#RandomAccessFile" class="headerlink" title="RandomAccessFile"></a>RandomAccessFile</h2><p>RandomAccessFile是用来访问那些保存数据记录的文件的，你就可以用seek( )方法来访问记录，并进行读写了。这些记录的大小不必相同；但是其大小和位置必须是可知的。但是该类仅限于操作文件。</p>
-<p>RandomAccessFile不属于InputStream和OutputStream类系的。实际上，除了实现DataInput和DataOutput接口之外(DataInputStream和DataOutputStream也实现了这两个接口)，它和这两个类系毫不相干，甚至不使用InputStream和OutputStream类中已经存在的任何功能；它是一个完全独立的类，所有方法(绝大多数都只属于它自己)都是从零开始写的。这可能是因为RandomAccessFile能在文件里面前后移动，所以它的行为与其它的I/O类有些根本性的不同。总而言之，它是一个直接继承Object的，独立的类。</p>
-<p>基本上，RandomAccessFile的工作方式是，把DataInputStream和DataOutputStream结合起来，再加上它自己的一些方法，比如定位用的getFilePointer( )，在文件里移动用的seek( )，以及判断文件大小的length( )、skipBytes()跳过多少字节数。此外，它的构造函数还要一个表示以只读方式(“r”)，还是以读写方式(“rw”)打开文件的参数 (和C的fopen( )一模一样)。它不支持只写文件。</p>
-<p>只有RandomAccessFile才有seek搜寻方法，而这个方法也只适用于文件。BufferedInputStream有一个mark( )方法，你可以用它来设定标记(把结果保存在一个内部变量里)，然后再调用reset( )返回这个位置，但是它的功能太弱了，而且也不怎么实用。</p>
-<p>RandomAccessFile的绝大多数功能，但不是全部，已经被<strong>JDK 1.4的nio的”内存映射文件(memory-mapped files)”</strong>给取代了，你该考虑一下是不是用”内存映射文件”来代替RandomAccessFile了。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"><span class="keyword">import</span> java.io.RandomAccessFile;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestRandomAccessFile</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">		RandomAccessFile rf = <span class="keyword">new</span> RandomAccessFile(<span class="string">"rtest.dat"</span>, <span class="string">"rw"</span>);</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</div><div class="line">			<span class="comment">//写入基本类型double数据</span></div><div class="line">			rf.writeDouble(i * <span class="number">1.414</span>);</div><div class="line">		&#125;</div><div class="line">		rf.close();</div><div class="line">		rf = <span class="keyword">new</span> RandomAccessFile(<span class="string">"rtest.dat"</span>, <span class="string">"rw"</span>);</div><div class="line">		<span class="comment">//直接将文件指针移到第5个double数据后面</span></div><div class="line">		rf.seek(<span class="number">5</span> * <span class="number">8</span>);</div><div class="line">		<span class="comment">//覆盖第6个double数据</span></div><div class="line">		rf.writeDouble(<span class="number">47.0001</span>);</div><div class="line">		rf.close();</div><div class="line">		rf = <span class="keyword">new</span> RandomAccessFile(<span class="string">"rtest.dat"</span>, <span class="string">"r"</span>);</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</div><div class="line">			System.out.println(<span class="string">"Value "</span> + i + <span class="string">": "</span> + rf.readDouble());</div><div class="line">		&#125;</div><div class="line">		rf.close();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="内存映射文件"><a href="#内存映射文件" class="headerlink" title="内存映射文件"></a>内存映射文件</h2><p>内存映射文件能让你创建和修改那些因为太大而无法放入内存的文件。有了内存映射文件，你就可以认为文件已经全部读进了内存，然后把它当成一个非常大的数组来访问。这种解决办法能大大简化修改文件的代码。</p>
-<p>fileChannel.map(FileChannel.MapMode mode, long position, long size)将此通道的文件区域直接映射到内存中。注意，你必须指明，它是从文件的哪个位置开始映射的，映射的范围又有多大；也就是说，它还可以映射一个大文件的某个小片断。</p>
-<p>MappedByteBuffer是ByteBuffer的子类，因此它具备了ByteBuffer的所有方法，但新添了force()将缓冲区的内容强制刷新到存储设备中去、load()将存储设备中的数据加载到内存中、isLoaded()位置内存中的数据是否与存储设置上同步。这里只简单地演示了一下put()和get()方法，除此之外，你还可以使用asCharBuffer( )之类的方法得到相应基本类型数据的缓冲视图后，可以方便的读写基本类型数据。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.io.RandomAccessFile;</div><div class="line"><span class="keyword">import</span> java.nio.MappedByteBuffer;</div><div class="line"><span class="keyword">import</span> java.nio.channels.FileChannel;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LargeMappedFiles</span> </span>&#123;</div><div class="line">	<span class="keyword">static</span> <span class="keyword">int</span> length = <span class="number">0x8000000</span>; <span class="comment">// 128 Mb</span></div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">		<span class="comment">// 为了以可读可写的方式打开文件，这里使用RandomAccessFile来创建文件。</span></div><div class="line">		FileChannel fc = <span class="keyword">new</span> RandomAccessFile(<span class="string">"test.dat"</span>, <span class="string">"rw"</span>).getChannel();</div><div class="line">		<span class="comment">//注意，文件通道的可读可写要建立在文件流本身可读写的基础之上</span></div><div class="line">		MappedByteBuffer out = fc.map(FileChannel.MapMode.READ_WRITE, <span class="number">0</span>, length);</div><div class="line">		<span class="comment">//写128M的内容</span></div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; i++) &#123;</div><div class="line">			out.put((<span class="keyword">byte</span>) <span class="string">'x'</span>);</div><div class="line">		&#125;</div><div class="line">		System.out.println(<span class="string">"Finished writing"</span>);</div><div class="line">		<span class="comment">//读取文件中间6个字节内容</span></div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = length / <span class="number">2</span>; i &lt; length / <span class="number">2</span> + <span class="number">6</span>; i++) &#123;</div><div class="line">			System.out.print((<span class="keyword">char</span>) out.get(i));</div><div class="line">		&#125;</div><div class="line">		fc.close();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><strong>尽管映射写似乎要用到FileOutputStream，但是映射文件中的所有输出 必须使用RandomAccessFile，但如果只需要读时可以使用FileInputStream，写映射文件时一定要使用随机访问文件，可能写时要读的原因吧。</strong></p>
-<p>该程序创建了一个128Mb的文件，如果一次性读到内存可能导致内存溢出，但这里访问好像只是一瞬间的事，这是因为，真正调入内存的只是其中的一小部分，其余部分则被放在交换文件上。这样你就可以很方便地修改超大型的文件了(最大可以到2 GB)。注意，Java是调用操作系统的”文件映射机制”来提升性能的。</p>
-<h2 id="RandomAccessFile类的应用"><a href="#RandomAccessFile类的应用" class="headerlink" title="RandomAccessFile类的应用"></a>RandomAccessFile类的应用</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * 程序功能：演示了RandomAccessFile类的操作，同时实现了一个文件复制操作。</div><div class="line"> */</div><div class="line"><span class="keyword">package</span> com.lwj.demo;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.*;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RandomAccessFileDemo</span> </span>&#123;</div><div class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">  RandomAccessFile file = <span class="keyword">new</span> RandomAccessFile(<span class="string">"file"</span>, <span class="string">"rw"</span>);</div><div class="line">  <span class="comment">// 以下向file文件中写数据</span></div><div class="line">  file.writeInt(<span class="number">20</span>);<span class="comment">// 占4个字节</span></div><div class="line">  file.writeDouble(<span class="number">8.236598</span>);<span class="comment">// 占8个字节</span></div><div class="line">  file.writeUTF(<span class="string">"这是一个UTF字符串"</span>);<span class="comment">// 这个长度写在当前文件指针的前两个字节处，可用readShort()读取</span></div><div class="line">  file.writeBoolean(<span class="keyword">true</span>);<span class="comment">// 占1个字节</span></div><div class="line">  file.writeShort(<span class="number">395</span>);<span class="comment">// 占2个字节</span></div><div class="line">  file.writeLong(<span class="number">2325451l</span>);<span class="comment">// 占8个字节</span></div><div class="line">  file.writeUTF(<span class="string">"又是一个UTF字符串"</span>);</div><div class="line">  file.writeFloat(<span class="number">35.5f</span>);<span class="comment">// 占4个字节</span></div><div class="line">  file.writeChar(<span class="string">'a'</span>);<span class="comment">// 占2个字节</span></div><div class="line"></div><div class="line">  file.seek(<span class="number">0</span>);<span class="comment">// 把文件指针位置设置到文件起始处</span></div><div class="line"></div><div class="line">  <span class="comment">// 以下从file文件中读数据，要注意文件指针的位置</span></div><div class="line">  System.out.println(<span class="string">"——————从file文件指定位置读数据——————"</span>);</div><div class="line">  System.out.println(file.readInt());</div><div class="line">  System.out.println(file.readDouble());</div><div class="line">  System.out.println(file.readUTF());</div><div class="line"></div><div class="line">  file.skipBytes(<span class="number">3</span>);<span class="comment">// 将文件指针跳过3个字节，本例中即跳过了一个boolean值和short值。</span></div><div class="line">  System.out.println(file.readLong());</div><div class="line"></div><div class="line">  file.skipBytes(file.readShort()); <span class="comment">// 跳过文件中“又是一个UTF字符串”所占字节，注意readShort()方法会移动文件指针，所以不用加2。</span></div><div class="line">  System.out.println(file.readFloat());</div><div class="line">  </div><div class="line">  <span class="comment">//以下演示文件复制操作</span></div><div class="line">  System.out.println(<span class="string">"——————文件复制（从file到fileCopy）——————"</span>);</div><div class="line">  file.seek(<span class="number">0</span>);</div><div class="line">  RandomAccessFile fileCopy=<span class="keyword">new</span> RandomAccessFile(<span class="string">"fileCopy"</span>,<span class="string">"rw"</span>);</div><div class="line">  <span class="keyword">int</span> len=(<span class="keyword">int</span>)file.length();<span class="comment">//取得文件长度（字节数）</span></div><div class="line">  <span class="keyword">byte</span>[] b=<span class="keyword">new</span> <span class="keyword">byte</span>[len];</div><div class="line">  file.readFully(b);</div><div class="line">  fileCopy.write(b);</div><div class="line">  System.out.println(<span class="string">"复制完成！"</span>);</div><div class="line"> &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="RandomAccessFile-插入写示例"><a href="#RandomAccessFile-插入写示例" class="headerlink" title="RandomAccessFile 插入写示例"></a>RandomAccessFile 插入写示例</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * </div><div class="line"> * <span class="doctag">@param</span> skip 跳过多少过字节进行插入数据</div><div class="line"> * <span class="doctag">@param</span> str 要插入的字符串</div><div class="line"> * <span class="doctag">@param</span> fileName 文件路径</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">beiju</span><span class="params">(<span class="keyword">long</span> skip, String str, String fileName)</span></span>&#123;</div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		RandomAccessFile raf = <span class="keyword">new</span> RandomAccessFile(fileName,<span class="string">"rw"</span>);</div><div class="line">		<span class="keyword">if</span>(skip &lt;  <span class="number">0</span> || skip &gt; raf.length())&#123;</div><div class="line">			System.out.println(<span class="string">"跳过字节数无效"</span>);</div><div class="line">			<span class="keyword">return</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">byte</span>[] b = str.getBytes();</div><div class="line">		raf.setLength(raf.length() + b.length);</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">long</span> i = raf.length() - <span class="number">1</span>; i &gt; b.length + skip - <span class="number">1</span>; i--)&#123;</div><div class="line">			raf.seek(i - b.length);</div><div class="line">			<span class="keyword">byte</span> temp = raf.readByte();</div><div class="line">			raf.seek(i);</div><div class="line">			raf.writeByte(temp);</div><div class="line">		&#125;</div><div class="line">		raf.seek(skip);</div><div class="line">		raf.write(b);</div><div class="line">		raf.close();</div><div class="line">	&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">		e.printStackTrace();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="利用RandomAccessFile实现文件的多线程下载"><a href="#利用RandomAccessFile实现文件的多线程下载" class="headerlink" title="利用RandomAccessFile实现文件的多线程下载"></a>利用RandomAccessFile实现文件的多线程下载</h2><p>即多线程下载一个文件时，将文件分成几块，每块用不同的线程进行下载。下面是一个利用多线程在写文件时的例子，其中预先分配文件所需要的空间，然后在所分配的空间中进行分块，然后写入：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.io.FileNotFoundException;</div><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"><span class="keyword">import</span> java.io.RandomAccessFile;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 测试利用多线程进行文件的写操作</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">		<span class="comment">// 预分配文件所占的磁盘空间，磁盘中会创建一个指定大小的文件</span></div><div class="line">		RandomAccessFile raf = <span class="keyword">new</span> RandomAccessFile(<span class="string">"D://abc.txt"</span>, <span class="string">"rw"</span>);</div><div class="line">		raf.setLength(<span class="number">1024</span>*<span class="number">1024</span>); <span class="comment">// 预分配 1M 的文件空间</span></div><div class="line">		raf.close();</div><div class="line">		</div><div class="line">		<span class="comment">// 所要写入的文件内容</span></div><div class="line">		String s1 = <span class="string">"第一个字符串"</span>;</div><div class="line">		String s2 = <span class="string">"第二个字符串"</span>;</div><div class="line">		String s3 = <span class="string">"第三个字符串"</span>;</div><div class="line">		String s4 = <span class="string">"第四个字符串"</span>;</div><div class="line">		String s5 = <span class="string">"第五个字符串"</span>;</div><div class="line">		</div><div class="line">		<span class="comment">// 利用多线程同时写入一个文件</span></div><div class="line">		<span class="keyword">new</span> FileWriteThread(<span class="number">1024</span>*<span class="number">1</span>,s1.getBytes()).start(); <span class="comment">// 从文件的1024字节之后开始写入数据</span></div><div class="line">		<span class="keyword">new</span> FileWriteThread(<span class="number">1024</span>*<span class="number">2</span>,s2.getBytes()).start(); <span class="comment">// 从文件的2048字节之后开始写入数据</span></div><div class="line">		<span class="keyword">new</span> FileWriteThread(<span class="number">1024</span>*<span class="number">3</span>,s3.getBytes()).start(); <span class="comment">// 从文件的3072字节之后开始写入数据</span></div><div class="line">		<span class="keyword">new</span> FileWriteThread(<span class="number">1024</span>*<span class="number">4</span>,s4.getBytes()).start(); <span class="comment">// 从文件的4096字节之后开始写入数据</span></div><div class="line">		<span class="keyword">new</span> FileWriteThread(<span class="number">1024</span>*<span class="number">5</span>,s5.getBytes()).start(); <span class="comment">// 从文件的5120字节之后开始写入数据</span></div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">// 利用线程在文件的指定位置写入指定数据</span></div><div class="line">	<span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">FileWriteThread</span> <span class="keyword">extends</span> <span class="title">Thread</span></span>&#123;</div><div class="line">		<span class="keyword">private</span> <span class="keyword">int</span> skip;</div><div class="line">		<span class="keyword">private</span> <span class="keyword">byte</span>[] content;</div><div class="line">		</div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="title">FileWriteThread</span><span class="params">(<span class="keyword">int</span> skip,<span class="keyword">byte</span>[] content)</span></span>&#123;</div><div class="line">			<span class="keyword">this</span>.skip = skip;</div><div class="line">			<span class="keyword">this</span>.content = content;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</div><div class="line">			RandomAccessFile raf = <span class="keyword">null</span>;</div><div class="line">			<span class="keyword">try</span> &#123;</div><div class="line">				raf = <span class="keyword">new</span> RandomAccessFile(<span class="string">"D://abc.txt"</span>, <span class="string">"rw"</span>);</div><div class="line">				raf.seek(skip);</div><div class="line">				raf.write(content);</div><div class="line">			&#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</div><div class="line">				e.printStackTrace();</div><div class="line">			&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">				<span class="comment">// TODO Auto-generated catch block</span></div><div class="line">				e.printStackTrace();</div><div class="line">			&#125; <span class="keyword">finally</span> &#123;</div><div class="line">				<span class="keyword">try</span> &#123;</div><div class="line">					raf.close();</div><div class="line">				&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
+        <p><strong>RandomAccessFile</strong></p>
+<p>RandomAccessFile是用来访问那些保存数据记录的文件的，你就可以用seek( )方法来访问记录，并进行读写了。这些记录的大小不必相同；但是其大小和位置必须是可知的。但是该类仅限于操作文件。</p>
+<p>RandomAccessFile不属于InputStream和OutputStream类系的。实际上，除了实现DataInput和DataOutput接口之外(DataInputStream和DataOutputStream也实现了这两个接口)，它和这两个类系毫不相干，甚至不使用InputStream和OutputStream类中已经存在的任何功能；它是一个完全独立的类，所有方法(绝大多数都只属于它自己)都是从零开始写的。这可能是因为RandomAccessFile能在文件里面前后移动，所以它的行为与其它的I/O类有些根本性的不同。总而言之，它是一个直接继承Object的，独立的类。基本上，RandomAccessFile的工作方式是，把DataInputStream和DataOutputStream结合起来，再加上它自己的一些方法，比如定位用的getFilePointer( )，在文件里移动用的seek( )，以及判断文件大小的length( )、skipBytes()跳过多少字节数。此外，它的构造函数还要一个表示以只读方式(“r”)，还是以读写方式(“rw”)打开文件的参数 (和C的fopen( )一模一样)。它不支持只写文件。</p>
+<p>只有RandomAccessFile才有seek搜寻方法，而这个方法也只适用于文件。BufferedInputStream有一个mark( )方法，你可以用它来设定标记(把结果保存在一个内部变量里)，然后再调用reset( )返回这个位置，但是它的功能太弱了，而且也不怎么实用。RandomAccessFile的绝大多数功能，但不是全部，已经被<strong>JDK 1.4的nio的”内存映射文件(memory-mapped files)”</strong>给取代了，你该考虑一下是不是用”内存映射文件”来代替RandomAccessFile了。</p>
+        
+          <a class="article-more-a" href="/2016/11/05/Java中-RandomAccessFile-用法/#more">more >></a>
+        
       
 
       
@@ -303,7 +293,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/work/" class="article-tag-list-link color5">work</a>
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
         		</li>
       		
 		</ul>
@@ -330,19 +320,19 @@
 
 
   
-    <article id="post-Java中的String-StringBuilder和StringBuffer" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Java 中的 String-StringBuilder 和 StringBuffer" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/03/Java中的String-StringBuilder和StringBuffer/">Java中的String StringBuilder和StringBuffer</a>
+      <a class="article-title" href="/2016/11/03/Java 中的 String-StringBuilder 和 StringBuffer/">Java中的String StringBuilder和StringBuffer</a>
     </h1>
   
 
         
-        <a href="/2016/11/03/Java中的String-StringBuilder和StringBuffer/" class="archive-article-date">
+        <a href="/2016/11/03/Java 中的 String-StringBuilder 和 StringBuffer/" class="archive-article-date">
   	<time datetime="2016-11-03T13:57:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-11-03</time>
 </a>
         
@@ -350,105 +340,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="String对象的创建"><a href="#String对象的创建" class="headerlink" title="String对象的创建"></a>String对象的创建</h2><p> 1、关于类对象的创建，很普通的一种方式就是利用构造器，String类也不例外：String s=new String(“Hello world”); 问题是参数”Hello world”是什么东西，也是字符串对象吗?莫非用字符串对象创建一个字符串对象?</p>
+        <p><strong>String对象的创建</strong></p>
+<p> 1、关于类对象的创建，很普通的一种方式就是利用构造器，String类也不例外：String s=new String(“Hello world”); 问题是参数”Hello world”是什么东西，也是字符串对象吗?莫非用字符串对象创建一个字符串对象?</p>
 <p> 2、当然，String类对象还有一种大家都很喜欢的创建方式：String s=”Hello world”; 但是有点怪呀，怎么与基本数据类型的赋值操作（int i=1）很像?</p>
-<ul>
-<li><p>Java class文件结构 和常量池</p>
-<p>我们知道，Java程序要运行，首先需要编译器将源代码文件编译成字节码文件(也就是.class文件)。然后在由JVM解释执行。</p>
-<p>   class文件是8位字节的二进制流 。这些二进制流的涵义由一些紧凑的有意义的项 组成。比如class字节流中最开始的4个字节组成的项叫做魔数 (magic)，其意义在于分辨class文件(值为0xCAFEBABE)与非class文件。class字节流大致结构如下图左侧。</p>
-</li>
-</ul>
+<p><strong>Java class 文件结构和常量池</strong></p>
+<p>我们知道，Java程序要运行，首先需要编译器将源代码文件编译成字节码文件(也就是.class文件)。然后在由JVM解释执行。class文件是8位字节的二进制流 。这些二进制流的涵义由一些紧凑的有意义的项 组成。比如class字节流中最开始的4个字节组成的项叫做魔数 (magic)，其意义在于分辨class文件(值为0xCAFEBABE)与非class文件。class字节流大致结构如下图左侧。</p>
 <p><img src="http://dl.iteye.com/upload/picture/pic/50015/1f7bd098-2b41-3f95-b129-460190f351ba.gif" alt="pic"></p>
 <p>其中，在class文件中有一个非常重要的项——常量池 。这个常量池专门放置源代码中的符号信息(并且不同的符号信息放置在不同标志的常量表中)。如上图右侧是HelloWorld代码中的常量表（HelloWorld代码如下），其中有四个不同类型的常量表(四个不同的常量池入口)。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span></span>&#123;  </div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">hello</span><span class="params">()</span></span>&#123;  </div><div class="line">        System.out.println(<span class="string">"Hello world"</span>);  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>通过上图可见，代码中的”Hello world”字符串字面值被编译之后，可以清楚的看到存放在了class常量池中的字符串常量表中(上图右侧红框区域)。</p>
-<ul>
-<li>JVM运行class文件</li>
-</ul>
-<p>源代码编译成class文件之后，JVM就要运行这个class文件。它首先会用类装载器加载进class文件。然后需要创建许多内存数据结构来存放class文件中的字节数据。比如class文件对应的类信息数据、常量池结构、方法中的二进制指令序列、类方法与字段的描述信息等等。当然，在运行的时候，还需要为方法创建栈帧等。这么多的内存结构当然需要管理，JVM会把这些东西都组织到几个“运行时数据区 ”中。这里面就有我们经常说的“方法区 ”、“堆 ”、“Java栈 ”等。</p>
-<p>上面我们提到了，在Java源代码中的每一个字面值字符串，都会在编译成class文件阶段，形成标志号 为8(CONSTANT_String_info)的常量表 。 当JVM加载 class文件的时候，会为对应的常量池建立一个内存数据结构，并存放在方法区中。同时JVM会自动为CONSTANT_String_info常量表 的字符串常量字面值 在堆中 创建 新的String对象(intern字符串 对象，又叫拘留字符串对象)。然后把CONSTANT_String_info常量表的入口地址转变成这个堆中String对象的直接地址(常量池解析)。</p>
-<p> 这里很关键的就是这个拘留字符串对象 。源代码中所有相同字面值的字符串常量只可能建立唯一一个拘留字符串对象。 实际上JVM是通过一个记录了拘留字符串引用的内部数据结构来维持这一特性的。在Java程序中，可以调用String的intern()方法来使得一个常规字符串对象成为拘留字符串对象。我们会在后面介绍这个方法的。</p>
-<ul>
-<li>操作码助忆符指令 </li>
-</ul>
-<p>有了上面阐述的两个知识前提，下面我们将根据二进制指令来区别两种字符串对象的创建方式：</p>
-<p> (1) String s=new String(“Hello world”);编译成class文件后的指令(在myeclipse中查看)</p>
-<p> <strong>Class字节码指令集代码</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">0  new java.lang.String [15]  //在堆中分配一个String类对象的空间，并将该对象的地址堆入操作数栈。  </div><div class="line">3  dup //复制操作数栈顶数据，并压入操作数栈。该指令使得操作数栈中有两个String对象的引用值。  </div><div class="line">4  ldc &lt;String &quot;Hello world&quot;&gt; [17] //将常量池中的字符串常量&quot;Hello world&quot;指向的堆中拘留String对象的地址压入操作数栈  </div><div class="line">6  invokespecial java.lang.String(java.lang.String) [19] //调用String的初始化方法，弹出操作数栈栈顶的两个对象地址，用拘留String对象的值初始化new指令创建的String对象，然后将这个对象的引用压入操作数栈  </div><div class="line">9  astore_1 [s] // 弹出操作数栈顶数据存放在局部变量区的第一个位置上。此时存放的是new指令创建出的，已经被初始化的String对象的地址 （此时的栈顶值弹出存入局部变量中去)。</div></pre></td></tr></table></figure>
-<p><strong>注意</strong></p>
-<blockquote>
-<p>这里有个dup指令。其作用就是复制之前分配的Java.lang.String空间的引用并压入栈顶。那么这里为什么需要这样么做呢？因为invokespecial指令通过[15]这个常量池入口寻找到了java.lang.String()构造方法，构造方法虽然找到了。但是必须还得知道是谁的构造方法，所以要将之前分配的空间的应用压入栈顶让invokespecial命令应用才知道原来这个构造方法是刚才创建的那个引用的，调用完成之后将栈顶的值弹出。之后调用astore_1将此时的栈顶值弹出存入局部变量中去。</p>
-</blockquote>
-<p> 事实上，在运行这段指令之前，JVM就已经为”Hello world”在堆中创建了一个拘留字符串( 值得注意的是：如果源程序中还有一个”Hello world”字符串常量，那么他们都对应了同一个堆中的拘留字符串)。然后用这个拘留字符串的值来初始化堆中用new指令创建出来的新的String对象，局部变量s实际上存储的是new出来的堆对象地址。 大家注意了，此时在JVM管理的堆中，有两个相同字符串值的String对象：一个是拘留字符串对象，一个是new新建的字符串对象。如果还有一条创建语句String s1=new String(“Hello world”)；堆中有几个值为”Hello world”的字符串呢? 答案是3个。</p>
-<p>(2)将String s=”Hello world”;编译成class文件后的指令:</p>
-<p><strong>Class字节码指令集代码</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">0  ldc &lt;String &quot;Hello world&quot;&gt; [15]//将常量池中的字符串常量&quot;Hello world&quot;指向的堆中拘留String对象的地址压入操作数栈  </div><div class="line">2  astore_1 [str] // 弹出操作数栈顶数据存放在局部变量区的第一个位置上。此时存放的是拘留字符串对象在堆中的地址</div></pre></td></tr></table></figure>
-<p>和上面的创建指令有很大的不同，局部变量s存储的是早已创建好的拘留字符串的堆地址(没有new 的对象了)。 大家好好想想，如果还有一条穿件语句String s1=”Hello word”；此时堆中有几个值为”Hello world”的字符串呢?答案是1个。那么局部变量s与s1存储的地址是否相同呢？</p>
-<p><strong>总结</strong></p>
-<ul>
-<li>关于字符串相等关系的争论</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//代码1  </span></div><div class="line">String sa=<span class="keyword">new</span> String(<span class="string">"Hello world"</span>);            </div><div class="line">String sb=<span class="keyword">new</span> String(<span class="string">"Hello world"</span>);      </div><div class="line">System.out.println(sa==sb);  <span class="comment">// false       </span></div><div class="line"><span class="comment">//代码2    </span></div><div class="line">String sc=<span class="string">"Hello world"</span>;    </div><div class="line">String sd=<span class="string">"Hello world"</span>;  </div><div class="line">System.out.println(sc==sd);  <span class="comment">// true</span></div></pre></td></tr></table></figure>
-<p>  <strong>代码1</strong>中局部变量sa,sb中存储的是JVM在堆中new出来的两个String对象的内存地址。虽然这两个String对象的值(char[]存放的字符序列)都是”Hello world”。 因此”==”比较的是两个不同的堆地址。</p>
-<p>  <strong>代码2</strong>中局部变量sc,sd中存储的也是地址，但却都是常量池中”Hello world”指向的堆的唯一的那个拘留字符串对象的地址 。自然相等了。</p>
-<ul>
-<li>字符串“+”操作的内幕</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//代码1  </span></div><div class="line">String sa = <span class="string">"ab"</span>;                                          </div><div class="line">String sb = <span class="string">"cd"</span>;                                       </div><div class="line">String sab=sa+sb;                                      </div><div class="line">String s=<span class="string">"abcd"</span>;  </div><div class="line">System.out.println(sab==s); <span class="comment">// false  </span></div><div class="line"><span class="comment">//代码2  </span></div><div class="line">String sc=<span class="string">"ab"</span>+<span class="string">"cd"</span>;  </div><div class="line">String sd=<span class="string">"abcd"</span>;  </div><div class="line">System.out.println(sc==sd); <span class="comment">//true</span></div></pre></td></tr></table></figure>
-<p><strong>代码1</strong> 中局部变量sa,sb存储的是堆中两个拘留字符串对象的地址。而当执行sa+sb时，JVM首先会在堆中创建一个StringBuilder类，同时用sa指向的拘留字符串对象完成初始化，然后调用append方法完成对sb所指向的拘留字符串的合并操作，接着调用StringBuilder的toString()方法在堆中创建一个String对象，最后将刚生成的String对象的堆地址存放在局部变量sab中。而局部变量s存储的是常量池中”abcd”所对应的拘留字符串对象的地址。 sab与s地址当然不一样了。这里要注意了，代码1的堆中实际上有五个字符串对象：三个拘留字符串对象、一个String对象和一个StringBuilder对象。</p>
-<p><strong>代码2</strong>中”ab”+”cd”会直接在编译期就合并成常量”abcd”， 因此相同字面值常量”abcd”所对应的是同一个拘留字符串对象，自然地址也就相同。</p>
-<h2 id="String、StringBuffer、StringBuilder"><a href="#String、StringBuffer、StringBuilder" class="headerlink" title="String、StringBuffer、StringBuilder"></a>String、StringBuffer、StringBuilder</h2><blockquote>
-<p>String(JDK1.0时代) 不可变字符序列</p>
-<p>StringBuffer(JDK1.0) 线程安全的可变字符序列</p>
-<p>StringBuilder(JDK1.5) 非线程安全的可变字符序列</p>
-</blockquote>
-<ul>
-<li>StringBuffer与String的可变性问题</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//String   </span></div><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">String</span>  </span></div><div class="line">&#123;  </div><div class="line">        <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">char</span> value[];  </div><div class="line">  </div><div class="line">         <span class="function"><span class="keyword">public</span> <span class="title">String</span><span class="params">(String original)</span> </span>&#123;  </div><div class="line">              <span class="comment">// 把原字符串original切分成字符数组并赋给value[];  </span></div><div class="line">         &#125;  </div><div class="line">&#125;  </div><div class="line">  </div><div class="line"><span class="comment">//StringBuffer   </span></div><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">StringBuffer</span> <span class="keyword">extends</span> <span class="title">AbstractStringBuilder</span>  </span></div><div class="line">&#123;  </div><div class="line">         <span class="keyword">char</span> value[]; <span class="comment">//继承了父类AbstractStringBuilder中的value[]  </span></div><div class="line">         <span class="function"><span class="keyword">public</span> <span class="title">StringBuffer</span><span class="params">(String str)</span> </span>&#123;  </div><div class="line">                 <span class="keyword">super</span>(str.length() + <span class="number">16</span>); <span class="comment">//继承父类的构造器，并创建一个大小为str.length()+16的value[]数组  </span></div><div class="line">                 append(str); <span class="comment">//将str切分成字符序列并加入到value[]中  </span></div><div class="line">        &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>String和StringBuffer中的value[]都用于存储字符序列。但是</p>
-<p><strong>(1) String中的是常量(final)数组，只能被赋值一次。</strong> </p>
-<p> 比如：new String(“abc”)使得value[]={‘a’,’b’,’c’}(查看jdk String 就是这么实现的)，之后这个String对象中的value[]再也不能改变了。这也正是大家常说的，String是不可变的原因。</p>
-<p> 注意：这个对初学者来说有个误区，有人说String str1=new String(“abc”); str1=new String(“cba”);不是改变了字符串str1吗？那么你有必要先搞懂对象引用和对象本身的区别。这里我简单的说明一下，对象本身指的是存放在堆空间中的该对象的实例数据(非静态非常量字段)。而对象引用指的是堆中对象本身所存放的地址，一般方法区和Java栈中存储的都是对象引用，而非对象本身的数据。</p>
-<p><strong>(2) StringBuffer中的value[]就是一个很普通的数组，而且可以通过append()方法将新字符串加入value[]末尾。这样也就改变了value[]的内容和大小了。</strong></p>
-<p>比如：new StringBuffer(“abc”)使得value[]={‘a’,’b’,’c’,’’,’’…}(注意构造的长度是str.length()+16)。如果再将这个对象append(“abc”)，那么这个对象中的value[]={‘a’,’b’,’c’,’a’,’b’,’c’,’’….}。这也就是为什么大家说 StringBuffer是可变字符串 的涵义了。从这一点也可以看出，StringBuffer中的value[]完全可以作为字符串的缓冲区功能。<strong>其累加性能是很不错的</strong>，在后面我们会进行比较。</p>
-<p>总结，讨论String和StringBuffer可不可变。本质上是指对象中的value[]字符数组可不可变，而不是对象引用可不可变。</p>
-<ul>
-<li>StringBuffer与StringBuilder的线程安全性问题 </li>
-</ul>
-<p>StringBuffer和StringBuilder可以算是双胞胎了，这两者的方法没有很大区别。但在线程安全性方面，StringBuffer允许多线程进行字符操作。这是因为在源代码中StringBuffer的很多方法都被关键字synchronized 修饰了，而StringBuilder没有。</p>
-<p>有多线程编程经验的程序员应该知道synchronized。这个关键字是为线程同步机制 设定的。简要阐述一下synchronized的含义：</p>
-<blockquote>
-<p>每一个类对象都对应一把锁，当某个线程A调用类对象O中的synchronized方法M时，必须获得对象O的锁才能够执行M方法，否则线程A阻塞。一旦线程A开始执行M方法，将独占对象O的锁。使得其它需要调用O对象的M方法的线程阻塞。只有线程A执行完毕，释放锁后。那些阻塞线程才有机会重新调用M方法。这就是解决线程同步问题的锁机制。</p>
-</blockquote>
-<p>了解了synchronized的含义以后，大家可能都会有这个感觉。多线程编程中StringBuffer比StringBuilder要安全多了 ，事实确实如此。如果有多个线程需要对同一个字符串缓冲区进行操作的时候，StringBuffer应该是不二选择。</p>
-<p>注意：是不是String也不安全呢？事实上不存在这个问题，String是不可变的。线程对于堆中指定的一个String对象只能读取，无法修改。试问：还有什么不安全的呢？ </p>
-<h2 id="String和StringBuffer的效率问题"><a href="#String和StringBuffer的效率问题" class="headerlink" title="String和StringBuffer的效率问题"></a>String和StringBuffer的效率问题</h2><p>首先说明一点：StringBuffer和StringBuilder可谓双胞胎，StringBuilder是1.5新引入的，其前身就是StringBuffer。StringBuilder的效率比StringBuffer稍高，如果不考虑线程安全，StringBuilder应该是首选。另外，JVM运行程序主要的时间耗费是在创建对象和回收对象上。</p>
-<p>我们用下面的代码运行1W次字符串的连接操作，测试String,StringBuffer所运行的时间。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//测试代码  </span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RunTime</span></span>&#123;  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;  </div><div class="line">           ● 测试代码位置<span class="number">1</span>  </div><div class="line">          <span class="keyword">long</span> beginTime=System.currentTimeMillis();  </div><div class="line">          <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10000</span>;i++)&#123;  </div><div class="line">                 ● 测试代码位置<span class="number">2</span>  </div><div class="line">          &#125;  </div><div class="line">          <span class="keyword">long</span> endTime=System.currentTimeMillis();  </div><div class="line">          System.out.println(endTime-beginTime);     </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><strong>(1) String常量与String变量的”+”操作比较</strong> </p>
-<p>测试①代码：<br>(测试代码位置1)  String str=””;<br>(测试代码位置2)  str=”Heart”+”Raid”;<br>[耗时：  0ms]</p>
-<p>测试②代码<br>(测试代码位置1)<br>String s1=”Heart”;<br>String s2=”Raid”;<br>String str=””;<br>(测试代码位置2)<br>str=s1+s2;<br>[耗时：  15—16ms]</p>
-<blockquote>
-<p>结论：String常量的“+连接”  稍优于  String变量的“+连接”。</p>
-<p>原因：测试①的”Heart”+”Raid”在编译阶段就已经连接起来，形成了一个字符串常量”HeartRaid”，并指向堆中的拘留字符串对象。运行时只需要将”HeartRaid”指向的拘留字符串对象地址取出1W次，存放在局部变量str中。这确实不需要什么时间。<br>               测试②中局部变量s1和s2存放的是两个不同的拘留字符串对象的地址。然后会通过下面三个步骤完成“+连接”：<br>                                1、StringBuilder temp=new StringBuilder(s1)，<br>                                2、temp.append(s2);<br>                                3、str=temp.toString();<br>               我们发现，虽然在中间的时候也用到了append()方法，但是在开始和结束的时候分别创建了StringBuilder和String对象。可想而知：调用1W次，是不是就创建了1W次这两种对象呢？不划算。<br>     但是，String变量的”+连接”操作比String常量的”+连接”操作使用的更加广泛。 这一点是不言而喻的。</p>
-</blockquote>
-<p><strong>(2)String对象的”累+”连接操作与StringBuffer对象的append()累和连接操作比较。</strong></p>
-<p>测试①代码：<br>(代码位置1)<br>String s1=”Heart”;<br>String s=””;<br>(代码位置2)<br>s=s+s1;<br>[耗时：  4200—4500ms]</p>
-<p>测试②代码<br>(代码位置1)<br>String s1=”Heart”;<br>StringBuffer sb=new StringBuffer();<br>(代码位置2)<br>sb.append(s1);<br>[耗时：  0ms(当循环100000次的时候，耗时大概16—31ms)]</p>
-<blockquote>
-<p>结论：大量字符串累加时，StringBuffer的append()效率远好于String对象的”累+”连接 </p>
-<p>原因：测试① 中的s=s+s1，JVM会利用首先创建一个StringBuilder，并利用append方法完成s和s1所指向的字符串对象值的合并操作，接着调用StringBuilder的 toString()方法在堆中创建一个新的String对象，其值为刚才字符串的合并结果。而局部变量s指向了新创建的String对象。<br>                  因为String对象中的value[]是不能改变的，每一次合并后字符串值都需要创建一个新的String对象来存放。循环1W次自然需要创建1W个String对象和1W个StringBuilder对象，效率低就可想而知了。<br>测试②中sb.append(s1);只需要将自己的value[]数组不停的扩大来存放s1即可。循环过程中无需在堆中创建任何新的对象。效率高就不足为奇了。    </p>
-</blockquote>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
-<li><p>在编译阶段就能够确定的字符串常量，完全没有必要创建String或StringBuffer对象。直接使用字符串常量的”+”连接操作效率最高。</p>
-</li>
-<li><p>StringBuffer对象的append效率要高于String对象的”+”连接操作。</p>
-</li>
-<li><p>不停的创建对象是程序低效的一个重要原因。那么相同的字符串值能否在堆中只创建一个String对象那。显然拘留字符串能够做到这一点，除了程序中的字符串常量会被JVM自动创建拘留字符串之外，调用String的intern()方法也能做到这一点。当调用intern()时，如果常量池中已经有了当前String的值，那么返回这个常量指向拘留对象的地址。如果没有，则将String值加入常量池中，并创建一个新的拘留字符串对象。</p>
-</li>
-</ul>
-
+        
+          <a class="article-more-a" href="/2016/11/03/Java 中的 String-StringBuilder 和 StringBuffer/#more">more >></a>
+        
       
 
       
@@ -473,7 +375,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/work/" class="article-tag-list-link color5">work</a>
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
         		</li>
       		
 		</ul>
@@ -482,7 +384,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2016/11/03/Java中的String-StringBuilder和StringBuffer/">展开全文 >></a>
+          <a class="article-more-a" href="/2016/11/03/Java 中的 String-StringBuilder 和 StringBuffer/">展开全文 >></a>
         </p>
       
 
@@ -1451,7 +1353,7 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1459,7 +1361,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color5">main</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1467,19 +1369,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">tool</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">main</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">os</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">javaweb</a>
+                <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1491,7 +1381,19 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">javaweb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">wireshark</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">tool</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">os</a>
               </li>
              
               <li class="article-tag-list-item">
