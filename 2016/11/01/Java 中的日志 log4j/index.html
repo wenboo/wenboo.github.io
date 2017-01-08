@@ -12,8 +12,7 @@
 入门实例
 1. 新建一个Java工程，导入导入包log4j-1.2.17.jar，整个工程最终目录如下
 
-2. src同级创建并设置log4j.properties
-12345">
+2. src同级创建并设置log4j.properties">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java中的日志log4j">
 <meta property="og:url" content="http://wenboo.github.io/2016/11/01/Java 中的日志 log4j/index.html">
@@ -22,22 +21,20 @@
 入门实例
 1. 新建一个Java工程，导入导入包log4j-1.2.17.jar，整个工程最终目录如下
 
-2. src同级创建并设置log4j.properties
-12345">
+2. src同级创建并设置log4j.properties">
 <meta property="og:image" content="http://static.codeceo.com/images/2015/05/4b08140cb7fc48b1af2646ad4b021735.jpg">
 <meta property="og:image" content="http://static.codeceo.com/images/2015/05/80700478ec208d187f60107a6a517712.jpg">
 <meta property="og:image" content="http://static.codeceo.com/images/2015/05/8a57406bc3f02fcd687fce535fc546ee.jpg">
 <meta property="og:image" content="http://static.codeceo.com/images/2015/05/e3dc8eb3a3841a2f50dd24567f41b4d5.jpg">
 <meta property="og:image" content="http://static.codeceo.com/images/2015/05/f82057d8ca93b4f23893cc9e204f1a51.jpg">
-<meta property="og:updated_time" content="2017-01-08T13:24:46.092Z">
+<meta property="og:updated_time" content="2017-01-08T13:31:04.355Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java中的日志log4j">
 <meta name="twitter:description" content="日志是应用软件中不可缺少的部分，Apache的开源项目log4j是一个功能强大的日志组件,提供方便的日志记录。在apache网站：jakarta.apache.org/log4j 可以免费下载到Log4j最新版本的软件包。
 入门实例
 1. 新建一个Java工程，导入导入包log4j-1.2.17.jar，整个工程最终目录如下
 
-2. src同级创建并设置log4j.properties
-12345">
+2. src同级创建并设置log4j.properties">
 <meta name="twitter:image" content="http://static.codeceo.com/images/2015/05/4b08140cb7fc48b1af2646ad4b021735.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hi~Welcome to Wenboo&#39;s Blog" type="application/atom+xml">
@@ -215,6 +212,7 @@
 <p><strong>1. 新建一个Java工程，导入导入包log4j-1.2.17.jar，整个工程最终目录如下</strong></p>
 <p><img src="http://static.codeceo.com/images/2015/05/4b08140cb7fc48b1af2646ad4b021735.jpg" alt="pic"></p>
 <p><strong>2. src同级创建并设置log4j.properties</strong></p>
+<a id="more"></a>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">### 设置###</div><div class="line">log4j.rootLogger = debug,stdout,D,E</div><div class="line"></div><div class="line">### 输出信息到控制抬 ###</div><div class="line">log4j.appender.stdout = org.apache.log4j.ConsoleAppender</div><div class="line">log4j.appender.stdout.Target = System.out</div><div class="line">log4j.appender.stdout.layout = org.apache.log4j.PatternLayout</div><div class="line">log4j.appender.stdout.layout.ConversionPattern = [%-5p] %d&#123;yyyy-MM-dd HH:mm:ss,SSS&#125; method:%l%n%m%n</div><div class="line"></div><div class="line">### 输出DEBUG 级别以上的日志到=E://logs/error.log ###</div><div class="line">log4j.appender.D = org.apache.log4j.DailyRollingFileAppender</div><div class="line">log4j.appender.D.File = E://logs/log.log</div><div class="line">log4j.appender.D.Append = true</div><div class="line">log4j.appender.D.Threshold = DEBUG </div><div class="line">log4j.appender.D.layout = org.apache.log4j.PatternLayout</div><div class="line">log4j.appender.D.layout.ConversionPattern = %-d&#123;yyyy-MM-dd HH:mm:ss&#125;  [ %t:%r ] - [ %p ]  %m%n</div><div class="line"></div><div class="line">### 输出ERROR 级别以上的日志到=E://logs/error.log ###</div><div class="line">log4j.appender.E = org.apache.log4j.DailyRollingFileAppender</div><div class="line">log4j.appender.E.File =E://logs/error.log </div><div class="line">log4j.appender.E.Append = true</div><div class="line">log4j.appender.E.Threshold = ERROR </div><div class="line">log4j.appender.E.layout = org.apache.log4j.PatternLayout</div><div class="line">log4j.appender.E.layout.ConversionPattern = %-d&#123;yyyy-MM-dd HH:mm:ss&#125;  [ %t:%r ] - [ %p ]  %m%n</div></pre></td></tr></table></figure>
 <p><strong>3. 设置日志内容</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.mucfc;</div><div class="line"><span class="keyword">import</span> org.apache.log4j.Logger;</div><div class="line"><span class="comment">/**</span></div><div class="line"> *<span class="doctag">@author</span> linbingwen</div><div class="line"> *@2015年5月18日9:14:21</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> Logger logger = Logger.getLogger(Test.class);  </div><div class="line"></div><div class="line">    <span class="comment">/** </span></div><div class="line">     * <span class="doctag">@param</span> args </div><div class="line">     */  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;  </div><div class="line">        <span class="comment">// System.out.println("This is println message.");  </span></div><div class="line"></div><div class="line">        <span class="comment">// 记录debug级别的信息  </span></div><div class="line">        logger.debug(<span class="string">"This is debug message."</span>);  </div><div class="line">        <span class="comment">// 记录info级别的信息  </span></div><div class="line">        logger.info(<span class="string">"This is info message."</span>);  </div><div class="line">        <span class="comment">// 记录error级别的信息  </span></div><div class="line">        logger.error(<span class="string">"This is error message."</span>);  </div><div class="line">    &#125;  </div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -487,15 +485,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">tool</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -503,11 +493,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">main</a>
+                <a href="javascript:void(0)" class="js-tag color5">tool</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">java,tomcat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">main</a>
               </li>
              
               <li class="article-tag-list-item">
