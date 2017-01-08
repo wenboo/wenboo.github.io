@@ -402,19 +402,19 @@
 
 
   
-    <article id="post-Java中的日志log4j" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Java 中的日志 log4j" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/01/Java中的日志log4j/">Java中的日志log4j</a>
+      <a class="article-title" href="/2016/11/01/Java 中的日志 log4j/">Java中的日志log4j</a>
     </h1>
   
 
         
-        <a href="/2016/11/01/Java中的日志log4j/" class="archive-article-date">
+        <a href="/2016/11/01/Java 中的日志 log4j/" class="archive-article-date">
   	<time datetime="2016-11-01T14:28:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-11-01</time>
 </a>
         
@@ -423,23 +423,23 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>日志是应用软件中不可缺少的部分，Apache的开源项目log4j是一个功能强大的日志组件,提供方便的日志记录。在apache网站：jakarta.apache.org/log4j 可以免费下载到Log4j最新版本的软件包。</p>
-<h2 id="入门实例"><a href="#入门实例" class="headerlink" title="入门实例"></a>入门实例</h2><p><strong>1. 新建一个Java工程，导入导入包log4j-1.2.17.jar，整个工程最终目录如下</strong></p>
+<p><strong>入门实例</strong></p>
+<p><strong>1. 新建一个Java工程，导入导入包log4j-1.2.17.jar，整个工程最终目录如下</strong></p>
 <p><img src="http://static.codeceo.com/images/2015/05/4b08140cb7fc48b1af2646ad4b021735.jpg" alt="pic"></p>
 <p><strong>2. src同级创建并设置log4j.properties</strong></p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"> ### 设置###</div><div class="line">log4j.rootLogger = debug,stdout,D,E</div><div class="line"></div><div class="line">### 输出信息到控制抬 ###</div><div class="line">log4j.appender.stdout = org.apache.log4j.ConsoleAppender</div><div class="line">log4j.appender.stdout.Target = System.out</div><div class="line">log4j.appender.stdout.layout = org.apache.log4j.PatternLayout</div><div class="line">log4j.appender.stdout.layout.ConversionPattern = [%-5p] %d&#123;yyyy-MM-dd HH:mm:ss,SSS&#125; method:%l%n%m%n</div><div class="line"></div><div class="line">### 输出DEBUG 级别以上的日志到=E://logs/error.log ###</div><div class="line">log4j.appender.D = org.apache.log4j.DailyRollingFileAppender</div><div class="line">log4j.appender.D.File = E://logs/log.log</div><div class="line">log4j.appender.D.Append = true</div><div class="line">log4j.appender.D.Threshold = DEBUG </div><div class="line">log4j.appender.D.layout = org.apache.log4j.PatternLayout</div><div class="line">log4j.appender.D.layout.ConversionPattern = %-d&#123;yyyy-MM-dd HH:mm:ss&#125;  [ %t:%r ] - [ %p ]  %m%n</div><div class="line"></div><div class="line">### 输出ERROR 级别以上的日志到=E://logs/error.log ###</div><div class="line">log4j.appender.E = org.apache.log4j.DailyRollingFileAppender</div><div class="line">log4j.appender.E.File =E://logs/error.log </div><div class="line">log4j.appender.E.Append = true</div><div class="line">log4j.appender.E.Threshold = ERROR </div><div class="line">log4j.appender.E.layout = org.apache.log4j.PatternLayout</div><div class="line">log4j.appender.E.layout.ConversionPattern = %-d&#123;yyyy-MM-dd HH:mm:ss&#125;  [ %t:%r ] - [ %p ]  %m%n</div></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">### 设置###</div><div class="line">log4j.rootLogger = debug,stdout,D,E</div><div class="line"></div><div class="line">### 输出信息到控制抬 ###</div><div class="line">log4j.appender.stdout = org.apache.log4j.ConsoleAppender</div><div class="line">log4j.appender.stdout.Target = System.out</div><div class="line">log4j.appender.stdout.layout = org.apache.log4j.PatternLayout</div><div class="line">log4j.appender.stdout.layout.ConversionPattern = [%-5p] %d&#123;yyyy-MM-dd HH:mm:ss,SSS&#125; method:%l%n%m%n</div><div class="line"></div><div class="line">### 输出DEBUG 级别以上的日志到=E://logs/error.log ###</div><div class="line">log4j.appender.D = org.apache.log4j.DailyRollingFileAppender</div><div class="line">log4j.appender.D.File = E://logs/log.log</div><div class="line">log4j.appender.D.Append = true</div><div class="line">log4j.appender.D.Threshold = DEBUG </div><div class="line">log4j.appender.D.layout = org.apache.log4j.PatternLayout</div><div class="line">log4j.appender.D.layout.ConversionPattern = %-d&#123;yyyy-MM-dd HH:mm:ss&#125;  [ %t:%r ] - [ %p ]  %m%n</div><div class="line"></div><div class="line">### 输出ERROR 级别以上的日志到=E://logs/error.log ###</div><div class="line">log4j.appender.E = org.apache.log4j.DailyRollingFileAppender</div><div class="line">log4j.appender.E.File =E://logs/error.log </div><div class="line">log4j.appender.E.Append = true</div><div class="line">log4j.appender.E.Threshold = ERROR </div><div class="line">log4j.appender.E.layout = org.apache.log4j.PatternLayout</div><div class="line">log4j.appender.E.layout.ConversionPattern = %-d&#123;yyyy-MM-dd HH:mm:ss&#125;  [ %t:%r ] - [ %p ]  %m%n</div></pre></td></tr></table></figure>
 <p><strong>3. 设置日志内容</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.mucfc;</div><div class="line"><span class="keyword">import</span> org.apache.log4j.Logger;</div><div class="line"><span class="comment">/**</span></div><div class="line"> *<span class="doctag">@author</span> linbingwen</div><div class="line"> *@2015年5月18日9:14:21</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> Logger logger = Logger.getLogger(Test.class);  </div><div class="line"></div><div class="line">    <span class="comment">/** </span></div><div class="line">     * <span class="doctag">@param</span> args </div><div class="line">     */  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;  </div><div class="line">        <span class="comment">// System.out.println("This is println message.");  </span></div><div class="line"></div><div class="line">        <span class="comment">// 记录debug级别的信息  </span></div><div class="line">        logger.debug(<span class="string">"This is debug message."</span>);  </div><div class="line">        <span class="comment">// 记录info级别的信息  </span></div><div class="line">        logger.info(<span class="string">"This is info message."</span>);  </div><div class="line">        <span class="comment">// 记录error级别的信息  </span></div><div class="line">        logger.error(<span class="string">"This is error message."</span>);  </div><div class="line">    &#125;  </div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p><strong>4. 输出结果</strong></p>
-<ul>
-<li><p>首先是控制台的信息<br><img src="http://static.codeceo.com/images/2015/05/80700478ec208d187f60107a6a517712.jpg" alt="pic"></p>
-</li>
-<li><p>再来看看输出文件<br><img src="http://static.codeceo.com/images/2015/05/8a57406bc3f02fcd687fce535fc546ee.jpg" alt="pic"></p>
-</li>
-</ul>
+<p>1) 首先是控制台的信息</p>
+<p><img src="http://static.codeceo.com/images/2015/05/80700478ec208d187f60107a6a517712.jpg" alt="pic"></p>
+<p>2) 再来看看输出文件</p>
+<p><img src="http://static.codeceo.com/images/2015/05/8a57406bc3f02fcd687fce535fc546ee.jpg" alt="pic"></p>
 <p>内容如下，发现已按照要求输出到对应的文档中去了。</p>
 <p><img src="http://static.codeceo.com/images/2015/05/e3dc8eb3a3841a2f50dd24567f41b4d5.jpg" alt="pic"></p>
 <p><img src="http://static.codeceo.com/images/2015/05/f82057d8ca93b4f23893cc9e204f1a51.jpg" alt="pic"></p>
-<h2 id="Log4j基本使用方法"><a href="#Log4j基本使用方法" class="headerlink" title="Log4j基本使用方法"></a>Log4j基本使用方法</h2><p>Log4j由三个重要的组件构成：日志信息的优先级，日志信息的输出目的地，日志信息的输出格式。日志信息的优先级从高到低有ERROR、WARN、 INFO、DEBUG，分别用来指定这条日志信息的重要程度；日志信息的输出目的地指定了日志将打印到控制台还是文件中；而输出格式则控制了日志信息的显 示内容。</p>
+<p><strong>Log4j基本使用方法</strong></p>
+<p>Log4j由三个重要的组件构成：日志信息的优先级，日志信息的输出目的地，日志信息的输出格式。日志信息的优先级从高到低有ERROR、WARN、 INFO、DEBUG，分别用来指定这条日志信息的重要程度；日志信息的输出目的地指定了日志将打印到控制台还是文件中；而输出格式则控制了日志信息的显 示内容。</p>
 <p><strong>定义配置文件</strong></p>
 <p>其实您也可以完全不使用配置文件，而是在代码中配置Log4j环境。但是，使用配置文件将使您的应用程序更加灵活。Log4j支持两种配置文件格式，一种是XML格式的文件，一种是Java特性文件（键=值）。下面我们介绍使用Java特性文件做为配置文件的方法：</p>
 <p><strong>1. 配置根Logger，其语法为：</strong></p>
@@ -452,22 +452,15 @@
 <p>其中，Log4j提供的layout有以下几种：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">org.apache.log4j.HTMLLayout（以HTML表格形式布局），  </div><div class="line">org.apache.log4j.PatternLayout（可以灵活地指定布局模式），  </div><div class="line">org.apache.log4j.SimpleLayout（包含日志信息的级别和信息字符串），  </div><div class="line">org.apache.log4j.TTCCLayout（包含日志产生的时间、线程、类别等等信息）</div></pre></td></tr></table></figure>
 <p>Log4J采用类似C语言中的printf函数的打印格式格式化日志信息，打印参数如下： %m 输出代码中指定的消息</p>
-<ul>
-<li><p>%p输出优先级，即DEBUG，INFO，WARN，ERROR，FATAL  </p>
-</li>
-<li><p>%r 输出自应用启动到输出该log信息耗费的毫秒数</p>
-</li>
-<li><p>%c 输出所属的类目，通常就是所在类的全名  </p>
-</li>
-<li><p>%t 输出产生该日志事件的线程名  </p>
-</li>
-<li><p>%n 输出一个回车换行符，Windows平台为“rn”，Unix平台为“n”  </p>
-</li>
-<li><p>%d 输出日志时间点的日期或时间，默认格式为ISO8601，也可以在其后指定格式，比如：%d{yyy MMM dd HH:mm:ss,SSS}，输出类似：2002年10月18日 22：10：28，921  </p>
-</li>
-<li><p>%l 输出日志事件的发生位置，包括类目名、发生的线程，以及在代码中的行数。举例：Testlog4.main(TestLog4.java:10)</p>
-</li>
-</ul>
+<blockquote>
+<p>%p 输出优先级，即DEBUG，INFO，WARN，ERROR，FATAL  </p>
+<p>%r 输出自应用启动到输出该log信息耗费的毫秒数</p>
+<p>%c 输出所属的类目，通常就是所在类的全名  </p>
+<p>%t 输出产生该日志事件的线程名  </p>
+<p>%n 输出一个回车换行符，Windows平台为“rn”，Unix平台为“n”  </p>
+<p>%d 输出日志时间点的日期或时间，默认格式为ISO8601，也可以在其后指定格式，比如：%d{yyy MMM dd HH:mm:ss,SSS}，输出类似：2002年10月18日 22：10：28，921  </p>
+<p>%l 输出日志事件的发生位置，包括类目名、发生的线程，以及在代码中的行数。举例：Testlog4.main(TestLog4.java:10)</p>
+</blockquote>
 
       
 
@@ -493,7 +486,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/work/" class="article-tag-list-link color5">work</a>
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
         		</li>
       		
 		</ul>
@@ -502,7 +495,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2016/11/01/Java中的日志log4j/">展开全文 >></a>
+          <a class="article-more-a" href="/2016/11/01/Java 中的日志 log4j/">展开全文 >></a>
         </p>
       
 
@@ -520,19 +513,19 @@
 
 
   
-    <article id="post-为什么Java中1000-1000为false而100-100为true" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-为什么 Java 中 1000-1000 为 false 而 100-100 为 true" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/31/为什么Java中1000-1000为false而100-100为true/">为什么Java中1000==1000为false而100==100为true</a>
+      <a class="article-title" href="/2016/10/31/为什么 Java 中 1000-1000 为 false 而 100-100 为 true/">为什么Java中1000==1000为false而100==100为true</a>
     </h1>
   
 
         
-        <a href="/2016/10/31/为什么Java中1000-1000为false而100-100为true/" class="archive-article-date">
+        <a href="/2016/10/31/为什么 Java 中 1000-1000 为 false 而 100-100 为 true/" class="archive-article-date">
   	<time datetime="2016-10-31T13:59:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-31</time>
 </a>
         
@@ -598,7 +591,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2016/10/31/为什么Java中1000-1000为false而100-100为true/">展开全文 >></a>
+          <a class="article-more-a" href="/2016/10/31/为什么 Java 中 1000-1000 为 false 而 100-100 为 true/">展开全文 >></a>
         </p>
       
 
@@ -1353,19 +1346,11 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">c</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">main</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1373,11 +1358,27 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
+                <a href="javascript:void(0)" class="js-tag color5">tool</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">main</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">java,tomcat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">os</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1386,14 +1387,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">wireshark</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">tool</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">os</a>
               </li>
              
               <li class="article-tag-list-item">

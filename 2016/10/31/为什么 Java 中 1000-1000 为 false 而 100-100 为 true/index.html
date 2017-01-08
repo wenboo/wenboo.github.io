@@ -6,14 +6,33 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://wenboo.github.io">
-  <title>Archives: 2017 | Hi~Welcome to Wenboo&#39;s Blog</title>
+  <title>为什么Java中1000==1000为false而100==100为true | Hi~Welcome to Wenboo&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hi~Welcome to Wenboo's Blog">
-<meta property="og:url" content="http://wenboo.github.io/archives/2017/index.html">
+  <meta name="description" content="这是一个挺有意思的讨论话题。
+如果你运行下面的代码
+123Integer a = 1000, b = 1000;System.out.println(a == b);//1 Integer c = 100, d = 100;  System.out.println(c == d);//2
+你会得到：
+12falsetrue
+基本知识：我们知道，如果两个引用指向同一个对象，用==表示它们是相等的。如">
+<meta property="og:type" content="article">
+<meta property="og:title" content="为什么Java中1000==1000为false而100==100为true">
+<meta property="og:url" content="http://wenboo.github.io/2016/10/31/为什么 Java 中 1000-1000 为 false 而 100-100 为 true/index.html">
 <meta property="og:site_name" content="Hi~Welcome to Wenboo's Blog">
+<meta property="og:description" content="这是一个挺有意思的讨论话题。
+如果你运行下面的代码
+123Integer a = 1000, b = 1000;System.out.println(a == b);//1 Integer c = 100, d = 100;  System.out.println(c == d);//2
+你会得到：
+12falsetrue
+基本知识：我们知道，如果两个引用指向同一个对象，用==表示它们是相等的。如">
+<meta property="og:updated_time" content="2016-10-31T14:03:47.179Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hi~Welcome to Wenboo's Blog">
+<meta name="twitter:title" content="为什么Java中1000==1000为false而100==100为true">
+<meta name="twitter:description" content="这是一个挺有意思的讨论话题。
+如果你运行下面的代码
+123Integer a = 1000, b = 1000;System.out.println(a == b);//1 Integer c = 100, d = 100;  System.out.println(c == d);//2
+你会得到：
+12falsetrue
+基本知识：我们知道，如果两个引用指向同一个对象，用==表示它们是相等的。如">
   
     <link rel="alternative" href="/atom.xml" title="Hi~Welcome to Wenboo&#39;s Blog" type="application/atom+xml">
   
@@ -165,169 +184,189 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-为什么 Java 中 1000-1000 为 false 而 100-100 为 true" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      为什么Java中1000==1000为false而100==100为true
+    </h1>
+  
+
+        
+        <a href="/2016/10/31/为什么 Java 中 1000-1000 为 false 而 100-100 为 true/" class="archive-article-date">
+  	<time datetime="2016-10-31T13:59:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-31</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这是一个挺有意思的讨论话题。</p>
+<p>如果你运行下面的代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Integer a = <span class="number">1000</span>, b = <span class="number">1000</span>;</div><div class="line">System.out.println(a == b);<span class="comment">//1 Integer c = 100, d = 100;  </span></div><div class="line">System.out.println(c == d);<span class="comment">//2</span></div></pre></td></tr></table></figure>
+<p>你会得到：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">false</span></div><div class="line"><span class="keyword">true</span></div></pre></td></tr></table></figure>
+<p><strong>基本知识：</strong>我们知道，如果两个引用指向同一个对象，用==表示它们是相等的。如果两个引用指向不同的对象，用==表示它们是不相等的，即使它们的内容相同。</p>
+<p>因此，后面一条语句也应该是false 。</p>
+<p>这就是它有趣的地方了。如果你看去看 Integer.Java 类，你会发现有一个内部私有类，IntegerCache.java，它缓存了从-128到127之间的所有的整数对象。</p>
+<p><strong>所以事情就成了，所有的小整数在内部缓存，然后当我们声明类似</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Integer c = <span class="number">100</span>;</div></pre></td></tr></table></figure>
+<p>的时候，它实际上在内部做的是：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Integer i = Integer.valueOf(<span class="number">100</span>);</div></pre></td></tr></table></figure>
+<p>现在，如果我们去看valueOf()方法，我们可以看到：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Integer <span class="title">valueOf</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (i &gt;= IntegerCache.low &amp;&amp; i</div><div class="line">    <span class="keyword">return</span> IntegerCache.cache[i + (-IntegerCache.low)];</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Integer(i);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果值的范围在-128到127之间，它就从高速缓存返回实例。所以</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Integer c = <span class="number">100</span>, d = <span class="number">100</span>;</div></pre></td></tr></table></figure>
+<p>指向了同一个对象。这就是为什么我们写：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">System.out.println(c == d);</div></pre></td></tr></table></figure>
+<p>我们可以得到true。</p>
+<p><strong>现在你可能会问，为什么这里需要缓存？</strong></p>
+<p>合乎逻辑的理由是，在此范围内的“小”整数使用率比大整数要高，因此，使用相同的底层对象是有价值的，可以减少潜在的内存占用。</p>
+<p>然而，通过反射API你会误用此功能。</p>
+<p><strong>运行下面的代码，享受它的魅力吧</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> NoSuchFieldException, </span></div><div class="line">IllegalAccessException &#123;</div><div class="line">    Class cache = Integer.class.getDeclaredClasses()[<span class="number">0</span>]; <span class="comment">//1 </span></div><div class="line">    Field myCache = cache.getDeclaredField(<span class="string">"cache"</span>); <span class="comment">//2 </span></div><div class="line">    myCache.setAccessible(<span class="keyword">true</span>);<span class="comment">//3 </span></div><div class="line">    Integer[] newCache = (Integer[]) myCache.get(cache); <span class="comment">//4 </span></div><div class="line">    newCache[<span class="number">132</span>] = newCache[<span class="number">133</span>]; <span class="comment">//5 </span></div><div class="line">    <span class="keyword">int</span> a = <span class="number">2</span>;</div><div class="line">    <span class="keyword">int</span> b = a + a;</div><div class="line">    System.out.printf(<span class="string">"%d + %d = %d"</span>, a, a, b); <span class="comment">// </span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/01/05/wireshark-实用过滤表达式（针对ip、协议、端口、长度和内容）/" class="archive-article-date">
-  	<time datetime="2017-01-05T12:36:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/01/05/wireshark-实用过滤表达式（针对ip、协议、端口、长度和内容）/">wireshark 实用过滤表达式（针对ip、协议、端口、长度和内容）</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">wireshark</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/network/" class="article-tag-list-link color3">network</a>
+        			<a href="/categories/work/" class="article-tag-list-link color5">work</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://wenboo.github.io/2016/10/31/为什么 Java 中 1000-1000 为 false 而 100-100 为 true/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/01/03/Java中main函数为什么要加static/" class="archive-article-date">
-  	<time datetime="2017-01-03T14:42:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-03</time>
-</a>
-        </div>
-    	 
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/01/03/Java中main函数为什么要加static/">java中main函数为什么要加static</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">main</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/01/02/程序员对内存的理解/" class="archive-article-date">
-  	<time datetime="2017-01-02T11:10:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-02</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/01/02/程序员对内存的理解/">程序员对内存的理解</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">内存</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cm/" class="article-tag-list-link color3">cm</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+    <a href="/2016/11/01/Java 中的日志 log4j/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Java中的日志log4j
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2016/10/31/阿里面试回来，想和Java程序员谈一谈/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">阿里面试回来，想和Java程序员谈一谈</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="为什么 Java 中 1000-1000 为 false 而 100-100 为 true" data-title="为什么Java中1000==1000为false而100==100为true" data-url="http://wenboo.github.io/2016/10/31/为什么 Java 中 1000-1000 为 false 而 100-100 为 true/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"wenboo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
   
 
-    
+
 
 
           </div>
@@ -350,8 +389,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
