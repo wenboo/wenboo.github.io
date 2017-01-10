@@ -24,7 +24,7 @@
 你会得到：
 12falsetrue
 基本知识：我们知道，如果两个引用指向同一个对象，用==表示它们是相等的。如">
-<meta property="og:updated_time" content="2016-10-31T14:03:47.179Z">
+<meta property="og:updated_time" content="2017-01-10T13:40:34.844Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="为什么Java中1000==1000为false而100==100为true">
 <meta name="twitter:description" content="这是一个挺有意思的讨论话题。
@@ -211,6 +211,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">false</span></div><div class="line"><span class="keyword">true</span></div></pre></td></tr></table></figure>
 <p><strong>基本知识：</strong>我们知道，如果两个引用指向同一个对象，用==表示它们是相等的。如果两个引用指向不同的对象，用==表示它们是不相等的，即使它们的内容相同。</p>
 <p>因此，后面一条语句也应该是false 。</p>
+<a id="more"></a>
 <p>这就是它有趣的地方了。如果你看去看 Integer.Java 类，你会发现有一个内部私有类，IntegerCache.java，它缓存了从-128到127之间的所有的整数对象。</p>
 <p><strong>所以事情就成了，所有的小整数在内部缓存，然后当我们声明类似</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Integer c = <span class="number">100</span>;</div></pre></td></tr></table></figure>
@@ -462,11 +463,11 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">c</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
+                <a href="javascript:void(0)" class="js-tag color2">c</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -474,15 +475,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">tool</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">java,tomcat</a>
+                <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -490,7 +483,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">tool</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">java,tomcat</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -503,6 +504,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">wireshark</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
