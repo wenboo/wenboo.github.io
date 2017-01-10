@@ -187,102 +187,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="TCP-头格式"><a href="#TCP-头格式" class="headerlink" title="TCP 头格式"></a>TCP 头格式</h2><p><img src="http://coolshell.cn/wp-content/uploads/2014/05/TCP-Header-01.jpg" alt="pic"></p>
-<ul>
-<li><p>TCP的包是没有IP地址的，那是IP层上的事。但是有源端口和目标端口。</p>
-</li>
-<li><p>一个TCP连接需要四个元组来表示是同一个连接（src_ip, src_port, dst_ip, dst_port）准确说是五元组，还有一个是协议。但因为这里只是说TCP协议，所以，这里我只说四元组。</p>
-</li>
-</ul>
+        <p><strong>TCP 头格式</strong></p>
+<p><img src="http://coolshell.cn/wp-content/uploads/2014/05/TCP-Header-01.jpg" alt="pic"></p>
+<p>1) TCP的包是没有IP地址的，那是IP层上的事。但是有源端口和目标端口。</p>
+<p>2) 一个TCP连接需要四个元组来表示是同一个连接（src_ip, src_port, dst_ip, dst_port）准确说是五元组，还有一个是协议。但因为这里只是说TCP协议，所以，这里我只说四元组。</p>
 <p>注意上图中的四个非常重要的内容：</p>
-<ul>
-<li><strong>Sequence Number</strong>是包的序号，用来解决<strong>网络包乱序（reordering）</strong>问题。</li>
-<li><strong>Acknowledgement Number</strong>就是ACK——用于确认收到，用来解决<strong>不丢包</strong>的问题。</li>
-<li><strong>Window</strong>又叫Advertised-Window，也就是著名的滑动窗口（Sliding Window），用于解决<strong>流控</strong>的。</li>
-<li><strong>TCP Flag</strong>，也就是包的类型，主要是用于<strong>操控TCP的状态机</strong>的。</li>
-</ul>
+<p><strong>Sequence Number</strong>是包的序号，用来解决<strong>网络包乱序（reordering）</strong>问题。<br><strong>Acknowledgement Number</strong>就是ACK——用于确认收到，用来解决<strong>不丢包</strong>的问题。<br><strong>Window</strong>又叫Advertised-Window，也就是著名的滑动窗口（Sliding Window），用于解决<strong>流控</strong>的。<br><strong>TCP Flag</strong>，也就是包的类型，主要是用于<strong>操控TCP的状态机</strong>的。</p>
 <p><img src="http://coolshell.cn/wp-content/uploads/2014/05/TCP-Header-02.jpg" alt="pic"></p>
-<h2 id="TCP-状态机"><a href="#TCP-状态机" class="headerlink" title="TCP 状态机"></a>TCP 状态机</h2><p>其实，<strong>网络上的传输是没有连接的，包括TCP也是一样的</strong>。而TCP所谓的“连接”，其实只不过是在通讯的双方维护一个“连接状态”，让它看上去好像有连接一样。所以，TCP的状态变换是非常重要的。</p>
-<p>下面是：“TCP协议的状态机” 和 “TCP建链接”、“TCP断链接”、“传数据” 的对照图：</p>
-<p><img src="http://coolshell.cn/wp-content/uploads/2014/05/tcpfsm.png" alt="pic"></p>
-<p><img src="http://coolshell.cn/wp-content/uploads/2014/05/tcp_open_close.jpg" alt="pic"></p>
-<ul>
-<li><p><strong>对于建链接的3次握手</strong>，主要是要初始化Sequence Number 的初始值。通信的双方要互相通知对方自己的初始化的Sequence Number（缩写为ISN：Inital Sequence Number）——所以叫SYN，全称Synchronize Sequence Numbers。也就上图中的 x 和 y。这个号要作为以后的数据通信的序号，以保证应用层接收到的数据不会因为网络上的传输的问题而乱序（TCP会用这个序号来拼接数据）。</p>
-</li>
-<li><p><strong>对于4次挥手</strong>，其实仔细看是2次，因为TCP是全双工的，所以，发送方和接收方都需要Fin和Ack。只不过，有一方是被动的，所以看上去就成了所谓的4次挥手。如果两边同时断连接，那就会就进入到CLOSING状态，然后到达TIME_WAIT状态。下图是双方同时断连接的示意图（同样可以对照着TCP状态机看）：</p>
-</li>
-</ul>
-<p><strong>两端同时断开连接</strong></p>
-<p><img src="http://coolshell.cn/wp-content/uploads/2014/05/tcpclosesimul.png" alt="pic"></p>
-<p>另外，还有接事情需要注意下：</p>
-<ul>
-<li><strong>关于建连接时SYN超时。</strong></li>
-</ul>
-<p>试想一下，如果server端接到了clien发的SYN后回了SYN-ACK后client掉线了，server端没有收到client回来的ACK，那么，这个连接处于一个中间状态，即没成功，也没失败。于是，server端如果在一定时间内没有收到的TCP会重发SYN-ACK。在Linux下，默认重试次数为5次，重试的间隔时间从1s开始每次都翻售，5次的重试时间间隔为1s, 2s, 4s, 8s, 16s，总共31s，第5次发出后还要等32s都知道第5次也超时了，所以，总共需要 1s + 2s + 4s+ 8s+ 16s + 32s = 2^6 -1 = 63s，TCP才会把断开这个连接。</p>
-<ul>
-<li><strong>关于SYN Flood攻击。</strong></li>
-</ul>
-<p>一些恶意的人就为此制造了SYN Flood攻击——给服务器发了一个SYN后，就下线了，于是服务器需要默认等63s才会断开连接，这样，攻击者就可以把服务器的syn连接的队列耗尽，让正常的连接请求不能处理。于是，Linux下给了一个叫<strong>tcp_syncookies</strong>的参数来应对这个事——当SYN队列满了后，TCP会通过源地址端口、目标地址端口和时间戳打造出一个特别的Sequence Number发回去（又叫cookie），如果是攻击者则不会有响应，如果是正常连接，则会把这个 SYN Cookie发回来，然后服务端可以通过cookie建连接（即使你不在SYN队列中）。请注意，<strong>请先千万别用tcp_syncookies来处理正常的大负载的连接的情况</strong>。因为，synccookies是妥协版的TCP协议，并不严谨。对于正常的请求，你应该调整三个TCP参数可供你选择，第一个是：tcp_synack_retries 可以用他来减少重试次数；第二个是：tcp_max_syn_backlog，可以增大SYN连接数；第三个是：tcp_abort_on_overflow 处理不过来干脆就直接拒绝连接了。</p>
-<ul>
-<li><strong>关于ISN的初始化。</strong></li>
-</ul>
-<p>ISN是不能hard code的，不然会出问题的——比如：如果连接建好后始终用1来做ISN，如果client发了30个segment过去，但是网络断了，于是 client重连，又用了1做ISN，但是之前连接的那些包到了，于是就被当成了新连接的包，此时，client的Sequence Number 可能是3，而Server端认为client端的这个号是30了。全乱了。RFC793中说，ISN会和一个假的时钟绑在一起，这个时钟会在每4微秒对ISN做加一操作，直到超过2^32，又从0开始。这样，一个ISN的周期大约是4.55个小时。因为，我们假设我们的TCP Segment在网络上的存活时间不会超过Maximum Segment Lifetime（缩写为MSL – Wikipedia语条），所以，只要MSL的值小于4.55小时，那么，我们就不会重用到ISN。</p>
-<ul>
-<li><strong>关于 MSL 和 TIME_WAIT。</strong></li>
-</ul>
-<p>通过上面的ISN的描述，相信你也知道MSL是怎么来的了。我们注意到，在TCP的状态图中，从TIME_WAIT状态到CLOSED状态，有一个超时设置，这个超时设置是 2*MSL（RFC793定义了MSL为2分钟，Linux设置成了30s）为什么要这有TIME_WAIT？为什么不直接给转成CLOSED状态呢？主要有两个原因：1）TIME_WAIT确保有足够的时间让对端收到了ACK，如果被动关闭的那方没有收到Ack，就会触发被动端重发Fin，一来一去正好2个MSL，2）有足够的时间让这个连接不会跟后面的连接混在一起（你要知道，有些自做主张的路由器会缓存IP数据包，如果连接被重用了，那么这些延迟收到的包就有可能会跟新连接混在一起）。你可以看看这篇文章《TIME_WAIT and its design implications for protocols and scalable client server systems》</p>
-<ul>
-<li><strong>关于TIME_WAIT数量太多。</strong></li>
-</ul>
-<p>从上面的描述我们可以知道，TIME_WAIT是个很重要的状态，但是如果在大并发的短链接下，TIME_WAIT 就会太多，这也会消耗很多系统资源。只要搜一下，你就会发现，十有八九的处理方式都是教你设置两个参数，一个叫<strong>tcp_tw_reuse</strong>，另一个叫<strong>tcp_tw_recycle</strong>的参数，这两个参数默认值都是被关闭的，后者recyle比前者resue更为激进，resue要温柔一些。另外，如果使用tcp_tw_reuse，必需设置tcp_timestamps=1，否则无效。这里，你一定要注意，打开这两个参数会有比较大的坑—可能会让TCP连接出一些诡异的问题（因为如上述一样，如果不等待超时重用连接的话，新的连接可能会建不上。正如官方文档上说的一样“It should not be changed without advice/request of technical experts”）。</p>
-<blockquote>
-<ol>
-<li><strong>关于tcp_tw_reuse。</strong>官方文档上说tcp_tw_reuse 加上tcp_timestamps（又叫PAWS, for Protection Against Wrapped Sequence Numbers）可以保证协议的角度上的安全，但是你需要tcp_timestamps在两边都被打开（你可以读一下tcp_twsk_unique的源码 ）。我个人估计还是有一些场景会有问题。</li>
-<li><strong>关于tcp_tw_recycle。</strong>如果是tcp_tw_recycle被打开了话，会假设对端开启了tcp_timestamps，然后会去比较时间戳，如果时间戳变大了，就可以重用。但是，如果对端是一个NAT网络的话（如：一个公司只用一个IP出公网）或是对端的IP被另一台重用了，这个事就复杂了。建链接的SYN可能就被直接丢掉了（你可能会看到connection time out的错误）（如果你想观摩一下Linux的内核代码，请参看源码 tcp_timewait_state_process）。</li>
-<li><strong>关于tcp_max_tw_buckets。</strong>这个是控制并发的TIME_WAIT的数量，默认值是180000，如果超限，那么，系统会把多的给destory掉，然后在日志里打一个警告（如：time wait bucket table overflow），官网文档说这个参数是用来对抗DDoS攻击的。也说的默认值180000并不小。这个还是需要根据实际情况考虑。</li>
-</ol>
-</blockquote>
-<p>同样，使用tcp_tw_reuse和tcp_tw_recycle来解决TIME_WAIT的问题是非常非常危险的，因为这两个参数违反了TCP协议（RFC 1122）。</p>
-<p>其实，TIME_WAIT表示的是你主动断连接，所以，这就是所谓的“不作死不会死”。试想，如果让对端断连接，那么这个破问题就是对方的了。另外，如果你的服务器是于HTTP服务器，那么设置一个HTTP的KeepAlive有多重要（浏览器会重用一个TCP连接来处理多个HTTP请求），然后让客户端去断链接（你要小心，浏览器可能会非常贪婪，他们不到万不得已不会主动断连接）。</p>
-<h2 id="数据传输中的-Sequence-Number"><a href="#数据传输中的-Sequence-Number" class="headerlink" title="数据传输中的 Sequence Number"></a>数据传输中的 Sequence Number</h2><p>下图是从Wireshark中截了个我在访问coolshell.cn时的有数据传输的图给你看一下，SeqNum是怎么变的。（使用Wireshark菜单中的Statistics -&gt;Flow Graph）</p>
-<p><img src="http://coolshell.cn/wp-content/uploads/2014/05/tcp_data_seq_num.jpg" alt="pic"></p>
-<p>可以看到，<strong>SeqNum的增加是和传输的字节数相关的</strong>。上图中，三次握手后，来了两个Len:1440的包，而第二个包的SeqNum就成了1441。然后第一个ACK回的是1441，表示第一个1440收到了。</p>
-<p><strong>注意：</strong>如果用Wireshark抓包程序看3次握手，你会发现SeqNum总是为0，不是这样的，Wireshark为了显示更友好，使用了Relative SeqNum——相对序号，你只要在右键菜单中的protocol preference 中取消掉就可以看到“Absolute SeqNum”了。</p>
-<h2 id="TCP-重传机制"><a href="#TCP-重传机制" class="headerlink" title="TCP 重传机制"></a>TCP 重传机制</h2><p>TCP要保证所有的数据包都可以到达，所以，必需要有重传机制。</p>
-<p>注意，接收端给发送端的Ack确认只会确认最后一个连续的包，比如，发送端发了1,2,3,4,5一共五份数据，接收端收到了1，2，于是回ack 3，然后收到了4（注意此时3没收到），此时的TCP会怎么办？我们要知道，因为正如前面所说的，<strong>SeqNum和Ack是以字节数为单位，所以ack的时候，不能跳着确认，只能确认最大的连续收到的包</strong>，不然，发送端就以为之前的都收到了。</p>
-<h3 id="超时重传机制"><a href="#超时重传机制" class="headerlink" title="超时重传机制"></a>超时重传机制</h3><p>一种是不回ack，死等3，当发送方发现收不到3的ack超时后，会重传3。一旦接收方收到3后，会ack 回 4——意味着3和4都收到了。</p>
-<p>但是，这种方式会有比较严重的问题，那就是因为要死等3，所以会导致4和5即便已经收到了，而发送方也完全不知道发生了什么事，因为没有收到Ack，所以，发送方可能会悲观地认为也丢了，所以有可能也会导致4和5的重传。</p>
-<p><strong>对此有两种选择：</strong></p>
-<ul>
-<li>一种是仅重传timeout的包。也就是第3份数据。</li>
-<li>另一种是重传timeout后所有的数据，也就是第3，4，5这三份数据。</li>
-</ul>
-<h3 id="快速重传机制"><a href="#快速重传机制" class="headerlink" title="快速重传机制"></a>快速重传机制</h3><p>于是，TCP引入了一种叫<strong>Fast Retransmit</strong> 的算法，不以时间驱动，而以数据驱动重传。也就是说，如果，包没有连续到达，就ack最后那个可能被丢了的包，如果发送方连续收到3次相同的ack，就重传。Fast Retransmit的好处是不用等timeout了再重传。</p>
-<p>比如：如果发送方发出了1，2，3，4，5份数据，第一份先到送了，于是就ack回2，结果2因为某些原因没收到，3到达了，于是还是ack回2，后面的4和5都到了，但是还是ack回2，因为2还是没有收到，于是发送端收到了三个ack=2的确认，知道了2还没有到，于是就马上重转2。然后，接收端收到了2，此时因为3，4，5都收到了，于是ack回6。示意图如下：</p>
-<p><img src="http://coolshell.cn/wp-content/uploads/2014/05/FASTIncast021.png" alt="pic"></p>
-<p>Fast Retransmit只解决了一个问题，就是timeout的问题，它依然面临一个艰难的选择，就是，是重传之前的一个还是重传所有的问题。对于上面的示例来说，是重传#2呢还是重传#2，#3，#4，#5呢？因为发送端并不清楚这连续的3个ack(2)是谁传回来的？也许发送端发了20份数据，是#6，#10，#20传来的呢。这样，发送端很有可能要重传从2到20的这堆数据（这就是某些TCP的实际的实现）。可见，这是一把双刃剑。</p>
-<h2 id="SACK-方法"><a href="#SACK-方法" class="headerlink" title="SACK 方法"></a>SACK 方法</h2><p>另外一种更好的方式叫：<strong>Selective Acknowledgment (SACK)</strong>（参看RFC 2018），这种方式需要在TCP头里加一个SACK的东西，ACK还是Fast Retransmit的ACK，SACK则是汇报收到的数据碎版。参看下图：</p>
-<p><img src="http://coolshell.cn/wp-content/uploads/2014/05/tcp_sack_example-900x507.jpg" alt="pic"></p>
-<p>这样，在发送端就可以根据回传的SACK来知道哪些数据到了，哪些没有到。于是就优化了Fast Retransmit的算法。当然，这个协议需要两边都支持。在 Linux下，可以通过<strong>tcp_sack</strong>参数打开这个功能（Linux 2.4后默认打开）。</p>
-<p>这里还需要注意一个问题——<strong>接收方Reneging，所谓Reneging的意思就是接收方有权把已经报给发送端SACK里的数据给丢了</strong>。这样干是不被鼓励的，因为这个事会把问题复杂化了，但是，接收方这么做可能会有些极端情况，比如要把内存给别的更重要的东西。所以，<strong>发送方也不能完全依赖SACK，还是要依赖ACK，并维护Time-Out，如果后续的ACK没有增长，那么还是要把SACK的东西重传，另外，接收端这边永远不能把SACK的包标记为Ack。</strong></p>
-<p>注意：SACK会消费发送方的资源，试想，如果一个攻击者给数据发送方发一堆SACK的选项，这会导致发送方开始要重传甚至遍历已经发出的数据，这会消耗很多发送端的资源。详细的东西请参看《TCP SACK的性能权衡》</p>
-<h2 id="Duplicate-SACK-–-重复收到数据的问题"><a href="#Duplicate-SACK-–-重复收到数据的问题" class="headerlink" title="Duplicate SACK – 重复收到数据的问题"></a>Duplicate SACK – 重复收到数据的问题</h2><p>Duplicate SACK又称D-SACK，<strong>其主要使用了SACK来告诉发送方有哪些数据被重复接收了。</strong>RFC-2883 里有详细描述和示例。下面举几个例子（来源于RFC-2883）</p>
-<p>D-SACK使用了SACK的第一个段来做标志，</p>
-<ul>
-<li>如果SACK的第一个段的范围被ACK所覆盖，那么就是D-SACK</li>
-<li>如果SACK的第一个段的范围被SACK的第二个段覆盖，那么就是D-SACK</li>
-</ul>
-<h3 id="示例一：ACK丢包"><a href="#示例一：ACK丢包" class="headerlink" title="示例一：ACK丢包"></a>示例一：ACK丢包</h3><p>下面的示例中，丢了两个ACK，所以，发送端重传了第一个数据包（3000-3499），于是接收端发现重复收到，于是回了一个SACK=3000-3500，因为ACK都到了4000意味着收到了4000之前的所有数据，所以这个SACK就是D-SACK——旨在告诉发送端我收到了重复的数据，而且我们的发送端还知道，数据包没有丢，丢的是ACK包。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function">Transmitted  Received    ACK Sent</span></div><div class="line">Segment      <span class="title">Segment</span>     <span class="params">(Including SACK Blocks)</span></div><div class="line"> </div><div class="line">3000-3499    3000-3499   3500 <span class="params">(ACK dropped)</span></div><div class="line">3500-3999    3500-3999   4000 <span class="params">(ACK dropped)</span></div><div class="line">3000-3499    3000-3499   4000, SACK=<span class="number">3000</span>-<span class="number">3500</span></div></pre></td></tr></table></figure>
-<h3 id="示例二，网络延误"><a href="#示例二，网络延误" class="headerlink" title="示例二，网络延误"></a>示例二，网络延误</h3><p>下面的示例中，网络包（1000-1499）被网络给延误了，导致发送方没有收到ACK，而后面到达的三个包触发了“Fast Retransmit算法”，所以重传，但重传时，被延误的包又到了，所以，回了一个SACK=1000-1500，因为ACK已到了3000，所以，这个SACK是D-SACK——标识收到了重复的包。</p>
-<p>这个案例下，发送端知道之前因为“Fast Retransmit算法”触发的重传不是因为发出去的包丢了，也不是因为回应的ACK包丢了，而是因为网络延时了。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function">Transmitted    Received    ACK Sent</span></div><div class="line">Segment        <span class="title">Segment</span>     <span class="params">(Including SACK Blocks)</span></div><div class="line"> </div><div class="line">500-999        500-999     1000</div><div class="line">1000-1499      <span class="params">(delayed)</span></div><div class="line">1500-1999      1500-1999   1000, SACK=<span class="number">1500</span>-<span class="number">2000</span></div><div class="line"><span class="number">2000</span>-<span class="number">2499</span>      <span class="number">2000</span>-<span class="number">2499</span>   <span class="number">1000</span>, SACK=<span class="number">1500</span>-<span class="number">2500</span></div><div class="line"><span class="number">2500</span>-<span class="number">2999</span>      <span class="number">2500</span>-<span class="number">2999</span>   <span class="number">1000</span>, SACK=<span class="number">1500</span>-<span class="number">3000</span></div><div class="line"><span class="number">1000</span>-<span class="number">1499</span>      <span class="number">1000</span>-<span class="number">1499</span>   <span class="number">3000</span></div><div class="line">               <span class="number">1000</span>-<span class="number">1499</span>   <span class="number">3000</span>, SACK=<span class="number">1000</span>-<span class="number">1500</span></div></pre></td></tr></table></figure>
-<p><strong>可见，引入了D-SACK，有这么几个好处：</strong></p>
-<blockquote>
-<p>1）可以让发送方知道，是发出去的包丢了，还是回来的ACK包丢了。<br>2）是不是自己的timeout太小了，导致重传。<br>3）网络上出现了先发的包后到的情况（又称reordering）<br>4）网络上是不是把我的数据包给复制了。</p>
-</blockquote>
-<p>知道这些东西可以很好得帮助TCP了解网络情况，从而可以更好的做网络上的流控。</p>
-
+        
+          <a class="article-more-a" href="/2016/10/24/TCP的那些事儿/#more">more >></a>
+        
       
 
       
@@ -295,7 +209,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">计算机网络</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">tcp</a>
         		</li>
       		
 		</ul>
@@ -307,7 +221,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/work/" class="article-tag-list-link color5">work</a>
+        			<a href="/categories/network/" class="article-tag-list-link color3">network</a>
         		</li>
       		
 		</ul>
@@ -354,34 +268,39 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>在 Java 程序中使用 SQLite 之前，我们需要确保机器上已经有 SQLite JDBC Driver 驱动程序和 Java。可以查看 Java 教程了解如何在计算机上安装 Java。现在，我们来看看如何在机器上安装 SQLite JDBC 驱动程序。</p>
-<ul>
-<li><p>从 <a href="https://bitbucket.org/xerial/sqlite-jdbc/downloads" target="_blank" rel="external">sqlite-jdbc</a>库下载 sqlite-jdbc-(VERSION).jar 的最新版本。</p>
-</li>
-<li><p>在您的 class 路径中添加下载的 jar 文件 sqlite-jdbc-(VERSION).jar，或者在 -classpath 选项中使用它，这将在后面的实例中进行讲解。</p>
-</li>
-</ul>
-<h2 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h2><p>下面的 Java 程序显示了如何连接到一个现有的数据库。如果数据库不存在，那么它就会被创建，最后将返回一个数据库对象。</p>
+        <p><strong>安装</strong></p>
+<p>在 Java 程序中使用 SQLite 之前，我们需要确保机器上已经有 SQLite JDBC Driver 驱动程序和 Java。可以查看 Java 教程了解如何在计算机上安装 Java。现在，我们来看看如何在机器上安装 SQLite JDBC 驱动程序。</p>
+<blockquote>
+<p>从 <a href="https://bitbucket.org/xerial/sqlite-jdbc/downloads" target="_blank" rel="external">sqlite-jdbc</a>库下载 sqlite-jdbc-(VERSION).jar 的最新版本。</p>
+<p>在您的 class 路径中添加下载的 jar 文件 sqlite-jdbc-(VERSION).jar，或者在 -classpath 选项中使用它，这将在后面的实例中进行讲解。</p>
+</blockquote>
+<p><strong>连接数据库</strong></p>
+<p>下面的 Java 程序显示了如何连接到一个现有的数据库。如果数据库不存在，那么它就会被创建，最后将返回一个数据库对象。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.sql.*;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SQLiteJDBC</span></span></div><div class="line">&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">( String args[] )</span></span></div><div class="line">  &#123;</div><div class="line">    Connection c = <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">      Class.forName(<span class="string">"org.sqlite.JDBC"</span>);</div><div class="line">      c = DriverManager.getConnection(<span class="string">"jdbc:sqlite:test.db"</span>);</div><div class="line">    &#125; <span class="keyword">catch</span> ( Exception e ) &#123;</div><div class="line">      System.err.println( e.getClass().getName() + <span class="string">": "</span> + e.getMessage() );</div><div class="line">      System.exit(<span class="number">0</span>);</div><div class="line">    &#125;</div><div class="line">    System.out.println(<span class="string">"Opened database successfully"</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>现在，让我们来编译和运行上面的程序，在当前目录中创建我们的数据库 test.db。您可以根据需要改变路径。我们假设当前路径下可用的 JDBC 驱动程序的版本是 sqlite-jdbc-3.7.2.jar。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$javac SQLiteJDBC.java</div><div class="line">$java -classpath <span class="string">".:sqlite-jdbc-3.7.2.jar"</span> SQLiteJDBC</div><div class="line">Open database successfully</div></pre></td></tr></table></figure>
 <p>如果您想要使用 Windows 机器，可以按照下列所示编译和运行您的代码：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$javac SQLiteJDBC.java</div><div class="line">$java -classpath <span class="string">".;sqlite-jdbc-3.7.2.jar"</span> SQLiteJDBC</div><div class="line">Opened database successfully</div></pre></td></tr></table></figure>
-<h2 id="创建表单"><a href="#创建表单" class="headerlink" title="创建表单"></a>创建表单</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.sql.*;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SQLiteJDBC</span></span></div><div class="line">&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">( String args[] )</span></span></div><div class="line">  &#123;</div><div class="line">    Connection c = <span class="keyword">null</span>;</div><div class="line">    Statement stmt = <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">      Class.forName(<span class="string">"org.sqlite.JDBC"</span>);</div><div class="line">      c = DriverManager.getConnection(<span class="string">"jdbc:sqlite:test.db"</span>);</div><div class="line">      System.out.println(<span class="string">"Opened database successfully"</span>);</div><div class="line"></div><div class="line">      stmt = c.createStatement();</div><div class="line">      String sql = <span class="string">"CREATE TABLE COMPANY "</span> +</div><div class="line">                   <span class="string">"(ID INT PRIMARY KEY     NOT NULL,"</span> +</div><div class="line">                   <span class="string">" NAME           TEXT    NOT NULL, "</span> + </div><div class="line">                   <span class="string">" AGE            INT     NOT NULL, "</span> + </div><div class="line">                   <span class="string">" ADDRESS        CHAR(50), "</span> + </div><div class="line">                   <span class="string">" SALARY         REAL)"</span>; </div><div class="line">      stmt.executeUpdate(sql);</div><div class="line">      stmt.close();</div><div class="line">      c.close();</div><div class="line">    &#125; <span class="keyword">catch</span> ( Exception e ) &#123;</div><div class="line">      System.err.println( e.getClass().getName() + <span class="string">": "</span> + e.getMessage() );</div><div class="line">      System.exit(<span class="number">0</span>);</div><div class="line">    &#125;</div><div class="line">    System.out.println(<span class="string">"Table created successfully"</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>创建表单</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.sql.*;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SQLiteJDBC</span></span></div><div class="line">&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">( String args[] )</span></span></div><div class="line">  &#123;</div><div class="line">    Connection c = <span class="keyword">null</span>;</div><div class="line">    Statement stmt = <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">      Class.forName(<span class="string">"org.sqlite.JDBC"</span>);</div><div class="line">      c = DriverManager.getConnection(<span class="string">"jdbc:sqlite:test.db"</span>);</div><div class="line">      System.out.println(<span class="string">"Opened database successfully"</span>);</div><div class="line"></div><div class="line">      stmt = c.createStatement();</div><div class="line">      String sql = <span class="string">"CREATE TABLE COMPANY "</span> +</div><div class="line">                   <span class="string">"(ID INT PRIMARY KEY     NOT NULL,"</span> +</div><div class="line">                   <span class="string">" NAME           TEXT    NOT NULL, "</span> + </div><div class="line">                   <span class="string">" AGE            INT     NOT NULL, "</span> + </div><div class="line">                   <span class="string">" ADDRESS        CHAR(50), "</span> + </div><div class="line">                   <span class="string">" SALARY         REAL)"</span>; </div><div class="line">      stmt.executeUpdate(sql);</div><div class="line">      stmt.close();</div><div class="line">      c.close();</div><div class="line">    &#125; <span class="keyword">catch</span> ( Exception e ) &#123;</div><div class="line">      System.err.println( e.getClass().getName() + <span class="string">": "</span> + e.getMessage() );</div><div class="line">      System.exit(<span class="number">0</span>);</div><div class="line">    &#125;</div><div class="line">    System.out.println(<span class="string">"Table created successfully"</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>上述程序编译和执行时，它会在 test.db 中创建 COMPANY 表，最终文件列表如下所示：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">-rw-r--r--. <span class="number">1</span> root root <span class="number">3201128</span> Jan <span class="number">22</span> <span class="number">19</span>:<span class="number">04</span> sqlite-jdbc-<span class="number">3.7</span>.2.jar</div><div class="line">-rw-r--r--. <span class="number">1</span> root root    <span class="number">1506</span> May  <span class="number">8</span> <span class="number">05</span>:<span class="number">43</span> SQLiteJDBC.class</div><div class="line">-rw-r--r--. <span class="number">1</span> root root     <span class="number">832</span> May  <span class="number">8</span> <span class="number">05</span>:<span class="number">42</span> SQLiteJDBC.java</div><div class="line">-rw-r--r--. <span class="number">1</span> root root    <span class="number">3072</span> May  <span class="number">8</span> <span class="number">05</span>:<span class="number">43</span> test.db</div></pre></td></tr></table></figure>
-<h2 id="INSERT-操作"><a href="#INSERT-操作" class="headerlink" title="INSERT 操作"></a>INSERT 操作</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.sql.*;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SQLiteJDBC</span></span></div><div class="line">&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">( String args[] )</span></span></div><div class="line">  &#123;</div><div class="line">    Connection c = <span class="keyword">null</span>;</div><div class="line">    Statement stmt = <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">      Class.forName(<span class="string">"org.sqlite.JDBC"</span>);</div><div class="line">      c = DriverManager.getConnection(<span class="string">"jdbc:sqlite:test.db"</span>);</div><div class="line">      c.setAutoCommit(<span class="keyword">false</span>);</div><div class="line">      System.out.println(<span class="string">"Opened database successfully"</span>);</div><div class="line"></div><div class="line">      stmt = c.createStatement();</div><div class="line">      String sql = <span class="string">"INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) "</span> +</div><div class="line">                   <span class="string">"VALUES (1, 'Paul', 32, 'California', 20000.00 );"</span>; </div><div class="line">      stmt.executeUpdate(sql);</div><div class="line"></div><div class="line">      sql = <span class="string">"INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) "</span> +</div><div class="line">            <span class="string">"VALUES (2, 'Allen', 25, 'Texas', 15000.00 );"</span>; </div><div class="line">      stmt.executeUpdate(sql);</div><div class="line"></div><div class="line">      sql = <span class="string">"INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) "</span> +</div><div class="line">            <span class="string">"VALUES (3, 'Teddy', 23, 'Norway', 20000.00 );"</span>; </div><div class="line">      stmt.executeUpdate(sql);</div><div class="line"></div><div class="line">      sql = <span class="string">"INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) "</span> +</div><div class="line">            <span class="string">"VALUES (4, 'Mark', 25, 'Rich-Mond ', 65000.00 );"</span>; </div><div class="line">      stmt.executeUpdate(sql);</div><div class="line"></div><div class="line">      stmt.close();</div><div class="line">      c.commit();</div><div class="line">      c.close();</div><div class="line">    &#125; <span class="keyword">catch</span> ( Exception e ) &#123;</div><div class="line">      System.err.println( e.getClass().getName() + <span class="string">": "</span> + e.getMessage() );</div><div class="line">      System.exit(<span class="number">0</span>);</div><div class="line">    &#125;</div><div class="line">    System.out.println(<span class="string">"Records created successfully"</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>INSERT 操作</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.sql.*;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SQLiteJDBC</span></span></div><div class="line">&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">( String args[] )</span></span></div><div class="line">  &#123;</div><div class="line">    Connection c = <span class="keyword">null</span>;</div><div class="line">    Statement stmt = <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">      Class.forName(<span class="string">"org.sqlite.JDBC"</span>);</div><div class="line">      c = DriverManager.getConnection(<span class="string">"jdbc:sqlite:test.db"</span>);</div><div class="line">      c.setAutoCommit(<span class="keyword">false</span>);</div><div class="line">      System.out.println(<span class="string">"Opened database successfully"</span>);</div><div class="line"></div><div class="line">      stmt = c.createStatement();</div><div class="line">      String sql = <span class="string">"INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) "</span> +</div><div class="line">                   <span class="string">"VALUES (1, 'Paul', 32, 'California', 20000.00 );"</span>; </div><div class="line">      stmt.executeUpdate(sql);</div><div class="line"></div><div class="line">      sql = <span class="string">"INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) "</span> +</div><div class="line">            <span class="string">"VALUES (2, 'Allen', 25, 'Texas', 15000.00 );"</span>; </div><div class="line">      stmt.executeUpdate(sql);</div><div class="line"></div><div class="line">      sql = <span class="string">"INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) "</span> +</div><div class="line">            <span class="string">"VALUES (3, 'Teddy', 23, 'Norway', 20000.00 );"</span>; </div><div class="line">      stmt.executeUpdate(sql);</div><div class="line"></div><div class="line">      sql = <span class="string">"INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) "</span> +</div><div class="line">            <span class="string">"VALUES (4, 'Mark', 25, 'Rich-Mond ', 65000.00 );"</span>; </div><div class="line">      stmt.executeUpdate(sql);</div><div class="line"></div><div class="line">      stmt.close();</div><div class="line">      c.commit();</div><div class="line">      c.close();</div><div class="line">    &#125; <span class="keyword">catch</span> ( Exception e ) &#123;</div><div class="line">      System.err.println( e.getClass().getName() + <span class="string">": "</span> + e.getMessage() );</div><div class="line">      System.exit(<span class="number">0</span>);</div><div class="line">    &#125;</div><div class="line">    System.out.println(<span class="string">"Records created successfully"</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>上述程序编译和执行时，它会在 COMPANY 表中创建给定记录，并会显示以下两行：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Opened database successfully</div><div class="line">Records created successfully</div></pre></td></tr></table></figure>
-<h2 id="SELECT-操作"><a href="#SELECT-操作" class="headerlink" title="SELECT 操作"></a>SELECT 操作</h2><p>下面的 Java 程序显示了如何从前面创建的 COMPANY 表中获取并显示记录：</p>
+<p><strong>SELECT 操作</strong></p>
+<p>下面的 Java 程序显示了如何从前面创建的 COMPANY 表中获取并显示记录：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.sql.*;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SQLiteJDBC</span></span></div><div class="line">&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">( String args[] )</span></span></div><div class="line">  &#123;</div><div class="line">    Connection c = <span class="keyword">null</span>;</div><div class="line">    Statement stmt = <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">      Class.forName(<span class="string">"org.sqlite.JDBC"</span>);</div><div class="line">      c = DriverManager.getConnection(<span class="string">"jdbc:sqlite:test.db"</span>);</div><div class="line">      c.setAutoCommit(<span class="keyword">false</span>);</div><div class="line">      System.out.println(<span class="string">"Opened database successfully"</span>);</div><div class="line"></div><div class="line">      stmt = c.createStatement();</div><div class="line">      ResultSet rs = stmt.executeQuery( <span class="string">"SELECT * FROM COMPANY;"</span> );</div><div class="line">      <span class="keyword">while</span> ( rs.next() ) &#123;</div><div class="line">         <span class="keyword">int</span> id = rs.getInt(<span class="string">"id"</span>);</div><div class="line">         String  name = rs.getString(<span class="string">"name"</span>);</div><div class="line">         <span class="keyword">int</span> age  = rs.getInt(<span class="string">"age"</span>);</div><div class="line">         String  address = rs.getString(<span class="string">"address"</span>);</div><div class="line">         <span class="keyword">float</span> salary = rs.getFloat(<span class="string">"salary"</span>);</div><div class="line">         System.out.println( <span class="string">"ID = "</span> + id );</div><div class="line">         System.out.println( <span class="string">"NAME = "</span> + name );</div><div class="line">         System.out.println( <span class="string">"AGE = "</span> + age );</div><div class="line">         System.out.println( <span class="string">"ADDRESS = "</span> + address );</div><div class="line">         System.out.println( <span class="string">"SALARY = "</span> + salary );</div><div class="line">         System.out.println();</div><div class="line">      &#125;</div><div class="line">      rs.close();</div><div class="line">      stmt.close();</div><div class="line">      c.close();</div><div class="line">    &#125; <span class="keyword">catch</span> ( Exception e ) &#123;</div><div class="line">      System.err.println( e.getClass().getName() + <span class="string">": "</span> + e.getMessage() );</div><div class="line">      System.exit(<span class="number">0</span>);</div><div class="line">    &#125;</div><div class="line">    System.out.println(<span class="string">"Operation done successfully"</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>上述程序编译和执行时，它会产生以下结果：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">Opened database successfully</div><div class="line">ID = <span class="number">1</span></div><div class="line">NAME = Paul</div><div class="line">AGE = <span class="number">32</span></div><div class="line">ADDRESS = California</div><div class="line">SALARY = <span class="number">20000.0</span></div><div class="line"></div><div class="line">ID = <span class="number">2</span></div><div class="line">NAME = Allen</div><div class="line">AGE = <span class="number">25</span></div><div class="line">ADDRESS = Texas</div><div class="line">SALARY = <span class="number">15000.0</span></div><div class="line"></div><div class="line">ID = <span class="number">3</span></div><div class="line">NAME = Teddy</div><div class="line">AGE = <span class="number">23</span></div><div class="line">ADDRESS = Norway</div><div class="line">SALARY = <span class="number">20000.0</span></div><div class="line"></div><div class="line">ID = <span class="number">4</span></div><div class="line">NAME = Mark</div><div class="line">AGE = <span class="number">25</span></div><div class="line">ADDRESS = Rich-Mond</div><div class="line">SALARY = <span class="number">65000.0</span></div><div class="line"></div><div class="line">Operation done successfully</div></pre></td></tr></table></figure>
-<h2 id="UPDATE-操作"><a href="#UPDATE-操作" class="headerlink" title="UPDATE 操作"></a>UPDATE 操作</h2><p>下面的 Java 代码显示了如何使用 UPDATE 语句来更新任何记录，然后从 COMPANY 表中获取并显示更新的记录：</p>
+<p><strong>UPDATE 操作</strong></p>
+<p>下面的 Java 代码显示了如何使用 UPDATE 语句来更新任何记录，然后从 COMPANY 表中获取并显示更新的记录：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.sql.*;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SQLiteJDBC</span></span></div><div class="line">&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">( String args[] )</span></span></div><div class="line">  &#123;</div><div class="line">    Connection c = <span class="keyword">null</span>;</div><div class="line">    Statement stmt = <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">      Class.forName(<span class="string">"org.sqlite.JDBC"</span>);</div><div class="line">      c = DriverManager.getConnection(<span class="string">"jdbc:sqlite:test.db"</span>);</div><div class="line">      c.setAutoCommit(<span class="keyword">false</span>);</div><div class="line">      System.out.println(<span class="string">"Opened database successfully"</span>);</div><div class="line"></div><div class="line">      stmt = c.createStatement();</div><div class="line">      String sql = <span class="string">"UPDATE COMPANY set SALARY = 25000.00 where ID=1;"</span>;</div><div class="line">      stmt.executeUpdate(sql);</div><div class="line">      c.commit();</div><div class="line"></div><div class="line">      ResultSet rs = stmt.executeQuery( <span class="string">"SELECT * FROM COMPANY;"</span> );</div><div class="line">      <span class="keyword">while</span> ( rs.next() ) &#123;</div><div class="line">         <span class="keyword">int</span> id = rs.getInt(<span class="string">"id"</span>);</div><div class="line">         String  name = rs.getString(<span class="string">"name"</span>);</div><div class="line">         <span class="keyword">int</span> age  = rs.getInt(<span class="string">"age"</span>);</div><div class="line">         String  address = rs.getString(<span class="string">"address"</span>);</div><div class="line">         <span class="keyword">float</span> salary = rs.getFloat(<span class="string">"salary"</span>);</div><div class="line">         System.out.println( <span class="string">"ID = "</span> + id );</div><div class="line">         System.out.println( <span class="string">"NAME = "</span> + name );</div><div class="line">         System.out.println( <span class="string">"AGE = "</span> + age );</div><div class="line">         System.out.println( <span class="string">"ADDRESS = "</span> + address );</div><div class="line">         System.out.println( <span class="string">"SALARY = "</span> + salary );</div><div class="line">         System.out.println();</div><div class="line">      &#125;</div><div class="line">      rs.close();</div><div class="line">      stmt.close();</div><div class="line">      c.close();</div><div class="line">    &#125; <span class="keyword">catch</span> ( Exception e ) &#123;</div><div class="line">      System.err.println( e.getClass().getName() + <span class="string">": "</span> + e.getMessage() );</div><div class="line">      System.exit(<span class="number">0</span>);</div><div class="line">    &#125;</div><div class="line">    System.out.println(<span class="string">"Operation done successfully"</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>上述程序编译和执行时，它会产生以下结果：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">Opened database successfully</div><div class="line">ID = <span class="number">1</span></div><div class="line">NAME = Paul</div><div class="line">AGE = <span class="number">32</span></div><div class="line">ADDRESS = California</div><div class="line">SALARY = <span class="number">25000.0</span></div><div class="line"></div><div class="line">ID = <span class="number">2</span></div><div class="line">NAME = Allen</div><div class="line">AGE = <span class="number">25</span></div><div class="line">ADDRESS = Texas</div><div class="line">SALARY = <span class="number">15000.0</span></div><div class="line"></div><div class="line">ID = <span class="number">3</span></div><div class="line">NAME = Teddy</div><div class="line">AGE = <span class="number">23</span></div><div class="line">ADDRESS = Norway</div><div class="line">SALARY = <span class="number">20000.0</span></div><div class="line"></div><div class="line">ID = <span class="number">4</span></div><div class="line">NAME = Mark</div><div class="line">AGE = <span class="number">25</span></div><div class="line">ADDRESS = Rich-Mond</div><div class="line">SALARY = <span class="number">65000.0</span></div><div class="line"></div><div class="line">Operation done successfully</div></pre></td></tr></table></figure>
-<h2 id="DELETE-操作"><a href="#DELETE-操作" class="headerlink" title="DELETE 操作"></a>DELETE 操作</h2><p>下面的 Java 代码显示了如何使用 DELETE 语句删除任何记录，然后从 COMPANY 表中获取并显示剩余的记录：</p>
+<p><strong>DELETE 操作</strong></p>
+<p>下面的 Java 代码显示了如何使用 DELETE 语句删除任何记录，然后从 COMPANY 表中获取并显示剩余的记录：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.sql.*;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SQLiteJDBC</span></span></div><div class="line">&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">( String args[] )</span></span></div><div class="line">  &#123;</div><div class="line">    Connection c = <span class="keyword">null</span>;</div><div class="line">    Statement stmt = <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">      Class.forName(<span class="string">"org.sqlite.JDBC"</span>);</div><div class="line">      c = DriverManager.getConnection(<span class="string">"jdbc:sqlite:test.db"</span>);</div><div class="line">      c.setAutoCommit(<span class="keyword">false</span>);</div><div class="line">      System.out.println(<span class="string">"Opened database successfully"</span>);</div><div class="line"></div><div class="line">      stmt = c.createStatement();</div><div class="line">      String sql = <span class="string">"DELETE from COMPANY where ID=2;"</span>;</div><div class="line">      stmt.executeUpdate(sql);</div><div class="line">      c.commit();</div><div class="line"></div><div class="line">      ResultSet rs = stmt.executeQuery( <span class="string">"SELECT * FROM COMPANY;"</span> );</div><div class="line">      <span class="keyword">while</span> ( rs.next() ) &#123;</div><div class="line">         <span class="keyword">int</span> id = rs.getInt(<span class="string">"id"</span>);</div><div class="line">         String  name = rs.getString(<span class="string">"name"</span>);</div><div class="line">         <span class="keyword">int</span> age  = rs.getInt(<span class="string">"age"</span>);</div><div class="line">         String  address = rs.getString(<span class="string">"address"</span>);</div><div class="line">         <span class="keyword">float</span> salary = rs.getFloat(<span class="string">"salary"</span>);</div><div class="line">         System.out.println( <span class="string">"ID = "</span> + id );</div><div class="line">         System.out.println( <span class="string">"NAME = "</span> + name );</div><div class="line">         System.out.println( <span class="string">"AGE = "</span> + age );</div><div class="line">         System.out.println( <span class="string">"ADDRESS = "</span> + address );</div><div class="line">         System.out.println( <span class="string">"SALARY = "</span> + salary );</div><div class="line">         System.out.println();</div><div class="line">      &#125;</div><div class="line">      rs.close();</div><div class="line">      stmt.close();</div><div class="line">      c.close();</div><div class="line">    &#125; <span class="keyword">catch</span> ( Exception e ) &#123;</div><div class="line">      System.err.println( e.getClass().getName() + <span class="string">": "</span> + e.getMessage() );</div><div class="line">      System.exit(<span class="number">0</span>);</div><div class="line">    &#125;</div><div class="line">    System.out.println(<span class="string">"Operation done successfully"</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>上述程序编译和执行时，它会产生以下结果：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">Opened database successfully</div><div class="line">ID = <span class="number">1</span></div><div class="line">NAME = Paul</div><div class="line">AGE = <span class="number">32</span></div><div class="line">ADDRESS = California</div><div class="line">SALARY = <span class="number">25000.0</span></div><div class="line"></div><div class="line">ID = <span class="number">3</span></div><div class="line">NAME = Teddy</div><div class="line">AGE = <span class="number">23</span></div><div class="line">ADDRESS = Norway</div><div class="line">SALARY = <span class="number">20000.0</span></div><div class="line"></div><div class="line">ID = <span class="number">4</span></div><div class="line">NAME = Mark</div><div class="line">AGE = <span class="number">25</span></div><div class="line">ADDRESS = Rich-Mond</div><div class="line">SALARY = <span class="number">65000.0</span></div><div class="line"></div><div class="line">Operation done successfully</div></pre></td></tr></table></figure>
@@ -398,7 +317,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">sqlite</a>
         		</li>
       		
 		</ul>
@@ -410,7 +329,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/work/" class="article-tag-list-link color5">work</a>
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
         		</li>
       		
 		</ul>
@@ -458,77 +377,17 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>对于即时类应用或者即时类的游戏，HTTP协议很多时候无法满足于我们的需求。这会，Socket对于我们来说就非常实用了。</p>
-<h2 id="异常类型"><a href="#异常类型" class="headerlink" title="异常类型"></a>异常类型</h2><p>在了解Socket的内容之前，先要了解一下涉及到的一些异常类型。以下四种类型都是继承于IOException，所以很多之后直接弹出IOException即可。</p>
-<ul>
-<li>UnkownHostException:主机名字或IP错误</li>
-<li>ConnectException:服务器拒绝连接、服务器没有启动、（超出队列数，拒绝连接）</li>
-<li>SocketTimeoutException:连接超时</li>
-<li>BindException:Socket对象无法与制定的本地IP地址或端口绑定</li>
-</ul>
-<h2 id="交互过程"><a href="#交互过程" class="headerlink" title="交互过程"></a>交互过程</h2><p>Socket与ServerSocket的交互：</p>
-<p><img src="http://images.cnitblog.com/blog/211061/201402/241809453054816.png" alt="pic"></p>
-<h2 id="Socket"><a href="#Socket" class="headerlink" title="Socket"></a>Socket</h2><h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><ul>
-<li>Socket()</li>
-<li>Socket(InetAddress address, int port)throws UnknownHostException, IOException</li>
-<li>Socket(InetAddress address, int port, InetAddress localAddress, int localPort)throws IOException</li>
-<li>Socket(String host, int port)throws UnknownHostException, IOException</li>
-<li>Socket(String host, int port, InetAddress localAddress, int localPort)throws IOException</li>
-</ul>
-<p>除去第一种不带参数的之外，其它构造函数会尝试建立与服务器的连接。如果失败会抛出IOException错误。如果成功，则返回Socket对象。</p>
-<p>InetAddress是一个用于记录主机的类，其静态getHostByName(String msg)可以返回一个实例，其静态方法getLocalHost()也可以获得当前主机的IP地址，并返回一个实例。Socket(String host, int port, InetAddress localAddress, int localPort)构造函数的参数分别为目标IP、目标端口、绑定本地IP、绑定本地端口。</p>
-<h3 id="Socket-方法"><a href="#Socket-方法" class="headerlink" title="Socket 方法"></a>Socket 方法</h3><ul>
-<li>getInetAddress();    　　 远程服务端的IP地址</li>
-<li>getPort();    　　　　　　远程服务端的端口</li>
-<li>getLocalAddress()    　   本地客户端的IP地址</li>
-<li>getLocalPort()    　　　　本地客户端的端口</li>
-<li>getInputStream();    　   获得输入流</li>
-<li>getOutStream();    　　   获得输出流</li>
-</ul>
-<p>值得注意的是，在这些方法里面，最重要的就是getInputStream()和getOutputStream()了。</p>
-<h3 id="Socket-状态"><a href="#Socket-状态" class="headerlink" title="Socket 状态"></a>Socket 状态</h3><ul>
-<li><p>isClosed();<br>连接是否已关闭，若关闭，返回true；否则返回false</p>
-</li>
-<li><p>isConnect();<br>如果曾经连接过，返回true；否则返回false</p>
-</li>
-<li><p>isBound();<br>如果Socket已经与本地一个端口绑定，返回true；否则返回false</p>
-</li>
-</ul>
-<p>如果要确认Socket的状态是否处于连接中，下面语句是很好的判断方式。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">boolean</span> isConnection=socket.isConnected() &amp;&amp; !socket.isClosed();   <span class="comment">//判断当前是否处于连接</span></div></pre></td></tr></table></figure>
-<h3 id="半关闭-Socket"><a href="#半关闭-Socket" class="headerlink" title="半关闭 Socket"></a>半关闭 Socket</h3><p>很多时候，我们并不知道在获得的输入流里面到底读多长才结束。下面是一些比较普遍的方法：</p>
-<ul>
-<li>自定义标识符（譬如下面的例子，当受到“bye”字符串的时候，关闭Socket）</li>
-<li>告知读取长度（有些自定义协议的，固定前几个字节表示读取的长度的）</li>
-<li>读完所有数据</li>
-<li>当Socket调用close的时候关闭的时候，关闭其输入输出流</li>
-</ul>
-<h2 id="ServerSocket"><a href="#ServerSocket" class="headerlink" title="ServerSocket"></a>ServerSocket</h2><h3 id="构造函数-1"><a href="#构造函数-1" class="headerlink" title="构造函数"></a>构造函数</h3><ul>
-<li>ServerSocket()throws IOException</li>
-<li>ServerSocket(int port)throws IOException</li>
-<li>ServerSocket(int port, int backlog)throws IOException</li>
-<li>ServerSocket(int port, int backlog, InetAddress bindAddr)throws IOException</li>
-</ul>
-<p><strong>注意点：</strong></p>
-<ol>
-<li>port服务端要监听的端口；backlog客户端连接请求的队列长度；bindAddr服务端绑定IP</li>
-<li>如果端口被占用或者没有权限使用某些端口会抛出BindException错误。譬如1~1023的端口需要管理员才拥有权限绑定。</li>
-<li>如果设置端口为0，则系统会自动为其分配一个端口；</li>
-<li>bindAddr用于绑定服务器IP，为什么会有这样的设置呢，譬如有些机器有多个网卡。</li>
-<li>ServerSocket一旦绑定了监听端口，就无法更改。ServerSocket()可以实现在绑定端口前设置其他的参数。</li>
-</ol>
-<h3 id="单线程-ServerSocket-例子"><a href="#单线程-ServerSocket-例子" class="headerlink" title="单线程 ServerSocket 例子"></a>单线程 ServerSocket 例子</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">service</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</div><div class="line">        Socket socket=<span class="keyword">null</span>;</div><div class="line">        <span class="keyword">try</span>&#123;</div><div class="line">            socket=serverSocket.accept();<span class="comment">//从连接队列中取出一个连接，如果没有则等待</span></div><div class="line">            System.out.println(<span class="string">"新增连接："</span>+socket.getInetAddress()+<span class="string">":"</span>+socket.getPort());</div><div class="line">            ...<span class="comment">//接收和发送数据</span></div><div class="line">        &#125;<span class="keyword">catch</span>(IOException e)&#123;e.printStackTrace();&#125;<span class="keyword">finally</span>&#123;</div><div class="line">            <span class="keyword">try</span>&#123;</div><div class="line">                <span class="keyword">if</span>(socket!=<span class="keyword">null</span>) socket.close();<span class="comment">//与一个客户端通信结束后，要关闭Socket</span></div><div class="line">            &#125;<span class="keyword">catch</span>(IOException e)&#123;e.printStackTrace();&#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="多线程的-ServerSocket"><a href="#多线程的-ServerSocket" class="headerlink" title="多线程的 ServerSocket"></a>多线程的 ServerSocket</h3><p>多线程的好处不用多说，而且大多数的场景都是多线程的，无论是我们的即时类游戏还是IM，多线程的需求都是必须的。下面说说实现方式：</p>
+<p><strong>异常类型</strong></p>
+<p>在了解Socket的内容之前，先要了解一下涉及到的一些异常类型。以下四种类型都是继承于IOException，所以很多之后直接弹出IOException即可。</p>
 <blockquote>
-<p><strong>主线程会循环执行ServerSocket.accept()；</strong></p>
-<p><strong>当拿到客户端连接请求的时候，就会将Socket对象传递给多线程，让多线程去执行具体的操作；</strong></p>
+<p>UnkownHostException:主机名字或IP错误</p>
+<p>ConnectException:服务器拒绝连接、服务器没有启动、（超出队列数，拒绝连接）</p>
+<p>SocketTimeoutException:连接超时</p>
+<p>BindException:Socket对象无法与制定的本地IP地址或端口绑定</p>
 </blockquote>
-<p>实现多线程的方法要么继承Thread类，要么实现Runnable接口。当然也可以使用线程池，但实现的本质都是差不多的。</p>
-<p>这里举例，下面代码为服务器的主线程。为每个客户分配一个工作线程：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">service</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</div><div class="line">        Socket socket=<span class="keyword">null</span>;</div><div class="line">        <span class="keyword">try</span>&#123;</div><div class="line">            socket=serverSocket.accept();                        <span class="comment">//主线程获取客户端连接</span></div><div class="line">            Thread workThread=<span class="keyword">new</span> Thread(<span class="keyword">new</span> Handler(socket));    <span class="comment">//创建线程</span></div><div class="line">            workThread.start();                                    <span class="comment">//启动线程</span></div><div class="line">        &#125;<span class="keyword">catch</span>(Exception e)&#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>当然这里的重点在于如何实现Handler这个类。Handler需要实现Runnable接口：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Handler</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</div><div class="line">    <span class="keyword">private</span> Socket socket;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Handler</span><span class="params">(Socket socket)</span></span>&#123;</div><div class="line">        <span class="keyword">this</span>.socket=socket;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">try</span>&#123;</div><div class="line">            System.out.println(<span class="string">"新连接:"</span>+socket.getInetAddress()+<span class="string">":"</span>+socket.getPort());</div><div class="line">            Thread.sleep(<span class="number">10000</span>);</div><div class="line">        &#125;<span class="keyword">catch</span>(Exception e)&#123;e.printStackTrace();&#125;<span class="keyword">finally</span>&#123;</div><div class="line">            <span class="keyword">try</span>&#123;</div><div class="line">                System.out.println(<span class="string">"关闭连接:"</span>+socket.getInetAddress()+<span class="string">":"</span>+socket.getPort());</div><div class="line">                <span class="keyword">if</span>(socket!=<span class="keyword">null</span>)socket.close();</div><div class="line">            &#125;<span class="keyword">catch</span>(IOException e)&#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>当然是先多线程还有其它的方式，譬如线程池，或者JVM自带的线程池都可以。</p>
-
+        
+          <a class="article-more-a" href="/2016/10/23/Socket-和-ServerSocket-学习/#more">more >></a>
+        
       
 
       
@@ -541,11 +400,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">os</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">socket</a>
         		</li>
       		
 		</ul>
@@ -557,7 +412,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/work/" class="article-tag-list-link color5">work</a>
+        			<a href="/categories/network/" class="article-tag-list-link color3">network</a>
         		</li>
       		
 		</ul>
@@ -604,270 +459,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="什么是-HTTP-协议"><a href="#什么是-HTTP-协议" class="headerlink" title="什么是 HTTP 协议"></a>什么是 HTTP 协议</h2><p>HTTP协议是指计算机通信网络中两台计算机之间进行通信所必须共同遵守的规定或规则，超文本传输协议(HTTP)是一种通信协议，它允许将超文本标记语言(HTML)文档从Web服务器传送到客户端的浏览器。目前我们使用的是HTTP/1.1版本。</p>
-<h2 id="Web服务器、浏览器、代理服务器"><a href="#Web服务器、浏览器、代理服务器" class="headerlink" title="Web服务器、浏览器、代理服务器"></a>Web服务器、浏览器、代理服务器</h2><p>当我们打开浏览器，在地址栏中输入URL，然后我们就看到了网页。原理是怎样的呢？实际上我们输入URL后，我们的浏览器给Web服务器发送了一个Request,Web服务器接到Request后进行处理，生成相应的Response，然后发送给浏览器，浏览器解析Response中的HTML,这样我们就看到了网页，过程如下图所示:</p>
-<p><img src="http://pic002.cnblogs.com/images/2012/263119/2012020910422542.png" alt="pic"></p>
-<p>我们的Request有可能是经过了代理服务器，最后才到达Web服务器的。过程如下图所示:</p>
-<p><img src="http://pic002.cnblogs.com/images/2012/263119/2012020910491417.png" alt="pic"></p>
-<p>代理服务器就是网络信息的中转站，有什么功能呢？</p>
-<ul>
-<li><p>提高访问速度， 大多数的代理服务器都有缓存功能</p>
-</li>
-<li><p>突破限制， 也就是FQ了</p>
-</li>
-<li><p>隐藏身份</p>
-</li>
-</ul>
-<h2 id="URL-详解"><a href="#URL-详解" class="headerlink" title="URL 详解"></a>URL 详解</h2><p> <strong>URL(Uniform Resource Locator)</strong> 地址用于描述一个网络上的资源,  基本格式如下:</p>
-<blockquote>
-<p>schema://host[:port#]/path/…/[?query-string][#anchor]</p>
-</blockquote>
-<ul>
-<li>scheme               指定低层使用的协议(例如：http, https, ftp)</li>
-<li>host                   HTTP服务器的IP地址或者域名</li>
-<li>port                 HTTP服务器的默认端口是80，这种情况下端口号可以省略。如果使用了别的端口，必须指明，例如 <a href="http://www.cnblogs.com:8080/" target="_blank" rel="external">http://www.cnblogs.com:8080/</a></li>
-<li>path                   访问资源的路径</li>
-<li>query-string       发送给http服务器的数据</li>
-<li>anchor             锚</li>
-</ul>
-<p><strong>URL 的一个例子</strong></p>
-<blockquote>
-<p><a href="http://www.mywebsite.com/sj/test/test.aspx?name=sviergn&amp;x=true#stuff" target="_blank" rel="external">http://www.mywebsite.com/sj/test/test.aspx?name=sviergn&amp;x=true#stuff</a></p>
-<p>Schema:                 http<br>host:                   www.mywebsite.com<br>path:                   /sj/test/test.aspx<br>Query String:           name=sviergn&amp;x=true<br>Anchor:                 stuff</p>
-</blockquote>
-<h2 id="HTTP-协议是无状态的"><a href="#HTTP-协议是无状态的" class="headerlink" title="HTTP 协议是无状态的"></a>HTTP 协议是无状态的</h2><p>HTTP协议是无状态的，同一个客户端的这次请求和上次请求是没有对应关系，对HTTP服务器来说，它并不知道这两个请求来自同一个客户端。 为了解决这个问题，Web程序引入了Cookie机制来维护状态。</p>
-<h2 id="打开一个网页需要浏览器发送很多次Request"><a href="#打开一个网页需要浏览器发送很多次Request" class="headerlink" title="打开一个网页需要浏览器发送很多次Request"></a>打开一个网页需要浏览器发送很多次Request</h2><ol>
-<li><p>当你在浏览器输入URL <a href="http://www.cnblogs.com" target="_blank" rel="external">http://www.cnblogs.com</a> 的时候，浏览器发送一个Request去获取 <a href="http://www.cnblogs.com" target="_blank" rel="external">http://www.cnblogs.com</a> 的html.  服务器把Response发送回给浏览器.</p>
-</li>
-<li><p>浏览器分析Response中的 HTML，发现其中引用了很多其他文件，比如图片，CSS文件，JS文件。通过fiddler等抓包工具可以看到，请求资源文件往往是在访问html之后。</p>
-</li>
-<li><p>浏览器会自动再次发送Request去获取图片，CSS文件，或者JS文件。</p>
-</li>
-<li><p>等所有的文件都下载成功后。 网页就被显示出来了。</p>
-</li>
-</ol>
-<h2 id="HTTP-消息结构"><a href="#HTTP-消息结构" class="headerlink" title="HTTP 消息结构"></a>HTTP 消息结构</h2><p>先看Request 消息的结构,   Request 消息分为3部分，第一部分叫Request line, 第二部分叫Request header, 第三部分是body. header和body之间有个空行， 结构如下图：</p>
-<p><img src="http://pic002.cnblogs.com/images/2012/263119/2012020914293943.png" alt="pic"></p>
-<p>第一行中的Method表示请求方法,比如”POST”,”GET”,  Path-to-resoure表示请求的资源， Http/version-number 表示HTTP协议的版本号</p>
-<p>当使用的是”GET” 方法的时候， body是为空的。</p>
-<p>比如我们打开博客园首页的request 如下:</p>
-<blockquote>
-<p>GET <a href="http://www.cnblogs.com/" target="_blank" rel="external">http://www.cnblogs.com/</a> HTTP/1.1<br>Host: www.cnblogs.com</p>
-</blockquote>
-<p>抽象的东西，难以理解，老感觉是虚的， 所谓眼见为实, 实际见到的东西，我们才能理解和记忆。 我们今天用Fiddler，实际的看看Request和Response。</p>
-<p>下面我们打开Fiddler 捕捉一个博客园登录的Request 然后分析下它的结构, 在Inspectors tab下以Raw的方式可以看到完整的Request的消息，如下图：</p>
-<p><img src="http://pic002.cnblogs.com/images/2012/263119/2012022009421183.png" alt="pic"></p>
-<p>我们再看Response消息的结构, 和Request消息的结构基本一样。 同样也分为三部分,第一部分叫Response line, 第二部分叫Response header，第三部分是body. header和body之间也有个空行,  结构如下图：</p>
-<p><img src="http://pic002.cnblogs.com/images/2012/263119/2012021309365350.png" alt="pic"></p>
-<p>HTTP/version-number表示HTTP协议的版本号，  status-code 和message 请看下节[状态代码]的详细解释。</p>
-<p>我们用Fiddler 捕捉一个博客园首页的Response然后分析下它的结构, 在Inspectors tab下以Raw的方式可以看到完整的Response的消息，如下图：</p>
-<p><img src="http://pic002.cnblogs.com/images/2012/263119/2012022009373182.png" alt="pic"></p>
-<h2 id="Get和Post方法的区别"><a href="#Get和Post方法的区别" class="headerlink" title="Get和Post方法的区别"></a>Get和Post方法的区别</h2><p>Http协议定义了很多与服务器交互的方法，最基本的有4种，分别是GET,POST,PUT,DELETE. 一个URL地址用于描述一个网络上的资源，而HTTP中的GET, POST, PUT, DELETE就对应着对这个资源的查，改，增，删4个操作。 我们最常见的就是GET和POST了。GET一般用于获取/查询资源信息，而POST一般用于更新资源信息.</p>
-<p><strong>我们看看GET和POST的区别</strong></p>
-<ol>
-<li><p>GET提交的数据会放在URL之后，以?分割URL和传输数据，参数之间以&amp;相连，如EditPosts.aspx?name=test1&amp;id=123456。 POST方法是把提交的数据放在HTTP包的Body中。</p>
-</li>
-<li><p>GET提交的数据大小有限制（因为浏览器对URL的长度有限制），而POST方法提交的数据没有限制。</p>
-</li>
-<li><p>GET方式需要使用Request.QueryString来取得变量的值，而POST方式通过Request.Form来获取变量的值。</p>
-</li>
-<li><p>GET方式提交数据，会带来安全问题，比如一个登录页面，通过GET方式提交数据时，用户名和密码将出现在URL上，如果页面可以被缓存或者其他人可以访问这台机器，就可以从历史记录获得该用户的账号和密码。</p>
-</li>
-</ol>
-<h2 id="状态码"><a href="#状态码" class="headerlink" title="状态码"></a>状态码</h2><p>Response 消息中的第一行叫做状态行，由HTTP协议版本号， 状态码， 状态消息 三部分组成。</p>
-<p>状态码用来告诉HTTP客户端,HTTP服务器是否产生了预期的Response.</p>
-<p>HTTP/1.1中定义了5类状态码， 状态码由三位数字组成，第一个数字定义了响应的类别：</p>
-<ul>
-<li><p>1XX  提示信息 - 表示请求已被成功接收，继续处理</p>
-</li>
-<li><p>2XX  成功 - 表示请求已被成功接收，理解，接受</p>
-</li>
-<li><p>3XX  重定向 - 要完成请求必须进行更进一步的处理</p>
-</li>
-<li><p>4XX  客户端错误 -  请求有语法错误或请求无法实现</p>
-</li>
-<li><p>5XX  服务器端错误 -   服务器未能实现合法的请求</p>
-</li>
-</ul>
-<p><strong>看看一些常见的状态码</strong></p>
-<blockquote>
-<p>200 OK</p>
-</blockquote>
-<p>最常见的就是成功响应状态码200了， 这表明该请求被成功地完成，所请求的资源发送回客户端</p>
-<p>如下图， 打开博客园首页：</p>
-<p><img src="http://pic002.cnblogs.com/images/2012/263119/2012021114423456.png" alt="pic"></p>
-<blockquote>
-<p>302 Found</p>
-</blockquote>
-<p>重定向，新的URL会在response 中的Location中返回，浏览器将会自动使用新的URL发出新的Request</p>
-<p>例如在IE中输入， <a href="http://www.google.com" target="_blank" rel="external">http://www.google.com</a>. HTTP服务器会返回302， IE取到Response中Location header的新URL, 又重新发送了一个Request。</p>
-<p><img src="http://pic002.cnblogs.com/images/2012/263119/2012021115280744.png" alt="pic"></p>
-<blockquote>
-<p>304 Not Modified</p>
-</blockquote>
-<p>代表上次的文档已经被缓存了， 还可以继续使用，</p>
-<p>例如打开博客园首页, 发现很多Response 的status code 都是304。</p>
-<p><img src="http://pic002.cnblogs.com/images/2012/263119/2012021115064471.png" alt="pic"></p>
-<p>提示：　如果你不想使用本地缓存可以用Ctrl+F5 强制刷新页面</p>
-<blockquote>
-<p>400 Bad Request  客户端请求与语法错误，不能被服务器所理解</p>
-<p>403 Forbidden 服务器收到请求，但是拒绝提供服务</p>
-<p>404 Not Found<br>请求资源不存在（输错了URL）</p>
-</blockquote>
-<p>比如在IE中输入一个错误的URL， <a href="http://www.cnblogs.com/tesdf.aspx" target="_blank" rel="external">http://www.cnblogs.com/tesdf.aspx</a></p>
-<p><img src="http://pic002.cnblogs.com/images/2012/263119/2012021114534541.png" alt="pic"></p>
-<blockquote>
-<p>500 Internal Server Error 服务器发生了不可预期的错误</p>
-<p>503 Server Unavailable 服务器当前不能处理客户端的请求，一段时间后可能恢复正常</p>
-</blockquote>
-<h2 id="HTTP-Request-Header"><a href="#HTTP-Request-Header" class="headerlink" title="HTTP Request Header"></a>HTTP Request Header</h2><p>使用Fiddler 能很方便的查看Reques header, 点击Inspectors tab -&gt;Request tab-&gt; headers  如下图所示：</p>
-<p><img src="http://pic002.cnblogs.com/images/2012/263119/2012021116181545.png" alt="pic"></p>
-<p>header 有很多，比较难以记忆，我们也按照Fiddler那样把header 进行分类，这样比较清晰也容易记忆。</p>
-<h2 id="Cache-头域"><a href="#Cache-头域" class="headerlink" title="Cache 头域"></a>Cache 头域</h2><blockquote>
-<p>If-Modified-Since</p>
-</blockquote>
-<p>作用： 把浏览器端缓存页面的最后修改时间发送到服务器去，服务器会把这个时间与服务器上实际文件的最后修改时间进行对比。如果时间一致，那么返回304，客户端就直接使用本地缓存文件。如果时间不一致，就会返回200和新的文件内容。客户端接到之后，会丢弃旧文件，把新文件缓存起来，并显示在浏览器中。<br>（前端发布时需要文件的时间戳，原理如上，通过比较时间，请求新的文件）</p>
-<p>例如：If-Modified-Since: Thu, 09 Feb 2012 09:07:57 GMT</p>
-<p><strong>实例如下图</strong></p>
-<p><img src="http://pic002.cnblogs.com/images/2012/263119/2012021322503738.png" alt="pic"></p>
-<blockquote>
-<p>If-None-Match</p>
-</blockquote>
-<p>作用: If-None-Match和ETag一起工作，工作原理是在HTTP Response中添加ETag信息。 当用户再次请求该资源时，将在HTTP Request 中加入If-None-Match信息(ETag的值)。如果服务器验证资源的ETag没有改变（该资源没有更新），将返回一个304状态告诉客户端使用本地缓存文件。否则将返回200状态和新的资源和Etag.  使用这样的机制将提高网站的性能</p>
-<p>例如: If-None-Match: “03f2b33c0bfcc1:0”</p>
-<p><strong>实例如下图</strong></p>
-<p><img src="http://pic002.cnblogs.com/images/2012/263119/2012021117041918.png" alt="pic"></p>
-<blockquote>
-<p>Pragma</p>
-</blockquote>
-<p>作用： 防止页面被缓存， 在HTTP/1.1版本中，它和Cache-Control:no-cache作用一模一样</p>
-<p>Pargma只有一个用法， 例如： Pragma: no-cache</p>
-<p>注意: 在HTTP/1.0版本中，只实现了Pragema:no-cache, 没有实现Cache-Control</p>
-<blockquote>
-<p>Cache-Control</p>
-</blockquote>
-<p>作用: 这个是非常重要的规则。 这个用来指定Response-Request遵循的缓存机制。各个指令含义如下</p>
-<p>Cache-Control:Public   可以被任何缓存所缓存（）</p>
-<p>Cache-Control:Private     内容只缓存到私有缓存中</p>
-<p>Cache-Control:no-cache  所有内容都不会被缓存</p>
-<h2 id="Client-头域"><a href="#Client-头域" class="headerlink" title="Client 头域"></a>Client 头域</h2><blockquote>
-<p>Accept</p>
-</blockquote>
-<p>作用： 浏览器端可以接受的媒体类型,</p>
-<p>例如：  Accept: text/html  代表浏览器可以接受服务器回发的类型为 text/html  也就是我们常说的html文档,</p>
-<p>如果服务器无法返回text/html类型的数据,服务器应该返回一个406错误(non acceptable)</p>
-<p>通配符 * 代表任意类型</p>
-<p>例如  Accept: <em>/</em>  代表浏览器可以处理所有类型,(一般浏览器发给服务器都是发这个)</p>
-<blockquote>
-<p>Accept-Encoding：</p>
-</blockquote>
-<p>作用： 浏览器申明自己接收的编码方法，通常指定压缩方法，是否支持压缩，支持什么压缩方法（gzip，deflate），（注意：这不是只字符编码）;</p>
-<p>例如： Accept-Encoding: gzip, deflate</p>
-<blockquote>
-<p>Accept-Language</p>
-</blockquote>
-<p>作用： 浏览器申明自己接收的语言。 </p>
-<p>语言跟字符集的区别：中文是语言，中文有多种字符集，比如big5，gb2312，gbk等等；</p>
-<p>例如： Accept-Language: en-us</p>
-<blockquote>
-<p>User-Agent</p>
-</blockquote>
-<p>作用：告诉HTTP服务器， 客户端使用的操作系统和浏览器的名称和版本.</p>
-<p>我们上网登陆论坛的时候，往往会看到一些欢迎信息，其中列出了你的操作系统的名称和版本，你所使用的浏览器的名称和版本，这往往让很多人感到很神奇，实际上，服务器应用程序就是从User-Agent这个请求报头域中获取到这些信息User-Agent请求报头域允许客户端将它的操作系统、浏览器和其它属性告诉服务器。</p>
-<p>例如： User-Agent: Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.0; CIBA; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729; .NET4.0C; InfoPath.2; .NET4.0E)</p>
-<blockquote>
-<p>Accept-Charset</p>
-</blockquote>
-<p>作用：浏览器申明自己接收的字符集，这就是本文前面介绍的各种字符集和字符编码，如gb2312，utf-8（通常我们说Charset包括了相应的字符编码方案）。</p>
-<h2 id="Cookie-Login-头域"><a href="#Cookie-Login-头域" class="headerlink" title="Cookie/Login 头域"></a>Cookie/Login 头域</h2><p>Cookie:</p>
-<p>作用： 最重要的header, 将cookie的值发送给HTTP 服务器</p>
-<h2 id="Entity头域"><a href="#Entity头域" class="headerlink" title="Entity头域"></a>Entity头域</h2><blockquote>
-<p>Content-Length</p>
-</blockquote>
-<p>作用：发送给HTTP服务器数据的长度。</p>
-<p>例如： Content-Length: 38</p>
-<blockquote>
-<p>Content-Type</p>
-</blockquote>
-<p>作用：</p>
-<p>例如：Content-Type: application/x-www-form-urlencoded</p>
-<h2 id="Miscellaneous-头域"><a href="#Miscellaneous-头域" class="headerlink" title="Miscellaneous 头域"></a>Miscellaneous 头域</h2><p>Referer:</p>
-<p>作用： 提供了Request的上下文信息的服务器，告诉服务器我是从哪个链接过来的，比如从我主页上链接到一个朋友那里，他的服务器就能够从HTTP Referer中统计出每天有多少用户点击我主页上的链接访问他的网站。</p>
-<p>例如: Referer:<a href="http://translate.google.cn/?hl=zh-cn&amp;tab=wT" target="_blank" rel="external">http://translate.google.cn/?hl=zh-cn&amp;tab=wT</a></p>
-<h2 id="Transport-头域"><a href="#Transport-头域" class="headerlink" title="Transport 头域"></a>Transport 头域</h2><blockquote>
-<p>Connection</p>
-</blockquote>
-<p>例如：　Connection: keep-alive   当一个网页打开完成后，客户端和服务器之间用于传输HTTP数据的TCP连接不会关闭，如果客户端再次访问这个服务器上的网页，会继续使用这一条已经建立的连接</p>
-<p>例如：  Connection: close  代表一个Request完成后，客户端和服务器之间用于传输HTTP数据的TCP连接会关闭， 当客户端再次发送Request，需要重新建立TCP连接。</p>
-<blockquote>
-<p>Host（发送请求时，该报头域是必需的）</p>
-</blockquote>
-<p>作用: 请求报头域主要用于指定被请求资源的Internet主机和端口号，它通常从HTTP URL中提取出来的</p>
-<p>例如: 我们在浏览器中输入：<a href="http://www.guet.edu.cn/index.html" target="_blank" rel="external">http://www.guet.edu.cn/index.html</a></p>
-<p>浏览器发送的请求消息中，就会包含Host请求报头域，如下：</p>
-<p>Host：<a href="http://www.guet.edu.cn" target="_blank" rel="external">http://www.guet.edu.cn</a></p>
-<p>此处使用缺省端口号80，若指定了端口号，则变成：Host：指定端口号</p>
-<h2 id="HTTP-Response-Header"><a href="#HTTP-Response-Header" class="headerlink" title="HTTP Response Header"></a>HTTP Response Header</h2><p>同样使用Fiddler 查看Response header, 点击Inspectors tab -&gt;Response tab-&gt; headers  如下图所示：</p>
-<p><img src="http://pic002.cnblogs.com/images/2012/263119/2012021116212815.png" alt="pic"></p>
-<p>我们也按照Fiddler那样把header 进行分类，这样比较清晰也容易记忆。</p>
-<h2 id="Entity头域-1"><a href="#Entity头域-1" class="headerlink" title="Entity头域"></a>Entity头域</h2><blockquote>
-<p>ETag</p>
-</blockquote>
-<p>作用:  和If-None-Match 配合使用。 （实例请看上节中If-None-Match的实例）</p>
-<p>例如: ETag: “03f2b33c0bfcc1:0”</p>
-<blockquote>
-<p>Last-Modified:</p>
-</blockquote>
-<p>作用： 用于指示资源的最后修改日期和时间。（实例请看上节的If-Modified-Since的实例）</p>
-<p>例如: Last-Modified: Wed, 21 Dec 2011 09:09:10 GMT</p>
-<blockquote>
-<p>Content-Type</p>
-</blockquote>
-<p>作用：WEB服务器告诉浏览器自己响应的对象的类型和字符集,</p>
-<p>例如:</p>
-<p>Content-Type: text/html; charset=utf-8</p>
-<p>Content-Type:text/html;charset=GB2312</p>
-<p>Content-Type: image/jpeg</p>
-<blockquote>
-<p>Content-Length</p>
-</blockquote>
-<p>指明实体正文的长度，以字节方式存储的十进制数字来表示。在数据下行的过程中，Content-Length的方式要预先在服务器中缓存所有数据，然后所有数据再一股脑儿地发给客户端。</p>
-<p>例如: Content-Length: 19847</p>
-<blockquote>
-<p>Content-Encoding</p>
-</blockquote>
-<p>WEB服务器表明自己使用了什么压缩方法（gzip，deflate）压缩响应中的对象。</p>
-<p>例如：Content-Encoding：gzip</p>
-<blockquote>
-<p>Content-Language</p>
-</blockquote>
-<p>作用： WEB服务器告诉浏览器自己响应的对象的语言者</p>
-<p>例如： Content-Language:da</p>
-<h2 id="Miscellaneous-头域-1"><a href="#Miscellaneous-头域-1" class="headerlink" title="Miscellaneous 头域"></a>Miscellaneous 头域</h2><blockquote>
-<p>Server:</p>
-</blockquote>
-<p>作用：指明HTTP服务器的软件信息</p>
-<p>例如:Server: Microsoft-IIS/7.5</p>
-<blockquote>
-<p>X-AspNet-Version:</p>
-</blockquote>
-<p>作用：如果网站是用ASP.NET开发的，这个header用来表示ASP.NET的版本</p>
-<p>例如: X-AspNet-Version: 4.0.30319</p>
-<blockquote>
-<p>X-Powered-By:</p>
-</blockquote>
-<p>作用：表示网站是用什么技术开发的</p>
-<p>例如： X-Powered-By: ASP.NET</p>
-<h2 id="Transport头域"><a href="#Transport头域" class="headerlink" title="Transport头域"></a>Transport头域</h2><p>Connection</p>
-<p>例如：　Connection: keep-alive   当一个网页打开完成后，客户端和服务器之间用于传输HTTP数据的TCP连接不会关闭，如果客户端再次访问这个服务器上的网页，会继续使用这一条已经建立的连接</p>
-<p>例如：  Connection: close  代表一个Request完成后，客户端和服务器之间用于传输HTTP数据的TCP连接会关闭， 当客户端再次发送Request，需要重新建立TCP连接。</p>
-<h2 id="Location头域"><a href="#Location头域" class="headerlink" title="Location头域"></a>Location头域</h2><p>Location</p>
-<p>作用： 用于重定向一个新的位置, 包含新的URL地址</p>
-<h2 id="HTTP协议是无状态的和Connection-keep-alive的区别"><a href="#HTTP协议是无状态的和Connection-keep-alive的区别" class="headerlink" title="HTTP协议是无状态的和Connection: keep-alive的区别"></a>HTTP协议是无状态的和Connection: keep-alive的区别</h2><p>无状态是指协议对于事务处理没有记忆能力，服务器不知道客户端是什么状态。从另一方面讲，打开一个服务器上的网页和你之前打开这个服务器上的网页之间没有任何联系。</p>
-<p>HTTP是一个无状态的面向连接的协议，无状态不代表HTTP不能保持TCP连接，更不能代表HTTP使用的是UDP协议（无连接）。</p>
-<p>从HTTP/1.1起，默认都开启了Keep-Alive，保持连接特性，简单地说，当一个网页打开完成后，客户端和服务器之间用于传输HTTP数据的TCP连接不会关闭，如果客户端再次访问这个服务器上的网页，会继续使用这一条已经建立的连接。</p>
-<p> Keep-Alive不会永久保持连接，它有一个保持时间，可以在不同的服务器软件（如Apache）中设定这个时间。</p>
-
+        <p><strong>什么是 HTTP 协议</strong></p>
+<p>HTTP协议是指计算机通信网络中两台计算机之间进行通信所必须共同遵守的规定或规则，超文本传输协议(HTTP)是一种通信协议，它允许将超文本标记语言(HTML)文档从Web服务器传送到客户端的浏览器。目前我们使用的是HTTP/1.1版本。</p>
+<p><strong>Web服务器、浏览器、代理服务器</strong></p>
+<p>当我们打开浏览器，在地址栏中输入URL，然后我们就看到了网页。原理是怎样的呢？实际上我们输入URL后，我们的浏览器给Web服务器发送了一个Request,Web服务器接到Request后进行处理，生成相应的Response，然后发送给浏览器，浏览器解析Response中的HTML,这样我们就看到了网页，过程如下图所示:</p>
+        
+          <a class="article-more-a" href="/2016/10/22/HTTP协议学习/#more">more >></a>
+        
       
 
       
@@ -880,7 +478,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">计算机网络</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">http</a>
         		</li>
       		
 		</ul>
@@ -892,7 +490,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/work/" class="article-tag-list-link color5">work</a>
+        			<a href="/categories/network/" class="article-tag-list-link color3">network</a>
         		</li>
       		
 		</ul>
@@ -1835,7 +1433,7 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color2">c</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1843,11 +1441,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">c</a>
+                <a href="javascript:void(0)" class="js-tag color5">http</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">tool</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1855,19 +1457,27 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">sqlite</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">java,tomcat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">os</a>
+                <a href="javascript:void(0)" class="js-tag color2">socket</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">javaweb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">tcp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1879,11 +1489,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">内存</a>
+                <a href="javascript:void(0)" class="js-tag color3">os</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">tool</a>
+                <a href="javascript:void(0)" class="js-tag color2">java,tomcat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">内存</a>
               </li>
             
             <div class="clearfix"></div>

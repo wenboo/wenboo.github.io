@@ -6,21 +6,14 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://wenboo.github.io">
-  <title>Servlet接口的五种方法介绍 | Hi~Welcome to Wenboo&#39;s Blog</title>
+  <title>Tag: tcp | Hi~Welcome to Wenboo&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Servlet中的五种接口：
-1.init()2.service()3.destroy()4.getServletConfig()5.getServletInfo()">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Servlet接口的五种方法介绍">
-<meta property="og:url" content="http://wenboo.github.io/2016/11/14/Servlet接口的五种方法介绍/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hi~Welcome to Wenboo's Blog">
+<meta property="og:url" content="http://wenboo.github.io/tags/tcp/index.html">
 <meta property="og:site_name" content="Hi~Welcome to Wenboo's Blog">
-<meta property="og:description" content="Servlet中的五种接口：
-1.init()2.service()3.destroy()4.getServletConfig()5.getServletInfo()">
-<meta property="og:updated_time" content="2017-01-05T15:05:08.706Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Servlet接口的五种方法介绍">
-<meta name="twitter:description" content="Servlet中的五种接口：
-1.init()2.service()3.destroy()4.getServletConfig()5.getServletInfo()">
+<meta name="twitter:title" content="Hi~Welcome to Wenboo's Blog">
   
     <link rel="alternative" href="/atom.xml" title="Hi~Welcome to Wenboo&#39;s Blog" type="application/atom+xml">
   
@@ -172,197 +165,71 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Servlet接口的五种方法介绍" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      Servlet接口的五种方法介绍
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2016" class="archive-year">2016</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2016/10/24/TCP的那些事儿/" class="archive-article-date">
+  	<time datetime="2016-10-24T14:21:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-24</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2016/10/24/TCP的那些事儿/">TCP的那些事儿</a>
     </h1>
   
 
-        
-        <a href="/2016/11/14/Servlet接口的五种方法介绍/" class="archive-article-date">
-  	<time datetime="2016-11-14T13:41:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-11-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>Servlet中的五种接口：</strong></p>
-<p>1.init()<br>2.service()<br>3.destroy()<br>4.getServletConfig()<br>5.getServletInfo() </p>
-<a id="more"></a>
-<p><strong>Servlet容器默认是采用单实例多线程的方式处理多个请求的：</strong></p>
-<p>1.当web服务器启动的时候（或客户端发送请求到服务器时），Servlet就被加载并实例化（只存在一个Servlet实例）;<br>2.容器初始化Servlet。主要就是读取配置文件（例如tomcat，可以通过servlet.xml的设置线程池中线程数目，初始化线程池；通过web.xml，初始化每个参数值等等）；<br>3.当请求到达时，Servlet容器通过调度线程（Dispatchaer Thread）调度它管理下的线程池中等待执行的线程（Worker Thread）给请求者；<br>4.线程执行Servlet的service方法；<br>5.请求结束，放回线程池，等到被调用； </p>
-<blockquote>
-<p>Servlet单实例，减少了产生servlet的开销； </p>
-<p>Servlet容器并不关心到达的Servlet请求访问的是否是同一个Servlet还是另一个Servlet，直接分配给它一个新的线程；如果是同一个Servlet的多个请求，那么Servlet的service方法将在多线程中并发的执行；</p>
-<p>每一个请求由ServletRequest对象来接受请求，由ServletResponse对象来响应该请求； 同一个Servlet的的多个请求到来时，可能发生多线程同时访问同一资源的情况，数据可能变的不一致，可能会因为线程安全问题发生错误。</p>
-</blockquote>
-<p><strong>1.实现 SingleThreadModel 接口 即：管理servlet</strong></p>
-<p>如果一个Servlet被这个接口指定,那么在这个Servlet中的service方法将不会有两个线程被同时执行，当然也就不存在线程安全的问题；</p>
-<p><strong>2.同步对共享数据的操作 即：管理被访问的资源</strong></p>
-<p>使用sy nchronized 关键字能保证一次只有一个线程可以访问被保护的区段，Servlet可以通过同步块   操作来保证线程的安全。ServletRequest对象是线程安全的，但是ServletContext和HttpSession不是   线程安全的；要使用同步的集合类： Vector代替ArrayList，HsahTable代替HashMap；</p>
-<p><strong>3.避免使用实例变量（成员变量）</strong></p>
-<p>线程安全问题是由实例变量造成的，只要在Servlet里面的任何方法里面都不使用实例变量，那么该Servlet就是线程安全的。</p>
-<p>对上面的三种方法进行测试，可以表明用它们都能设计出线程安全的Servlet程序。但是，如果一个Servlet实现了SingleThreadModel接口，Servlet引擎将为每个新的请求创建一个单独的Servlet实例，这将引起大量的系统开销。SingleThreadModel在Servlet2.4中已不再提倡使用；同样如果在程序中使用同步来保护要使用的共享的数据，也会使系统的性能大大下降。这是因为被同步的代码块在同一时刻只能有一个线程执行它，使得其同时处理客户请求的吞吐量降低，而且很多客户处于阻塞状态。另外为保证主存内容和线程的工作内存中的数据的一致性，要频繁地刷新缓存,这也会大大地影响系统的性能。所以在实际的开发中也应避免或最小化 Servlet 中的同步代码；在Serlet中避免使用实例变量是保证Servlet线程安全的最佳选择。从Java 内存模型也可以知道，方法中的临时变量是在栈上分配空间，而且每个线程都有自己私有的栈空间，所以它们不会影响线程的安全。</p>
-<p>Servlet的线程安全问题只有在大量的并发访问时才会显现出来，并且很难发现，因此在编写Servlet程序时要特别注意。线程安全问题主要是由实例变量造成的,因此在Servlet中应避免使用实例变量。如果应用程序设计无法避免使用实例变量，那么使用同步来保护要使用的实例变量，但为保证系统的最佳性能，应该同步可用性最小的代码路径。</p>
-<p>1) init() 在Servlet实例化后，Servlet容器会调用init()方法来初始化该对象，主要是为了让Servlet对象在处理客户请求前可以完成一些初始化工作，例如：建立数据库的连接，获取配置信息等。对于每一个Servlet实例，init()方法只能被调用一次。init()方法有一个类型为ServletConfig的参数，Servlet容器通过这个参数向Servlet传递配置信息。Servlet使用ServletConfig对象从Web应用程序的配置信息中获取以名-值对形式提供的初始化参数。另外，在Servlet中，还可以通过ServletConfig对象获取描述Servlet运行环境的ServletContext对象，使用该对象，Servlet可以和它的Servlet容器进行通信。</p>
-<p>2) Service() 容器调用service()方法来处理客户端的请求。要注意的是，在service()方法被容器调用之前，必须确保init()方法正确完成。容器会构造一个表示客户端请求信息的请求对象（类型为ServletRequest）和一个用于对客户端进行响应的响应对象（类型为ServletResponse）作为参数传递给service()。在service()方法中，Servlet对象通过ServletRequest对象得到客户端的相关信息和请求信息，在对请求进行处理后，调用ServletResponse对象的方法设置响应信息。</p>
-<p>3) destroy() 当容器检测到一个Servlet对象应该从服务中被移除的时候，容器会调用该对象的destroy()方法，以便让Servlet对象可以释放它所使用的资源，保存数据到持久存储设备中，例如将内存中的数据保存到数据库中，关闭数据库的连接等。当需要释放内存或者容器关闭时，容器就会调用Servlet对象的destroy()方法，在Servlet容器调用destroy()方法前，如果还有其他的线程正在service()方法中执行容器会等待这些线程执行完毕或者等待服务器设定的超时值到达。一旦Servlet对象的destroy()方法被调用，容器不回再把请求发送给该对象。如果需要改Servlet再次为客户端服务，容器将会重新产生一个Servlet对象来处理客户端的请求。在destroy()方法调用之后，容器会释放这个Servlet对象，在随后的时间内，该对象会被java的垃圾收集器所回收。</p>
-<blockquote>
-<p>getServletConfig() 该方法返回容器调用init()方法时传递给Servlet对象的ServletConfig对象，ServletConfig对象包含了Servlet的初始化参数。</p>
-<p>getServletInfo() 返回一个String类型的字符串，其中包括了关于Servlet的信息，例如，作者、版本和版权。该方法返回的应该是纯文本字符串，而不是任何类型的标记。
-　 
-　 
-　 </p>
-</blockquote>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">tomcat</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">tcp</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
+        			<a href="/categories/network/" class="article-tag-list-link color3">network</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://wenboo.github.io/2016/11/14/Servlet接口的五种方法介绍/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2016/11/17/Tomcat启动过程原理详解/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Tomcat启动过程原理详解
-        
-      </div>
-    </a>
   
   
-    <a href="/2016/11/14/Servlet必须知道的细节/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Servlet必知细节</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-
-
-
-
-  
-  <div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Servlet接口的五种方法介绍" data-title="Servlet接口的五种方法介绍" data-url="http://wenboo.github.io/2016/11/14/Servlet接口的五种方法介绍/"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"wenboo"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
-</div>
-
+    </div></section>
   
 
-
+    
 
 
           </div>
@@ -385,9 +252,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		root: "/",
