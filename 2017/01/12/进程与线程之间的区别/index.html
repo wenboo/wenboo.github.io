@@ -6,23 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://wenboo.github.io">
-  <title>保持冷静，节制使用 JSON | Hi~Welcome to Wenboo&#39;s Blog</title>
+  <title>进程与线程之间的区别 | Hi~Welcome to Wenboo&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="JSON (JavaScript Object Notation)是一种轻量级的数据交换格式。它容易被人们阅读和编写，也容易被软件所读取和生成。如下是用JSON描述的一份客户数据。它能很好的用在交换和集成商。
-1234567891011121314151617181920212223&amp;#123;    &quot;Name&quot; : &quot;Jane Smith&quot;,    &quot;DOB&quot;  : &quot;1990-01-30&quot;,">
+  <meta name="description" content="进程是什么？
+程序并不能单独运行，只有将程序装载到内存中，系统为它分配资源才能运行，而这种执行的程序就称之为进程。程序和进程的区别就在于：程序是指令的集合，它是进程运行的静态描述文本；进程是程序的一次执行活动，属于动态概念。
+在多道编程中，我们允许多个程序同时加载到内存中，在操作系统的调度下，可以实现并发地执行。这是这样的设计，大大提高了CPU的利用率。进程的出现让每个用户感觉到自己独享CPU，因">
 <meta property="og:type" content="article">
-<meta property="og:title" content="保持冷静，节制使用 JSON">
-<meta property="og:url" content="http://wenboo.github.io/2016/10/22/保持冷静，节制使用-Json/index.html">
+<meta property="og:title" content="进程与线程之间的区别">
+<meta property="og:url" content="http://wenboo.github.io/2017/01/12/进程与线程之间的区别/index.html">
 <meta property="og:site_name" content="Hi~Welcome to Wenboo's Blog">
-<meta property="og:description" content="JSON (JavaScript Object Notation)是一种轻量级的数据交换格式。它容易被人们阅读和编写，也容易被软件所读取和生成。如下是用JSON描述的一份客户数据。它能很好的用在交换和集成商。
-1234567891011121314151617181920212223&amp;#123;    &quot;Name&quot; : &quot;Jane Smith&quot;,    &quot;DOB&quot;  : &quot;1990-01-30&quot;,">
-<meta property="og:image" content="http://static.oschina.net/uploads/space/2016/1018/113822_VAkX_2903254.png">
-<meta property="og:updated_time" content="2017-01-12T12:28:41.225Z">
+<meta property="og:description" content="进程是什么？
+程序并不能单独运行，只有将程序装载到内存中，系统为它分配资源才能运行，而这种执行的程序就称之为进程。程序和进程的区别就在于：程序是指令的集合，它是进程运行的静态描述文本；进程是程序的一次执行活动，属于动态概念。
+在多道编程中，我们允许多个程序同时加载到内存中，在操作系统的调度下，可以实现并发地执行。这是这样的设计，大大提高了CPU的利用率。进程的出现让每个用户感觉到自己独享CPU，因">
+<meta property="og:updated_time" content="2017-01-12T13:51:57.972Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="保持冷静，节制使用 JSON">
-<meta name="twitter:description" content="JSON (JavaScript Object Notation)是一种轻量级的数据交换格式。它容易被人们阅读和编写，也容易被软件所读取和生成。如下是用JSON描述的一份客户数据。它能很好的用在交换和集成商。
-1234567891011121314151617181920212223&amp;#123;    &quot;Name&quot; : &quot;Jane Smith&quot;,    &quot;DOB&quot;  : &quot;1990-01-30&quot;,">
-<meta name="twitter:image" content="http://static.oschina.net/uploads/space/2016/1018/113822_VAkX_2903254.png">
+<meta name="twitter:title" content="进程与线程之间的区别">
+<meta name="twitter:description" content="进程是什么？
+程序并不能单独运行，只有将程序装载到内存中，系统为它分配资源才能运行，而这种执行的程序就称之为进程。程序和进程的区别就在于：程序是指令的集合，它是进程运行的静态描述文本；进程是程序的一次执行活动，属于动态概念。
+在多道编程中，我们允许多个程序同时加载到内存中，在操作系统的调度下，可以实现并发地执行。这是这样的设计，大大提高了CPU的利用率。进程的出现让每个用户感觉到自己独享CPU，因">
   
     <link rel="alternative" href="/atom.xml" title="Hi~Welcome to Wenboo&#39;s Blog" type="application/atom+xml">
   
@@ -174,63 +175,46 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-保持冷静，节制使用-Json" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-进程与线程之间的区别" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      保持冷静，节制使用 JSON
+      进程与线程之间的区别
     </h1>
   
 
         
-        <a href="/2016/10/22/保持冷静，节制使用-Json/" class="archive-article-date">
-  	<time datetime="2016-10-22T14:21:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-22</time>
+        <a href="/2017/01/12/进程与线程之间的区别/" class="archive-article-date">
+  	<time datetime="2017-01-12T13:49:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-12</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>JSON (JavaScript Object Notation)是一种轻量级的数据交换格式。它容易被人们阅读和编写，也容易被软件所读取和生成。如下是用JSON描述的一份客户数据。它能很好的用在交换和集成商。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="string">"Name"</span> : <span class="string">"Jane Smith"</span>,</div><div class="line">    <span class="string">"DOB"</span>  : <span class="string">"1990-01-30"</span>,</div><div class="line">    <span class="string">"Billing"</span> : [</div><div class="line">        &#123;</div><div class="line">            <span class="string">"type"</span>    : <span class="string">"visa"</span>,</div><div class="line">            <span class="string">"cardnum"</span> : <span class="string">"5827-2842-2847-3909"</span>,</div><div class="line">            <span class="string">"expiry"</span>  : <span class="string">"2019-03"</span></div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            <span class="string">"type"</span>    : <span class="string">"master"</span>,</div><div class="line">            <span class="string">"cardnum"</span> : <span class="string">"6274-2542-5847-3949"</span>,</div><div class="line">            <span class="string">"expiry"</span>  : <span class="string">"2018-12"</span></div><div class="line">        &#125;</div><div class="line">    ],</div><div class="line">   <span class="string">"address"</span>: </div><div class="line">      &#123;</div><div class="line">  <span class="string">"street"</span>  : <span class="string">"9462, Fillmore"</span>,</div><div class="line">  <span class="string">"city"</span>    : <span class="string">"San Francisco"</span>,</div><div class="line">            <span class="string">"state"</span>   : <span class="string">"California"</span>,</div><div class="line">            <span class="string">"zip"</span>     : <span class="number">94401</span></div><div class="line">      &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        <p><strong>进程是什么？</strong></p>
+<p>程序并不能单独运行，只有将程序装载到内存中，系统为它分配资源才能运行，而这种执行的程序就称之为进程。程序和进程的区别就在于：程序是指令的集合，它是进程运行的静态描述文本；进程是程序的一次执行活动，属于动态概念。</p>
+<p>在多道编程中，我们允许多个程序同时加载到内存中，在操作系统的调度下，可以实现并发地执行。这是这样的设计，大大提高了CPU的利用率。进程的出现让每个用户感觉到自己独享CPU，因此，进程就是为了在CPU上实现多道编程而提出的。</p>
 <a id="more"></a>
-<p>目前使用还不错。如果只把JSON用在应用程序中不同层级间的数据交换上，那还好。而当人们开始要将其作为一种数据库存储格式来使用时，就不好了。当我第一次遇到将JSON作为一种数据库中的数据格式时，感到非常惊奇，因为数据库要花费不少代价，每一条记录里面键和值都要存，而且每次查询都要进行处理。在我的演讲和文章里面，已经有许多人提过这个问题了。</p>
-<p><strong>以下是经常会遇到的异议:</strong></p>
+<p><strong>有了进程为什么还要线程？</strong></p>
+<p>进程有很多优点，它提供了多道编程，让我们感觉我们每个人都拥有自己的CPU和其他资源，可以提高计算机的利用率。很多人就不理解了，既然进程这么优秀，为什么还要线程呢？其实，仔细观察就会发现进程还是有很多缺陷的，主要体现在两点上：</p>
 <blockquote>
-<p>1.JSON 是文本，它效率不高。</p>
-<p>2.JSON 没有没有可执行结构，毫无数据质量可言。</p>
-<p>3.每一个文档（行）都得是键值对?你肯定是疯了才会这样做。</p>
+<p>进程只能在一个时间干一件事，如果想同时干两件事或多件事，进程就无能为力了。</p>
+<p>进程在执行的过程中如果阻塞，例如等待输入，整个进程就会挂起，即使进程中有些工作不依赖于输入的数据，也将无法执行。</p>
 </blockquote>
-<p>让我们一个一个讨论这些异议。</p>
-<p><strong>1.JSON 是文本，它效率不高</strong></p>
-<p>RDBMS十分高效。RDBMS有一种成本意识: 空间，时间，时空，甚至一切。与RDBMS存储格式相比，JSON效率低下。</p>
-<blockquote>
-<p>所有的数据都是字符形式的JSON需要转换处理。</p>
-<p>即使数值数据也存储在文本中。</p>
-<p>每个值在每个文档中都带有其键名称（键值）。需要更多的存储和处理。</p>
-<p>允许表示复杂的结构，导致运行时开销。</p>
-<p>官方支持小集数据类型。无小数，无时间戳记等。</p>
-</blockquote>
-<p><strong>在数据库中使用JSON意味着:</strong></p>
-<blockquote>
-<p>数据库引擎必须理解每个文档的模式并处理它们，而不是处理常规元组和属性（行和列）。</p>
-<p>必须解析和处理JSON中每个键值的数据类型。</p>
-<p>JSON可能是XML的一个精减的版本，但它仍然很庞大。</p>
-</blockquote>
-<p>有这么多低效率的缺陷，为什么还有数据库使用JSON作为数据模型呢？或者说实现JSON数据类型呢？</p>
-<p>的确。JSON作为数据交换格式被发明，现在是公共API——数据集成场景的首选格式。大多数设备，大多数软件层可以以JSON的形式消费和产品数据。以JSON存储和发布数据意味着，除了下面的优点之外，API和应用程序还可以在他们熟悉的介质中与数据库交互。你必须考虑N层应用程序效率，而不是将其与元组插入和更新进行比较。大多数RDBMS现在已经将JSON添加为数据类型。随着JSON使用量的增长，存储和处理效率将会提高。</p>
-<p><strong>2.JSON 在数据库中不要求数据结构。因此数据质量差</strong></p>
-<p>自从JSON数据库不要求任何结构。不管是有意，还是无意，应用程序都可以插入任何格式的数据了，只要这些数据是有效的JSON。基于JSON的数据库倾向于“读取模式“。也就是说，读者有责任去理解和翻译每一个文档或查询结果的模式。查询语言，如N1QL ，就有很多文档本身的自解读功能。已经提到过的一些工具，如Ottoman 和 Mongoose可以帮你去验证一个给定的JSON是否违反了已定义的结构。尽管对将数据加载进JSON数据库来说，这不是一个好的安全装置，但是在应用层对数据的正确控制可以帮助你提高数据的一致性。另一方面，灵活性，JSON的内嵌结构可以帮助你在一个单独的JSON文档中匹配对象数据。</p>
-<p>使用JSON也可以避免对象关系映射的开销。应用程序的规范和修改对象。为了在关系模式中存储这些数据，你需要在多个关系中规范这些数据，把它们存储在离散的表中。当你需要重建对象时，你需要在这些表中连接数据，构建返回对象。而对象关系映射层（如Hibernate自动完成这个过程），你仍然会消耗性能，因为你为每步执行了多个查询。</p>
-<p>通过对象在JSON的分层内嵌结构中的表示，避免了很多对象关系映射的消耗。</p>
-<p><img src="http://static.oschina.net/uploads/space/2016/1018/113822_VAkX_2903254.png" alt="pic"></p>
-<p><strong>3.每一个文档都是键值对? 那你就疯了 !</strong></p>
-<p>不过现在的结果是瓶颈已经被转移啦。瓶颈已经从数据库核心性能移向了数据库灵活性和应用程序开发的迭代变更管理。80，90年代RDBMS被用于许多的应用和用例中，最重要的是RDBMS能跟上发展脚步还有硬件的更新。它能适用于高时速，新指令，多内核，大内存的硬件更新。随着业务的增长，对应用程序的自动化多进程要求越来越高。而且一些应用程序越来越受欢迎和有价值，企业当然就希望它能做得更多。业务应用程序开始从后台自动化到真正的业务变更驱动程序。RDBMS虽然擅长于做许多事情，但是从未改变过自己。所面临的问题都是组织和技术方面的问题。RDBMS使用“写入模式”方法。模式决定了创建表的时间，在每个插入，更新，合并处检查。更改表结构通常涉及多个相关字段，多个应用程序，需要测试所有相关模块。</p>
-<p>使用ALTER在表中添加列，更改数据类型需要对表的数据进行校验是否都符合要更改的数据类型，若有不符合的会导致应用程序和业务计划停机。如果你需要一个列来存储不同类型的数据或结构，那你就太不走运了。针对这种情况，系统已经尝试通过允许用户在线添加列来缓解小子集的问题。</p>
-<p>如果使用JSON格式通过键值来存储数据，您可以避免在写入时强制执行模式。当文档被查询处理引擎或应用程序读取时，它们必须阅读和解释文档。应用程序通常会对文档进行版本化管理以便他们知道在文档本身的模式发展过程中会发生什么。查询语言（如N1QL，SQL ++）将扩展到文件内部处理更灵活的模式。</p>
+<p>如果这两个缺点理解比较困难的话，举个现实的例子也许你就清楚了：如果把我们上课的过程看成一个进程的话，那么我们要做的是耳朵听老师讲课，手上还要记笔记，脑子还要思考问题，这样才能高效的完成听课的任务。而如果只提供进程这个机制的话，上面这三件事将不能同时执行，同一时间只能做一件事，听的时候就不能记笔记，也不能用脑子思考，这是其一；如果老师在黑板上写演算过程，我们开始记笔记，而老师突然有一步推不下去了，阻塞住了，他在那边思考着，而我们呢，也不能干其他事，即使你想趁此时思考一下刚才没听懂的一个问题都不行，这是其二。</p>
+<p>现在你应该明白了进程的缺陷了，而解决的办法很简单，我们完全可以让听、写、思三个独立的过程，并行起来，这样很明显可以提高听课的效率。而实际的操作系统中，也同样引入了这种类似的机制——线程。</p>
+<p><strong>线程的优点</strong></p>
+<p>因为要并发，我们发明了进程，又进一步发明了线程。只不过进程和线程的并发层次不同：进程属于在处理器这一层上提供的抽象；线程则属于在进程这个层次上再提供了一层并发的抽象。如果我们进入计算机体系结构里，就会发现，流水线提供的也是一种并发，不过是指令级的并发。这样，流水线、线程、进程就从低到高在三个层次上提供我们所迫切需要的并发！</p>
+<p>除了提高进程的并发度，线程还有个好处，就是可以有效地利用多处理器和多核计算机。现在的处理器有个趋势就是朝着多核方向发展，在没有线程之前，多核并不能让一个进程的执行速度提高，原因还是上面所有的两点限制。但如果讲一个进程分解为若干个线程，则可以让不同的线程运行在不同的核上，从而提高了进程的执行速度。</p>
+<p>例如：我们经常使用微软的Word进行文字排版，实际上就打开了多个线程。这些线程一个负责显示，一个接受键盘的输入，一个进行存盘等等。这些线程一起运行，让我们感觉到我们输入和屏幕显示同时发生，而不是输入一些字符，过一段时间才能看到显示出来。在我们不经意间，还进行了自动存盘操作。这就是线程给我们带来的方便之处。</p>
+<p><strong>进程与线程的区别</strong></p>
+<p>进程是具有一定独立功能的程序关于某个数据集合上的一次运行活动,进程是系统进行资源分配和调度的一个独立单位。</p>
+<p>线程是进程的一个实体, 是CPU调度和分派的基本单位,它是比进程更小的能独立运行的基本单位.线程自己基本上不拥有系统资源,只拥有一点在运行中必不可少的资源(如程序计数器,一组寄存器和栈),但是它可与同属一个进程的其他的线程共享进程所拥有的全部资源。</p>
+<p>一个线程可以创建和撤销另一个线程，同一个进程中的多个线程之间可以并发执行。<br>进程和线程的主要差别在于它们是不同的操作系统资源管理方式。进程有独立的地址空间，一个进程崩溃后，在保护模式下不会对其它进程产生影响，而线程只是一个进程中的不同执行路径。线程有自己的堆栈和局部变量，但线程之间没有单独的地址空间，一个线程死掉就等于整个进程死掉，所以多进程的程序要比多线程的程序 健壮，但在进程切换时，耗费资源较大，效率要差一些。但对于一些要求同时进行并且又要共享某些变量的并发操作，只能用线程，不能用进程。</p>
 
       
 
@@ -244,7 +228,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">json</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">进程</a>
         		</li>
       		
 		</ul>
@@ -256,7 +240,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
+        			<a href="/categories/cm/" class="article-tag-list-link color3">cm</a>
         		</li>
       		
 		</ul>
@@ -311,7 +295,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://wenboo.github.io/2016/10/22/保持冷静，节制使用-Json/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://wenboo.github.io/2017/01/12/进程与线程之间的区别/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -325,18 +309,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2016/10/22/HTTP-协议学习/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          HTTP 协议学习
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/10/22/计算机网络术语/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">计算机网络术语</div>
+    <a href="/2017/01/12/2017-1-12-日志排版/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">2017-1-12 日志排版</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -350,7 +325,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="保持冷静，节制使用-Json" data-title="保持冷静，节制使用 JSON" data-url="http://wenboo.github.io/2016/10/22/保持冷静，节制使用-Json/"></div>
+	<div class="ds-thread" data-thread-key="进程与线程之间的区别" data-title="进程与线程之间的区别" data-url="http://wenboo.github.io/2017/01/12/进程与线程之间的区别/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
