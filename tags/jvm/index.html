@@ -6,35 +6,14 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://wenboo.github.io">
-  <title>Socket 和 ServerSocket 学习 | Hi~Welcome to Wenboo&#39;s Blog</title>
+  <title>Tag: jvm | Hi~Welcome to Wenboo&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="对于即时类应用或者即时类的游戏，HTTP协议很多时候无法满足于我们的需求。这会，Socket对于我们来说就非常实用了。
-异常类型
-在了解Socket的内容之前，先要了解一下涉及到的一些异常类型。以下四种类型都是继承于IOException，所以很多之后直接弹出IOException即可。
-
-UnkownHostException:主机名字或IP错误
-ConnectException:服务器拒绝连接">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Socket 和 ServerSocket 学习">
-<meta property="og:url" content="http://wenboo.github.io/2016/10/23/Socket-和-ServerSocket-学习/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hi~Welcome to Wenboo's Blog">
+<meta property="og:url" content="http://wenboo.github.io/tags/jvm/index.html">
 <meta property="og:site_name" content="Hi~Welcome to Wenboo's Blog">
-<meta property="og:description" content="对于即时类应用或者即时类的游戏，HTTP协议很多时候无法满足于我们的需求。这会，Socket对于我们来说就非常实用了。
-异常类型
-在了解Socket的内容之前，先要了解一下涉及到的一些异常类型。以下四种类型都是继承于IOException，所以很多之后直接弹出IOException即可。
-
-UnkownHostException:主机名字或IP错误
-ConnectException:服务器拒绝连接">
-<meta property="og:image" content="http://images.cnitblog.com/blog/211061/201402/241809453054816.png">
-<meta property="og:updated_time" content="2017-01-10T14:18:20.628Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Socket 和 ServerSocket 学习">
-<meta name="twitter:description" content="对于即时类应用或者即时类的游戏，HTTP协议很多时候无法满足于我们的需求。这会，Socket对于我们来说就非常实用了。
-异常类型
-在了解Socket的内容之前，先要了解一下涉及到的一些异常类型。以下四种类型都是继承于IOException，所以很多之后直接弹出IOException即可。
-
-UnkownHostException:主机名字或IP错误
-ConnectException:服务器拒绝连接">
-<meta name="twitter:image" content="http://images.cnitblog.com/blog/211061/201402/241809453054816.png">
+<meta name="twitter:title" content="Hi~Welcome to Wenboo's Blog">
   
     <link rel="alternative" href="/atom.xml" title="Hi~Welcome to Wenboo&#39;s Blog" type="application/atom+xml">
   
@@ -186,239 +165,71 @@ ConnectException:服务器拒绝连接">
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Socket-和-ServerSocket-学习" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      Socket 和 ServerSocket 学习
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2017" class="archive-year">2017</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2017/01/12/一张图读懂JVM架构/" class="archive-article-date">
+  	<time datetime="2017-01-12T13:53:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-12</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/01/12/一张图读懂JVM架构/">一张图读懂JVM架构</a>
     </h1>
   
 
-        
-        <a href="/2016/10/23/Socket-和-ServerSocket-学习/" class="archive-article-date">
-  	<time datetime="2016-10-23T08:53:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>对于即时类应用或者即时类的游戏，HTTP协议很多时候无法满足于我们的需求。这会，Socket对于我们来说就非常实用了。</p>
-<p><strong>异常类型</strong></p>
-<p>在了解Socket的内容之前，先要了解一下涉及到的一些异常类型。以下四种类型都是继承于IOException，所以很多之后直接弹出IOException即可。</p>
-<blockquote>
-<p>UnkownHostException:主机名字或IP错误</p>
-<p>ConnectException:服务器拒绝连接、服务器没有启动、（超出队列数，拒绝连接）</p>
-<p>SocketTimeoutException:连接超时</p>
-<p>BindException:Socket对象无法与制定的本地IP地址或端口绑定</p>
-</blockquote>
-<a id="more"></a>
-<p><strong>交互过程</strong></p>
-<p>Socket与ServerSocket的交互：</p>
-<p><img src="http://images.cnitblog.com/blog/211061/201402/241809453054816.png" alt="pic"></p>
-<p><strong>Socket</strong></p>
-<p>构造函数</p>
-<blockquote>
-<p>Socket()</p>
-<p>Socket(InetAddress address, int port)throws UnknownHostException, IOException</p>
-<p>Socket(InetAddress address, int port, InetAddress localAddress, int localPort)throws IOException</p>
-<p>Socket(String host, int port)throws UnknownHostException, IOException</p>
-<p>Socket(String host, int port, InetAddress localAddress, int localPort)throws IOException</p>
-</blockquote>
-<p>除去第一种不带参数的之外，其它构造函数会尝试建立与服务器的连接。如果失败会抛出IOException错误。如果成功，则返回Socket对象。InetAddress是一个用于记录主机的类，其静态getHostByName(String msg)可以返回一个实例，其静态方法getLocalHost()也可以获得当前主机的IP地址，并返回一个实例。Socket(String host, int port, InetAddress localAddress, int localPort)构造函数的参数分别为目标IP、目标端口、绑定本地IP、绑定本地端口。</p>
-<p><strong>Socket 方法</strong></p>
-<blockquote>
-<p>getInetAddress();    　　 远程服务端的IP地址</p>
-<p>getPort();    　　　　　　远程服务端的端口</p>
-<p>getLocalAddress()    　   本地客户端的IP地址</p>
-<p>getLocalPort()    　　　　本地客户端的端口</p>
-<p>getInputStream();    　   获得输入流</p>
-<p>getOutStream();    　　   获得输出流</p>
-</blockquote>
-<p>值得注意的是，在这些方法里面，最重要的就是getInputStream()和getOutputStream()了。</p>
-<p><strong>Socket 状态</strong></p>
-<p>1) isClosed(); 连接是否已关闭，若关闭，返回true；否则返回false</p>
-<p>2) isConnect(); 如果曾经连接过，返回true；否则返回false</p>
-<p>3) isBound(); 如果Socket已经与本地一个端口绑定，返回true；否则返回false</p>
-<p>如果要确认Socket的状态是否处于连接中，下面语句是很好的判断方式。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">boolean</span> isConnection=socket.isConnected() &amp;&amp; !socket.isClosed();   <span class="comment">//判断当前是否处于连接</span></div></pre></td></tr></table></figure>
-<p><strong>半关闭 Socket</strong></p>
-<p>很多时候，我们并不知道在获得的输入流里面到底读多长才结束。下面是一些比较普遍的方法：</p>
-<blockquote>
-<p>自定义标识符（譬如下面的例子，当受到“bye”字符串的时候，关闭Socket）</p>
-<p>告知读取长度（有些自定义协议的，固定前几个字节表示读取的长度的）</p>
-<p>读完所有数据</p>
-<p>当Socket调用close的时候关闭的时候，关闭其输入输出流</p>
-</blockquote>
-<p><strong>ServerSocket</strong></p>
-<p>构造函数</p>
-<blockquote>
-<p>ServerSocket()throws IOException</p>
-<p>ServerSocket(int port)throws IOException</p>
-<p>ServerSocket(int port, int backlog)throws IOException</p>
-<p>ServerSocket(int port, int backlog, InetAddress bindAddr)throws IOException</p>
-</blockquote>
-<p><strong>注意点：</strong></p>
-<p>1.port服务端要监听的端口；backlog客户端连接请求的队列长度；bindAddr服务端绑定IP</p>
-<p>2.如果端口被占用或者没有权限使用某些端口会抛出BindException错误。譬如1~1023的端口需要管理员才拥有权限绑定。</p>
-<p>3.如果设置端口为0，则系统会自动为其分配一个端口；</p>
-<p>4.bindAddr用于绑定服务器IP，为什么会有这样的设置呢，譬如有些机器有多个网卡。</p>
-<p>5.ServerSocket一旦绑定了监听端口，就无法更改。ServerSocket()可以实现在绑定端口前设置其他的参数。</p>
-<p><strong>单线程 ServerSocket 例子</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">service</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</div><div class="line">        Socket socket=<span class="keyword">null</span>;</div><div class="line">        <span class="keyword">try</span>&#123;</div><div class="line">            socket=serverSocket.accept();<span class="comment">//从连接队列中取出一个连接，如果没有则等待</span></div><div class="line">            System.out.println(<span class="string">"新增连接："</span>+socket.getInetAddress()+<span class="string">":"</span>+socket.getPort());</div><div class="line">            ...<span class="comment">//接收和发送数据</span></div><div class="line">        &#125;<span class="keyword">catch</span>(IOException e)&#123;e.printStackTrace();&#125;<span class="keyword">finally</span>&#123;</div><div class="line">            <span class="keyword">try</span>&#123;</div><div class="line">                <span class="keyword">if</span>(socket!=<span class="keyword">null</span>) socket.close();<span class="comment">//与一个客户端通信结束后，要关闭Socket</span></div><div class="line">            &#125;<span class="keyword">catch</span>(IOException e)&#123;e.printStackTrace();&#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><strong>多线程的 ServerSocket</strong></p>
-<p>多线程的好处不用多说，而且大多数的场景都是多线程的，无论是我们的即时类游戏还是IM，多线程的需求都是必须的。下面说说实现方式：</p>
-<blockquote>
-<p>主线程会循环执行ServerSocket.accept()；</p>
-<p>当拿到客户端连接请求的时候，就会将Socket对象传递给多线程，让多线程去执行具体的操作；</p>
-</blockquote>
-<p>实现多线程的方法要么继承Thread类，要么实现Runnable接口。当然也可以使用线程池，但实现的本质都是差不多的。这里举例，下面代码为服务器的主线程。为每个客户分配一个工作线程：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">service</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</div><div class="line">        Socket socket=<span class="keyword">null</span>;</div><div class="line">        <span class="keyword">try</span>&#123;</div><div class="line">            socket=serverSocket.accept();                        <span class="comment">//主线程获取客户端连接</span></div><div class="line">            Thread workThread=<span class="keyword">new</span> Thread(<span class="keyword">new</span> Handler(socket));    <span class="comment">//创建线程</span></div><div class="line">            workThread.start();                                    <span class="comment">//启动线程</span></div><div class="line">        &#125;<span class="keyword">catch</span>(Exception e)&#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>当然这里的重点在于如何实现Handler这个类。Handler需要实现Runnable接口：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Handler</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</div><div class="line">    <span class="keyword">private</span> Socket socket;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Handler</span><span class="params">(Socket socket)</span></span>&#123;</div><div class="line">        <span class="keyword">this</span>.socket=socket;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">try</span>&#123;</div><div class="line">            System.out.println(<span class="string">"新连接:"</span>+socket.getInetAddress()+<span class="string">":"</span>+socket.getPort());</div><div class="line">            Thread.sleep(<span class="number">10000</span>);</div><div class="line">        &#125;<span class="keyword">catch</span>(Exception e)&#123;e.printStackTrace();&#125;<span class="keyword">finally</span>&#123;</div><div class="line">            <span class="keyword">try</span>&#123;</div><div class="line">                System.out.println(<span class="string">"关闭连接:"</span>+socket.getInetAddress()+<span class="string">":"</span>+socket.getPort());</div><div class="line">                <span class="keyword">if</span>(socket!=<span class="keyword">null</span>)socket.close();</div><div class="line">            &#125;<span class="keyword">catch</span>(IOException e)&#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>当然是先多线程还有其它的方式，譬如线程池，或者JVM自带的线程池都可以。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">socket</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">jvm</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/network/" class="article-tag-list-link color3">network</a>
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://wenboo.github.io/2016/10/23/Socket-和-ServerSocket-学习/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2016/10/23/Java-SQLite-学习/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Java SQLite 学习
-        
-      </div>
-    </a>
   
   
-    <a href="/2016/10/22/HTTP-协议学习/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">HTTP 协议学习</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-
-
-
-
-  
-  <div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Socket-和-ServerSocket-学习" data-title="Socket 和 ServerSocket 学习" data-url="http://wenboo.github.io/2016/10/23/Socket-和-ServerSocket-学习/"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"wenboo"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
-</div>
-
+    </div></section>
   
 
-
+    
 
 
           </div>
@@ -441,9 +252,9 @@ ConnectException:服务器拒绝连接">
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		root: "/",
