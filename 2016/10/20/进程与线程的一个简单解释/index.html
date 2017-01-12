@@ -8,30 +8,12 @@
   <link rel="dns-prefetch" href="http://wenboo.github.io">
   <title>进程与线程的一个简单解释 | Hi~Welcome to Wenboo&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1 计算机的核心是CPU，它承担了所有的计算任务。它就像一座工厂，时刻在运行。
-
-
-2 假定工厂的电力有限，一次只能供给一个车间使用。也就是说，一个车间开工的时候，其他车间都必须停工。背后的含义就是，单个CPU一次只能运行一个任务。
-
-
-3 进程就好比工厂的车间，它代表CPU所能处理的单个任务。任一时刻，CPU总是运行一个进程，其他进程处于非运行状态。
-
-
-4 一个车间里，可以有很多工人。他们协同">
+  <meta name="description" content="1 计算机的核心是CPU，它承担了所有的计算任务。它就像一座工厂，时刻在运行。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="进程与线程的一个简单解释">
 <meta property="og:url" content="http://wenboo.github.io/2016/10/20/进程与线程的一个简单解释/index.html">
 <meta property="og:site_name" content="Hi~Welcome to Wenboo's Blog">
-<meta property="og:description" content="1 计算机的核心是CPU，它承担了所有的计算任务。它就像一座工厂，时刻在运行。
-
-
-2 假定工厂的电力有限，一次只能供给一个车间使用。也就是说，一个车间开工的时候，其他车间都必须停工。背后的含义就是，单个CPU一次只能运行一个任务。
-
-
-3 进程就好比工厂的车间，它代表CPU所能处理的单个任务。任一时刻，CPU总是运行一个进程，其他进程处于非运行状态。
-
-
-4 一个车间里，可以有很多工人。他们协同">
+<meta property="og:description" content="1 计算机的核心是CPU，它承担了所有的计算任务。它就像一座工厂，时刻在运行。">
 <meta property="og:image" content="http://images.cnitblog.com/news/145819/201304/24231003-62541ee9b2f74245996a2bdd5cb71be1.jpg">
 <meta property="og:image" content="http://images.cnitblog.com/news/145819/201304/24231003-c95c56a39b3841469e31327e2e5471b6.png">
 <meta property="og:image" content="http://images.cnitblog.com/news/145819/201304/24231003-454e3f0e81804fee82241ec46ac091e8.jpg">
@@ -43,19 +25,10 @@
 <meta property="og:image" content="http://images.cnitblog.com/news/145819/201304/24231005-574168dceaeb4d7da0c1e1860b9140b1.jpg">
 <meta property="og:image" content="http://images.cnitblog.com/news/145819/201304/24231005-f8b8ff4e03ec4cca84d2976ba2c69aba.jpg">
 <meta property="og:image" content="http://images.cnitblog.com/news/145819/201304/24231004-af56379265f44ab595760f4438624f06.png">
-<meta property="og:updated_time" content="2017-01-10T15:13:12.955Z">
+<meta property="og:updated_time" content="2017-01-12T12:44:35.129Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="进程与线程的一个简单解释">
-<meta name="twitter:description" content="1 计算机的核心是CPU，它承担了所有的计算任务。它就像一座工厂，时刻在运行。
-
-
-2 假定工厂的电力有限，一次只能供给一个车间使用。也就是说，一个车间开工的时候，其他车间都必须停工。背后的含义就是，单个CPU一次只能运行一个任务。
-
-
-3 进程就好比工厂的车间，它代表CPU所能处理的单个任务。任一时刻，CPU总是运行一个进程，其他进程处于非运行状态。
-
-
-4 一个车间里，可以有很多工人。他们协同">
+<meta name="twitter:description" content="1 计算机的核心是CPU，它承担了所有的计算任务。它就像一座工厂，时刻在运行。">
 <meta name="twitter:image" content="http://images.cnitblog.com/news/145819/201304/24231003-62541ee9b2f74245996a2bdd5cb71be1.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hi~Welcome to Wenboo&#39;s Blog" type="application/atom+xml">
@@ -230,6 +203,7 @@
       
         <p>1 计算机的核心是CPU，它承担了所有的计算任务。它就像一座工厂，时刻在运行。</p>
 <p><img src="http://images.cnitblog.com/news/145819/201304/24231003-62541ee9b2f74245996a2bdd5cb71be1.jpg" alt="1"></p>
+<a id="more"></a>
 <hr>
 <p>2 假定工厂的电力有限，一次只能供给一个车间使用。也就是说，一个车间开工的时候，其他车间都必须停工。背后的含义就是，单个CPU一次只能运行一个任务。</p>
 <p><img src="http://images.cnitblog.com/news/145819/201304/24231003-c95c56a39b3841469e31327e2e5471b6.png" alt="2"></p>
@@ -501,7 +475,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">http</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">sqlite</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -513,11 +495,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">sqlite</a>
+                <a href="javascript:void(0)" class="js-tag color1">log4j</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">main</a>
+                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -525,7 +507,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
+                <a href="javascript:void(0)" class="js-tag color2">java,tomcat</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -533,15 +515,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">java,tomcat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">tcp</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">wireshark</a>
+                <a href="javascript:void(0)" class="js-tag color5">main</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -549,7 +527,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">json</a>
+                <a href="javascript:void(0)" class="js-tag color5">wireshark</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -561,7 +543,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux</a>
+                <a href="javascript:void(0)" class="js-tag color5">json</a>
               </li>
             
             <div class="clearfix"></div>

@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://wenboo.github.io">
-  <title>Tomcat启动过程原理详解 | Hi~Welcome to Wenboo&#39;s Blog</title>
+  <title>Tomcat 启动过程原理详解 | Hi~Welcome to Wenboo&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="基于Java的Web 应用程序是 servlet、JSP 页面、静态页面、类和其他资源的集合，它们可以用标准方式打包，并运行在来自多个供应商的多个容器。Web 应用程序存在于结构化层次结构的目录中，该层次结构是由 Java Servlet 规范定义的。Web 应用程序的根目录包含直接存储或存储在子文件夹中的所有公共资源，比如图像、HTML 页面等。构成：Web应用由Web组件(一组Java类库)、">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Tomcat启动过程原理详解">
+<meta property="og:title" content="Tomcat 启动过程原理详解">
 <meta property="og:url" content="http://wenboo.github.io/2016/11/17/Tomcat-启动过程原理详解/index.html">
 <meta property="og:site_name" content="Hi~Welcome to Wenboo's Blog">
 <meta property="og:description" content="基于Java的Web 应用程序是 servlet、JSP 页面、静态页面、类和其他资源的集合，它们可以用标准方式打包，并运行在来自多个供应商的多个容器。Web 应用程序存在于结构化层次结构的目录中，该层次结构是由 Java Servlet 规范定义的。Web 应用程序的根目录包含直接存储或存储在子文件夹中的所有公共资源，比如图像、HTML 页面等。构成：Web应用由Web组件(一组Java类库)、">
-<meta property="og:updated_time" content="2017-01-05T15:04:59.834Z">
+<meta property="og:updated_time" content="2017-01-12T12:47:02.273Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Tomcat启动过程原理详解">
+<meta name="twitter:title" content="Tomcat 启动过程原理详解">
 <meta name="twitter:description" content="基于Java的Web 应用程序是 servlet、JSP 页面、静态页面、类和其他资源的集合，它们可以用标准方式打包，并运行在来自多个供应商的多个容器。Web 应用程序存在于结构化层次结构的目录中，该层次结构是由 Java Servlet 规范定义的。Web 应用程序的根目录包含直接存储或存储在子文件夹中的所有公共资源，比如图像、HTML 页面等。构成：Web应用由Web组件(一组Java类库)、">
   
     <link rel="alternative" href="/atom.xml" title="Hi~Welcome to Wenboo&#39;s Blog" type="application/atom+xml">
@@ -176,7 +176,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Tomcat启动过程原理详解
+      Tomcat 启动过程原理详解
     </h1>
   
 
@@ -318,14 +318,14 @@
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          15个Java多线程面试题目
+          15个 Java 多线程面试题目
         
       </div>
     </a>
   
   
     <a href="/2016/11/14/Servlet-接口的五种方法介绍/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Servlet接口的五种方法介绍</div>
+      <div class="article-nav-title">Servlet 接口的五种方法介绍</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -339,7 +339,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Tomcat-启动过程原理详解" data-title="Tomcat启动过程原理详解" data-url="http://wenboo.github.io/2016/11/17/Tomcat-启动过程原理详解/"></div>
+	<div class="ds-thread" data-thread-key="Tomcat-启动过程原理详解" data-title="Tomcat 启动过程原理详解" data-url="http://wenboo.github.io/2016/11/17/Tomcat-启动过程原理详解/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -458,7 +458,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">http</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">sqlite</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -470,11 +478,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">sqlite</a>
+                <a href="javascript:void(0)" class="js-tag color1">log4j</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">main</a>
+                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -482,7 +490,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
+                <a href="javascript:void(0)" class="js-tag color2">java,tomcat</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -490,15 +498,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">java,tomcat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">tcp</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">wireshark</a>
+                <a href="javascript:void(0)" class="js-tag color5">main</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -506,7 +510,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">json</a>
+                <a href="javascript:void(0)" class="js-tag color5">wireshark</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -518,7 +526,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux</a>
+                <a href="javascript:void(0)" class="js-tag color5">json</a>
               </li>
             
             <div class="clearfix"></div>
