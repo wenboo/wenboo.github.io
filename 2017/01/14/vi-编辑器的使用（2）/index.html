@@ -6,14 +6,35 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://wenboo.github.io">
-  <title>Category: cm | Hi~Welcome to Wenboo&#39;s Blog</title>
+  <title>vi 编辑器的使用（2） | Hi~Welcome to Wenboo&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hi~Welcome to Wenboo's Blog">
-<meta property="og:url" content="http://wenboo.github.io/categories/cm/index.html">
+  <meta name="description" content="1.4 光标移动
+vi编辑器中的很多命令都是基于光标当前位置的，因此，如何移动光标定位到所需要的位置是一项十分重要的工作，下面进行详细介绍（如无特别说明，下面所讲的命令都是在普通模式下执行）。
+1.向前移动字符
+将光标向前移动一个字符可以使用命令为：l、Space键或方向键→。如果在命令前加一个数字n，就是将光标向前移动n个字符，例如：
+1#include&amp;lt;stdio.h&amp;gt;
+假设当前光">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vi 编辑器的使用（2）">
+<meta property="og:url" content="http://wenboo.github.io/2017/01/14/vi-编辑器的使用（2）/index.html">
 <meta property="og:site_name" content="Hi~Welcome to Wenboo's Blog">
+<meta property="og:description" content="1.4 光标移动
+vi编辑器中的很多命令都是基于光标当前位置的，因此，如何移动光标定位到所需要的位置是一项十分重要的工作，下面进行详细介绍（如无特别说明，下面所讲的命令都是在普通模式下执行）。
+1.向前移动字符
+将光标向前移动一个字符可以使用命令为：l、Space键或方向键→。如果在命令前加一个数字n，就是将光标向前移动n个字符，例如：
+1#include&amp;lt;stdio.h&amp;gt;
+假设当前光">
+<meta property="og:image" content="http://images.cnblogs.com/cnblogs_com/iuices/201112/201112042055232248.jpg">
+<meta property="og:updated_time" content="2017-01-14T14:32:20.895Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hi~Welcome to Wenboo's Blog">
+<meta name="twitter:title" content="vi 编辑器的使用（2）">
+<meta name="twitter:description" content="1.4 光标移动
+vi编辑器中的很多命令都是基于光标当前位置的，因此，如何移动光标定位到所需要的位置是一项十分重要的工作，下面进行详细介绍（如无特别说明，下面所讲的命令都是在普通模式下执行）。
+1.向前移动字符
+将光标向前移动一个字符可以使用命令为：l、Space键或方向键→。如果在命令前加一个数字n，就是将光标向前移动n个字符，例如：
+1#include&amp;lt;stdio.h&amp;gt;
+假设当前光">
+<meta name="twitter:image" content="http://images.cnblogs.com/cnblogs_com/iuices/201112/201112042055232248.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hi~Welcome to Wenboo&#39;s Blog" type="application/atom+xml">
   
@@ -165,326 +186,301 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-vi-编辑器的使用（2）" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      vi 编辑器的使用（2）
+    </h1>
+  
+
+        
+        <a href="/2017/01/14/vi-编辑器的使用（2）/" class="archive-article-date">
+  	<time datetime="2017-01-14T14:15:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-14</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>1.4 光标移动</strong></p>
+<p>vi编辑器中的很多命令都是基于光标当前位置的，因此，如何移动光标定位到所需要的位置是一项十分重要的工作，下面进行详细介绍（如无特别说明，下面所讲的命令都是在普通模式下执行）。</p>
+<p><strong>1.向前移动字符</strong></p>
+<p>将光标向前移动一个字符可以使用命令为：l、Space键或方向键→。如果在命令前加一个数字n，就是将光标向前移动n个字符，例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></div></pre></td></tr></table></figure>
+<p>假设当前光标在include中的字符c上，则使用5l后，光标将移动到e处。但是要注意：光标的移动不能超过当前行的末尾，当然如果给出的数字超过当前光标到行末尾的字符个数，那么也只能移到行尾。</p>
+<a id="more"></a>
+<p><strong>2.向后移动字符</strong></p>
+<p>将光标向后移动一个字符可以使用命令为：h、空格键或方向键←。同上面类似，如果在命令前加一个数字n，就将光标向后移动n个字符，而且光标不能超出行首。</p>
+<p><strong>3.移到下一行</strong></p>
+<p>将光标移到下一行可以用的命令：+、Enter键、j、Ctrl+n或方向键↓。这些命令之间是有差别的，+和Enter键是将光标移到下一行的行首，其余命令仅是移到下一行，所在的列不变。如果下一行比当前光标所在位置还短，则下标到行尾。</p>
+<p><strong>4.移到上一行</strong></p>
+<p>将光标上移一行可以使用的命令：-、k、Ctrl+p或方向键↑。同上面的命令类似，-命令将光标移到上一行行首，而另外3个保持在同一列。</p>
+<p><strong>5.移至行首</strong></p>
+<p>将光标移到当前行的行首使用的命令为0和^。这两个命令在使用时的差别在于命令0是将光标移到当前行的第一个字符，不管它是否为空白符，而命令^将光标移到当前行的第一个非空白符。</p>
+<p><strong>6.移至行尾</strong></p>
+<p>将光标移到当前行的行尾使用的命令为$。光标移至行尾后，停留在最后一个字符上，如果在该命令前加数字n，则光标将下移到n-1行的行尾。</p>
+<p><strong>7.按词前移</strong></p>
+<p>将光标按词前移使用的命令为w和W。这两个命令都是将光标向前移至下一个单词的开头，它们的区别在：命令w搜索词被定义为以标点符号或空白符（如制表符、换行符或空格符）分隔的字母或数字串；而命令W搜索的词被定义为非空白符字符串。例如有字符串：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">echo l &gt; /proc/sys/net/ipv4/conf/<span class="keyword">default</span>/rp_filter</div></pre></td></tr></table></figure>
+<p>连续输入命令w，光标从行首移动的位置为：e、l、&gt;、/、p、s、…、/、r、r。</p>
+<p>而命令W，光标从行首移动的位置为：e、l、&gt;、/、r。</p>
+<p><strong>8.按词后移</strong></p>
+<p>将光标后移的命令是b和B，这两个命令都是将光标后移至上一个单词的开头，同样，他们对词的定义是有区别的。</p>
+<p><strong>9.移至词尾</strong></p>
+<p>将光标移至当前字符所在词尾的命令是e和E。它们对词的定义与上面的类似。</p>
+<p><strong>10.移至指定行</strong></p>
+<p>将光标移至指定行的开头可以用命令如下：</p>
+<blockquote>
+<p>：行号</p>
+<p>行号G</p>
+</blockquote>
+<p>注意：第一个命令是在命令模式下执行的，而非普通模式。如果没给出行号要显示行号可以用如下命令显示行号：</p>
+<blockquote>
+<p>：set number</p>
+<p>：ser nu</p>
+</blockquote>
+<p>如图1-11所示。</p>
+<p><img src="http://images.cnblogs.com/cnblogs_com/iuices/201112/201112042055232248.jpg" alt="img"></p>
+<p>将行号去掉可以使用命令：</p>
+<blockquote>
+<p>：set nonumber</p>
+<p>：set nonu</p>
+</blockquote>
+<hr>
+<p><strong>1.5 屏幕滚动</strong></p>
+<p>在文件的编辑查看过程中经常涉及屏幕的滚动问题。</p>
+<p>在vi编辑器中，尽管可以使用键盘上的Page Up键和Page Dawn键来完成这些操作，甚至使用方向键↑和↓，但是效率比较低，下面来看看相关屏幕滚动的命令。</p>
+<p><strong>1.向后滚动一屏</strong></p>
+<p>使用的命令为：Ctrl+f （滚屏后保留上一屏的最后两行）</p>
+<p><strong>2.向后滚动半屏</strong></p>
+<p>使用的命令为：Ctrl+d</p>
+<p><strong>3.向前滚动一屏</strong></p>
+<p>使用的命令为：Ctrl+b</p>
+<p><strong>4.向前滚动半屏</strong></p>
+<p>使用的命令为：Ctrl+u</p>
+<p><strong>5.屏幕定位</strong></p>
+<p>使用命令zz将当前行置为屏幕正中央，使用命令zt会将当前行置为屏幕顶端，命令zb则会将当前行置于屏幕底端。</p>
+<p>将屏幕直接定位于文件第一屏或最后一屏也是经常遇到的问题，命令gg和G可以完成这样的功能，使用完这些命令后，光标会定位到第一屏的第一行或最后一屏的最后一行上。</p>
+<hr>
+<p><strong>1.6 文本输入、删除与修改</strong></p>
+<p>文本的输入、删除与修改是文件编辑的基本操作，其中大部分命令会将vi编辑器由普通模式切换为编辑模式，下面来介绍这些命令。</p>
+<p><strong>1.插入命令</strong></p>
+<p>文本的插入命令为i和I。其中i是将其后输出的字符插入到当前光标位置之前。命令I是将其后输入的字符插入到当前光标所在行的行首。</p>
+<p><strong>2.附加命令</strong></p>
+<p>附加文本的命令为a和A，其中命令a是将其后输入的字符插入到当前光标位置之后，而命令A则是将其后输入的字符追加到当前光标所在行的行尾。</p>
+<p><strong>3.另起新行</strong></p>
+<p>另起新行的命令为o和O，其中命令o是在当前行的下面另起一行，命令O是在当前行的上面另起一行。新行创建完后，光标停留在新行行首，等待输入文字。</p>
+<p><strong>4.删除字符</strong></p>
+<p>删除字符的命令为x和X。其中命令x删除光标所在处的字符，而命令X删除光标前面的那个字符。如果之前给出一个数字n，则删除由光标所在字符开始向右的n个字符。</p>
+<p><strong>5.删除文本对象</strong></p>
+<p>命令dd删除光标所在的行，命令D删除从光标所在位置开始到行尾的所有字符。</p>
+<p>字母d可以与光标移动命令组合，例如：</p>
+<p>d^：从光标位置删至行首，不包括光标位。<br>d$：从光标位置删至行尾，包括光标位，与D作用相同。<br>dG：删除当前行至文件尾的内容。<br>Dgg：删除当前行至文件头的内容。</p>
+<p><strong>6.修改命令</strong></p>
+<p>修改文本的命令为c、C和cc，它们的作用是用新输入的文本取代原来的文本，这等价于将原来的文本删除后，利用命令i插入新的文本。</p>
+<p>例如有一字符串：Hello World!</p>
+<p>假设光标当前处在e处，输入命令cw后，屏幕显示如下：</p>
+<p>H World!</p>
+<p>此时光标处在H后的空格处，接着输入文本i后按Esc键，屏幕显示如下：</p>
+<p>Hi World!</p>
+<p>从上面可以看出，cw只是修改光标当前位置到词尾的字符，如果要修改整个单词，可以使用命令caw。</p>
+<p>C命令用来修改从光标位置到行尾的文本。如果在前面加一个数字n，那么会把从当前光标位置至当前行下面的n-1行的内容都删除。</p>
+<p>命令cc的功能和C相同，只是修改的范围不同，它修改光标所在的整行内容。</p>
+<p><strong>7.取代命令</strong></p>
+<p>取代文本的命令为r和R。其中命令r是用其后输入的单个字符取代光标所在的字符，如果在r前加一个数字n，则用其后输入的单个字符取代光标所在处开始向后的n个字符。</p>
+<p>R命令用其后输入的文本取代光标所在处开始的若干个字符，每输入一个字符就取代原有的一个字符，多出的部分附加在后面。</p>
+<hr>
+<p><strong>1.7 复制与粘帖</strong></p>
+<p>vi编辑器中的缓冲区分为无名缓冲区和命名缓冲区。无名缓冲区以数字编号，一共有9个。前面讲过可以使用删除命令x和dd来删除文本，其实被删除的内容还保存在缓冲区中，最近一次删除的内容被保存在缓冲区1中，次近的在缓冲区2中，以此类推，我们可以使用命令把他们提取回来。</p>
+<p><strong>1.粘帖</strong></p>
+<p>粘帖缓冲区内容的命令是p和P，这两个命令的区别是：命令p将文本放在当前行之下或当前光标之后，而命令P将文本放在当前行之上或光标之前。</p>
+<p>例：使用vi编辑器打开如下文件，然后进行删除和粘帖操作。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">case</span> <span class="number">5</span>：</div><div class="line"><span class="keyword">case</span> <span class="number">4</span>：</div><div class="line"><span class="keyword">case</span> <span class="number">3</span>：</div><div class="line"><span class="keyword">case</span> <span class="number">2</span>：</div><div class="line"><span class="keyword">case</span> <span class="number">1</span>：</div><div class="line"><span class="keyword">case</span> <span class="number">0</span>：</div></pre></td></tr></table></figure>
+<p>假设光标当前出在第2行，连续执行dd命令4次，屏幕如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">case</span> <span class="number">5</span>：</div><div class="line"><span class="keyword">case</span> <span class="number">0</span>：</div></pre></td></tr></table></figure>
+<p>输入命令p，则在屏幕显示如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">case</span> <span class="number">5</span>：</div><div class="line"><span class="keyword">case</span> <span class="number">0</span>：</div><div class="line"><span class="keyword">case</span> <span class="number">1</span>：</div></pre></td></tr></table></figure>
+<p>输入命令”3p，则屏幕显示如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">case</span> <span class="number">5</span>：</div><div class="line"><span class="keyword">case</span> <span class="number">0</span>：</div><div class="line"><span class="keyword">case</span> <span class="number">1</span>：</div><div class="line"><span class="keyword">case</span> <span class="number">3</span>：</div></pre></td></tr></table></figure>
+<p>注意：”3用来引用缓冲区3，单个双引号后紧跟缓冲区的编号。</p>
+<p><strong>2.复制</strong></p>
+<p>命名缓冲区是以字母a~z命名的，利用命名缓冲区可以很好地保存若干文本段，便于以后存取、移动或者重排。访问这些缓冲区时，和前面一样，使用单个双引号。</p>
+<p>复制文本的命令有如下两种格式：</p>
+<p>yy</p>
+<p>y&lt;光标移动命令&gt;</p>
+<p>其中yy表示复制整行内容，而后者则通过光标移动命令来限定被复制的文本，如果没有指定缓冲区的名字，文本就被插入到无名缓冲区中。如果用大写字母表示缓冲区，则文本就附加到该缓冲区中，缓冲区中原有的内容不会被覆盖。</p>
+<p><strong>3.不使用缓冲区的复制与移动</strong></p>
+<p>使用的命令为co，它的基本格式如下：</p>
+<p>:&lt;开始行&gt;,&lt;结束行&gt; co &lt;目标行&gt;</p>
+<p>这个命令在命令模式下执行，其中开始行和结束行标识了文本复制的范围，而目标行则是文本粘帖的位置。</p>
+<hr>
+<p><strong>1.8 查找与替换</strong></p>
+<p><strong>1.查找</strong></p>
+<p>/str向前查找字符串str，并将光标定位在str的第一个字母上，方便继续操作，按下“/”键后光标跳到vi窗口的最后一行，然后等待输入要查找的字符串，输入完成后按Enter键开始搜索，这时编辑器会高亮显示搜索结果。接下来可以使用命令n来实现光标在搜索结果中移动。</p>
+<p>命令?与/的工作方式相同，只有搜索方向相反。</p>
+<p>使用上面介绍的命令，例如/the来查找时，可能需要搜索匹配单词soothe和there，这时需要使用如下的形式：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/\&lt;the\&gt;</div></pre></td></tr></table></figure>
+<p>同理，要匹配一行的开头与结尾需要使用^和$字符，例如：</p>
+<p>big$</p>
+<p>这个命令只能匹配到一行末尾的单词big。</p>
+<p>:set ignorecase</p>
+<p>如果不关心目标字符串中的大小写，可以用上面的命令来设置。</p>
+<p>:set nowrapscan</p>
+<p>上面的命令是在输入目标字符串的过程中vi就开始搜索工作，即就是未完成输入事就能找到目标。</p>
+<p><strong>2.替换命令</strong></p>
+<p>使用的命令为s和S，其中命令s用随后输入的文本替换光标所在处的字符。命令S将新输入的文本替换当前整行。</p>
+<p><strong>3.全局替换</strong></p>
+<p>全局替换命令有几种常用的格式：</p>
+<p>g/s1/s//s2/</p>
+<p>将包含字符串s1的所有行中用字符串s2替换s1的首次出现，即就是将所有行中第一次出现的s1替换为s2。</p>
+<p>例如程序如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> x;</div><div class="line">    <span class="keyword">for</span>(x=<span class="number">1</span>;x&lt;=<span class="number">10</span>;x++)</div><div class="line">        <span class="built_in">printf</span>(“%d\n”,x);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>输入命令g/x/s//abc/后，上面的程序变为：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> abc;</div><div class="line">    <span class="keyword">for</span>(abc=<span class="number">1</span>;x&lt;=<span class="number">10</span>;x++)</div><div class="line">        <span class="built_in">printf</span>(“%d\n”,abc);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>可以看到每行中存在x的第一次出现处都被换为abc。</p>
+<p>如果要将文件中的所有字符串s1都替换为字符串s2，则使用如下命令：</p>
+<p>g/s1/s//s2/g</p>
+<p>例如程序如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> x;</div><div class="line">    <span class="keyword">for</span>(x=<span class="number">1</span>;x&lt;=<span class="number">10</span>;x++)</div><div class="line">        <span class="built_in">printf</span>(“%d\n”,x);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>输入命令g/x/s//abc/g后，上面的程序变为：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> abc;</div><div class="line">    <span class="keyword">for</span>(abc =<span class="number">1</span>; abc &lt;=<span class="number">10</span>; abc ++)</div><div class="line">        <span class="built_in">printf</span>(“%d\n”, abc);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>可以看到所有的x都被替换为abc了。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">g/s1/s<span class="comment">//s2/gc</span></div></pre></td></tr></table></figure>
+<p>该命令基本与上面的功能相同，只是在替换之前给出提示要求确认，如果回答y则进行替换，否则不作替换。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/01/12/进程与线程之间的区别/" class="archive-article-date">
-  	<time datetime="2017-01-12T13:49:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/01/12/进程与线程之间的区别/">进程与线程之间的区别</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">进程</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cm/" class="article-tag-list-link color3">cm</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/01/02/程序员对内存的理解/" class="archive-article-date">
-  	<time datetime="2017-01-02T11:10:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-02</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/01/02/程序员对内存的理解/">程序员对内存的理解</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">内存</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cm/" class="article-tag-list-link color3">cm</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
       
-        </div></section>
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/c/" class="article-tag-list-link color2">c</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
       
+
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/10/20/进程与线程的一个简单解释/" class="archive-article-date">
-  	<time datetime="2016-10-19T16:13:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/10/20/进程与线程的一个简单解释/">进程与线程的一个简单解释</a>
-    </h1>
-  
+      </div>
+    </span>
+  </div>
+</div>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">os</a>
-        		</li>
-      		
-		</ul>
-	</div>
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://wenboo.github.io/2017/01/14/vi-编辑器的使用（2）/" alt="微信分享二维码">
+    </div>
+</div>
 
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cm/" class="article-tag-list-link color3">cm</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/10/19/编译器的工作原理/" class="archive-article-date">
-  	<time datetime="2016-10-19T15:34:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/10/19/编译器的工作原理/">编译器的工作原理</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">微机原理</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cm/" class="article-tag-list-link color3">cm</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/10/17/为什么寄存器比内存块？/" class="archive-article-date">
-  	<time datetime="2016-10-17T14:55:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/10/17/为什么寄存器比内存块？/">为什么寄存器比内存块？</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">微机原理</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cm/" class="article-tag-list-link color3">cm</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/10/16/操作系统原理面试题目总结/" class="archive-article-date">
-  	<time datetime="2016-10-16T13:44:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/10/16/操作系统原理面试题目总结/">操作系统原理面试题目总结</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">os</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cm/" class="article-tag-list-link color3">cm</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2017/01/14/vi-编辑器的使用（1）/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">vi 编辑器的使用（1）</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="vi-编辑器的使用（2）" data-title="vi 编辑器的使用（2）" data-url="http://wenboo.github.io/2017/01/14/vi-编辑器的使用（2）/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"wenboo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
   
 
-    
+
 
 
           </div>
@@ -507,10 +503,10 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
-		isCategory: true,
+		isCategory: false,
 		open_in_new: false,
 		root: "/",
 		innerArchive: true,
