@@ -167,6 +167,135 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-vi-编辑器的使用（1）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/14/vi-编辑器的使用（1）/">vi 编辑器的使用（1）</a>
+    </h1>
+  
+
+        
+        <a href="/2017/01/14/vi-编辑器的使用（1）/" class="archive-article-date">
+  	<time datetime="2017-01-14T13:53:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Linux 系统下的文本编辑器有很多种，包括图形模式下的gedit、kwrite等，文本模式下的vi、vim（vi的增强版本）、emacs等。其中vi和emacs是Linux系统中最常用的两个编辑器。本节主要介绍vi编辑器，主要内容包括：</p>
+<blockquote>
+<p>vi编辑器的基本使用，包括vi的启动与退出、工作模式的切换、光标的移动、屏幕的滚动、文本的插入与删除、复制与粘帖、查找与替换等。</p>
+<p>vi编辑器之程序编辑，包括程序设计中光标的跳转、关键字的补全，以及代码的缩进等。</p>
+</blockquote>
+<p><strong>1 - vi编辑器的基本使用</strong></p>
+<p>vi编辑器是Linux系统下的标准编辑器。虽然命令繁多复杂，并且绝大多数功能的输入都依靠键盘来完成，但如果我们熟悉掌握之后就会发现vi编辑器的功能、效率等都是其他图形界面编辑器无法比拟的，下面让我们来揭开它的神秘面纱。</p>
+<hr>
+<p><strong>1.1 vi的启动</strong></p>
+<p>在终端输入命令vi，后面接着输入想要创建或编辑的文件名，即可进入vi编辑器。</p>
+<p>$ vi example.c</p>
+<p>命令的结果如图1-1所示：</p>
+<p><img src="http://images.cnblogs.com/cnblogs_com/iuices/201112/201112021719232580.png" alt="img"></p>
+<p>如果vi命令后面所输入的文件不存在，则系统会自动创建一个以该字符串命名的文本文件。如上图，光标停留在左上方，由于新建文件中没有任何内容，所以每一行的开头都为波浪线。窗口的底部为状态栏，显示当前编辑文件的相关信息。打开文件后，光标停留在屏幕左上方。状态栏显示了当前编辑文件的文件名、行数以及字符数等信息，如图1-2所示。</p>
+<p><img src="http://images.cnblogs.com/cnblogs_com/iuices/201112/201112021719247498.png" alt="img"></p>
+<p>vi命令打开文件时还可以带参数，这些参数用于修正vi的打开方式，主要包括如下：</p>
+<blockquote>
+<p>-R 以只读方式打开文件。</p>
+</blockquote>
+<p>如果只需阅读文件内容而不想对其进行修改时，可以使用这个参数，以防对文件的误操作，如下：</p>
+<p>$ vi –R example.c</p>
+<p>运行命令如图1-3所示。</p>
+<p><img src="http://images.cnblogs.com/cnblogs_com/iuices/201112/201112021719251477.png" alt="img"></p>
+<blockquote>
+<p>-x 对文件进行加密。</p>
+</blockquote>
+<p>该参数可以在保存文件时对其进行加密，以后每次打开都需要输入密钥，否则将出现乱码。</p>
+<p>如果在打开vi时，没有给出文件名，也没有给出任何参数，即：</p>
+<p>$ vi</p>
+<p>命令结果如图1-4所示：</p>
+<p><img src="http://images.cnblogs.com/cnblogs_com/iuices/201112/201112021719282052.png" alt="img"></p>
+<p>此时，vi编辑器中所有行都为空，窗口中央给出的是vi编辑器的使用帮助，当用户在vi中输入文本或执行命令时，该帮助信息会自动消失。另外，如果以这种方式打开vi编辑器，在保存文件时，需要指定文件名。</p>
+<hr>
+<p><strong>1.2 vi的工作模式</strong></p>
+<p>vi有3种工作模式：普通模式、编辑模式和命令模式，这3种模式之间可以相互切换，如图1-5所示。</p>
+<p><img src="http://images.cnblogs.com/cnblogs_com/iuices/201112/201112021719317295.png" alt="img"></p>
+<p><strong>1）普通模式</strong></p>
+<p>由Shell进入vi编辑器时，首先进入普通模式。在普通模式下，从键盘输入任何字符都被当作命令来解释。普通模式下没有任何提示符，当输入命令时立即执行，不需要回车，而且输入的字符不会在屏幕上显示出来。普通模式下可以输入命令进行光标的移动，字符、单词、行的复制、粘帖以及删除等操作。</p>
+<p><strong>2）编辑模式</strong></p>
+<p>编辑模式主要用于文本的输入。在该模式下，用户输入的任何字符都被作为文件的内容保存起来，并在屏幕上显示出来。在普通模式下，输入a（附加命令）、c（修改命令）、i（插入命令）、o（另起新行）、r（取代命令）以及s（替换命令）都将进入编辑模式，此时vi窗口的最后一行会显示“插入”。输入i命令时屏幕上并无变化，但是通过执行i命令，编辑器由普通模式切换为编辑模式，如图1-6所示。</p>
+<p><img src="http://images.cnblogs.com/cnblogs_com/iuices/201112/20111202171933967.png" alt="img"></p>
+<p>接着输入x=，屏幕显示如图1-7所示。要返回到普通模式，只需按键Esc即可。</p>
+<p><img src="http://images.cnblogs.com/cnblogs_com/iuices/201112/201112021719342472.png" alt="img"></p>
+<p><strong>3）命令模式</strong></p>
+<p>命令模式下，用户可以对文件进行一些附加处理。尽管普通模式下的命令可以完成很多功能，但要执行一些如字符串查找、替换、显示行号等操作还是必须要进入命令模式的。在普通模式下输入冒号即可进入命令模式，此时vi窗口的状态行会显示出冒号，等待用户输入命令。用户输入完成后，按回车执行，之后vi编辑器又返回到普通模式下。</p>
+<hr>
+<p><strong>1.3 文件的保存和退出</strong></p>
+<p>当编辑完毕，需要退出vi编辑器时，可以在命令模式下使用命令退出vi，返回到Shell。</p>
+<p><strong>1）保存退出</strong></p>
+<p>保存退出是指将缓冲区中的内容写入文件，可以使用的命令为wq和x，如图1-8所示。</p>
+<p><img src="http://images.cnblogs.com/cnblogs_com/iuices/201112/201112021719352929.png" alt="img"></p>
+<p><strong>2）强行退出</strong></p>
+<p>强行退出是指无条件退出，不把缓冲区中的内容写入文件，所使用的命令为q!。其中感叹号“!”表示不管文件是否被修改，放弃所修改的内容强行退出。</p>
+<p><strong>2）直接退出</strong></p>
+<p>直接退出和强行退出的区别是如果文件内容有修改则给出提示，如图1-9所示，否则直接退出。直接退出使用的命令为q。</p>
+<p><img src="http://images.cnblogs.com/cnblogs_com/iuices/201112/20111202171936289.png" alt="img"></p>
+<p>应该要注意一点，vi编辑器编辑文件时，用户的操作都是基于缓冲区中的副本进行的。如果退出时没有保存到磁盘，则缓冲区中的内容就会被丢失。所以，在退出vi编辑器时应该考虑是否需要保存所编辑的内容，然后再选择执行合适的退出命令。保存命令为w，如果打开vi时没有给出文件名，这时还需要给相互文件名。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/c/" class="article-tag-list-link color2">c</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/01/14/vi-编辑器的使用（1）/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-一张图读懂JVM架构" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -834,86 +963,6 @@
 
 
   
-    <article id="post-Servlet-接口的五种方法介绍" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/14/Servlet-接口的五种方法介绍/">Servlet 接口的五种方法介绍</a>
-    </h1>
-  
-
-        
-        <a href="/2016/11/14/Servlet-接口的五种方法介绍/" class="archive-article-date">
-  	<time datetime="2016-11-14T13:41:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-11-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>Servlet中的五种接口：</strong></p>
-<p>1.init()<br>2.service()<br>3.destroy()<br>4.getServletConfig()<br>5.getServletInfo() </p>
-        
-          <a class="article-more-a" href="/2016/11/14/Servlet-接口的五种方法介绍/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">tomcat</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/11/14/Servlet-接口的五种方法介绍/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1014,11 +1063,11 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color2">c</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">c</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1038,15 +1087,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">main</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">log4j</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多线程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">main</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1058,6 +1107,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">socket</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">tcp</a>
               </li>
              
@@ -1066,19 +1119,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">socket</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">json</a>
+                <a href="javascript:void(0)" class="js-tag color5">wireshark</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">json</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1091,10 +1144,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">进程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">wireshark</a>
               </li>
             
             <div class="clearfix"></div>
