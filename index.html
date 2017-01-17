@@ -167,6 +167,139 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-2016-秋季校招面经（华为、腾讯、360、网易等）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/17/2016-秋季校招面经（华为、腾讯、360、网易等）/">2016 秋季校招面经（华为、腾讯、360、网易等）</a>
+    </h1>
+  
+
+        
+        <a href="/2017/01/17/2016-秋季校招面经（华为、腾讯、360、网易等）/" class="archive-article-date">
+  	<time datetime="2017-01-17T13:16:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>1.华为提前批（跪在性格测试）</strong></p>
+<p>2016-08-19 一面：</p>
+<p>介绍我的项目，针对我的项目中的点询问是如何实现的<br>Activity生命周期？为什么Activity要这么设计？这样设计有什么好处？<br>Android与iOS运行机制上有哪些不同？<br>为什么Android用起来没有iOS流畅？为了让Android系统更流畅，应该从哪些方面做好？<br>如何让Service不被杀死？<br>Android系统分层？Library层起什么作用？<br>如果一个应用要升级需要注意哪些方面？（我回答服务端api要兼容，如果只是小bug就通过补丁方式，但是貌似面试官不满意，就引导我说数据方面的，我才知道原来是想要我说本地数据的兼容）<br>问我有什么要问他的？<br>还有其他的一些问题，记不太清了….</p>
+<p>2016-08-19 二面：</p>
+<p>二面是一个中年男人，一开始很严肃，聊了几句后它就笑嘻嘻了。</p>
+<p>首先叫我介绍自己<br>本科在哪读的（普通二本）<br>家里有多少人，是农村的还是城市的，家里生活水平怎么样？<br>有没有女朋友、女朋友是哪里人、女朋友有没有工作？<br>为什么不留武汉（我简历填杭州），不留武汉你女朋友同意吗？<br>选一个你收获最大的项目来谈谈？（后面就是针对我的项目一直聊~）<br>二面大概30分钟左右，后面说我的性格测试没通过，让我重新再做一次。然而，第二次性格测试还是没通过，最终我还是因为性格测试没通过的原因，与华为无缘。。。。</p>
+<hr>
+<p><strong>2.腾讯内推TST（已拿到offer）</strong></p>
+<p>2016-08-19 一面：</p>
+<p>1.自我介绍<br>2.跟我提简历里面的项目，如何实现的？具体原理？如果出现XXX情况，会不会出现XXX问题？<br>3.Android 消息机制，Looper、消息队列等<br>4.Android事件分发机制<br>5.自定义过View吗？回答有自定义过，然后谈了下（普通View）onMeasure、onDraw。针对ViewGroup谈了下onLayout，然后还有就是需要注意onDraw不要做过于耗时的任务，防止卡顿。<br>6.Java中的多线程：Thread、Runnable<br>7.Java中的同步问题？Lock、Synchronized<br>8.类的加载过程？五步<br>9.TCP与UDP区别 10.10万个整数中找出排序后的前10个数（Top N 问题），及其对应算法复杂度<br>11.10万个整数中，每个整数取值[0,99],找出排序后的中间位置的数（中位数）<br>12.堆排序的算法复杂度<br>13.面试官说，大概就这些了。紧接着想要挂电话的样子，我赶紧说，我可以问您几个问题吗？面试官说当然可以。我就问了以我当前的水平能否符合您们的要求？面试官说我觉得你还不错。紧接着问了一下大概等多久才能进入下一场面试，面试官说会尽快安排，可能会再周末。</p>
+<p>2016-09-03 上午 现场二面</p>
+<p>面试官非常nice，整个过程很挺顺利。<br>1.针对项目询问<br>2.TCP拥塞机制<br>3.手写代码，针对Top k问题<br>4.如何做到多个线程访问同一个数组，既要线程安全，同时提高读写效率（我是通过分段锁的思想，说了一下自己的想法），后面还让我手写代码实现。<br>5.还有很多内容，忘记了。。。</p>
+<p>2016-09-03 下午 现场三面</p>
+<p>三面面试官据说是总监，反正我是被打压的抬不起头。不得不说，总监级的人物技术确实牛逼。首先看了我的简历，然后说简历里面的项目经验太简单了。<br>1.什么是内存对齐？<br>2.C++内存分为几种类型？（我对C++不熟，就说了JVM中的内存分类）<br>3.如何压缩一篇文章？<br>4.java类加载过程？（这个我很熟，里面滔滔不绝，然而，得到的回应是：背的倒是挺熟）<br>5.Java那些类是final？（除了String，我真的不知道还有哪些），只回答了String，面试官说，还有呢？（回答不出来了。。。）后面查了下，其实Math类也是final，面试官说日期类有很多，但是我回头查了下，还是没查到哪个日期类是final。<br>6.快结束时，面试官说，就到这里吧，你很幸运，我没有让你现场手写代码。因为我当时觉得这次面试面的很差，我就回答，我愿意尝试手写代码。然后面试官出了2道题：如何逆转字符串？如何实现“ I am Student”转为“Student am I”？两道题都很简单，剑指offer里面都有。我一听到这个问题心里就呵呵一笑了，立马说出如何实现。然后，面试官说行，就到这了。</p>
+<p>虽然炮轰式的提问，但是我的记忆力确实很差。目前只记得这些。。。后面想到再补充。二面完了之后，我觉得直接都挂了，因为好多跟C++相关问题我都回答不出来（毕竟我只搞Java 、Android），在面试官面前，自己确实很菜。</p>
+<p>2016-09-03 下午 现场HR面</p>
+<p>1.家在哪？<br>2.本科是哪个学校？<br>3.有没有亲戚在腾讯？<br>4.有没有女朋友？<br>5.你来深圳了，女朋友怎么办？（回答跟我一起来）<br>6.你实习过吗？回答实验室不允许我们实习，然后HR说，那相比那些实习过的人，你的优势是什么？<br>7.你有什么问题问我吗？</p>
+<hr>
+<p><strong>3.2016-08-25 奇虎360</strong></p>
+<p>2016-08-25，今天下午2：00开始，到4:30，一共面了3面：一面、二面、HR面。不得不说，360办事效率真的很高，觉得你OK，就立马给你安排下一面。360整体感觉比较偏向询问项目中的问题，所以有好的项目经验比较重要。</p>
+<p>一面：</p>
+<p>其实之前有整理一面的问题，但是是写在纸上，然后那张纸被我一不小心当垃圾扔了。。。。所以现在回想的起来的问题很少。。。</p>
+<p>手写ListView（可能是考我会不会想到ViewHolder）<br>记性真的很差。。。想不起来了。。。总之，一面一般问的比较基础，大部分人都能通过。</p>
+<p>二面：</p>
+<p>你知道B树吗？B树用到哪些场景？<br>用过JNI吗？<br>生活中有没有遇到一些事情，你通过程序来解决的？<br>针对项目问了很多问题….<br>其他很多问题忘记了。。。。<br>HR面：</p>
+<p>先是自我介绍。大致介绍了一些后，居然发现不知道该说什么了。有点尴尬！HR姐姐就一直看着我。。。实在看不下去了，就说，那你介绍下你做的项目吧~。</p>
+<p>大致说一下做过的项目<br>本科学校是哪里？我回答桂电，数学专业！然后HR姐姐就说，你学数学的跟我们学计算机的枪饭碗啊！我回答第一台计算机是数学家发明的，所以不能说我是抢计算机饭碗~<br>为什么要来北京？（其实我并不想去北京，只是360没其他地方可选~）<br>你了解360的产品吗？用过哪些产品？<br>你觉得360靠什么盈利？<br>假设一个场景，你正在做一个app，deadline快到了，但是产品设计提出新的需求你会怎么办？新功能到底加不加？（加的话可能有新BUG，不加的会如何跟产品设计解释？）<br>其他问题忘记了。。。。<br>后面得到通知，成功称为360的备胎。。。。</p>
+<p>2016-09-20 下午 网易</p>
+<p>吐个槽，原本安排5:20开始面的，想着那么晚，提前过去看看能不能提前面试。从2：30就赶过去，结果直到6点才轮到我。硬是坐了一下午！</p>
+<p>一面</p>
+<p>如何让Service不被Kill<br>Volley框架原理？<br>除了Volley你还了解哪些框架？<br>点击事件机制？<br>简单的算法：打印100以内的所有质数（PS：没有比这个更简单的面试手写算法题了）<br>热补丁技术？<br>插件化技术？<br>如何判断对象的生死？<br>垃圾回收算法？<br>新生代，老年代？<br>http与https区别？<br>加密算法你学过哪些？<br>hashcode与equals区别？<br>HashMap里面的hash映射？如何实现根据Key的hashcode找到下标？HashMap做了哪些优化？</p>
+<p>二面</p>
+<p>二面的面试官基本没有准备问题，都是拿着简历对着问，所以不同人的简历可能问的差别很大。</p>
+<p>把你所知道的设计模式说出来<br>C语言中的编译和链接过程？<br>Java NIO是啥？<br>进程和线程区别？<br>其他问题基本是围绕项目问的。</p>
+<p>HR面</p>
+<p>总结3个你的性格缺点<br>如何看待阿里抢月饼事件?如果是你你也会去写插件抢吗？<br>如何看待百度贴吧事件？<br>家庭情况？<br>本科是什么专业？<br>为什么当初会考研？为什么会选择考武汉大学？<br>有女朋友吗？ 女朋友是做什么的？<br>最让你有成就感的事情是什么？<br>后面还有其他公司的面试吗？<br>现在手上有其他公司的offer吗？<br>网易最后还是跪了，主要是二面没面好。二面面试官从我刚进门就没有给好脸色，聊不到一块去，后面我回答问题时，面试官没有正眼看过我。所以找工作这件事，运气也很重要，遇到聊得来的面试官，一切都好办。</p>
+<hr>
+<p><strong>4.滴滴（已拿offer）</strong></p>
+<p>一面</p>
+<p>一开始一面面试官没正眼看我一眼，瞬间我就觉得，糟了，这肯定要跪了！刚开始问了几个简单的问题，我回答了后，他依然没有重视我。然后他就让我说说binder机制，我把《简单明了，彻底地理解Binder》 这篇文章跟面试官说了一遍，瞬间面试官眼睛亮了！他突然好激动，他说，今天我面了一天了，你是我面的最好的。然后立马加了我微信。后面面试官说，二面你不用面了，直接去综面。</p>
+<p>二面</p>
+<p>因为一面面试官说二面免了，所以直接去综面了。</p>
+<p>综面</p>
+<p>综面面试官没有问android相关问题，就是一直问算法、考算法。算法题目我忘记了，大致记得就是一个数组，只有2个数是相同的，其他各个数是不同的，找出这个相同的数，并且要求时间复杂度和空间复杂度都是O(n)。还有其他算法题，记不住了。</p>
+<hr>
+<p>5.乐视（已拿offer）</p>
+<p>一面：</p>
+<p>相隔时间比较久，记忆的内容也不多，乐视一面面的挺久，大概1个小时。跟面试官讨论的主要问题是Binder跨进程问题，其实也就是我把我写的《简单明了，彻底地理解Binder》 这篇文章跟面试官说了一遍。然后再一起讨论设计模式什么的，当然了，面试内容也不仅仅这点，大部分问题跟前面重复，具体我也想不起来了。</p>
+<p>二面</p>
+<p>二面面试官是负责乐视的基于webkit浏览器开发。能记下的内容不多，我记得的问题有：你觉得浏览器难点在那？然后还有就是问了一下项目相关的问题。最后给了个智力题：在平面上画线，最多能将屏幕划分为多少个区域，比如一条直线能将平面分为2个区域，2条直线最多分为4个区域，那么n条直线最多分为多少区域？</p>
+<p>HR面</p>
+<p>拿了哪些公司offer了呀？<br>为什么选择乐视呀？<br>去北京离你家那么远，你能接受吗？<br>你都拿到其他公司offer了，怎么还来面乐视呢？<br>其他问题。。。<br>乐视后面还给我加面了，专门打电话让我去加面。加面的面试官居然不知道我是加面的，以为我是来二面，我特意提醒了下后，他才知道。后面简单聊了下后，就让我回去了。很遗憾，虽然加面了，我最终拿到的乐视薪资依然是白菜价。</p>
+<hr>
+<p><strong>6.涂鸦（已拿offer）</strong></p>
+<p>涂鸦是全程算法题。</p>
+<p>一面：</p>
+<p>如何判断二维坐标系中的圆和三角形是否有重叠区域？<br>给一个二维数组，告诉你哪些坐标位置是不能行走的，计算从左上到右下有多少种走法。<br>其他问题记不住。。。。我已经尽力了。。。。</p>
+<p>二面：</p>
+<p>二面也就几个算法题，不说了。记不住。</p>
+<p>写在最后</p>
+<p>虽然好多问题我都忘记了，但是其实各个公司面试官问的android基础问题就那些。二面基本上都是问项目，所以建议大家一定要准备好项目，要不然二面就很难通过。另外有些二面面试官喜欢问算法，问智力题。大部分二面面试官不会问android基础。最后，我后面会把我准备校招期间的所有笔记公开给大家，敬请期待！</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">面试</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/c/" class="article-tag-list-link color2">c</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/01/17/2016-秋季校招面经（华为、腾讯、360、网易等）/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-vi-编辑器的使用（3）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -857,71 +990,6 @@
 
 
   
-    <article id="post-2016-年末总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/31/2016-年末总结/">2016年末总结</a>
-    </h1>
-  
-
-        
-        <a href="/2016/12/31/2016-年末总结/" class="archive-article-date">
-  	<time datetime="2016-12-31T12:34:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-12-31</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="https://raw.githubusercontent.com/wenboo/wenboo.github.io/master/blogImg/1231.jpeg" width="650" height="425"></p>
-<p>本来还想着搞个长篇大论来总结下过去的二零一六，后来还是想想算了，别啰里啰嗦搞什么幺蛾子了，整整齐齐写几段文字，mark下即可，一来理顺了过去一年的事情，二来权当留个念想。</p>
-        
-          <a class="article-more-a" href="/2016/12/31/2016-年末总结/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/life/" class="article-tag-list-link color5">life</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/12/31/2016-年末总结/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1030,7 +1098,19 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">面试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">http</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">tool</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1042,11 +1122,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">tool</a>
+                <a href="javascript:void(0)" class="js-tag color1">log4j</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1059,14 +1135,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">java,tomcat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">log4j</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">socket</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1098,11 +1166,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">进程</a>
+                <a href="javascript:void(0)" class="js-tag color3">内存</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">内存</a>
+                <a href="javascript:void(0)" class="js-tag color2">socket</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">进程</a>
               </li>
             
             <div class="clearfix"></div>
