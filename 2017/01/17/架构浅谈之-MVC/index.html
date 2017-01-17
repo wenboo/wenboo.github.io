@@ -6,14 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://wenboo.github.io">
-  <title>Tag: tool | Hi~Welcome to Wenboo&#39;s Blog</title>
+  <title>架构浅谈之 MVC | Hi~Welcome to Wenboo&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hi~Welcome to Wenboo's Blog">
-<meta property="og:url" content="http://wenboo.github.io/tags/tool/index.html">
+  <meta name="description" content="1.什么是架构 ?
+对于架构，业界从来没有一个统一的定义，架构一词最初来自建筑业，假如我们要盖一栋大楼，那在完成这么一项重大工程之前肯定需要建造师的建筑图纸，而这建筑图纸可以说是建筑业架构的最核心体现，它描述了这栋大楼的外观、内部构造、户型设计、材料做法以及设备、施工等，有了建筑图纸，才能整体的规划整个工程，从大局出发，有序的推进项目的发展，最大程度的提高生产力。
+所以归根结底，架构的目的就是为了">
+<meta property="og:type" content="article">
+<meta property="og:title" content="架构浅谈之 MVC">
+<meta property="og:url" content="http://wenboo.github.io/2017/01/17/架构浅谈之-MVC/index.html">
 <meta property="og:site_name" content="Hi~Welcome to Wenboo's Blog">
+<meta property="og:description" content="1.什么是架构 ?
+对于架构，业界从来没有一个统一的定义，架构一词最初来自建筑业，假如我们要盖一栋大楼，那在完成这么一项重大工程之前肯定需要建造师的建筑图纸，而这建筑图纸可以说是建筑业架构的最核心体现，它描述了这栋大楼的外观、内部构造、户型设计、材料做法以及设备、施工等，有了建筑图纸，才能整体的规划整个工程，从大局出发，有序的推进项目的发展，最大程度的提高生产力。
+所以归根结底，架构的目的就是为了">
+<meta property="og:image" content="http://s4.51cto.com/wyfs02/M00/8B/BA/wKioL1hXU8vRX8elAAA2bXqAxMs799.png">
+<meta property="og:image" content="http://s3.51cto.com/wyfs02/M02/8B/BA/wKioL1hXVIXhUv7fAABmCP5pN6Y332.png">
+<meta property="og:updated_time" content="2017-01-17T13:53:25.317Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hi~Welcome to Wenboo's Blog">
+<meta name="twitter:title" content="架构浅谈之 MVC">
+<meta name="twitter:description" content="1.什么是架构 ?
+对于架构，业界从来没有一个统一的定义，架构一词最初来自建筑业，假如我们要盖一栋大楼，那在完成这么一项重大工程之前肯定需要建造师的建筑图纸，而这建筑图纸可以说是建筑业架构的最核心体现，它描述了这栋大楼的外观、内部构造、户型设计、材料做法以及设备、施工等，有了建筑图纸，才能整体的规划整个工程，从大局出发，有序的推进项目的发展，最大程度的提高生产力。
+所以归根结底，架构的目的就是为了">
+<meta name="twitter:image" content="http://s4.51cto.com/wyfs02/M00/8B/BA/wKioL1hXU8vRX8elAAA2bXqAxMs799.png">
   
     <link rel="alternative" href="/atom.xml" title="Hi~Welcome to Wenboo&#39;s Blog" type="application/atom+xml">
   
@@ -165,71 +178,209 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-架构浅谈之-MVC" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/10/14/Hexo-用法指南/" class="archive-article-date">
-  	<time datetime="2016-10-14T15:56:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-14</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/10/14/Hexo-用法指南/">Hexo 用法指南</a>
+    <h1 class="article-title" itemprop="name">
+      架构浅谈之 MVC
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/01/17/架构浅谈之-MVC/" class="archive-article-date">
+  	<time datetime="2017-01-17T13:46:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>1.什么是架构 ?</strong></p>
+<p>对于架构，业界从来没有一个统一的定义，架构一词最初来自建筑业，假如我们要盖一栋大楼，那在完成这么一项重大工程之前肯定需要建造师的建筑图纸，而这建筑图纸可以说是建筑业架构的最核心体现，它描述了这栋大楼的外观、内部构造、户型设计、材料做法以及设备、施工等，有了建筑图纸，才能整体的规划整个工程，从大局出发，有序的推进项目的发展，最大程度的提高生产力。</p>
+<p>所以归根结底，架构的目的就是为了提高生产力。而软件领域的架构主要体现在模块之间的「高内聚，低耦合」，这六个字听起来有点难以理解，其实通俗来讲就是单一职责的功能封装成模块，在模块内部高度聚合，模块与模块之间不会互相依赖，即低耦合。比如我们常用的网络库、图片加载库，这都是属于两个模块，在每个模块内部功能单一，代码高度内聚，但是网络库与图片加载库又不互相依赖，都可以独立工作，互不干扰，这就是所谓的低耦合。</p>
+<p>而我们追求「高内聚，低耦合」的目的很简单，我们想让开发人员只专注于一点，提高开发效率的同时，也对代码的健壮性与扩展性有很大好处。试想，如果你做的功能需要同时跟四个部门进行合作，依赖于他们的模块，那么你的开发效率肯定奇低，而且依赖过高，其他部门的代码稍一改动很可能就会对你产生影响，而且问题还不容易定位，这将是一个定时炸弹。</p>
+<a id="more"></a>
+<p>所以，架构的重要性不言而喻，但是架构有一条原则：千万不要过度设计!<br>如果你盖的是栋大楼，你肯定需要建造师的建筑图纸，但是如果你盖的是一间茅草屋，你觉得你还需要请个建造师来先给你设计一张建筑图纸再开工么?可能花在设计建筑图纸的时间都够你盖完了。所以架构一定得看不同场景的需求，如果你的工程总共就十来个文件，那么你在开发的过程中运用各种设计模式、考虑各种分层，只会让原本简单的东西复杂化，还会增加工作量，这违背了架构的初衷。<br>最原始、最简单的东西反而是最高效的，只不过我们的项目慢慢变得庞大，那些最原始的框架与结构满足不了我们的需求了，这个时候我们必须从整体出发重新考虑整个项目的架构，通过架构来帮助我们提高生产力，减少重复繁杂的工作量，提升工作效率。</p>
+<hr>
+<p><strong>2.三层架构</strong></p>
+<p>说到架构，就不得不谈到最经典的三层架构的概念，三层架构最初是微软提出的，并且推荐各应用程序都应该遵守这种分层方式，而现今大多数应用程序基本都遵守这三层分层式架构。这三层架构分别是：表示层、业务层、数据访问层。</p>
+<p><img src="http://s4.51cto.com/wyfs02/M00/8B/BA/wKioL1hXU8vRX8elAAA2bXqAxMs799.png" alt="img"></p>
+<p>我们拿访问一个网站来举个例子。你在浏览器输入一个网址，访问一个网站的时候，这中间经过了这么一个过程，用户在浏览器输入 url，然后浏览器向 Server 发起一个 http 请求，Server 拿到这个 http 请求之后会根据相关的条件到数据库查询相关数据，然后把数据以特定的格式(网站是 html 格式)返回给浏览器，浏览器再根据特定数据渲染出相应页面。</p>
+<p>这其中就对应了三层架构，首先对用户来说，浏览器就是表示层，它主要是与用户交互的页面，根据用户的输入与事件，处理并显示返回的特定数据。我们知道数据是一切应用程序的基础，如果没有数据，那么没有任何意义，所以 Server 端必须要一个强大的数据库来存储所有用户交互产生的数据，而对这些数据的处理，包括增、删、改、查就属于数据访问层。那么连接表示层与数据访问层的就是业务逻辑层，这包括后端程序中模型设计、验证、业务规则、各种计算等。</p>
+<p>所以后端的架构是很复杂的，它除了有复杂的业务逻辑之外，还有存储、性能、并发、负载均衡等等，所以架构师一职最初也是针对服务端提供的职位。</p>
+<hr>
+<p><strong>3.MVC</strong></p>
+<p>随着移动端的普及，手机端的应用程序功能越来越大，项目也越来越复杂，所以移动端架构也被越来越多的人关注与重视，但是移动端架构远没有服务端复杂，一是移动端的数据来源于服务端，不必有专门的数据存储，最多有本地的缓存以及一些必要的小型数据库，对于一些复杂的业务逻辑也更多的放在服务端，而且客户端不必考虑成百上千万用户的同时访问，移动端通常更应该把精力专注在 UI、交互、体验上，所以客户端的架构没有那么重，但是为了让移动端代码分层更加清晰，代码扩展性更好，以及更好的高内聚、低耦合，目前有一系列的移动端架构方案，大家耳熟能详的比如 MVC、MVP、MVVM、Clean 等，今天就先来针对 Android 开发，来讲讲 MVC 的概念。</p>
+<p>MVC 是 Model(模型)、View(视图)、Controller(控制器) 的缩写，其中 View 层处理界面显示，Controller 层用来处理用户的交互与事件，Model 层则用来定义实体对象与处理业务逻辑。这么说难免有点晦涩难懂，我们来拿我们最熟悉的 Android 开发来举例。</p>
+<hr>
+<p><strong>4.Android MVC</strong></p>
+<p>其实 Android 开发本身默认的就是一套 MVC 实现。</p>
+<blockquote>
+<p>View 层：Android 开发中的 xml 布局就是我们的 View 层，默认情况下也建议 View 都尽量用 xml 实现，当然对于一些复杂的就需要我们自定义 View 了，自定义 View 同样也是属于 View 层，只不过大多数时候还是 xml 布局用的最多;</p>
+<p>Controller 层：毫无疑问，Android 默认也给我们提供了 Controller，就是 Activity &amp; Fragment，仔细想想，是不是用户的交互事件，如输入、点击、滑动等都是在 Activity、Fragment 中处理的?关于这点有人认为 Activity &amp; Fragment 属于 View 层，这个我是不认可的，View 应该专注界面的显示，Controller 处理用户的交互，提供给 View 需要的数据，从而让 View 正确的显示出来，而这都是 Activity &amp; Fragment 的工作。</p>
+<p>Model 层：Android 中对 View 与 Controller 有了定义，其实没有对 Model 层做定义，而大部分架构都不会对 Model 层做定义，因为 Model 本身是跟业务相关，针对不同的业务模型，定义需要的数据模型与实体类，以及相关的业务逻辑处理，虽然 Android 没有明确定义 Model 层，但是我们在开发中都会定义一个专门的 model package 用来统一管理所有的 model 文件，如 User、Order、Chat 等。</p>
+</blockquote>
+<p>这里做个补充，因为对于部分初学者可能不理解什么是 Model，Model 的具体职责以及什么是所谓的业务逻辑?这里姑且说明下：</p>
+<p>1) Model 即模型，也就是数据模型，通常就是所谓的 JavaBean 实体类，比如在界面上我们要显示一些用户信息，这个时候我们必须定义一个 User 对象，这个 User 对象也即所谓的 Model，如</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123; </div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age; </div><div class="line">    <span class="keyword">private</span> String name; </div><div class="line">    <span class="keyword">private</span> ... </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123; </div><div class="line">    &#125; </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123; </div><div class="line">        <span class="keyword">return</span> age; </div><div class="line">    &#125; </div><div class="line">    ... </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>通常这个就是 Model 的主要功能。</p>
+<p>2) Model 就是一个数据模型的定义，定义了供我们使用的数据实体类而已。因为大部分我们的数据来源都是来自后端，客户端不需要处理太多的业务逻辑，所以大部分情况下 Model 也就只包含基本的属性与 get、set 方法。但是，并不是说明客户端不包含任何业务逻辑，比如我们除了显示用户的基本信息外还需要显示用户的身体质量指数(也就是 BMI)，这个值不是一个 Model 自带的属性，而是根据一些属性通过一定的算法算出来的，这也就是所谓的业务逻辑。</p>
+<p>BMI 的算法很简单，就是体重(kg)÷ (身高^2(m))，有人可能直接在显示的页面把这段算法写出来，比如直接在 Activity 有如下代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">textView.setText(String.valueOf(user.weight / (user.height * user.height)));</div></pre></td></tr></table></figure>
+<p>这个当然是可以，但是很糟糕，因为你需要在每一个显示的地方都写这么一段代码，而它本身是属于业务逻辑的，所以你应该把这个算法放在 User 的 model 里处理：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123; </div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age; </div><div class="line">    <span class="keyword">private</span> String name; </div><div class="line">    <span class="keyword">private</span> <span class="keyword">float</span> weight; </div><div class="line">    <span class="keyword">private</span> <span class="keyword">float</span> height; </div><div class="line">    ... </div><div class="line">    ... </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">float</span> <span class="title">getBMI</span><span class="params">()</span> </span>&#123; </div><div class="line">        <span class="keyword">return</span> weight / height * height; </div><div class="line">    &#125; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然后只需要在需要显示的地方调用 user.getBMI() 这个方法就 ok 了，这个算法其实就是所谓的简单的业务逻辑。</p>
+<p>当然以上只是举个例子，其实很简单的概念，但是对于一些初学者可能不能理解，特此说明下，实际开发过程中，所有跟 model 相关的一些计算都可以算作业务逻辑，而这也是 Model 的第二个重要作用。</p>
+<hr>
+<p><strong>5.MVC 与三层架构的关系</strong></p>
+<p>有人可能会问了，你一会三层架构，一会 MVC 的，他俩之间到底是什么关系?</p>
+<p>三层架构是一种软件领域最普遍的分层式架构，而 MVC 是在三层架构的基础上设计的一种框架型架构，三层架构是一种宏观的概念，而 MVC 就是一种比较具体的三层架构的框架实现，我们在 MVC 的基础上把不同类别的代码文件进行分类就可以了，所以他们之间的关系可以用下图来表示：</p>
+<p><img src="http://s3.51cto.com/wyfs02/M02/8B/BA/wKioL1hXVIXhUv7fAABmCP5pN6Y332.png" alt="img"></p>
+<p>上图可以看到，View 层和 Controller 层都属于三层架构的表示层，而 Model 层属于业务层，有人又问了，那数据访问层怎么没有相对应的呢?这个就是有争议的地方了。<br>有人认为 Model 层除了定义业务需要的实体类与简单的逻辑算法处理之外，还应该包括对数据库的操作、对网络等的操作等，这对后端开发来说没问题，因为后端的数据全部来源于数据库，而且后端可以很方便的跟数据服务器进行连接，而 Model 的业务逻辑大多都是来自对数据的处理，所以这种方式很正常。</p>
+<p>但是对于客户端来说差别就大了，我们知道客户端的数据来源大多来自服务端的接口请求，但是很可能同时有本地数据库、本地的文件都能提供数据，比如可能会有离线操作，比如可能为了用户体验，用户断网的时候会做缓存处理，也就是说客户端的数据来源有多种多样，而 Model 本身的主要职责应该定义业务需要的数据模型以及简单的逻辑处理，如果同时也要处理本地数据库与网络数据未免变得臃肿起来，而且职责不清晰。</p>
+<p>所以，我是非常不建议在 Model 层做多余的数据处理工作的，而对应三层架构我强烈建议客户端的开发中应该多一层 data 层，也就是所谓的数据处理层，这一层包含了对 database、network、sharedpreference 等数据的处理，Model 层回归最简单、最本质的模型职责，只定义业务需要的数据模型与简单的逻辑处理即可。</p>
+<hr>
+<p><strong>6.MVC 的优缺点</strong></p>
+<p>虽然 Android 开发框架并不是严格意义上的 MVC，但是显而易见，默认的开发就是 MVC 框架，优点也很明显，学习成本很低，理解很容易，对 UI 层与业务层做了分离，我们只需要对 Model 层与 data 层做个简单的分层与封装，就是一个扩展性还不错、还算清晰的开发架构。</p>
+<p>但是缺点也很明显，随着功能的不断迭代与越来越复杂的交互处理，Controller 层也就是 Activity、Fragment 中的代码越来越多，变得很臃肿，难以维护，尤其在需求变化的时候，改起来特别痛苦，我甚至见过一个 Activity 有几千行代码的情况，试想这得多痛苦，当然出现这种情况本身也有程序员自己的问题，但是这暴露了 MVC 这种架构的缺点。</p>
+<p>MVC 可以说是最经典的架构模式，它适用于大部分的开发场景，如果你对架构不怎么了解，那么建议老老实实的使用 MVC，在此架构基础上进行封装与优化绝对够了，只是项目到了一定体量了，需求也越来越复杂，总归是会碰到难以扩展、Controller 层发展成“死胖子”的情况，这个时候怎么解决呢?且听下回分解，当然下篇什么时候我也不清楚。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">tool</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">架构</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">mvc</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/work/" class="article-tag-list-link color5">work</a>
+        			<a href="/categories/life/" class="article-tag-list-link color5">life</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://wenboo.github.io/2017/01/17/架构浅谈之-MVC/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2017/01/17/如何构建一个较为通用的业务技术架构/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">如何构建一个较为通用的业务技术架构</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="架构浅谈之-MVC" data-title="架构浅谈之 MVC" data-url="http://wenboo.github.io/2017/01/17/架构浅谈之-MVC/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"wenboo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
   
 
-    
+
 
 
           </div>
@@ -252,9 +403,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		root: "/",

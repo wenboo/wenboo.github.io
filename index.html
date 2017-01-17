@@ -167,6 +167,88 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-架构浅谈之-MVC" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/17/架构浅谈之-MVC/">架构浅谈之 MVC</a>
+    </h1>
+  
+
+        
+        <a href="/2017/01/17/架构浅谈之-MVC/" class="archive-article-date">
+  	<time datetime="2017-01-17T13:46:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>1.什么是架构 ?</strong></p>
+<p>对于架构，业界从来没有一个统一的定义，架构一词最初来自建筑业，假如我们要盖一栋大楼，那在完成这么一项重大工程之前肯定需要建造师的建筑图纸，而这建筑图纸可以说是建筑业架构的最核心体现，它描述了这栋大楼的外观、内部构造、户型设计、材料做法以及设备、施工等，有了建筑图纸，才能整体的规划整个工程，从大局出发，有序的推进项目的发展，最大程度的提高生产力。</p>
+<p>所以归根结底，架构的目的就是为了提高生产力。而软件领域的架构主要体现在模块之间的「高内聚，低耦合」，这六个字听起来有点难以理解，其实通俗来讲就是单一职责的功能封装成模块，在模块内部高度聚合，模块与模块之间不会互相依赖，即低耦合。比如我们常用的网络库、图片加载库，这都是属于两个模块，在每个模块内部功能单一，代码高度内聚，但是网络库与图片加载库又不互相依赖，都可以独立工作，互不干扰，这就是所谓的低耦合。</p>
+<p>而我们追求「高内聚，低耦合」的目的很简单，我们想让开发人员只专注于一点，提高开发效率的同时，也对代码的健壮性与扩展性有很大好处。试想，如果你做的功能需要同时跟四个部门进行合作，依赖于他们的模块，那么你的开发效率肯定奇低，而且依赖过高，其他部门的代码稍一改动很可能就会对你产生影响，而且问题还不容易定位，这将是一个定时炸弹。</p>
+        
+          <a class="article-more-a" href="/2017/01/17/架构浅谈之-MVC/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">架构</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">mvc</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/life/" class="article-tag-list-link color5">life</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/01/17/架构浅谈之-MVC/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-如何构建一个较为通用的业务技术架构" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -192,59 +274,9 @@
 <hr>
 <p><strong>2.通用架构实现</strong></p>
 <p>总的来说我的通用架构还是以三层架构为基础进行演变的，在经典的三层架构中，最上层的是controller，中间是service，下层是dao。在我的架构中，最上层是网关层，controller只是网关的一种，中间是业务层，service只是业务层的入口，最下层是基础层，dao只是基础层中的数据存储组件。</p>
-<hr>
-<p><strong>2.1.网关层</strong></p>
-<p>网关层本质上是对不同的网络协议的请求进行处理，比如HTTP协议，TCP协议，当然，也可以对其他协议进行处理。具体见下图：</p>
-<p><img src="http://static.codeceo.com/images/2016/11/business-framework-01.png" alt="img"></p>
-<p><strong>2.1.1、HTTP请求</strong></p>
-<p>一般来自PC端和APP端的请求都是基于HTTP协议的，对于处理HTTP请求的方案，业内已经非常成熟了。首先，tomcat容器本身已经把HTTP请求处理的复杂性封装掉了，其次，spring mvc对请求处理提供了RESTful风格的编码方式，大大降低了开发的复杂度。我们要做的就是对controller按照业务领域划分，比如按照订单、会员去划分大的领域，里面的各种方法就是这个领域内的操作。这里的controller就是统一网关处理层，对于每个controller的方法只做三件事，第一，将请求参数解析出来并组装成内部参数，第二调用下层服务执行业务逻辑，第三组装返回结果，对于异常情况，需要记录异常堆栈日志并转换错误码，堆栈信息不要暴露到调用方。</p>
-<p><strong>2.1.2、TCP请求</strong></p>
-<p>对于处理TCP请求的方案，业内也已经很成熟了，比如Netty。但是，TCP请求毕竟太底层，我们往往会基于TCP协议去开发自己的协议。另外，很多分布式框架都是基于TCP协议的，比如RPC框架Dubbo，消息框架RocketMQ等等。从单机系统到分布式系统，无非就是网关层多了处理TCP请求的逻辑，理论上底层的业务是无需感知自己到底是出于单机环境还是分布式环境，网关层的作用就是要屏蔽这种不同外部调用源的细节。在Dubbo服务端中，我们需要实现远程接口，并对远程服务调用进行内部的转发，转发的逻辑也很简单，首先是解析参数并组装内部参数，然后调用业务层的接口执行业务逻辑，最后组装返回结果，对于异常处理也需要在这里做掉，防止异常暴露给外部应用。</p>
-<p><strong>2.1.3、小结</strong></p>
-<p>网关层本质是对协议进行处理，同时将业务逻辑收敛到网关层，而不是暴露给外部，当内部业务逻辑进行重构的时候，外部调用方就不需要感知这些变化，当外部调用源增加时，内部业务逻辑不需要感知这种变化，从而将外部调用方和内部业务逻辑进行了解耦。</p>
-<hr>
-<p><strong>2.2.业务层</strong></p>
-<p>业务层是一个系统，无论是单机系统还是分布式系统群中的某个业务系统，业务层都是承载业务流程和规则的地方。业务层从外到内包含三层：第一层是业务服务，第二层是业务流程，第三层是业务组件。具体如下图：</p>
-<p><img src="http://static.codeceo.com/images/2016/11/business-framework-02.png" alt="img"></p>
-<p><strong>2.2.1、业务服务</strong></p>
-<p>业务服务是业务层对外的统一门面，它由三方面组成：业务接口、入参、出参。</p>
-<p>a) 业务接口</p>
-<p>一个业务接口代表一个领域的业务服务，比如订单域的业务服务就由接口OrderService表示，会员域的业务服务就由接口MemberService表示。接口可以按照执行性质分为读接口和写接口，比如OrderReadService和OrderWriteService。读写分离的好处是可以对集群进行读写分组，从而管理流量，当然，单机系统读写分离意义不是太大。领域内的操作则以业务接口中的方法的形式体现，比如订单域有下单createOrder，取消订单cancelOrder等等操作。对于这些操作，尽量设计出有业务含义的方法，而不是增删改查，当然，对于一些简单的业务，也只能增删改查。</p>
-<p>b)入参</p>
-<p>接下来，是入参的设计。入参对于读方法，比较简单，不做讨论。对于写方法，我们将入参设计成有层次的数据模型。首先需要设计出公共的数据模型，比如订单数据模型，商家数据模型，商品数据模型等，然后将这些数据模型和一些特定业务下的个性数据结合，组成Request对象，这个request对象按照不同业务操作不同而不同，对应的返回结果就是response，它也是随着不同业务返回的参数不同。</p>
-<p>举个例子，拿下餐饮订单来说，首先，我们应该识别出这些业务流程中一些比较基础的数据模型，比如餐饮领域的菜品、桌位等，这些模型之所以说是基础模型，是因为，不管下什么餐饮订单，菜品和桌位肯定是逃不了的，它们是可以被复用的！因此，我们分别为这些基础模型设计相对于的DO（Domian Object）:DishDO（菜品）、BoardDO（桌位）等等，接下来，我们为下餐饮订单设计一个请求对象DishOrderCreateRequest其中DishOrderCreateRequest内部包含了DishDO和BoardDO，另外会包含一些特定的属性，比如人数啊，折扣啊等等，这样一来就能做到通用和灵活兼顾，DishOrderCreateRequest代表的个性化的灵活的业务入参，而DishDO和BoardDO等则代表了不易变化的基础模型。</p>
-<p>c) 出参</p>
-<p>最后，是出参的设计。对于写方法，一般出参比较简单。对于读方法，出参往往是一个结构与层次比较复杂的组合对象。比如查询一个订单，这个订单有订单基本信息，还有商品信息，收货人地址信息等。在设计出参的时候，结构上要设计成组合对象，但是真正查询的时候，通过查询选择器，去查询不同的组合对象。比如查询选择器设置商品查询为true，地址查询为false，那么这次查询出的订单就只包含商品，而不包含地址。</p>
-<p>2.2.2、业务流程</p>
-<p>业务流程其实就是对业务规则的解释，只是这种解释使用代码去实现的，我们要做的其实就是准确翻译这些业务规则，并维护好这些业务规则。</p>
-<p>业务流程中可以大致分为三种动作节点，1、组装参数节点  2、规则判断节点  3、执行动作节点，其中每个动作节点都是一些业务代码的片段。举个例子，下餐饮订单，我们第一步就是将上层传入的参数组装出一个基础的DishOrderDO（组装参数节点），然后按照特定的规则去填充这个DishOrderDO（规则判断节点），然后就是调用DAO去创建DishOrderDO（执行动作节点）。</p>
-<p>业务流程是最容易变化的地方，要想维护好业务流程并不容易，总的思想是将大的业务流程拆分成小的业务流程，抽出每个业务流程中共有的代码片段，变成可维护的业务组件。</p>
-<p>2.2.2、业务组件</p>
-<p>a) 基础组件</p>
-<p>业务组件其实是将一些内聚的可复用的代码片段进行封装。和业务流程中的三种业务节点相对应，业务组件也分为三种：组装参数组件 、规则判断组件 、动作执行业务组件。业务组件的抽象往往是对业务有了深刻理解之后才进行的，盲目地进行业务组件的抽象，往往到头来白忙活。</p>
-<p>b) 能力</p>
-<p>对业务组件进行进一步抽象，可以得到能力。业务能力是具有一定复用性的组件的组合，比如发短信能力=组装短信参数组件+发短信组件。对于发短信能力，可以被不同的业务流程复用，比如订单下单成功发短信，支付成功发短信，逻辑都是相似的，只有内容不同。能力是一种粒度比较大的组件，粒度越大，往往复用性就越小，对能力的抽取，也是基于对特定业务深刻的理解，没有一劳永逸的银弹。</p>
-<p>c)更高纬度的抽象</p>
-<p>经过本人的实践，对于互联网这样的需求变化极快的场景，更高纬度的组件抽象往往性价比很低，不建议大家去做。</p>
-<hr>
-<p><strong>2.3.基础层</strong></p>
-<p>基础层包含两个部分，第一是接口定义，第二是技术组件。</p>
-<p><img src="http://static.codeceo.com/images/2016/11/business-framework-03.png" alt="img"></p>
-<p><strong>2.3.1、接口定义</strong></p>
-<p>接口定义是按照不同的技术框架，同时结合业务需要，设计出合理的接口，对于业务组件来说，它们只会感知技术接口，而不会去感知技术实现，我们也不应该将具体的技术细节向上暴露，这也就是所谓的面向接口编程。技术接口往往是业务与技术之间的桥梁，接口本身是含有业务含义的，最常见的就是DAO接口，我们设计DAO接口的时候，不会设计成insert、update、query这样业务无关的接口，而是设计成insertUser，updateUserById等等和业务相关的接口，同样的道理，设计缓存接口的时候，也不能设计成put、get这样的接口，而应该设计成cacheUser，deprecateUser这样的接口。</p>
-<p><strong>2.3.2、技术组件</strong></p>
-<p>单机系统的技术组件一般来说分两种，一种是通用的技术组件，比如：数据存储、缓存、消息和调度任务、事务、锁。一种是基础设施，比如spring容器，tomcat容器。下面稍微谈谈通用技术组件。</p>
-<p>数据存储：数据存储包括关系型数据库、非关系型数据库以及文件存储系统。关系型数据库，比如MySQL，适合存放绝大部分业务数据。非关系型数据库，比如hbase，可以存放历史日志，也可以对历史的MySQL数据进行归档。文件存储系统，一般都是基于Linux文件系统，比如图片、html文件等等，也有基于HDFS的，用于大数据分析。</p>
-<p>缓存：缓存按响应时间分，可以分为纳秒级缓存，毫秒级缓存和百毫秒级缓存。纳秒级缓存就是一般的基于本地内存的缓存，比如encache，毫秒级缓存一般是集中式的内存缓存，比如memcache，由于访问时远程调用，因此响应时间会延长到几毫秒，百毫秒级缓存一般是集中式可持久化的缓存，比如redis，由于存在远程访问以及缓存击穿导致的读取持久化记录，它的响应时间会更长些，到几十甚至上百毫秒。单机系统一般用本地内存缓存就够了，当缓存被击穿的时候，直接访问数据库。</p>
-<p>消息和调度任务：消息和调度任务本质都是一种异步化的手段，区别在于消息无法控制异步的时间，而调度任务可以。一般，消息发送出去后，监听消息的系统会立即收到消息，从而立即触发业务逻辑的执行，而调度任务则会按照调度规则，一次或者多次的执行业务逻辑。单机系统中消息和调度任务用到的比较少，在做日志监控的时候可能会用到消息，在进行数据报表统计的时候可能会用到调度任务。</p>
-<p>事务：事务本质都是基于数据库去实现的，单机系统的事务就是依赖数据库的事务，我们可以使用spring-tx的事务模板进行事务操作，在业务逻辑开发中，一定要把握事务的大小，建议把业务比较紧密的一堆数据库操作放在一个事务里，不要随意的为每个方法都开启事务。</p>
-<p>锁：单机系统中主要用到两种锁：乐观锁和悲观锁。乐观锁依靠在数据库的业务表加版本字段来实现，每次更新都会去判断版本是否变化，如果变化则需要重试，这种锁的粒度比较小。悲观锁是基于JDK的Lock接口的，对一个业务流程进行加锁和释放锁的操作，锁的粒度比较粗。</p>
-<hr>
-<p><strong>3.总结</strong></p>
-<p>以上是我经过很长一段时间的实践后摸索出来的业务技术架构，自认为还算通用，而且能够在一定程度上支撑易变的业务。当然这套架构肯定不是银弹，不可能解决所有业务场景，所以最终还是需要围绕到具体的场景加以借鉴。</p>
-<p><strong>关于作者</strong></p>
-<p>吴极心，目前在杭州旅居星球担任架构师，专注于技术架构治和产品架构。</p>
-
+        
+          <a class="article-more-a" href="/2017/01/17/如何构建一个较为通用的业务技术架构/#more">more >></a>
+        
       
 
       
@@ -252,6 +284,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">架构</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
@@ -310,63 +353,9 @@
 <p>介绍我的项目，针对我的项目中的点询问是如何实现的<br>Activity生命周期？为什么Activity要这么设计？这样设计有什么好处？<br>Android与iOS运行机制上有哪些不同？<br>为什么Android用起来没有iOS流畅？为了让Android系统更流畅，应该从哪些方面做好？<br>如何让Service不被杀死？<br>Android系统分层？Library层起什么作用？<br>如果一个应用要升级需要注意哪些方面？（我回答服务端api要兼容，如果只是小bug就通过补丁方式，但是貌似面试官不满意，就引导我说数据方面的，我才知道原来是想要我说本地数据的兼容）<br>问我有什么要问他的？<br>还有其他的一些问题，记不太清了….</p>
 <p>2016-08-19 二面：</p>
 <p>二面是一个中年男人，一开始很严肃，聊了几句后它就笑嘻嘻了。</p>
-<p>首先叫我介绍自己<br>本科在哪读的（普通二本）<br>家里有多少人，是农村的还是城市的，家里生活水平怎么样？<br>有没有女朋友、女朋友是哪里人、女朋友有没有工作？<br>为什么不留武汉（我简历填杭州），不留武汉你女朋友同意吗？<br>选一个你收获最大的项目来谈谈？（后面就是针对我的项目一直聊~）<br>二面大概30分钟左右，后面说我的性格测试没通过，让我重新再做一次。然而，第二次性格测试还是没通过，最终我还是因为性格测试没通过的原因，与华为无缘。。。。</p>
-<hr>
-<p><strong>2.腾讯内推TST（已拿到offer）</strong></p>
-<p>2016-08-19 一面：</p>
-<p>1.自我介绍<br>2.跟我提简历里面的项目，如何实现的？具体原理？如果出现XXX情况，会不会出现XXX问题？<br>3.Android 消息机制，Looper、消息队列等<br>4.Android事件分发机制<br>5.自定义过View吗？回答有自定义过，然后谈了下（普通View）onMeasure、onDraw。针对ViewGroup谈了下onLayout，然后还有就是需要注意onDraw不要做过于耗时的任务，防止卡顿。<br>6.Java中的多线程：Thread、Runnable<br>7.Java中的同步问题？Lock、Synchronized<br>8.类的加载过程？五步<br>9.TCP与UDP区别 10.10万个整数中找出排序后的前10个数（Top N 问题），及其对应算法复杂度<br>11.10万个整数中，每个整数取值[0,99],找出排序后的中间位置的数（中位数）<br>12.堆排序的算法复杂度<br>13.面试官说，大概就这些了。紧接着想要挂电话的样子，我赶紧说，我可以问您几个问题吗？面试官说当然可以。我就问了以我当前的水平能否符合您们的要求？面试官说我觉得你还不错。紧接着问了一下大概等多久才能进入下一场面试，面试官说会尽快安排，可能会再周末。</p>
-<p>2016-09-03 上午 现场二面</p>
-<p>面试官非常nice，整个过程很挺顺利。<br>1.针对项目询问<br>2.TCP拥塞机制<br>3.手写代码，针对Top k问题<br>4.如何做到多个线程访问同一个数组，既要线程安全，同时提高读写效率（我是通过分段锁的思想，说了一下自己的想法），后面还让我手写代码实现。<br>5.还有很多内容，忘记了。。。</p>
-<p>2016-09-03 下午 现场三面</p>
-<p>三面面试官据说是总监，反正我是被打压的抬不起头。不得不说，总监级的人物技术确实牛逼。首先看了我的简历，然后说简历里面的项目经验太简单了。<br>1.什么是内存对齐？<br>2.C++内存分为几种类型？（我对C++不熟，就说了JVM中的内存分类）<br>3.如何压缩一篇文章？<br>4.java类加载过程？（这个我很熟，里面滔滔不绝，然而，得到的回应是：背的倒是挺熟）<br>5.Java那些类是final？（除了String，我真的不知道还有哪些），只回答了String，面试官说，还有呢？（回答不出来了。。。）后面查了下，其实Math类也是final，面试官说日期类有很多，但是我回头查了下，还是没查到哪个日期类是final。<br>6.快结束时，面试官说，就到这里吧，你很幸运，我没有让你现场手写代码。因为我当时觉得这次面试面的很差，我就回答，我愿意尝试手写代码。然后面试官出了2道题：如何逆转字符串？如何实现“ I am Student”转为“Student am I”？两道题都很简单，剑指offer里面都有。我一听到这个问题心里就呵呵一笑了，立马说出如何实现。然后，面试官说行，就到这了。</p>
-<p>虽然炮轰式的提问，但是我的记忆力确实很差。目前只记得这些。。。后面想到再补充。二面完了之后，我觉得直接都挂了，因为好多跟C++相关问题我都回答不出来（毕竟我只搞Java 、Android），在面试官面前，自己确实很菜。</p>
-<p>2016-09-03 下午 现场HR面</p>
-<p>1.家在哪？<br>2.本科是哪个学校？<br>3.有没有亲戚在腾讯？<br>4.有没有女朋友？<br>5.你来深圳了，女朋友怎么办？（回答跟我一起来）<br>6.你实习过吗？回答实验室不允许我们实习，然后HR说，那相比那些实习过的人，你的优势是什么？<br>7.你有什么问题问我吗？</p>
-<hr>
-<p><strong>3.2016-08-25 奇虎360</strong></p>
-<p>2016-08-25，今天下午2：00开始，到4:30，一共面了3面：一面、二面、HR面。不得不说，360办事效率真的很高，觉得你OK，就立马给你安排下一面。360整体感觉比较偏向询问项目中的问题，所以有好的项目经验比较重要。</p>
-<p>一面：</p>
-<p>其实之前有整理一面的问题，但是是写在纸上，然后那张纸被我一不小心当垃圾扔了。。。。所以现在回想的起来的问题很少。。。</p>
-<p>手写ListView（可能是考我会不会想到ViewHolder）<br>记性真的很差。。。想不起来了。。。总之，一面一般问的比较基础，大部分人都能通过。</p>
-<p>二面：</p>
-<p>你知道B树吗？B树用到哪些场景？<br>用过JNI吗？<br>生活中有没有遇到一些事情，你通过程序来解决的？<br>针对项目问了很多问题….<br>其他很多问题忘记了。。。。<br>HR面：</p>
-<p>先是自我介绍。大致介绍了一些后，居然发现不知道该说什么了。有点尴尬！HR姐姐就一直看着我。。。实在看不下去了，就说，那你介绍下你做的项目吧~。</p>
-<p>大致说一下做过的项目<br>本科学校是哪里？我回答桂电，数学专业！然后HR姐姐就说，你学数学的跟我们学计算机的枪饭碗啊！我回答第一台计算机是数学家发明的，所以不能说我是抢计算机饭碗~<br>为什么要来北京？（其实我并不想去北京，只是360没其他地方可选~）<br>你了解360的产品吗？用过哪些产品？<br>你觉得360靠什么盈利？<br>假设一个场景，你正在做一个app，deadline快到了，但是产品设计提出新的需求你会怎么办？新功能到底加不加？（加的话可能有新BUG，不加的会如何跟产品设计解释？）<br>其他问题忘记了。。。。<br>后面得到通知，成功称为360的备胎。。。。</p>
-<p>2016-09-20 下午 网易</p>
-<p>吐个槽，原本安排5:20开始面的，想着那么晚，提前过去看看能不能提前面试。从2：30就赶过去，结果直到6点才轮到我。硬是坐了一下午！</p>
-<p>一面</p>
-<p>如何让Service不被Kill<br>Volley框架原理？<br>除了Volley你还了解哪些框架？<br>点击事件机制？<br>简单的算法：打印100以内的所有质数（PS：没有比这个更简单的面试手写算法题了）<br>热补丁技术？<br>插件化技术？<br>如何判断对象的生死？<br>垃圾回收算法？<br>新生代，老年代？<br>http与https区别？<br>加密算法你学过哪些？<br>hashcode与equals区别？<br>HashMap里面的hash映射？如何实现根据Key的hashcode找到下标？HashMap做了哪些优化？</p>
-<p>二面</p>
-<p>二面的面试官基本没有准备问题，都是拿着简历对着问，所以不同人的简历可能问的差别很大。</p>
-<p>把你所知道的设计模式说出来<br>C语言中的编译和链接过程？<br>Java NIO是啥？<br>进程和线程区别？<br>其他问题基本是围绕项目问的。</p>
-<p>HR面</p>
-<p>总结3个你的性格缺点<br>如何看待阿里抢月饼事件?如果是你你也会去写插件抢吗？<br>如何看待百度贴吧事件？<br>家庭情况？<br>本科是什么专业？<br>为什么当初会考研？为什么会选择考武汉大学？<br>有女朋友吗？ 女朋友是做什么的？<br>最让你有成就感的事情是什么？<br>后面还有其他公司的面试吗？<br>现在手上有其他公司的offer吗？<br>网易最后还是跪了，主要是二面没面好。二面面试官从我刚进门就没有给好脸色，聊不到一块去，后面我回答问题时，面试官没有正眼看过我。所以找工作这件事，运气也很重要，遇到聊得来的面试官，一切都好办。</p>
-<hr>
-<p><strong>4.滴滴（已拿offer）</strong></p>
-<p>一面</p>
-<p>一开始一面面试官没正眼看我一眼，瞬间我就觉得，糟了，这肯定要跪了！刚开始问了几个简单的问题，我回答了后，他依然没有重视我。然后他就让我说说binder机制，我把《简单明了，彻底地理解Binder》 这篇文章跟面试官说了一遍，瞬间面试官眼睛亮了！他突然好激动，他说，今天我面了一天了，你是我面的最好的。然后立马加了我微信。后面面试官说，二面你不用面了，直接去综面。</p>
-<p>二面</p>
-<p>因为一面面试官说二面免了，所以直接去综面了。</p>
-<p>综面</p>
-<p>综面面试官没有问android相关问题，就是一直问算法、考算法。算法题目我忘记了，大致记得就是一个数组，只有2个数是相同的，其他各个数是不同的，找出这个相同的数，并且要求时间复杂度和空间复杂度都是O(n)。还有其他算法题，记不住了。</p>
-<hr>
-<p>5.乐视（已拿offer）</p>
-<p>一面：</p>
-<p>相隔时间比较久，记忆的内容也不多，乐视一面面的挺久，大概1个小时。跟面试官讨论的主要问题是Binder跨进程问题，其实也就是我把我写的《简单明了，彻底地理解Binder》 这篇文章跟面试官说了一遍。然后再一起讨论设计模式什么的，当然了，面试内容也不仅仅这点，大部分问题跟前面重复，具体我也想不起来了。</p>
-<p>二面</p>
-<p>二面面试官是负责乐视的基于webkit浏览器开发。能记下的内容不多，我记得的问题有：你觉得浏览器难点在那？然后还有就是问了一下项目相关的问题。最后给了个智力题：在平面上画线，最多能将屏幕划分为多少个区域，比如一条直线能将平面分为2个区域，2条直线最多分为4个区域，那么n条直线最多分为多少区域？</p>
-<p>HR面</p>
-<p>拿了哪些公司offer了呀？<br>为什么选择乐视呀？<br>去北京离你家那么远，你能接受吗？<br>你都拿到其他公司offer了，怎么还来面乐视呢？<br>其他问题。。。<br>乐视后面还给我加面了，专门打电话让我去加面。加面的面试官居然不知道我是加面的，以为我是来二面，我特意提醒了下后，他才知道。后面简单聊了下后，就让我回去了。很遗憾，虽然加面了，我最终拿到的乐视薪资依然是白菜价。</p>
-<hr>
-<p><strong>6.涂鸦（已拿offer）</strong></p>
-<p>涂鸦是全程算法题。</p>
-<p>一面：</p>
-<p>如何判断二维坐标系中的圆和三角形是否有重叠区域？<br>给一个二维数组，告诉你哪些坐标位置是不能行走的，计算从左上到右下有多少种走法。<br>其他问题记不住。。。。我已经尽力了。。。。</p>
-<p>二面：</p>
-<p>二面也就几个算法题，不说了。记不住。</p>
-<p>写在最后</p>
-<p>虽然好多问题我都忘记了，但是其实各个公司面试官问的android基础问题就那些。二面基本上都是问项目，所以建议大家一定要准备好项目，要不然二面就很难通过。另外有些二面面试官喜欢问算法，问智力题。大部分二面面试官不会问android基础。最后，我后面会把我准备校招期间的所有笔记公开给大家，敬请期待！</p>
-
+        
+          <a class="article-more-a" href="/2017/01/17/2016-秋季校招面经（华为、腾讯、360、网易等）/#more">more >></a>
+        
       
 
       
@@ -956,83 +945,6 @@
 
 
   
-    <article id="post-Java-中-main-函数为什么要加-static" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/03/Java-中-main-函数为什么要加-static/">Java 中 main 函数为什么要加 static</a>
-    </h1>
-  
-
-        
-        <a href="/2017/01/03/Java-中-main-函数为什么要加-static/" class="archive-article-date">
-  	<time datetime="2017-01-03T14:42:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>用static修饰的方法，无须产生类的实例对象就可以调用该方法。没有static修饰的方法，需要产生一个类的实例对象才可以调用该方法。main方法必须要static来修饰，是因为main方法是Java解释器调用的，那时候还没有任何对象产生。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mainID = (*env)-&gt;GetStaticMethodID(env, mainClass, <span class="string">"main"</span>,<span class="string">"([Ljava/lang/String;)V"</span>);</div></pre></td></tr></table></figure>
-<p>这是jvm启动时的代码，直接去找static的，参数为String数组的main方法。</p>
-        
-          <a class="article-more-a" href="/2017/01/03/Java-中-main-函数为什么要加-static/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">main</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/01/03/Java-中-main-函数为什么要加-static/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1141,7 +1053,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">tool</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1149,7 +1065,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">sqlite</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1165,6 +1081,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">sqlite</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
               </li>
              
@@ -1173,23 +1093,19 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">tcp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">socket</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">tool</a>
+                <a href="javascript:void(0)" class="js-tag color3">javaweb</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">wireshark</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">javaweb</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1201,19 +1117,23 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">tcp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">json</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">内存</a>
+                <a href="javascript:void(0)" class="js-tag color3">架构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">mvc</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">os</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">内存</a>
               </li>
              
               <li class="article-tag-list-item">
