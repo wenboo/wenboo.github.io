@@ -6,24 +6,14 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://wenboo.github.io">
-  <title>12个有趣的C语言面试题 | Hi~Welcome to Wenboo&#39;s Blog</title>
+  <title>Archives: 2017 | Hi~Welcome to Wenboo&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1 - gets()函数
-问：请找出下面代码里的问题：
-123456789101112#include&amp;lt;stdio.h&amp;gt; int main(void) &amp;#123;     char buff[10];     memset(buff,0,sizeof(buff));      gets(buff);      printf(&quot;\n The buffer entered is [%s]">
-<meta property="og:type" content="article">
-<meta property="og:title" content="12个有趣的C语言面试题">
-<meta property="og:url" content="http://wenboo.github.io/2016/10/19/12个有趣的C语言面试题/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hi~Welcome to Wenboo's Blog">
+<meta property="og:url" content="http://wenboo.github.io/archives/2017/page/2/index.html">
 <meta property="og:site_name" content="Hi~Welcome to Wenboo's Blog">
-<meta property="og:description" content="1 - gets()函数
-问：请找出下面代码里的问题：
-123456789101112#include&amp;lt;stdio.h&amp;gt; int main(void) &amp;#123;     char buff[10];     memset(buff,0,sizeof(buff));      gets(buff);      printf(&quot;\n The buffer entered is [%s]">
-<meta property="og:updated_time" content="2017-01-12T13:01:44.997Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="12个有趣的C语言面试题">
-<meta name="twitter:description" content="1 - gets()函数
-问：请找出下面代码里的问题：
-123456789101112#include&amp;lt;stdio.h&amp;gt; int main(void) &amp;#123;     char buff[10];     memset(buff,0,sizeof(buff));      gets(buff);      printf(&quot;\n The buffer entered is [%s]">
+<meta name="twitter:title" content="Hi~Welcome to Wenboo's Blog">
   
     <link rel="alternative" href="/atom.xml" title="Hi~Welcome to Wenboo&#39;s Blog" type="application/atom+xml">
   
@@ -175,229 +165,75 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-12个有趣的C语言面试题" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      12个有趣的C语言面试题
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2017" class="archive-year">2017</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2017/01/02/程序员对内存的理解/" class="archive-article-date">
+  	<time datetime="2017-01-02T11:10:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-02</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/01/02/程序员对内存的理解/">程序员对内存的理解</a>
     </h1>
   
 
-        
-        <a href="/2016/10/19/12个有趣的C语言面试题/" class="archive-article-date">
-  	<time datetime="2016-10-19T15:11:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>1 - gets()函数</strong></p>
-<p>问：请找出下面代码里的问题：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span> </span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span></div><div class="line">&#123; </div><div class="line">    <span class="keyword">char</span> buff[<span class="number">10</span>]; </div><div class="line">    <span class="built_in">memset</span>(buff,<span class="number">0</span>,<span class="keyword">sizeof</span>(buff)); </div><div class="line"> </div><div class="line">    gets(buff); </div><div class="line"> </div><div class="line">    <span class="built_in">printf</span>(<span class="string">"\n The buffer entered is [%s]\n"</span>,buff); </div><div class="line"> </div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>答：上面代码里的问题在于函数gets()的使用，这个函数从stdin接收一个字符串而不检查它所复制的缓存的容积，这可能会导致缓存溢出。这里推荐使用标准函数fgets()代替。</p>
-<a id="more"></a>
-<hr>
-<p><strong>2 - strcpy()函数</strong></p>
-<p>问：下面是一个简单的密码保护功能，你能在不知道密码的情况下将其破解吗？</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span> </span></div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span></div><div class="line">&#123; </div><div class="line">    <span class="keyword">int</span> flag = <span class="number">0</span>; </div><div class="line">    <span class="keyword">char</span> passwd[<span class="number">10</span>]; </div><div class="line"> </div><div class="line">    <span class="built_in">memset</span>(passwd,<span class="number">0</span>,<span class="keyword">sizeof</span>(passwd)); </div><div class="line"> </div><div class="line">    <span class="built_in">strcpy</span>(passwd, argv[<span class="number">1</span>]); </div><div class="line"> </div><div class="line">    <span class="keyword">if</span>(<span class="number">0</span> == <span class="built_in">strcmp</span>(<span class="string">"LinuxGeek"</span>, passwd)) </div><div class="line">    &#123; </div><div class="line">        flag = <span class="number">1</span>; </div><div class="line">    &#125; </div><div class="line"> </div><div class="line">    <span class="keyword">if</span>(flag) </div><div class="line">    &#123; </div><div class="line">        <span class="built_in">printf</span>(<span class="string">"\n Password cracked \n"</span>); </div><div class="line">    &#125; </div><div class="line">    <span class="keyword">else</span> </div><div class="line">    &#123; </div><div class="line">        <span class="built_in">printf</span>(<span class="string">"\n Incorrect passwd \n"</span>); </div><div class="line"> </div><div class="line">    &#125; </div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>答：破解上述加密的关键在于利用攻破strcpy()函数的漏洞。所以用户在向“passwd”缓存输入随机密码的时候并没有提前检查“passwd”的容量是否足够。所以，如果用户输入一个足够造成缓存溢出并且重写“flag”变量默认值所存在位置的内存的长“密码”，即使这个密码无法通过验证，flag验证位也变成了非零，也就可以获得被保护的数据了。例如：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ ./psswd aaaaaaaaaaaaa </div><div class="line"> </div><div class="line">Password cracked</div></pre></td></tr></table></figure>
-<p>虽然上面的密码并不正确，但我们仍然可以通过缓存溢出绕开密码安全保护。</p>
-<p>要避免这样的问题，建议使用 strncpy()函数。<br>作者注：最近的编译器会在内部检测栈溢出的可能，所以这样往栈里存储变量很难出现栈溢出。在我的gcc里默认就是这样，所以我不得不使用编译命令‘-fno-stack-protector’来实现上述方案。</p>
-<hr>
-<p><strong>3 - main()的返回类型</strong></p>
-<p>问：下面的代码能 编译通过吗？如果能，它有什么潜在的问题吗？</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span> </span></div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span></div><div class="line">&#123; </div><div class="line">    <span class="keyword">char</span> *ptr = (<span class="keyword">char</span>*)<span class="built_in">malloc</span>(<span class="number">10</span>); </div><div class="line"> </div><div class="line">    <span class="keyword">if</span>(<span class="literal">NULL</span> == ptr) </div><div class="line">    &#123; </div><div class="line">        <span class="built_in">printf</span>(<span class="string">"\n Malloc failed \n"</span>); </div><div class="line">        <span class="keyword">return</span>; </div><div class="line">    &#125; </div><div class="line">    <span class="keyword">else</span> </div><div class="line">    &#123; </div><div class="line">        <span class="comment">// Do some processing </span></div><div class="line">        <span class="built_in">free</span>(ptr); </div><div class="line">    &#125; </div><div class="line"> </div><div class="line">    <span class="keyword">return</span>; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>答：因为main()方法的返回类型，这段代码的错误在大多数编译器里会被当作警告。main()的返回类型应该是“int”而不是“void”。因为“int”返回类型会让程序返回状态值。这点非常重要，特别当程序是作为依赖于程序成功运行的脚本的一部分运行时。</p>
-<hr>
-<p><strong>4 - 内存泄露</strong></p>
-<p>问：下面的代码会导致内存泄漏吗？</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span> </span></div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span></div><div class="line">&#123; </div><div class="line">    <span class="keyword">char</span> *ptr = (<span class="keyword">char</span>*)<span class="built_in">malloc</span>(<span class="number">10</span>); </div><div class="line"> </div><div class="line">    <span class="keyword">if</span>(<span class="literal">NULL</span> == ptr) </div><div class="line">    &#123; </div><div class="line">        <span class="built_in">printf</span>(<span class="string">"\n Malloc failed \n"</span>); </div><div class="line">        <span class="keyword">return</span>; </div><div class="line">    &#125; </div><div class="line">    <span class="keyword">else</span> </div><div class="line">    &#123; </div><div class="line">        <span class="comment">// Do some processing </span></div><div class="line">    &#125; </div><div class="line"> </div><div class="line">    <span class="keyword">return</span>; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>答：尽管上面的代码并没有释放分配给“ptr”的内存，但并不会在程序退出后导致内存泄漏。在程序结束后，所有这个程序分配的内存都会自动被处理掉。但如果上面的代码处于一个“while循环”中，那将会导致严重的内存泄漏问题！</p>
-<hr>
-<p><strong>5 - free()函数</strong></p>
-<p>问：下面的程序会在用户输入’freeze’的时候出问题，而’zebra’则不会，为什么？</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">#include&lt;stdio.h&gt; </div><div class="line"> </div><div class="line">int main(int argc, char *argv[]) </div><div class="line">&#123; </div><div class="line">    char *ptr = (char*)malloc(10); </div><div class="line"> </div><div class="line">    if(NULL == ptr) </div><div class="line">    &#123; </div><div class="line">        printf("\n Malloc failed \n"); </div><div class="line">        return -1; </div><div class="line">    &#125; </div><div class="line">    else if(argc == 1) </div><div class="line">    &#123; </div><div class="line">        printf("\n Usage  \n"); </div><div class="line">    &#125; </div><div class="line">    else </div><div class="line">    &#123; </div><div class="line">        memset(ptr, 0, 10); </div><div class="line"> </div><div class="line">        strncpy(ptr, argv[1], 9); </div><div class="line"> </div><div class="line">        while(*ptr != 'z') </div><div class="line">        &#123; </div><div class="line">            if(*ptr == '') </div><div class="line">                break; </div><div class="line">            else </div><div class="line">                ptr++; </div><div class="line">        &#125; </div><div class="line"> </div><div class="line">        if(*ptr == 'z') </div><div class="line">        &#123; </div><div class="line">            printf("\n String contains 'z'\n"); </div><div class="line">            // Do some more processing </div><div class="line">        &#125; </div><div class="line"> </div><div class="line">       free(ptr); </div><div class="line">    &#125; </div><div class="line"> </div><div class="line">    return 0; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>答：这里的问题在于，代码会（通过增加“ptr”）修改while循环里“ptr”存储的地址。当输入“zebra”时，while循环会在执行前被终止，因此传给free()的变量就是传给malloc()的地址。但在“freeze”时，“ptr”存储的地址会在while循环里被修改，因此导致传给free()的地址出错，也就导致了seg-fault或者崩溃。</p>
-<hr>
-<p><strong>6 - 使用_exit退出</strong></p>
-<p>问：在下面的代码中，atexit()并没有被调用，为什么？</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span> </span></div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">void</span>)</span> </span></div><div class="line">&#123; </div><div class="line">    <span class="built_in">printf</span>(<span class="string">"\n Cleanup function called \n"</span>); </div><div class="line">    <span class="keyword">return</span>; </div><div class="line">&#125; </div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span></div><div class="line">&#123; </div><div class="line">    <span class="keyword">int</span> i = <span class="number">0</span>; </div><div class="line"> </div><div class="line">    atexit(func); </div><div class="line"> </div><div class="line">    <span class="keyword">for</span>(;i&lt;<span class="number">0xffffff</span>;i++); </div><div class="line"> </div><div class="line">    _exit(<span class="number">0</span>); </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这是因为_exit()函数的使用，该函数并没有调用atexit()等函数清理。如果使用atexit()就应当使用exit()或者“return”与之相配合。</p>
-<hr>
-<p><strong>7 - void/*和C结构体</strong> </p>
-<p>问：你能设计一个能接受任何类型的参数并返回interger（整数）结果的函数吗？</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">‍‍int func(void *ptr) ‍‍‍‍</div></pre></td></tr></table></figure>
-<p>如果这个函数的参数超过一个，那么这个函数应该由一个结构体来调用，这个结构体可以由需要传递参数来填充。</p>
-<hr>
-<p><strong>8 - *和++操作</strong></p>
-<p>问：下面的操作会输出什么？为什么？</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span> </span></div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span></div><div class="line">&#123; </div><div class="line">    <span class="keyword">char</span> *ptr = <span class="string">"Linux"</span>; </div><div class="line">    <span class="built_in">printf</span>(<span class="string">"\n [%c] \n"</span>,*ptr++); </div><div class="line">    <span class="built_in">printf</span>(<span class="string">"\n [%c] \n"</span>,*ptr); </div><div class="line"> </div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>答：输出结果应该是这样：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[L]  </div><div class="line"> </div><div class="line">[i]</div></pre></td></tr></table></figure>
-<p>因为“++”和“*”的优先权一样，所以“*ptr++”相当于“*(ptr++)”。即应该先执行ptr++，然后才是*ptr，所以操作结果是“L”。第二个结果是“i”。</p>
-<hr>
-<p><strong>9 - 问：修改代码片段（或者只读代码）</strong></p>
-<p>问：下面的代码段有错，你能指出来吗？</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span> </span></div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span></div><div class="line">&#123; </div><div class="line">    <span class="keyword">char</span> *ptr = <span class="string">"Linux"</span>; </div><div class="line">    *ptr = <span class="string">'T'</span>; </div><div class="line"> </div><div class="line">    <span class="built_in">printf</span>(<span class="string">"\n [%s] \n"</span>, ptr); </div><div class="line"> </div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>答：这是因为，通过*ptr = ‘T’，会改变内存中代码段（只读代码）“Linux”的第一个字母。这个操作是无效的，因此会造成seg-fault或者崩溃。</p>
-<hr>
-<p><strong>10 - 会改变自己名字的进程</strong></p>
-<p>问：你能写出一个在运行时改变自己进程名的程序吗？</p>
-<p>答：参见下面这段代码：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span> </span></div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span></div><div class="line">&#123; </div><div class="line">    <span class="keyword">int</span> i = <span class="number">0</span>; </div><div class="line">    <span class="keyword">char</span> buff[<span class="number">100</span>]; </div><div class="line"> </div><div class="line">    <span class="built_in">memset</span>(buff,<span class="number">0</span>,<span class="keyword">sizeof</span>(buff)); </div><div class="line"> </div><div class="line">    <span class="built_in">strncpy</span>(buff, argv[<span class="number">0</span>], <span class="keyword">sizeof</span>(buff)); </div><div class="line">    <span class="built_in">memset</span>(argv[<span class="number">0</span>],<span class="number">0</span>,<span class="built_in">strlen</span>(buff)); </div><div class="line"> </div><div class="line">    <span class="built_in">strncpy</span>(argv[<span class="number">0</span>], <span class="string">"NewName"</span>, <span class="number">7</span>); </div><div class="line"> </div><div class="line">    <span class="comment">// Simulate a wait. Check the process </span></div><div class="line">    <span class="comment">// name at this point. </span></div><div class="line">    <span class="keyword">for</span>(;i&lt;<span class="number">0xffffffff</span>;i++); </div><div class="line"> </div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<hr>
-<p><strong>11 - 返回本地变量的地址</strong></p>
-<p>问：下面代码有问题吗？如果有，该怎么修改？</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span> </span></div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">int</span>* <span class="title">inc</span><span class="params">(<span class="keyword">int</span> val)</span> </span></div><div class="line">&#123; </div><div class="line">  <span class="keyword">int</span> a = val; </div><div class="line">  a++; </div><div class="line">  <span class="keyword">return</span> &amp;a; </div><div class="line">&#125; </div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span></div><div class="line">&#123; </div><div class="line">    <span class="keyword">int</span> a = <span class="number">10</span>; </div><div class="line">    <span class="keyword">int</span> *val = inc(a); </div><div class="line">    <span class="built_in">printf</span>(<span class="string">"\n Incremented value is equal to [%d] \n"</span>, *val); </div><div class="line"> </div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>答：尽管上面的程序有时候能够正常运行，但是在“inc()”中存在严重的漏洞。这个函数返回本地变量的地址。因为本地变量的生命周期就是“inc()”的生命周期，所以在inc结束后，使用本地变量会发生不好的结果。这可以通过将main()中变量“a”的地址来避免，这样以后还可以修改这个地址存储的值。</p>
-<hr>
-<p><strong>12 - 处理printf()的参数</strong></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span> </span></div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span></div><div class="line">&#123; </div><div class="line">    <span class="keyword">int</span> a = <span class="number">10</span>, b = <span class="number">20</span>, c = <span class="number">30</span>; </div><div class="line">    <span class="built_in">printf</span>(<span class="string">"\n %d..%d..%d \n"</span>, a+b+c, (b = b*<span class="number">2</span>), (c = c*<span class="number">2</span>)); </div><div class="line"> </div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>答：输出结果是：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="number">110.</span><span class="number">.40</span>.<span class="number">.60</span></div></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">c</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">内存</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/c/" class="article-tag-list-link color2">c</a>
+        			<a href="/categories/cm/" class="article-tag-list-link color3">cm</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://wenboo.github.io/2016/10/19/12个有趣的C语言面试题/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2016/10/19/编译器的工作原理/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          编译器的工作原理
-        
-      </div>
-    </a>
   
   
-    <a href="/2016/10/19/让你的C程序更有效率的十种方法/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">让你的C程序更有效率的十种方法</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-
-
-
-
-  
-  <div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="12个有趣的C语言面试题" data-title="12个有趣的C语言面试题" data-url="http://wenboo.github.io/2016/10/19/12个有趣的C语言面试题/"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"wenboo"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
-</div>
-
+    </div></section>
   
 
-
+    
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/archives/2017/">&laquo; Prev</a><a class="page-number" href="/archives/2017/">1</a><span class="page-number current">2</span>
+    </nav>
+  
 
 
           </div>
@@ -420,8 +256,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
