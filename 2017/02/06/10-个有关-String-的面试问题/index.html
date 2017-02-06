@@ -6,14 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://wenboo.github.io">
-  <title>Tag: jdbc | Hi~Welcome to Wenboo&#39;s Blog</title>
+  <title>10 个有关 String 的面试问题 | Hi~Welcome to Wenboo&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hi~Welcome to Wenboo's Blog">
-<meta property="og:url" content="http://wenboo.github.io/tags/jdbc/index.html">
+  <meta name="description" content="1.如何比较两个字符串？使用“==”还是equals()方法？
+简单来讲，“==”测试的是两个对象的引用是否相同，而equals()比较的是两个字符串的值是否相等。除非你想检查的是两个字符串是否是同一个对象，否则你应该使用equals()来比较字符串。
+2.为什么针对安全保密高的信息，char[]比String更好？
+因为String是不可变的，就是说它一旦创建，就不能更改了，直到垃圾收集器将它回">
+<meta property="og:type" content="article">
+<meta property="og:title" content="10 个有关 String 的面试问题">
+<meta property="og:url" content="http://wenboo.github.io/2017/02/06/10-个有关-String-的面试问题/index.html">
 <meta property="og:site_name" content="Hi~Welcome to Wenboo's Blog">
+<meta property="og:description" content="1.如何比较两个字符串？使用“==”还是equals()方法？
+简单来讲，“==”测试的是两个对象的引用是否相同，而equals()比较的是两个字符串的值是否相等。除非你想检查的是两个字符串是否是同一个对象，否则你应该使用equals()来比较字符串。
+2.为什么针对安全保密高的信息，char[]比String更好？
+因为String是不可变的，就是说它一旦创建，就不能更改了，直到垃圾收集器将它回">
+<meta property="og:updated_time" content="2017-02-06T13:50:00.063Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hi~Welcome to Wenboo's Blog">
+<meta name="twitter:title" content="10 个有关 String 的面试问题">
+<meta name="twitter:description" content="1.如何比较两个字符串？使用“==”还是equals()方法？
+简单来讲，“==”测试的是两个对象的引用是否相同，而equals()比较的是两个字符串的值是否相等。除非你想检查的是两个字符串是否是同一个对象，否则你应该使用equals()来比较字符串。
+2.为什么针对安全保密高的信息，char[]比String更好？
+因为String是不可变的，就是说它一旦创建，就不能更改了，直到垃圾收集器将它回">
   
     <link rel="alternative" href="/atom.xml" title="Hi~Welcome to Wenboo&#39;s Blog" type="application/atom+xml">
   
@@ -165,48 +178,73 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-10-个有关-String-的面试问题" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/02/05/一个不安分的-JDBC-驱动/" class="archive-article-date">
-  	<time datetime="2017-02-05T07:36:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-05</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/02/05/一个不安分的-JDBC-驱动/">一个不安分的 JDBC 驱动</a>
+    <h1 class="article-title" itemprop="name">
+      10 个有关 String 的面试问题
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/02/06/10-个有关-String-的面试问题/" class="archive-article-date">
+  	<time datetime="2017-02-06T13:40:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>1.如何比较两个字符串？使用“==”还是equals()方法？</strong></p>
+<p>简单来讲，“==”测试的是两个对象的引用是否相同，而equals()比较的是两个字符串的值是否相等。除非你想检查的是两个字符串是否是同一个对象，否则你应该使用equals()来比较字符串。</p>
+<p><strong>2.为什么针对安全保密高的信息，char[]比String更好？</strong></p>
+<p>因为String是不可变的，就是说它一旦创建，就不能更改了，直到垃圾收集器将它回收走。而字符数组中的元素是可以更改的（译者注：这就意味着你就可以在使用完之后将其更改，而不会保留原始的数据）。所以使用字符数组的话，安全保密性高的信息(如密码之类的)将不会存在于系统中被他人看到。</p>
+<a id="more"></a>
+<p><strong>3.我们可以针对字符串使用switch条件语句吗？</strong></p>
+<p>对于JDK 7，回答是肯定的。从JDK 7开始, 我们可以针对字符串使用switch条件语句了；在JDK 6或者之前的版本，我们则不能使用switch条件语句。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Java 7或者以后的版本</span></div><div class="line"><span class="keyword">switch</span> (str.toLowerCase()) &#123;</div><div class="line">      <span class="keyword">case</span> <span class="string">"a"</span>:</div><div class="line">           value = <span class="number">1</span>;</div><div class="line">           <span class="keyword">break</span>;</div><div class="line">      <span class="keyword">case</span> <span class="string">"b"</span>:</div><div class="line">           value = <span class="number">2</span>;</div><div class="line">           <span class="keyword">break</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>4.如何将字符串转化成int ?</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> n = Integer.parseInt(<span class="string">"10"</span>);</div></pre></td></tr></table></figure>
+<p><strong>5.如何将字符串用空白字符分割开 ?</strong></p>
+<p>我们可以使用正则表达式来做到分割字符。“\s”代表空白字符” “, “\t”, “\r”, “\n”。</p>
+<p><strong>6.substring()方法到底做了什么？</strong></p>
+<p>在JDK 6中, substring()的做法是，用一个字符数组来表示现存的字符串，然后给这个字符数组提供一个“窗口”，但实际并没有创建一个新的字符数组。要创建一个新的字符串对象由新的字符串数组表示的话，你需要加上一个空字符串，如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">str.substring(m, n) + <span class="string">""</span></div></pre></td></tr></table></figure>
+<p>这会创建一个新的字符数组，用来表示新的字符串。这种方法会让你的代码更快，因为垃圾收集器会收集不用的长字符串，而仅保存要使用的子字符串。</p>
+<p>在Oracle JDK 7中，substring()会创建新的字符数组，而不是使用现存的字符数组。点击查看JDK 6和JDK 7中substring()的分别。</p>
+<p><strong>7.String vs StringBuilder vs StringBuffer</strong></p>
+<p>String vs StringBuilder: StringBuilder是可变的，这意味着它创建之后仍旧可以更改它的值。<br>StringBuilder vs StringBuffer: StringBuffer是synchronized的,它是线程安全的的，但是比StringBuilder要慢。</p>
+<p><strong>8.如何重复一个字符串</strong></p>
+<p>在Python中,我们可以乘一个数值来重复一个字符串。在Java中，我们可以使用Apache Commons Lang包中的StringUtils.repeat()方法来重复一个字符串。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">String str = <span class="string">"abcd"</span>;</div><div class="line">String repeated = StringUtils.repeat(str,<span class="number">3</span>);</div><div class="line"><span class="comment">//abcdabcdabcd</span></div></pre></td></tr></table></figure>
+<p><strong>9.如何将字符串转换成时间</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">String str = <span class="string">"Sep 17, 2013"</span>;</div><div class="line">Date date = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"MMMM d, yy"</span>, Locale.ENGLISH).parse(str);</div><div class="line">System.out.println(date);</div><div class="line"><span class="comment">//Tue Sep 17 00:00:00 EDT 2013</span></div></pre></td></tr></table></figure>
+<p><strong>10.如何计算一个字符串某个字符的出现次数 ?</strong></p>
+<p>请使用apache commons lang包中的StringUtils：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> n = StringUtils.countMatches(<span class="string">"11112222"</span>, <span class="string">"1"</span>);</div><div class="line">System.out.println(n);</div></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">jdbc</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">面试</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -219,66 +257,113 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://wenboo.github.io/2017/02/06/10-个有关-String-的面试问题/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/01/18/JDBC-的诞生/" class="archive-article-date">
-  	<time datetime="2017-01-18T12:41:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/01/18/JDBC-的诞生/">JDBC 的诞生</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">jdbc</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
+  
+<nav id="article-nav">
+  
+    <a href="/2017/12/31/2017-年开发阅读书单/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          2017 年开发阅读书单
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/02/06/Java-异步回调机制实例解析/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Java 异步回调机制实例解析</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+
+
+
+
   
-  
-    </div></section>
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="10-个有关-String-的面试问题" data-title="10 个有关 String 的面试问题" data-url="http://wenboo.github.io/2017/02/06/10-个有关-String-的面试问题/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"wenboo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
   
 
-    
+
 
 
           </div>
@@ -301,9 +386,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		root: "/",
