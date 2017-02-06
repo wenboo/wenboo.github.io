@@ -6,20 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://wenboo.github.io">
-  <title>2017 年开发书单 | Hi~Welcome to Wenboo&#39;s Blog</title>
+  <title>深入理解 Java 中 final 关键字 | Hi~Welcome to Wenboo&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="书名：《轻量级J2EE企业应用实战》作者：李刚出版社：电子工业出版社">
+  <meta name="description" content="Java中的final关键字非常重要，它可以应用于类、方法以及变量。这篇文章中我将带你看看什么是final关键字？将变量，方法和类声明为final代表了什么？使用final的好处是什么？最后也有一些使用final关键字的实例。final经常和static一起使用来声明常量，你也会看到final是如何改善应用性能的。
+final关键字的含义 ?
+final在Java中是一个保留的关键字，可以声明成员">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2017 年开发书单">
-<meta property="og:url" content="http://wenboo.github.io/2017/02/04/2017-年开发书单/index.html">
+<meta property="og:title" content="深入理解 Java 中 final 关键字">
+<meta property="og:url" content="http://wenboo.github.io/2017/02/06/深入理解-Java-中-final-关键字/index.html">
 <meta property="og:site_name" content="Hi~Welcome to Wenboo's Blog">
-<meta property="og:description" content="书名：《轻量级J2EE企业应用实战》作者：李刚出版社：电子工业出版社">
-<meta property="og:image" content="https://img1.doubanio.com/lpic/s9101288.jpg">
-<meta property="og:updated_time" content="2017-02-05T07:03:26.465Z">
+<meta property="og:description" content="Java中的final关键字非常重要，它可以应用于类、方法以及变量。这篇文章中我将带你看看什么是final关键字？将变量，方法和类声明为final代表了什么？使用final的好处是什么？最后也有一些使用final关键字的实例。final经常和static一起使用来声明常量，你也会看到final是如何改善应用性能的。
+final关键字的含义 ?
+final在Java中是一个保留的关键字，可以声明成员">
+<meta property="og:updated_time" content="2017-02-06T13:59:26.796Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="2017 年开发书单">
-<meta name="twitter:description" content="书名：《轻量级J2EE企业应用实战》作者：李刚出版社：电子工业出版社">
-<meta name="twitter:image" content="https://img1.doubanio.com/lpic/s9101288.jpg">
+<meta name="twitter:title" content="深入理解 Java 中 final 关键字">
+<meta name="twitter:description" content="Java中的final关键字非常重要，它可以应用于类、方法以及变量。这篇文章中我将带你看看什么是final关键字？将变量，方法和类声明为final代表了什么？使用final的好处是什么？最后也有一些使用final关键字的实例。final经常和static一起使用来声明常量，你也会看到final是如何改善应用性能的。
+final关键字的含义 ?
+final在Java中是一个保留的关键字，可以声明成员">
   
     <link rel="alternative" href="/atom.xml" title="Hi~Welcome to Wenboo&#39;s Blog" type="application/atom+xml">
   
@@ -171,35 +175,57 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-2017-年开发书单" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-深入理解-Java-中-final-关键字" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      2017 年开发书单
+      深入理解 Java 中 final 关键字
     </h1>
   
 
+        
+        <a href="/2017/02/06/深入理解-Java-中-final-关键字/" class="archive-article-date">
+  	<time datetime="2017-02-06T13:53:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-06</time>
+</a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>书名：《轻量级J2EE企业应用实战》</strong><br>作者：李刚<br>出版社：电子工业出版社</p>
-<p><img src="https://img1.doubanio.com/lpic/s9101288.jpg" alt="img"></p>
-
+        <p>Java中的final关键字非常重要，它可以应用于类、方法以及变量。这篇文章中我将带你看看什么是final关键字？将变量，方法和类声明为final代表了什么？使用final的好处是什么？最后也有一些使用final关键字的实例。final经常和static一起使用来声明常量，你也会看到final是如何改善应用性能的。</p>
+<p><strong>final关键字的含义 ?</strong></p>
+<p>final在Java中是一个保留的关键字，可以声明成员变量、方法、类以及本地变量。一旦你将引用声明作final，你将不能改变这个引用了，编译器会检查代码，如果你试图将变量再次初始化的话，编译器会报编译错误。</p>
+<a id="more"></a>
+<p><strong>什么是final变量？</strong></p>
+<p>凡是对成员变量或者本地变量(在方法中的或者代码块中的变量称为本地变量)声明为final的都叫作final变量。final变量经常和static关键字一起使用，作为常量。下面是final变量的例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String LOAN = <span class="string">"loan"</span>;</div><div class="line">LOAN = <span class="keyword">new</span> String(<span class="string">"loan"</span>) <span class="comment">//invalid compilation error</span></div></pre></td></tr></table></figure>
+<p>final变量是只读的。</p>
+<p><strong>什么是final方法 ?</strong></p>
+<p>final也可以声明方法。方法前面加上final关键字，代表这个方法不可以被子类的方法重写。如果你认为一个方法的功能已经足够完整了，子类中不需要改变的话，你可以声明此方法为final。final方法比非final方法要快，因为在编译的时候已经静态绑定了，不需要在运行时再动态绑定。下面是final方法的例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">PersonalLoan</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> String <span class="title">getName</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"personal loan"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"> </div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CheapPersonalLoan</span> <span class="keyword">extends</span> <span class="title">PersonalLoan</span></span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> String <span class="title">getName</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"cheap personal loan"</span>; <span class="comment">//compilation error: overridden method is final</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>什么是final类？</strong></p>
+<p>使用final来修饰的类叫作final类。final类通常功能是完整的，它们不能被继承。Java中有许多类是final的，譬如String, Interger以及其他包装类。下面是final类的实例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">PersonalLoan</span></span>&#123;</div><div class="line"> </div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">CheapPersonalLoan</span> <span class="keyword">extends</span> <span class="title">PersonalLoan</span></span>&#123;  <span class="comment">//compilation error: cannot inherit from final class</span></div><div class="line"> </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>final关键字的好处</strong></p>
+<p>下面总结了一些使用final关键字的好处</p>
+<blockquote>
+<p>1.final关键字提高了性能。JVM和Java应用都会缓存final变量。<br>2.final变量可以安全的在多线程环境下进行共享，而不需要额外的同步开销。<br>3.使用final关键字，JVM会对方法、变量及类进行优化。</p>
+</blockquote>
+<p><strong>不可变类</strong></p>
+<p>创建不可变类要使用final关键字。不可变类是指它的对象一旦被创建了就不能被更改了。String是不可变类的代表。不可变类有很多好处，譬如它们的对象是只读的，可以在多线程环境下安全的共享，不用额外的同步开销等等。</p>
+<p><strong>关于final的重要知识点</strong></p>
+<p>1.final关键字可以用于成员变量、本地变量、方法以及类。<br>2.final成员变量必须在声明的时候初始化或者在构造器中初始化，否则就会报编译错误。<br>3.你不能够对final变量再次赋值。<br>4.本地变量必须在声明时赋值。<br>5.在匿名类中所有变量都必须是final变量。<br>6.final方法不能被重写。<br>7.final类不能被继承。<br>8.final关键字不同于finally关键字，后者用于异常处理。<br>9.final关键字容易与finalize()方法搞混，后者是在Object类中定义的方法，是在垃圾回收之前被JVM调用的方法。<br>10.接口中声明的所有变量本身是final的。<br>11.final和abstract这两个关键字是反相关的，final类就不可能是abstract的。<br>12.final方法在编译阶段绑定，称为静态绑定(static binding)。<br>13.没有在声明时初始化final变量的称为空白final变量(blank final variable)，它们必须在构造器中初始化，或者调用this()初始化。不这么做的话，编译器会报错“final变量(变量名)需要进行初始化”。<br>14.将类、方法、变量声明为final能够提高性能，这样JVM就有机会进行估计，然后优化。<br>15.按照Java代码惯例，final变量就是常量，而且通常常量名要大写：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> COUNT = <span class="number">10</span>;</div></pre></td></tr></table></figure>
+<p>16.对于集合对象声明为final指的是引用不能被更改，但是你可以向其中增加，删除或者改变内容。譬如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">final</span> List Loans = <span class="keyword">new</span> ArrayList();</div><div class="line">list.add(“home loan”);  <span class="comment">//valid</span></div><div class="line">list.add(<span class="string">"personal loan"</span>); <span class="comment">//valid</span></div><div class="line">loans = <span class="keyword">new</span> Vector();  <span class="comment">//not valid</span></div></pre></td></tr></table></figure>
       
 
       
     </div>
     <div class="article-info article-info-index">
-      
-        <div class="article-pop-out tagcloud">
-          <i class="icon-tuding"></i>
-          <a>置顶</a>
-        </div>
       
       
 	<div class="article-tag tagcloud">
@@ -207,7 +233,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">书单</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
         		</li>
       		
 		</ul>
@@ -219,7 +245,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/life/" class="article-tag-list-link color5">life</a>
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
         		</li>
       		
 		</ul>
@@ -274,7 +300,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://wenboo.github.io/2017/02/04/2017-年开发书单/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://wenboo.github.io/2017/02/06/深入理解-Java-中-final-关键字/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -288,18 +314,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/02/04/make-命令教程/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/12/31/2017-年开发阅读书单/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          make 命令教程
+          2017 年开发阅读书单
         
       </div>
     </a>
   
   
-    <a href="/2017/01/23/Cookie-与-Session-的区别/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Cookie 与 Session 的区别</div>
+    <a href="/2017/02/06/10-个有关-String-的面试问题/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">10 个有关 String 的面试问题</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -313,7 +339,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="2017-年开发书单" data-title="2017 年开发书单" data-url="http://wenboo.github.io/2017/02/04/2017-年开发书单/"></div>
+	<div class="ds-thread" data-thread-key="深入理解-Java-中-final-关键字" data-title="深入理解 Java 中 final 关键字" data-url="http://wenboo.github.io/2017/02/06/深入理解-Java-中-final-关键字/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -432,10 +458,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">c</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">面试</a>
               </li>
              
@@ -444,7 +466,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">c</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -452,7 +482,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">log4j</a>
+                <a href="javascript:void(0)" class="js-tag color5">tool</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -460,7 +490,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
+                <a href="javascript:void(0)" class="js-tag color5">main</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">sqlite</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">回调</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">log4j</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -468,11 +510,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">tool</a>
+                <a href="javascript:void(0)" class="js-tag color2">socket</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -480,15 +518,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">tcp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">wireshark</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">main</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">tcp</a>
+                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -496,7 +534,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">socket</a>
+                <a href="javascript:void(0)" class="js-tag color3">架构</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -516,19 +554,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">架构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">内存</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">进程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">sqlite</a>
               </li>
             
             <div class="clearfix"></div>
