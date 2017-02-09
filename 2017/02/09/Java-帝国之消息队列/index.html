@@ -6,14 +6,31 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://wenboo.github.io">
-  <title>Tag: tcp | Hi~Welcome to Wenboo&#39;s Blog</title>
+  <title>Java 帝国之消息队列 | Hi~Welcome to Wenboo&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hi~Welcome to Wenboo's Blog">
-<meta property="og:url" content="http://wenboo.github.io/tags/tcp/index.html">
+  <meta name="description" content="张家村的历史
+Java 帝国的张家村正在迎来一次重大的变革。
+5年前网上购物兴起的时候， 帝国非常看好， 决定向这个领域进军， 于是兴建了张家村， 在这里安装了Java 虚拟机和数据库， 然后部署了一个基于Web的订单系统和一个库存系统， 由张家村的人负责操作。
+张家村的老村长很清楚， 说是两个系统， 其实是逻辑上的一种划分方式， 在物理上两个系统还是部署在一个虚拟机中。 那个时候用户量少， 数据">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java 帝国之消息队列">
+<meta property="og:url" content="http://wenboo.github.io/2017/02/09/Java-帝国之消息队列/index.html">
 <meta property="og:site_name" content="Hi~Welcome to Wenboo's Blog">
+<meta property="og:description" content="张家村的历史
+Java 帝国的张家村正在迎来一次重大的变革。
+5年前网上购物兴起的时候， 帝国非常看好， 决定向这个领域进军， 于是兴建了张家村， 在这里安装了Java 虚拟机和数据库， 然后部署了一个基于Web的订单系统和一个库存系统， 由张家村的人负责操作。
+张家村的老村长很清楚， 说是两个系统， 其实是逻辑上的一种划分方式， 在物理上两个系统还是部署在一个虚拟机中。 那个时候用户量少， 数据">
+<meta property="og:image" content="http://img.mp.itc.cn/upload/20170206/59834a8b35c04f7cb977605c921d1ad4_th.png">
+<meta property="og:image" content="http://img.mp.itc.cn/upload/20170206/9fe59e9b2c494fe49addb37d0dc7dd67_th.png">
+<meta property="og:image" content="http://img.mp.itc.cn/upload/20170206/a917b6f026d1411991abb020ac0d4fee_th.png">
+<meta property="og:updated_time" content="2017-02-09T13:25:41.556Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hi~Welcome to Wenboo's Blog">
+<meta name="twitter:title" content="Java 帝国之消息队列">
+<meta name="twitter:description" content="张家村的历史
+Java 帝国的张家村正在迎来一次重大的变革。
+5年前网上购物兴起的时候， 帝国非常看好， 决定向这个领域进军， 于是兴建了张家村， 在这里安装了Java 虚拟机和数据库， 然后部署了一个基于Web的订单系统和一个库存系统， 由张家村的人负责操作。
+张家村的老村长很清楚， 说是两个系统， 其实是逻辑上的一种划分方式， 在物理上两个系统还是部署在一个虚拟机中。 那个时候用户量少， 数据">
+<meta name="twitter:image" content="http://img.mp.itc.cn/upload/20170206/59834a8b35c04f7cb977605c921d1ad4_th.png">
   
     <link rel="alternative" href="/atom.xml" title="Hi~Welcome to Wenboo&#39;s Blog" type="application/atom+xml">
   
@@ -165,169 +182,214 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Java-帝国之消息队列" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Java 帝国之消息队列
+    </h1>
+  
+
+        
+        <a href="/2017/02/09/Java-帝国之消息队列/" class="archive-article-date">
+  	<time datetime="2017-02-09T13:18:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-09</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>张家村的历史</strong></p>
+<p>Java 帝国的张家村正在迎来一次重大的变革。</p>
+<p>5年前网上购物兴起的时候， 帝国非常看好， 决定向这个领域进军， 于是兴建了张家村， 在这里安装了Java 虚拟机和数据库， 然后部署了一个基于Web的订单系统和一个库存系统， 由张家村的人负责操作。</p>
+<p>张家村的老村长很清楚， 说是两个系统， 其实是逻辑上的一种划分方式， 在物理上两个系统还是部署在一个虚拟机中。 那个时候用户量少， 数据量也不大， 村民们只要使用这一个Java 虚拟机和数据库就足够了。</p>
+<p>订单和库存系统运转一直很好， 用户的订单来了， 会在订单系统中存下来， 然后通知库存系统发货。</p>
+<p>你要问怎么通知？ 老村长会告诉你说： 其实简单的很， 就是普通Java 方法的直接调用， 调用库存系统某个类的某个方法而已。 由于在同一个虚拟机之内， 效率极高 。</p>
+<p><img src="http://img.mp.itc.cn/upload/20170206/59834a8b35c04f7cb977605c921d1ad4_th.png" alt="img"></p>
+<p>转眼间5年过去了， 人类变得越来越懒， 越来越喜欢网上购物， 用户量和数据量暴增， 再加上他们时不时搞个什么秒杀活动， 更是让张家村变得不堪重负。 为了应付汹涌而来的订单， 张家村经常彻夜灯火通明， 全村人三班倒才能勉强应付。</p>
+<p>老村长向镇上报告了很多次都没有回音， 要不是帝国的性能监控部门发现了这个异常，还不知道要被瞒到什么时候。</p>
+<p>还好，钦差王大人来了， 变革要开始了。</p>
+<a id="more"></a>
+<hr>
+<p><strong>拆分</strong></p>
+<p>王大人经验丰富， 目光如炬， 一眼就看出了问题， 立刻下达了第一道命令： 拆分 ！ 把订单系统和库存系统分开！</p>
+<p>老村长说： “那拆开了以后，我们村还是放不下啊”</p>
+<p>王大人道： “订单系统还是留在张家村， 库存系统挪到李家庄去”</p>
+<p>老村长暗自思忖，订单系统是直接面向用户的，很重要， 张家村一定要保住， 至于库存系统，主要是后台操作，挪走就挪走吧， 于是就答应了。</p>
+<p>拆分不是那么容易的， 订单和库存耦合的比较紧密， 现在要把库存系统搬到李家庄的Java虚拟机和数据库去，免不了一番剧烈的折腾。</p>
+<p>在王大人的指导下， 原先那些直接的Java 方法调用，也被改成了Web 服务 – 张家村和李家庄虽然距离较远 ， 还是有网络相通的。</p>
+<p>现在用户下了订单以后， 先在张家村保存， 然后由张家村调用李家庄的Web服务来通知库存系统。</p>
+<p>数据库自然也做了拆分， 老的库存数据被导出来， 再导入到李家庄的新数据库中 。</p>
+<p>不管过程是多么艰难， 两个系统还是分了家，李家庄喜气洋洋、敲锣打鼓的迎接了库存系统的部署， 开始了试运营。</p>
+<p><img src="http://img.mp.itc.cn/upload/20170206/9fe59e9b2c494fe49addb37d0dc7dd67_th.png" alt="img"></p>
+<hr>
+<p><strong>新问题</strong></p>
+<p>由于只需要处理订单， 张家村的负载一下子降了下来， 恢复了正常的作息。</p>
+<p>可是好景不长，张家村很快发现李家庄对新系统根本不上心， 派了一个酒鬼小李去负责操作库存Web服务， 小李喝醉了啥都忘了， Web服务经常用不了。</p>
+<p>这还不算，李家庄是严格的日出而作， 日落而息， 张家村正在繁忙的处理订单的时候， 李家庄已经把系统关了，睡觉去了。</p>
+<p>这可苦了张家村的小张，用户提交了订单， 去调用Web服务通知库存发货， 可是Web服务经常不响应， 小张没有办法， 只好反复重试、等待一段时间后再试，导致一个订单很长时间才能完成， 用户体验极差， 大家怨声载道。</p>
+<p>小张向李家庄投诉了很多次都不管用，没人搭理，跨村庄协作可真是难啊！</p>
+<p>小张活干的不好，工分减少， 再这么下去，月底分粮的时候又要饿肚子了，小张想起来了自己经历过的《Java帝国之拨云见日识回调》， 心里再次哀叹： 为什么受伤的总是我？</p>
+<p>晚上到家，小张苦思悯想： 原来订单系统和库存系统都在一个虚拟机中， 处理起来很方便， 但是现在是个远程的Web服务， 酒鬼小李不给我返回结果， 我就没法结束， 这是典型的同步操作， 能不能改成异步的呢？</p>
+<p>我把一个订单包裹发给小李， 他什么时候处理我就不用管了， 这样我这边的效率就会大大的提高！ 可是现在的Web服务并不支持这种方式， 我怎么才能把包裹发过去呢？</p>
+<hr>
+<p><strong>消息队列</strong></p>
+<p>小张彻夜未眠， 第二天一大早就去请教老村长。</p>
+<p>村长说： “你能想到这一层，非常不错！ 近来我也一直在考虑这个问题啊， 在大型的分布式系统中，怎么做异步通信是个大问题， 我想到了一个叫消息队列的东西”</p>
+<p>“消息队列？ 没有听说过”</p>
+<p>“就拿你遇到的情况来说吧， 我们开发一个消息队列，名称我都想好了，就叫ZhangMQ(Zhang Message Queue), 把它部署在我们张家村和李家庄之间， 我们村产生的订单， 你只要负责把订单消息写到这个队列里就完事大吉了。”</p>
+<p>“奥，李家庄的酒鬼小李醒了，就让他从这个消息队列中读取消息，进行处理，对吧”</p>
+<p>“没错，这不就变成异步的了？ 酒鬼小李不处理， 那就是他们的责任了”</p>
+<p>“那订单消息的格式需要和李家庄商量好， 另外次序也不能乱掉， 还有, 要是断电了或者重启了，消息队列中的订单消息也不能丢失 “ 小张想的很深入</p>
+<p>“没错，这些都是我们的ZhangMQ要考虑的，要实现持久化， 把订单消息存到硬盘上”</p>
+<p>“这真是不错“ 小张跃跃欲试，“村长，我想去开发这个ZhangMQ， 一定要让我参加啊”</p>
+<p>“没问题， 不过我当前最重要的是说服李家庄， 让他们来采用我们的消息队列”</p>
+<p><img src="http://img.mp.itc.cn/upload/20170206/a917b6f026d1411991abb020ac0d4fee_th.png" alt="img"></p>
+<p>经过据理力争和艰难协商，李家庄终于同意了消息队列的方案，毕竟对他们也没啥损失， 也不用听张家村没完没了的投诉了，只需要改一点点代码，从消息队列中读取订单即可。</p>
+<p>小张和其他人在家里埋头开发ZhangMQ， 半年后，ZhangMQ正式上线， 彻底解决了异步通信的问题。</p>
+<p>前钦差王大人对张家村做了回访，发现了消息队列，赞不绝口，回去后就发来了褒奖令，还下令在帝国推广， ZhangMQ一下子出名了！</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/10/24/TCP-的那些事儿/" class="archive-article-date">
-  	<time datetime="2016-10-24T14:21:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-24</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/10/24/TCP-的那些事儿/">TCP 的那些事儿</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">tcp</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/network/" class="article-tag-list-link color3">network</a>
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://wenboo.github.io/2017/02/09/Java-帝国之消息队列/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/10/22/计算机网络术语/" class="archive-article-date">
-  	<time datetime="2016-10-21T16:11:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-22</time>
-</a>
-        </div>
-    	 
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/10/22/计算机网络术语/">计算机网络术语</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">tcp</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/network/" class="article-tag-list-link color3">network</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/10/21/图解-TCP-IP-协议/" class="archive-article-date">
-  	<time datetime="2016-10-21T15:47:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/10/21/图解-TCP-IP-协议/">图解 TCP/IP 协议</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">tcp</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/network/" class="article-tag-list-link color3">network</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+    <a href="/2017/12/31/2017-年开发阅读书单/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          2017 年开发阅读书单
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2017/02/09/HTTPS-中的那些加密算法/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">HTTPS 中的那些加密算法</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Java-帝国之消息队列" data-title="Java 帝国之消息队列" data-url="http://wenboo.github.io/2017/02/09/Java-帝国之消息队列/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"wenboo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
   
 
-    
+
 
 
           </div>
@@ -350,9 +412,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		root: "/",
