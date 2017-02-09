@@ -242,6 +242,83 @@
 
 
   
+    <article id="post-HTTPS-中的那些加密算法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/09/HTTPS-中的那些加密算法/">HTTPS 中的那些加密算法</a>
+    </h1>
+  
+
+        
+        <a href="/2017/02/09/HTTPS-中的那些加密算法/" class="archive-article-date">
+  	<time datetime="2017-02-09T12:49:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>密码学在计算机科学中使用非常广泛，HTTPS就是建立在密码学基础之上的一种安全的通信协议。HTTPS早在1994年由网景公司首次提出，而如今在众多互联网厂商的推广之下HTTPS已经被广泛使用在各种大小网站中。在完全理解HTTPS之前，有必要弄清楚一些密码学相关的概念，比如：明文、密文、密码、密钥、对称加密、非对称加密、摘要、数字签名、数字证书。</p>
+<p><strong>密码(cipher)</strong></p>
+<p>密码学中的密码（cipher）和我们日常生活中所说的密码不太一样，计算机术语『密码 cipher』是一种用于加密或者解密的算法，而我们日常所使用的『密码 password』是一种口令，它是用于认证用途的一组文本字符串，这里我们要讨论的是前者：cipher。</p>
+        
+          <a class="article-more-a" href="/2017/02/09/HTTPS-中的那些加密算法/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">http</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/network/" class="article-tag-list-link color3">network</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/02/09/HTTPS-中的那些加密算法/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-HashMap-的工作原理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -872,93 +949,9 @@
 
 
   
-    <article id="post-JDBC-的诞生" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/18/JDBC-的诞生/">JDBC 的诞生</a>
-    </h1>
-  
-
-        
-        <a href="/2017/01/18/JDBC-的诞生/" class="archive-article-date">
-  	<time datetime="2017-01-18T12:41:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>网络访问</strong></p>
-<p>随着 Oracle, Sybase, SQL Server ,DB2, Mysql 等人陆陆续续住进数据库村， 这里呈现出一片兴旺发达的景象， 无数的程序在村里忙忙碌碌， 读写数据库， 实际上一个村落已经容不下这么多人了， 数据库村变成了数据镇。这一天， 数据库镇发生了一件大事： 它连上了网络！外部的花花世界一下全部打开， 很多程序开始离开这个拥挤的城镇， 住到更加宜居的地方去。<br>可是他们的工作还是要读写数据库， 大家都在想办法能不能通过网络来访问数据库镇的数据库。其中移居到Tomcat村的Java 最为活跃， 这小子先去拜访了一下Mysql , 相对于Oracle, Sybase 等大佬， Mysql 还很弱小， 也许容易搞定。</p>
-<p>Java 说： “Mysql 先生， 现在已经网络时代了， 您也得与时俱进啊， 给我们开放下网络接口吧。 ”</p>
-<p>Mysql 说： “还网络时代， 你们这些家伙越来越懒了， 都不愿意到我们家里来了！ 说说吧， 你想怎么开放？ ”</p>
-<p>Java 说： “很简单， 您听说过TCP/IP还有Socket 没有？ 没有吗？！ 没关系， 您的操作系统肯定知道， 它内置实现了TCP/IP和socket, 您只需要和他商量一下， 需要申请一个ip ， 确定一个端口， 然后您在这个端口监听， 我每次想访问数据了， 就会创建一个socket ，向你发起连接请求， 你接受了就行了。 ”（刘欣注： 参见《张大胖的socket》）</p>
-<p>“这么麻烦啊？”</p>
-<p>“其实也简单， 您的操作系统会帮忙的， 他非常熟悉， 再说只需要做一次就行， 把这个网络访问建立起来， 到时候很多程序都会来访问您， 您会发财的。 ”</p>
-<p>“不会这么简单吧， 假设说， 我是说假设啊， 通过socket我们建立了连接， 通过这个连接， 你给我发送什么东西？ 我又给你发什么东西？” Mysql非常老练， 直击命门。</p>
-<p>“呃， 这个…. ”</p>
-<p>Java 其实心里其实非常明白， 这需要和Mysql定义一个应用层的协议， 就是所谓的你发什么请求， 我给你什么响应。</p>
-        
-          <a class="article-more-a" href="/2017/01/18/JDBC-的诞生/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">jdbc</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/01/18/JDBC-的诞生/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 
@@ -1060,11 +1053,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
+                <a href="javascript:void(0)" class="js-tag color2">c</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">c</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">书单</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1072,7 +1069,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">http</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">tool</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1080,7 +1085,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color2">sqlite</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">main</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1100,10 +1109,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">sqlite</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">socket</a>
               </li>
              
@@ -1112,15 +1117,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">wireshark</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">javaweb</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">wireshark</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1144,23 +1149,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">书单</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">main</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">tool</a>
+                <a href="javascript:void(0)" class="js-tag color3">内存</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">进程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">内存</a>
               </li>
             
             <div class="clearfix"></div>
