@@ -6,14 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://wenboo.github.io">
-  <title>Tag: 进程 | Hi~Welcome to Wenboo&#39;s Blog</title>
+  <title>为什么软件测试部门不喜欢重构？ | Hi~Welcome to Wenboo&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hi~Welcome to Wenboo's Blog">
-<meta property="og:url" content="http://wenboo.github.io/tags/进程/index.html">
+  <meta name="description" content="经常听到开发人员抱怨 ，“这么烂的代码，我来重构一下！”，“这代码怎么能这么写呢？谁来重构一下？”，“这儿有个坏味道，重构吧！”
+作为一名 QA，每次听到“重构”两个字，既想给追求卓越代码的开发人员点个赞，同时又会感觉非常紧张，为什么又要重构？马上就要上线了，怎么还要改？是不是应该阻止开发人员做重构？
+重构几乎是开发人员最喜欢的一项实践了，可 QA 们却充满了顾虑，那么为什么 QA 不喜欢重构呢？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="为什么软件测试部门不喜欢重构？">
+<meta property="og:url" content="http://wenboo.github.io/2017/02/14/为什么软件测试部门不喜欢重构？/index.html">
 <meta property="og:site_name" content="Hi~Welcome to Wenboo's Blog">
+<meta property="og:description" content="经常听到开发人员抱怨 ，“这么烂的代码，我来重构一下！”，“这代码怎么能这么写呢？谁来重构一下？”，“这儿有个坏味道，重构吧！”
+作为一名 QA，每次听到“重构”两个字，既想给追求卓越代码的开发人员点个赞，同时又会感觉非常紧张，为什么又要重构？马上就要上线了，怎么还要改？是不是应该阻止开发人员做重构？
+重构几乎是开发人员最喜欢的一项实践了，可 QA 们却充满了顾虑，那么为什么 QA 不喜欢重构呢？">
+<meta property="og:updated_time" content="2017-02-14T12:57:09.130Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hi~Welcome to Wenboo's Blog">
+<meta name="twitter:title" content="为什么软件测试部门不喜欢重构？">
+<meta name="twitter:description" content="经常听到开发人员抱怨 ，“这么烂的代码，我来重构一下！”，“这代码怎么能这么写呢？谁来重构一下？”，“这儿有个坏味道，重构吧！”
+作为一名 QA，每次听到“重构”两个字，既想给追求卓越代码的开发人员点个赞，同时又会感觉非常紧张，为什么又要重构？马上就要上线了，怎么还要改？是不是应该阻止开发人员做重构？
+重构几乎是开发人员最喜欢的一项实践了，可 QA 们却充满了顾虑，那么为什么 QA 不喜欢重构呢？">
   
     <link rel="alternative" href="/atom.xml" title="Hi~Welcome to Wenboo&#39;s Blog" type="application/atom+xml">
   
@@ -165,71 +175,189 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-为什么软件测试部门不喜欢重构？" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/01/12/进程与线程之间的区别/" class="archive-article-date">
-  	<time datetime="2017-01-12T13:49:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-12</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/01/12/进程与线程之间的区别/">进程与线程之间的区别</a>
+    <h1 class="article-title" itemprop="name">
+      为什么软件测试部门不喜欢重构？
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/02/14/为什么软件测试部门不喜欢重构？/" class="archive-article-date">
+  	<time datetime="2017-02-14T12:56:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>经常听到开发人员抱怨 ，“这么烂的代码，我来重构一下！”，“这代码怎么能这么写呢？谁来重构一下？”，“这儿有个坏味道，重构吧！”</p>
+<p>作为一名 QA，每次听到“重构”两个字，既想给追求卓越代码的开发人员点个赞，同时又会感觉非常紧张，为什么又要重构？马上就要上线了，怎么还要改？是不是应该阻止开发人员做重构？</p>
+<p>重构几乎是开发人员最喜欢的一项实践了，可 QA 们却充满了顾虑，那么为什么 QA 不喜欢重构呢？</p>
+<a id="more"></a>
+<p><strong>老功能被破坏</strong></p>
+<p>不止一次遇到这样的场景，某一天一个老功能突然被破坏了，QA 们感到奇怪，产品这块儿的功能已经很稳定了，也没有在这部分开发什么新功能，为什么突然出问题了呢？</p>
+<p>追查下去发现是近期做了重构。再追问下去，对于老代码，已经几乎看不懂老的测试了，可是开发人员看到代码的坏味道就想重构，于是功能破坏了。</p>
+<p>在快速迭代的开发模式下，QA 们主要关注用户故事的生命周期，重点测试新的特性功能，所以对于老功能回归测试的投入是非常有限的，如果开发人员突然对老功能进行了重构又没有告知团队， 这样的问题很可能就会进入生产环境，这样是非常有风险的。即便很多开发人员重构老功能时会告知 QA，以提前发现和修复导致的问题，但无疑会大大增加 QA 做回归测试的负担。</p>
+<p><strong>新功能推迟/重复测试</strong></p>
+<p>按照用户故事的开发流程，开发人员完成功能后，多方角色会首先在开发人员的机器上进行用户故事的快速验收以及探索性测试，然后开发人员会提交代码，由 QA 拿到包之后部署到测试环境进行测试。</p>
+<p>但有的时候 QA 在开发机器上快速验收之后，开发人员又进行重构，曾经经历过“故事验收的时候功能都是正常的，拿到包部署之后好多功能不工作了”的事情，跟开发人员确认，又是重构导致的。</p>
+<p>有时候开发人员会在用户故事验收之后告知 QA 还会继续重构，QA 可以等到重构完成后再拿新的版本做测试，这样就会导致用户故事的测试时间推迟。或者开发人员会先重构再做验收，而这样又会导致 QA 在开发机器上进行重复的验收测试。</p>
+<p><strong>无计划不可见</strong></p>
+<p>开发人员的重构时机对我们来说是无规律的。有的时候一边开发用户故事一边重构，有的时候会在故事完成后、QA 在开发机器上验证结束后才做重构，有的是代码评审后大家指出问题后做重构，有的甚至得等到项目组来了有经验的开发人员才开始重构。对 QA 来说，重构的时机是无计划的。</p>
+<p>另外重构也是不可见的。我们总谈可视化，日常的开发工作由用户故事和缺陷来可视化，而重构经常是幕后进行的，不被跟踪、不被记录、不可见，有经验的开发人员会在进行“大”的重构之前口头告知团队，如果没有告知，就在不知不觉中发生了，只有功能被破坏了才能意识到。</p>
+<p><strong>总结</strong></p>
+<p>以上列出了 QA 不喜欢重构的三个理由，归根结底其实都是重构不当导致的。<strong>代码重构（Code refactoring）指对软件代码做任何更动以增加可读性或者简化结构而不影响输出结果</strong>。而不当的重构往往只关注了前半部分却忽略了对输出结果的影响。</p>
+<p>个人认为，如果能够注意以下几个方面，也许可以很大程度减少 QA 对重构的顾虑：</p>
+<p>1.充足的自动化测试是保障输出结果的一个有效途径。不管对于历史代码还是新代码，进行重构的前提应该是确保这部分功能已经被足够的自动化测试覆盖， 有的开发人员认为这是一个不可行的建议，因为“充足”对于每个人每个角色的标准可能是不一样的，QA 也许永远都不会觉得测试足够，但是其实可以借助测试覆盖率等度量工具，甚至直接针对功能特性由 QA 来定义需要哪些自动化测试，在补齐这些自动化测试的基础上再做重构。</p>
+<p>2.对于新功能的重构，应该融入到正常开发过程中，在故事验收之前已经完成相应的重构，因为自动化测试不是万能的，也不可能达到 100% 的覆盖率，所以还是需要 QA 验证的。这么做就意味着客户要为我们的重构买单，所以作为软件领域专家的我们，如何让业务领域专家的客户理解重构的价值，这就变的至关重要了。</p>
+<p>3.小步前进，尽量避免或者减少大的重构，这样可以减少突然增多的回归测试工作量，也会减少功能被破坏的风险。如果发生了大的重构，反思一下是哪里出了问题？是我们积攒了太多的技术债？还是业务领域模型发生了大的改变？然后采取措施避免类似的事情再度发生。</p>
+<p>4.对于一些核心功能或者组件，进行重构之前尽早告知团队 QA，如果能够给 QA 讲解一下重构的目的以及本次重构可能会影响到的业务区域会对 QA 有很大的帮助。这样做一方面可以让 QA 把重心放在最容易受到影响的功能上加强回归测试，另一方面也能帮助 QA 更合理地安排测试计划。</p>
+<p>5.尽量避免在产品上线前进行重构，不仅可以减轻 QA 回归测试的负担，也会降低功能破坏后来不及修复的风险。</p>
+<p>重构的目标是<strong>为了改善代码质量</strong>，长远来看应该是可以减少软件缺陷的，从这个角度来说 QA 和开发人员的目标是一致的，我们相信，如果重构恰当，必定对项目是有利无害的。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">进程</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">代码重构</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/cm/" class="article-tag-list-link color3">cm</a>
+        			<a href="/categories/life/" class="article-tag-list-link color5">life</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://wenboo.github.io/2017/02/14/为什么软件测试部门不喜欢重构？/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2017/12/31/2017-年开发阅读书单/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          2017 年开发阅读书单
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2017/02/14/面试感悟，一名-3-年工作经验程序员应该具备的技能/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">面试感悟，一名 3 年工作经验程序员应该具备的技能</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="为什么软件测试部门不喜欢重构？" data-title="为什么软件测试部门不喜欢重构？" data-url="http://wenboo.github.io/2017/02/14/为什么软件测试部门不喜欢重构？/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"wenboo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
   
 
-    
+
 
 
           </div>
@@ -252,9 +380,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		root: "/",
