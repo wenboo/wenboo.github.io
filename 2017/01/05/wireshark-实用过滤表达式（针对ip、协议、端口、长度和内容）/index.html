@@ -8,7 +8,7 @@
   <link rel="dns-prefetch" href="http://wenboo.github.io">
   <title>Wireshark 实用过滤表达式 | Hi~Welcome to Wenboo&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="首先说几个最常用的关键字，“eq” 和 “==”等同，可以使用 “and” 表示并且，“or”表示或者。“!” 和 “not” 都表示取反。
+  <meta name="description" content="首先说几个最常用的关键字，“eq” 和 “==”等同，可以使用 “and” 表示并且，“or”表示或者。“!“ 和 “not” 都表示取反。
 1.针对wireshark最常用的自然是针对IP地址的过滤。其中有几种情况：
 （1）对源地址为192.168.0.1的包的过滤，即抓取源地址满足要求的包。　　 表达式为：ip.src == 192.168.0.1
 （2）对目的地址为192.168.0.1的包">
@@ -16,14 +16,14 @@
 <meta property="og:title" content="Wireshark 实用过滤表达式">
 <meta property="og:url" content="http://wenboo.github.io/2017/01/05/Wireshark-实用过滤表达式（针对ip、协议、端口、长度和内容）/index.html">
 <meta property="og:site_name" content="Hi~Welcome to Wenboo's Blog">
-<meta property="og:description" content="首先说几个最常用的关键字，“eq” 和 “==”等同，可以使用 “and” 表示并且，“or”表示或者。“!” 和 “not” 都表示取反。
+<meta property="og:description" content="首先说几个最常用的关键字，“eq” 和 “==”等同，可以使用 “and” 表示并且，“or”表示或者。“!“ 和 “not” 都表示取反。
 1.针对wireshark最常用的自然是针对IP地址的过滤。其中有几种情况：
 （1）对源地址为192.168.0.1的包的过滤，即抓取源地址满足要求的包。　　 表达式为：ip.src == 192.168.0.1
 （2）对目的地址为192.168.0.1的包">
-<meta property="og:updated_time" content="2017-01-17T14:07:32.428Z">
+<meta property="og:updated_time" content="2017-02-14T13:07:57.610Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Wireshark 实用过滤表达式">
-<meta name="twitter:description" content="首先说几个最常用的关键字，“eq” 和 “==”等同，可以使用 “and” 表示并且，“or”表示或者。“!” 和 “not” 都表示取反。
+<meta name="twitter:description" content="首先说几个最常用的关键字，“eq” 和 “==”等同，可以使用 “and” 表示并且，“or”表示或者。“!“ 和 “not” 都表示取反。
 1.针对wireshark最常用的自然是针对IP地址的过滤。其中有几种情况：
 （1）对源地址为192.168.0.1的包的过滤，即抓取源地址满足要求的包。　　 表达式为：ip.src == 192.168.0.1
 （2）对目的地址为192.168.0.1的包">
@@ -198,13 +198,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>首先说几个最常用的关键字，“eq” 和 “==”等同，可以使用 “and” 表示并且，“or”表示或者。“!” 和 “not” 都表示取反。</p>
+        <p>首先说几个最常用的关键字，“eq” 和 “==”等同，可以使用 “and” 表示并且，“or”表示或者。“!“ 和 “not” 都表示取反。</p>
 <p><strong>1.针对wireshark最常用的自然是针对IP地址的过滤。其中有几种情况：</strong></p>
 <p>（1）对源地址为192.168.0.1的包的过滤，即抓取源地址满足要求的包。<br>　　 表达式为：ip.src == 192.168.0.1</p>
 <p>（2）对目的地址为192.168.0.1的包的过滤，即抓取目的地址满足要求的包。<br>　　 表达式为：ip.dst == 192.168.0.1</p>
 <a id="more"></a>
 <p>（3）对源或者目的地址为192.168.0.1的包的过滤，即抓取满足源或者目的地址的ip地址是192.168.0.1的包。<br>　　 表达式为：ip.addr == 192.168.0.1,或者 ip.src == 192.168.0.1 or ip.dst == 192.168.0.1</p>
-<p>（4）要排除以上的数据包，我们只需要将其用括号囊括，然后使用 “!” 即可。<br>　　 表达式为：!(表达式)</p>
+<p>（4）要排除以上的数据包，我们只需要将其用括号囊括，然后使用 “!“ 即可。<br>　　 表达式为：!(表达式)</p>
 <p><strong>2.针对协议的过滤</strong></p>
 <p>（1）仅仅需要捕获某种协议的数据包，表达式很简单仅仅需要把协议的名字输入即可。<br>     表达式为：http</p>
 <p>（2）需要捕获多种协议的数据包，也只需对协议进行逻辑组合即可。<br>　　 表达式为：http or telnet （多种协议加上逻辑符号的组合即可）</p>
@@ -220,8 +220,8 @@
 <p>host 10.1.2.3<br>显示目的或来源IP地址为10.1.2.3的封包。</p>
 <p>src portrange 2000-2500<br>显示来源为UDP或TCP，并且端口号在2000至2500范围内的封包。</p>
 <p>not imcp<br>显示除了icmp以外的所有封包（icmp通常被ping工具使用）。</p>
-<p>src host 10.7.2.12 and not dst net 10.200.0.0/16<br>显示来源IP地址为10.7.2.12，但目的地不是10.200.0.0/16的封包。</p>
-<p>(src host 10.4.1.12 or src net 10.6.0.0/16) and tcp dst portrange 200-10000 and dst net 10.0.0.0/8<br>显示来源IP为10.4.1.12或者来源网络为10.6.0.0/16，目的地TCP端口号在200至10000之间，并且目的位于网络10.0.0.0/8内的所有封包。</p>
+<p>src host 10.7.2.12 and not dst net 10.200.0.0//16<br>显示来源IP地址为10.7.2.12，但目的地不是10.200.0.0//16的封包。</p>
+<p>(src host 10.4.1.12 or src net 10.6.0.0//16) and tcp dst portrange 200-10000 and dst net 10.0.0.0//8<br>显示来源IP为10.4.1.12或者来源网络为10.6.0.0//16，目的地TCP端口号在200至10000之间，并且目的位于网络10.0.0.0//8内的所有封包。</p>
 
       
 
@@ -456,15 +456,11 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">c</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">面试</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">书单</a>
+                <a href="javascript:void(0)" class="js-tag color2">c</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -472,11 +468,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
+                <a href="javascript:void(0)" class="js-tag color3">书单</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -496,7 +496,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
+                <a href="javascript:void(0)" class="js-tag color5">main</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -504,11 +504,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">回调</a>
+                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">main</a>
+                <a href="javascript:void(0)" class="js-tag color3">回调</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -516,15 +516,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">socket</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">tcp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -532,19 +524,23 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">wireshark</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">代码重构</a>
+                <a href="javascript:void(0)" class="js-tag color2">socket</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">架构</a>
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">代码重构</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -557,6 +553,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">mvc</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">架构</a>
               </li>
              
               <li class="article-tag-list-item">
