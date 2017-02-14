@@ -6,20 +6,31 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://wenboo.github.io">
-  <title>程序员对内存的理解 | Hi~Welcome to Wenboo&#39;s Blog</title>
+  <title>程序是如何执行 a = a+1 的 ？ | Hi~Welcome to Wenboo&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在C和C++语言开发中，指针、内存一直是学习的重点。因为C语言作为一种偏底层的中低级语言，提供了大量的内存直接操作的方法，这一方面使程序的灵活度最大化，同时也为bug埋下很多隐患。因此，无论如何，我们都要对内存有一个清晰的理解。">
+  <meta name="description" content="一、概述
+1、计算机中有两个主要的核心部件：CPU和内存，其中CPU负责运算而内存负责存储程序和相关的变量，每一条程序语句和变量都在内存中有对应的内存地址。
+2、寄存器是CPU的存储单元，每一个CPU都会有通用寄存器来给程序使用，编号R1~R32，代表有32个通用寄存器。
+3、CPU中的核心部件">
 <meta property="og:type" content="article">
-<meta property="og:title" content="程序员对内存的理解">
-<meta property="og:url" content="http://wenboo.github.io/2017/01/02/程序员对内存的理解/index.html">
+<meta property="og:title" content="程序是如何执行 a = a+1 的 ？">
+<meta property="og:url" content="http://wenboo.github.io/2017/02/14/程序是如何执行-a-a-1-的-？/index.html">
 <meta property="og:site_name" content="Hi~Welcome to Wenboo's Blog">
-<meta property="og:description" content="在C和C++语言开发中，指针、内存一直是学习的重点。因为C语言作为一种偏底层的中低级语言，提供了大量的内存直接操作的方法，这一方面使程序的灵活度最大化，同时也为bug埋下很多隐患。因此，无论如何，我们都要对内存有一个清晰的理解。">
-<meta property="og:image" content="http://images.cnblogs.com/cnblogs_com/iuices/201111/201111242150462923.jpg">
-<meta property="og:updated_time" content="2017-01-05T14:08:12.841Z">
+<meta property="og:description" content="一、概述
+1、计算机中有两个主要的核心部件：CPU和内存，其中CPU负责运算而内存负责存储程序和相关的变量，每一条程序语句和变量都在内存中有对应的内存地址。
+2、寄存器是CPU的存储单元，每一个CPU都会有通用寄存器来给程序使用，编号R1~R32，代表有32个通用寄存器。
+3、CPU中的核心部件">
+<meta property="og:image" content="http://images2015.cnblogs.com/blog/798267/201512/798267-20151218220426662-432951911.png">
+<meta property="og:image" content="http://images2015.cnblogs.com/blog/798267/201512/798267-20151218221438318-1494190049.png">
+<meta property="og:image" content="http://images2015.cnblogs.com/blog/798267/201512/798267-20151218230041240-1611722985.png">
+<meta property="og:updated_time" content="2017-02-14T14:00:09.778Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="程序员对内存的理解">
-<meta name="twitter:description" content="在C和C++语言开发中，指针、内存一直是学习的重点。因为C语言作为一种偏底层的中低级语言，提供了大量的内存直接操作的方法，这一方面使程序的灵活度最大化，同时也为bug埋下很多隐患。因此，无论如何，我们都要对内存有一个清晰的理解。">
-<meta name="twitter:image" content="http://images.cnblogs.com/cnblogs_com/iuices/201111/201111242150462923.jpg">
+<meta name="twitter:title" content="程序是如何执行 a = a+1 的 ？">
+<meta name="twitter:description" content="一、概述
+1、计算机中有两个主要的核心部件：CPU和内存，其中CPU负责运算而内存负责存储程序和相关的变量，每一条程序语句和变量都在内存中有对应的内存地址。
+2、寄存器是CPU的存储单元，每一个CPU都会有通用寄存器来给程序使用，编号R1~R32，代表有32个通用寄存器。
+3、CPU中的核心部件">
+<meta name="twitter:image" content="http://images2015.cnblogs.com/blog/798267/201512/798267-20151218220426662-432951911.png">
   
     <link rel="alternative" href="/atom.xml" title="Hi~Welcome to Wenboo&#39;s Blog" type="application/atom+xml">
   
@@ -171,67 +182,74 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-程序员对内存的理解" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-程序是如何执行-a-a-1-的-？" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      程序员对内存的理解
+      程序是如何执行 a = a+1 的 ？
     </h1>
   
 
         
-        <a href="/2017/01/02/程序员对内存的理解/" class="archive-article-date">
-  	<time datetime="2017-01-02T11:10:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-02</time>
+        <a href="/2017/02/14/程序是如何执行-a-a-1-的-？/" class="archive-article-date">
+  	<time datetime="2017-02-14T13:51:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-14</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在C和C++语言开发中，指针、内存一直是学习的重点。因为C语言作为一种偏底层的中低级语言，提供了大量的内存直接操作的方法，这一方面使程序的灵活度最大化，同时也为bug埋下很多隐患。因此，无论如何，我们都要对内存有一个清晰的理解。</p>
+        <p><strong>一、概述</strong></p>
+<p>1、计算机中有两个主要的核心部件：CPU和内存，其中CPU负责运算而内存负责存储程序和相关的变量，每一条程序语句和变量都在内存中有对应的内存地址。</p>
+<p>2、寄存器是CPU的存储单元，每一个CPU都会有通用寄存器来给程序使用，编号R1~R32，代表有32个通用寄存器。</p>
+<p>3、CPU中的核心部件</p>
 <a id="more"></a>
-<p><strong>1. 对内的分配</strong></p>
-<p>32位操作系统支持4GB内存的连续访问，但通常把内存分为两个2GB的空间，每个进程在运行时最大可以使用2GB的私有内存（0x00000000—0x7FFFFFFF）。即理论上支持如下的大数组：</p>
+<p>（1）程序计数器PC(Program Counter)</p>
+<p>程序计数器是一个特殊的寄存器部件，程序执行时，PC始终指向内存中的某条指令语句（即该条语句的内存地址），然后CPU就是读取（PC）所指向的那条指令执行。</p>
+<p>在顺序执行程序语句时，PC通过顺序加1(32位CPU一个指令占4字节，64位8字节)自动指向下一条要执行的程序语句。但是对于一些控制结构语句如if else for while这时PC的值就不是顺序加1指向下一条语句了。</p>
+<p>（2）指令寄存器IR(Instruction Register)</p>
+<p>指令寄存器也是一个特殊的寄存器，用来存放从内存中读取的指令。CPU从内存中读取指令到IR之后，由特定部件来解读这条指令，并执行相关的操作。</p>
+<p>（3）算术逻辑单元ALU(arithmetic logic unit)</p>
+<p>ALU是处理器中进行真实运算的部件，执行指令时，CPU把寄存器中的值输入到ALU中，ALU做完运算后把结果存回寄存器</p>
+<hr>
+<p><strong>二、a = a+1</strong></p>
+<p>1、对于a=a+1这条程序语句需要分解为三步</p>
 <blockquote>
-<p>char szBuffer[2*1024*1024*1024];</p>
+<p>1) 把变量a读取到某一个寄存器R存储，<br>2) CPU对寄存器R的值进行计算，<br>3) 计算完成后将值存回内存</p>
 </blockquote>
-<p>当然，由于在实际运行时，程序还有代码段、临时变量段、动态内存申请等，实际上是不可能用到上述那么大的数组的。至于高端的2GB内存地址（0x80000000—0xFFFFFFFF），操作系统一般内部保留使用，即供操作系统内核代码使用。在Windows和Linux平台上，一些动态链接库（Windows的dll，Linux的so）以及ocx控件等，由于是跨进程服务的，因此一般也在高2GB内存空间运行。</p>
-<p>可以看到，每个进程都能看到自己的2GB内存以及系统的2GB内存，但是不同进程之间是无法彼此看到对方的。当然，操作系统在底层做了很多工作，比如磁盘上的虚拟内存交换（请看下以标题），不同的内存块动态映射等等。</p>
-<p><strong>2. 虚拟内存</strong></p>
-<p>虚拟内存的基本思想是：用廉价但缓慢的磁盘来扩充快速却昂贵的内存。在一定时刻，程序实际需要使用的虚拟内存区段的内容就被载入物理内存中。当物理内存中的数据有一段时间未被使用，它们就可能被转移到硬盘中，节省下来的物理内存空间用于载入需要使用的其他数据。</p>
-<p>在进程执行过程中，操作系统负责具体细节，使每个进程都以为自己拥有整个地址空间的独家访问权。这个幻觉是通过“虚拟内存”实现的。所有进程共享机器的物理内存，当内存使用完时就用磁盘保存数据。在进程运行时，数据在磁盘和内存之间来回移动。内存管理硬件负责把虚拟地址翻译为物理地址，并让一个进程始终运行于系统的真正内存中，应用程序员只看到虚拟地址，并不知道自己的进程在磁盘与内存之间来回切换。</p>
-<p>从潜在的可能性上说，与进程有关的所有内存都将被系统所使用，如果该进程可能不会马上运行（可能它的优先级低，也可能是它处于睡眠状态），操作系统可以暂时取回所有分配给它的物理内存资源，将该进程的所有相关信息都备份到磁盘上。</p>
-<p>  进程只能操作位于物理内存中的页面。当进程引用一个不在物理内存中的页面时，MMU就会产生一个页错误。内存对此事做出响应，并判断该引用是否有效。如果无效，内核向进程发出一个“segmentation violation（段违规）”的信号，内核从磁盘取回该页，换入内存中，一旦页面进入内存，进程便被解锁，可以重新运行——进程本身并不知道它曾经因为页面换入事件等待了一会。</p>
-<p><strong>3. 内存的使用</strong></p>
-<p>对于程序员，我们最重要的是能理解不同进程间私有内存空间的含义。C和C++的编译器把私有内存分为3块：基栈、浮动栈和堆。如下图：</p>
-<p><img src="http://images.cnblogs.com/cnblogs_com/iuices/201111/201111242150462923.jpg"></p>
-<blockquote>
-<p>基栈：也叫静态存储区，这是编译器在编译期间就已经固定下来必须要使用的内存，如程序的代码段、静态变量、全局变量、const常量等。</p>
-<p>浮动栈：很多书上称为“栈”，就是程序开始运行，随着函数、对象的一段执行，函数内部变量、对象的内部成员变量开始动态占用内存，浮动栈一般都有生命周期，函数结束或者对象析构，其对应的浮动栈空间的就拆除了，这部分内容总是变来变去，内存占用也不是固定，因此叫浮动栈。</p>
-<p>堆：C和C++语言都支持动态内存申请，即程序运行期可以自由申请内存，这部分内存就是在堆空间申请的。堆位于2GB的最顶端，自上向下分配，这是避免和浮动栈混到一起，不好管理。我们用到malloc和new都是从堆空间申请的内存，new比malloc多了对象的支持，可以自动调用构造函数。另外，new创建对象，其成员变量位于堆里面。</p>
-</blockquote>
-<p>我们来看一个例子：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> n = <span class="number">100</span>;</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">Func</span><span class="params">(<span class="keyword">void</span>)</span></span></div><div class="line"> </div><div class="line">&#123;</div><div class="line">    <span class="keyword">char</span> ch = <span class="number">0</span>;</div><div class="line">    <span class="keyword">char</span>* pBuff = (<span class="keyword">char</span>*)<span class="built_in">malloc</span>(<span class="number">10</span>);</div><div class="line">    <span class="comment">//…</span></div><div class="line"> </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这个函数如果运行，其中n由于是全局静态变量，位于基栈，i和pBuff这两个函数内部变量，i位于浮动栈，而pBuff指向的由malloc分配的内存区，则位于堆栈。</p>
-<p>在内存理解上，最著名的例子就是线程启动时的参数传递。</p>
-<p>函数启动一个线程，很多时候需要向线程传参数，但是线程是异步启动的，即很可能启动函数已经退出了，而线程函数都还没有正式开始运行，因此，绝不能用启动函数的内部变量给线程传参。道理很简单，函数的内部变量在浮动栈，但函数退出时，浮动栈自动拆除，内存空间已经被释放了。当线程启动时，按照给的参数指针去查询变量，实际上是在读一块无效的内存区域，程序会因此而崩溃。</p>
-<p>那怎么办呢？我们应该直接用malloc函数给需要传递的参数分配一块内存区域，将指针传入线程，线程收到后使用，最后线程退出时，free释放。</p>
-<p>我们来看例子：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//这个结构体就是参数表</span></div><div class="line"> </div><div class="line">typedef struct _CListen_ListenAcceptTask_Param_ </div><div class="line">&#123; </div><div class="line">    Linux_Win_SOCKET m_nSocket; </div><div class="line">    <span class="comment">//其他参量… …</span></div><div class="line">&#125;SCListenAcceptTaskParam; </div><div class="line"> </div><div class="line"><span class="comment">//习惯性写法，设置结构体后，立即声明结构体的尺寸，为后续malloc提供方便</span></div><div class="line"><span class="keyword">const</span> ULONG SCListenAcceptTaskParamSize=sizeof(SCListenAcceptTaskParam); </div><div class="line"> </div><div class="line"><span class="comment">//这里接收到连接请求，申请参数区域，将关键信息带入参数区域，帮助后续线程工作。</span></div><div class="line">bool CListen::ListenTaskCallback(<span class="keyword">void</span>* pCallParam,<span class="keyword">int</span>&amp; nStatus) </div><div class="line">&#123; </div><div class="line"> </div><div class="line">    <span class="comment">//正常的函数逻辑… …</span></div><div class="line">    <span class="comment">//假定s是accept到的socket，需要传入后续线程工作</span></div><div class="line">    <span class="comment">//在此准备一块参数区域，从远堆上申请</span></div><div class="line">    SCListenAcceptTaskParam* pParam=(SCListenAcceptTaskParam*) malloc(SCListenAcceptTaskParamSize); </div><div class="line"> </div><div class="line">    <span class="comment">//给参数区域赋值</span></div><div class="line">    pParam-&gt;m_nSocket=s; </div><div class="line">    <span class="comment">//此处启动线程，将pParam传递给线程… …</span></div><div class="line">    <span class="comment">//正常的函数逻辑… …</span></div><div class="line"> </div><div class="line">&#125; </div><div class="line"> </div><div class="line"><span class="comment">//这是线程函数，负责处理上文accept到的socket </span></div><div class="line">bool CListen::ListenAcceptTask(<span class="keyword">void</span>* pCallParam,<span class="keyword">int</span>&amp; nStatus) </div><div class="line">&#123; </div><div class="line"> </div><div class="line">    <span class="comment">//第一句话就是强制指针类型转换，获得外界传入的参数区域</span></div><div class="line">    SCListenAcceptTaskParam* pParam= (SCListenAcceptTaskParam*)pCallParam; </div><div class="line"> </div><div class="line">    <span class="comment">//正常的函数逻辑… …</span></div><div class="line">    <span class="comment">//退出前，必须要做的工作，确保资源不被泄露</span></div><div class="line">    close(pParam-&gt;m_nSocket); <span class="comment">//关闭socket </span></div><div class="line">    free(pCallParam); <span class="comment">// free传入的参数区域</span></div><div class="line">    <span class="comment">//… … </span></div><div class="line"> </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><strong>4. 内存bug</strong></p>
-<p>无规则的滥用内存和指针会导致大量的bug，程序员应该对内存的使用保持高度的敏感性和警惕性，谨慎地使用内存资源。</p>
-<p>使用内存时最容易出现的bug是：</p>
-<p>(1) 坏指针值错误：在指针赋值之前就用它来引用内存，或者向库函数传送一个坏指针，第三种可能导致坏指针的原因是对指针进行释放之后再访问它的内容。可以修改free语句，在指针释放之后再将它置为空值。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">free</span>(p); p = <span class="literal">NULL</span>;</div></pre></td></tr></table></figure>
-<p>这样，如果在指针释放之后继续使用该指针，至少程序能在终止之前进行信息转储。</p>
-<p>(2) 改写（overwrite）错误：越过数组边界写入数据，在动态分配的内存两端之外写入数据，或改写一些堆管理数据结构（在动态分配内存之前的区域写入数据就很容易发生这种情况）</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">p = <span class="built_in">malloc</span>(<span class="number">256</span>); p[<span class="number">-1</span>] = <span class="number">0</span>; p[<span class="number">256</span>] = <span class="number">0</span>;</div></pre></td></tr></table></figure>
-<p>(3) 指针释放引起的错误：释放同一个内存块两次，或释放一块未曾使用malloc分配的内存，或释放仍在使用中的内存，或释放一个无效的指针。一个极为常见的与释放内存有关的错误就是在for(p=start;p=p-&gt;next)这样的循环中迭代一个链表，并在循环体内使用free(p)语句。这样，在下一次循环迭代时，程序就会对已经释放的指针进行解除引用操作，从而导致不可预料的结果。</p>
-<p>我们可以这样迭代：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">struct</span> node *p, *tart, *temp;</div><div class="line"><span class="keyword">for</span>(p = start; p ; p = temp)</div><div class="line">&#123;</div><div class="line">    temp = p-&gt;next;</div><div class="line">    <span class="built_in">free</span>(p);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><img src="http://images2015.cnblogs.com/blog/798267/201512/798267-20151218220426662-432951911.png" alt="img"></p>
+<p><img src="http://images2015.cnblogs.com/blog/798267/201512/798267-20151218221438318-1494190049.png" alt="img"></p>
+<p><strong>分解“a=a+1”的执行步骤：</strong></p>
+<p>第一步，CPU从地址300处读取第一条语句，CPU执行“读取a到R”语句，就会从地址1000出将a的值读到寄存器R中。</p>
+<p>第二步，CPU从地址301处读取第二条语句，执行”R+1”语句，CPU会对R执行加1的操作</p>
+<p>第三步，CPU从地址302出读取第三条语句，执行”将R存回a”语句，把寄存器R中变量a的值存回到内存中地址1000处。</p>
+<p>2、汇编指令的概念</p>
+<p>汇编指令由操作码和操作数组成，操作码是指令执行的基本动作，在load R1,(address)中，load是操作码，其后的寄存器R1和(address)都是操作数</p>
+<p>（1）”读取a到R”操作-load指令：</p>
+<p>load执行用来表示”CPU将内存中的a读取到寄存器R中”的操作。load指令需要有两个操作数。格式:load R1,(address),address是内存地址，(address)表示这个地址内存的值。例load R1,(1000)表示将地址1000处的变量值读取到寄存器R1中。</p>
+<p>（2）”R赋值”操作-mov指令：</p>
+<p>格式：mov R1，constant        mov用来将一个数赋给寄存器,mov指令有两个操作数前一个是寄存器，后一个是十六进制常数。例mov R1，0Ah表示将0Ah（十进制10）赋给寄存器R1。mov R2,R1表示将寄存器R1的值赋值给R2。</p>
+<p>（3）”R加1”操作-add指令</p>
+<p>格式：add R2,R1,constant    表示将R2=R1+constant。例add R2,R1,01h表示将寄存器R1中的值加1后将结果存到R2。例add R1,R1,R2表示将R1与R2的值相加将和存回R1。</p>
+<p>（4）减法指令-sub</p>
+<p>格式:sub R2,R1,constant  表示R2=R1-constant。例sub R3,R1,R2表示R3=R1-R2</p>
+<p>（5）左移位指令shiftl</p>
+<p>格式shiftl R2,R1,constant  表示R1寄存器的值左移constant位然后将值存入R2，左移一位就相当于乘以2，左移两位就相当与乘以4。例：shiftl R2,R1,05h表示R2 = R1 * 2的5次方</p>
+<p>（6）右移位指令shiftr</p>
+<p>（7）”将R存回a”操作-store指令</p>
+<p>格式:store (address),R1     程序语句中的存回表示将寄存器R中的值存回到内存中。address是内存地址，(address)是要存回的值，R1是寄存器。例:store (500),R1表示将寄存器R1中的值存入到内存地址500处</p>
+<p>3、a=a+1的完整执行过程</p>
+<p>首先用汇编指令表示一下这个过程（a = 10;a = a + 1）:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">mov R1,0Ah</div><div class="line">store (1000),R1</div><div class="line">load R1,(1000)</div><div class="line">add R1,R1,01h</div><div class="line">store (1000),R1</div></pre></td></tr></table></figure>
+<p>具体执行过程：</p>
+<p><img src="http://images2015.cnblogs.com/blog/798267/201512/798267-20151218230041240-1611722985.png" alt="img"></p>
+<p>（1）CPU从地址301处开始执行，PC的值为301，CPU从地址301处读取mov指令到IR，解读并执行mov指令，给寄存器R1中的变量赋初值10，然后PC加1，指向下一条汇编指令</p>
+<p>（2）PC值为302，CPU从地址302处读取store指令到IR，解读并执行store指令，将寄存器R1中的变量a的值存到内存地址1000处，然后PC加1指向下一条汇编指令。</p>
+<p>（3）PC的值为304，CPU从地址304处读取add指令到IR，解读并执行add指令，将寄存器R1中变量a的值加1，并将结果再存回寄存器R1，然后PC加1，指向下一条汇编指令。</p>
+
       
 
       
@@ -311,7 +329,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://wenboo.github.io/2017/01/02/程序员对内存的理解/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://wenboo.github.io/2017/02/14/程序是如何执行-a-a-1-的-？/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -325,18 +343,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/01/03/Java-中-main-函数为什么要加-static/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/12/31/2017-年开发阅读书单/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Java 中 main 函数为什么要加 static
+          2017 年开发阅读书单
         
       </div>
     </a>
   
   
-    <a href="/2016/12/31/2016-年末总结/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">2016年末总结</div>
+    <a href="/2017/02/14/为什么软件测试部门不喜欢重构？/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">为什么软件测试部门不喜欢重构？</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -350,7 +368,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="程序员对内存的理解" data-title="程序员对内存的理解" data-url="http://wenboo.github.io/2017/01/02/程序员对内存的理解/"></div>
+	<div class="ds-thread" data-thread-key="程序是如何执行-a-a-1-的-？" data-title="程序是如何执行 a = a+1 的 ？" data-url="http://wenboo.github.io/2017/02/14/程序是如何执行-a-a-1-的-？/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
