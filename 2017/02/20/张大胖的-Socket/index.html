@@ -6,14 +6,34 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://wenboo.github.io">
-  <title>Tag: 计算机网络 | Hi~Welcome to Wenboo&#39;s Blog</title>
+  <title>张大胖的 Socket | Hi~Welcome to Wenboo&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hi~Welcome to Wenboo's Blog">
-<meta property="og:url" content="http://wenboo.github.io/tags/计算机网络/index.html">
+  <meta name="description" content="张大胖研究TCP/IP已经有段时间了。
+他终于明白了所谓IP层就是把数据分组从一个主机跨越千山万水搬运到另外一主机，  并且这搬运服务一点都不可靠， 丢包、重复、失序可以说是家常便饭， 怪不得说是“尽力而为”， 基本上无所作为。
+脏活累活只好让TCP来做了， 在两个主机的应用（进程）之间通过失败重传来实现可靠性的传输。
+张大胖经常感慨：这建立一个TCP连接可是相当的复杂， 我的程序得先和远端的服务">
+<meta property="og:type" content="article">
+<meta property="og:title" content="张大胖的 Socket">
+<meta property="og:url" content="http://wenboo.github.io/2017/02/20/张大胖的-Socket/index.html">
 <meta property="og:site_name" content="Hi~Welcome to Wenboo's Blog">
+<meta property="og:description" content="张大胖研究TCP/IP已经有段时间了。
+他终于明白了所谓IP层就是把数据分组从一个主机跨越千山万水搬运到另外一主机，  并且这搬运服务一点都不可靠， 丢包、重复、失序可以说是家常便饭， 怪不得说是“尽力而为”， 基本上无所作为。
+脏活累活只好让TCP来做了， 在两个主机的应用（进程）之间通过失败重传来实现可靠性的传输。
+张大胖经常感慨：这建立一个TCP连接可是相当的复杂， 我的程序得先和远端的服务">
+<meta property="og:image" content="http://img.mp.itc.cn/upload/20161109/f3d8101f344e476c9e85b365d98f5a93_th.png">
+<meta property="og:image" content="http://img.mp.itc.cn/upload/20161109/200a75fc72b14459a0ede5d531ea930e.png">
+<meta property="og:image" content="http://img.mp.itc.cn/upload/20161109/1513c0d845b34ffaafe1fae461707210_th.png">
+<meta property="og:image" content="http://img.mp.itc.cn/upload/20161109/d03bb08a678043c8b03e040c7f5971e4.png">
+<meta property="og:image" content="http://img.mp.itc.cn/upload/20161109/faf2710b8eb4475ea9d35808359e9387.png">
+<meta property="og:image" content="http://img.mp.itc.cn/upload/20161109/9afd7b2b5913470da7a81a50145e3127.png">
+<meta property="og:updated_time" content="2017-02-20T14:00:27.838Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hi~Welcome to Wenboo's Blog">
+<meta name="twitter:title" content="张大胖的 Socket">
+<meta name="twitter:description" content="张大胖研究TCP/IP已经有段时间了。
+他终于明白了所谓IP层就是把数据分组从一个主机跨越千山万水搬运到另外一主机，  并且这搬运服务一点都不可靠， 丢包、重复、失序可以说是家常便饭， 怪不得说是“尽力而为”， 基本上无所作为。
+脏活累活只好让TCP来做了， 在两个主机的应用（进程）之间通过失败重传来实现可靠性的传输。
+张大胖经常感慨：这建立一个TCP连接可是相当的复杂， 我的程序得先和远端的服务">
+<meta name="twitter:image" content="http://img.mp.itc.cn/upload/20161109/f3d8101f344e476c9e85b365d98f5a93_th.png">
   
     <link rel="alternative" href="/atom.xml" title="Hi~Welcome to Wenboo&#39;s Blog" type="application/atom+xml">
   
@@ -165,71 +185,217 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-张大胖的-Socket" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/01/23/Cookie-与-Session-的区别/" class="archive-article-date">
-  	<time datetime="2017-01-23T12:05:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-23</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/01/23/Cookie-与-Session-的区别/">Cookie 与 Session 的区别</a>
+    <h1 class="article-title" itemprop="name">
+      张大胖的 Socket
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/02/20/张大胖的-Socket/" class="archive-article-date">
+  	<time datetime="2017-02-20T13:54:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>张大胖研究TCP/IP已经有段时间了。</p>
+<p>他终于明白了所谓IP层就是把数据分组从一个主机跨越千山万水搬运到另外一主机，  并且这搬运服务一点都不可靠， 丢包、重复、失序可以说是家常便饭， 怪不得说是“尽力而为”， 基本上无所作为。</p>
+<p>脏活累活只好让TCP来做了， 在两个主机的应用（进程）之间通过失败重传来实现可靠性的传输。</p>
+<p>张大胖经常感慨：这建立一个TCP连接可是相当的复杂， 我的程序得先和远端的服务器打个招呼， 然后它再给我打个招呼确认， 我还得再给它确认下。  这还不算完， 我们的招呼中还得各自带上各自的序号， 这将来传输真正的数据时用到。</p>
+<p>具体的传输就更麻烦了， 什么滑动窗口，什么累积确认、分组缓存、流量控制， 简直不是人做的事情。</p>
+<p>到了断开连接的时候， 还得考虑友好分手！</p>
+<p>可是领导竟然让张大胖用这个超级复杂的TCP协议来编程， 来设计一个客户端和服务器端的通信系统。</p>
+<p>张大胖掂量了下自己， 觉得肯定搞不定， 于是赶紧向自己的好基友，编程大神Bill求救， Bill 在电话里说： “这很简单啊，你去看看TCP/IP协议的RFC, 然后用C语言编程实现不就行了吗。”</p>
+<p>张大胖心想这等于啥也没说， 继续“跪求” 。  Bill 终于说：“等着吧， 我下周给你”</p>
+<a id="more"></a>
+<hr>
+<p><strong>Socket</strong></p>
+<p>周一， Bill果然带着7、8张软盘来找张大胖了， 把软盘的程序分别Copy到了两个电脑里， 一个模拟客户端， 一个模拟服务器。  很快程序运行起来了， 两个电脑可以通过TCP通信了。</p>
+<p>张大胖说： “大神， 你是怎么做到的？”</p>
+<p>Bill说：“TCP协议的确很复杂， 我们不能要求每个程序员都去实现建立连接的3次握手， 累积确认，分组缓存， 这些应该是属于操作系统内核的部分， 没必要重复开发， 但是对于应用程序来讲， <strong>操作系统需要抽象出一个概念， 让上层应用去编程</strong>。 “</p>
+<p>“什么概念？”</p>
+<p>“socket”</p>
+<p>”为啥叫socket? “</p>
+<p>“一个比喻而已， 就像插座一样， 一个插头插进插座， 建立了连接。 不过我设计这个socket  可以理解为 (<strong>客户端IP, 客户端Port,  服务器端IP, 服务器端Port</strong>)， 对了， Port就是端口， 通俗点讲就是一个数字而已”</p>
+<p>“好像不用port就可以吧，  因为我们这是两个机器之间的通信， IP是不是就够了？”</p>
+<p>Bill 说：“看来你忘了， TCP是两个进程之间的通信， 客户端上可以有很多进程同时访问多个服务器， 服务器上也有多个进程对外提供服务， 肯定要区分开啊”</p>
+<p>张大胖不好意思的说： “原来端口号就是用来区分进程的， 这样IP层发过来的数据包， 到达TCP层以后就可以分发给各个应用程序了。 ”</p>
+<p>“对的， 这叫多路复用。 一般来说， 服务器端都是被动访问的， 所以大家需要知道它提供服务的端口号， 要不然怎么连接？  例如80， 443等， 就是所谓知名端口号； 而客户端访问服务器的时候，自己的端口号可以随机生成一个， 只要不和别的应用冲突即可。”</p>
+<p><img src="http://img.mp.itc.cn/upload/20161109/f3d8101f344e476c9e85b365d98f5a93_th.png" alt="img"></p>
+<hr>
+<p><strong>Socket编程</strong></p>
+<p>张大胖问道： “那具体怎么使用你的Socket来编程？ ”</p>
+<p>“这要分为客户端和服务器端，两者不一样， 对客户端来讲很简单， 你需要创建一个socket， 然后向服务器发起连接，  连接上以后就可以发送，接收数据了， 你看看这段伪代码“</p>
+<p><img src="http://img.mp.itc.cn/upload/20161109/200a75fc72b14459a0ede5d531ea930e.png" alt="img"></p>
+<p>“恩， 抽象以后果然是不一样， 那些烦人的细节都被隐藏了， 只剩下一些概念性的东西， 用起来很清爽，   这个clientfd  我猜就是一个像文件描述符那样的东西吧？  打开文件就会有一个”</p>
+<p>“对的， 很好的类比， 注意，在上面的伪码中，没有出现客户端的ip和端口， <strong>系统可以自动获得IP， 也可以自动分配端口</strong>。 还有， 看到那个connect 函数没有， 其实就是在和服务器发起三次握手呢。 ”</p>
+<p>“那服务器怎么响应？”</p>
+<p>“服务器端要复杂一些， 你想想看， <strong>第一， 服务器是被动的， 所以它启动以后， 需要监听客户端发起的连接， 第二， 服务器要应付很多的客户端发起连接， 所以它一定得各个socket给区分开了</strong>， 要不就乱了套了， 伪代码是这个样子的：”</p>
+<p><img src="http://img.mp.itc.cn/upload/20161109/1513c0d845b34ffaafe1fae461707210_th.png" alt="img"></p>
+<p>张大胖说： “果然是复杂多了， listenfd ,从名称看就是为了要监听而创建的socket描述符吧， bind 是干嘛？  嗯， 我猜是为了声明说我要占用这个端口了啊， 你们都别用了，  listen函数才是真正开始监听了。   </p>
+<p>慢着，我赛，  接下来是个死循环啊， 啊对对，服务器端一直提供服务， 永不停歇。   可是这个accept是干嘛， 为什么使用了listenfd , 然后返回了一个新的connfd ???”</p>
+<p>Bill满意的说： “不错，思考就有进步， 可是你忘了我刚说的东西了， 服务器要区分开各个客户端， 怎么区分呢？  那只有用一个新的socket来表示喽， 你看后面的操作都是基于connfd 来做的。  还有<strong>这个accept 相当于和客户端的connect 一起完成了TCP的三次握手</strong> ！ 至于之前的listenfd ， 它只起到一个大门的作用了， 意思是说，欢迎敲门， 进门之后我将为你生成一个独一无二的socket描述符！  ”</p>
+<p><img src="http://img.mp.itc.cn/upload/20161109/d03bb08a678043c8b03e040c7f5971e4.png" alt="img"></p>
+<p>“有道理， 大神果然是大神， 考虑的非常全面啊， 不过似乎有个漏洞，你一开始说socket指的是 (IP, Port),   现在你已经有了一个listenfd 的socket, 端口是80  然后每次客户端发起连接还要创建新的connfd,  因为80端口已经被占用，难道服务器端会为每个连接都创建新的端口吗？”</p>
+<p>“这是个好问题啊”  Bill 说 “其实新创建的connfd 并没有使用新的端口号，也是用的80,  可以这么理解，这个socket描述符指向一个数据结构， 例如 listenfd 指向的结构是这样的：”</p>
+<p><img src="http://img.mp.itc.cn/upload/20161109/faf2710b8eb4475ea9d35808359e9387.png" alt="img"></p>
+<p>“而一旦accept 新的连接， 新的connfd 就会生成, 像下面的表格， 就生成了两个connfd ,  它们俩服务器端的ip和port都是想同的， 但是客户端的IP和Port是不同的， 自然就可以区分开来了”</p>
+<p><img src="http://img.mp.itc.cn/upload/20161109/9afd7b2b5913470da7a81a50145e3127.png" alt="img"></p>
+<p>张大胖说：“唉， 这底层做了这么多工作啊，  看来socket 必须得通过<strong>(客户端IP, 客户端Port,  服务器端IP, 服务器端Port)</strong> 来确定”</p>
+<p>“其实这个四元组还不太准确， 因为咱们说了半天，都是TCP协议的socket,  因为你们领导只要你实现这一个，   你看过UDP没有？  就是那个无连接的运输层协议， 也有socket, 所以更准确的定义的话，还得加上协议这一项， 变成五元组<strong>(协议， 客户端IP, 客户端Port,  服务器端IP, 服务器端Port)</strong> ”</p>
+<p>“大神，咱们什么时候讲讲UDP的socket ? ”</p>
+<p>“下次再说吧！”</p>
+<blockquote>
+<p>题外话： 文中提到的Bill 是向 Bill Joy致敬，  这是一个天才程序员，主要工作包括BSD Unix操作系统， 实现TCP/IP协议栈， vi 编辑器，c shell ， NFC, SPARC处理器，jini等。</p>
+<p>当年DARPA（美国国防部先进研究项目局）和一个叫做BBN的公司签署了一个合同，要把TCP/IP协议加入到Berkeley Unix当中， 当研究生Bill Joy 看到BBN写的TCP/IP实现时， 觉得非常差劲，拒绝把它加入内核， 后来干脆卷起袖子自己实现了一个高性能的TCP/IP栈， 这个协议栈至今是互联网的基石。</p>
+<p>别人问他是怎么实现这么复杂的软件的， 这位大神说： “很简单啊， 你只需要看看协议， 然后把代码写出来就行了”</p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">计算机网络</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">socket</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/network/" class="article-tag-list-link color3">network</a>
+        			<a href="/categories/c/" class="article-tag-list-link color2">c</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://wenboo.github.io/2017/02/20/张大胖的-Socket/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2017/12/31/2017-年开发阅读书单/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          2017 年开发阅读书单
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2017/02/20/我是一个键盘/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">我是一个键盘</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="张大胖的-Socket" data-title="张大胖的 Socket" data-url="http://wenboo.github.io/2017/02/20/张大胖的-Socket/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"wenboo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
   
 
-    
+
 
 
           </div>
@@ -252,9 +418,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		root: "/",
