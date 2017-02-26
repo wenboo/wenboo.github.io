@@ -167,6 +167,82 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-if&amp;else-代码重构方向原则指导" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/08/if&else-代码重构方向原则指导/">if&amp;else 代码重构方向原则指导</a>
+    </h1>
+  
+
+        
+        <a href="/2016/11/08/if&else-代码重构方向原则指导/" class="archive-article-date">
+  	<time datetime="2016-11-08T14:04:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-11-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>几天前的一次上线，脑残手抖不小心写了bug，虽然组里的老大没有说什么，但心里面很是难过。同事说我之所以写虫子是因为我讨厌if/else，这个习惯不好。的确，if/else可以帮助我们很方便的写出流程控制代码，简洁明了，这个条件做什么，那个条件做什么，说得很清楚。说真的，我从来不反对if/else，从经验上看，越复杂的业务场景下，代码写的越简单单一，通常越不容易出错。以结果为导向的现代项目管理方式，这是一种很有效实践经验。</p>
+<p>同事说的没错，我的确很讨厌if/else。这个习惯很大程度是受Thoughtworks一位咨询师朋友影响，他经常在我耳边唠叨，写代码要干净，要简洁，要灵活多变，不要固守城规，不要动不动就if/else，switch/case。初入it领域，我一直把这句话奉为经典。在以后的学习工作中也时刻提醒自己要让自己的代码尽可能的看起来简洁，不失灵活。不喜欢if/else并不意味着拒绝它，该使用的时候必要使用，比如函数接口入参check，处理异常分支逻辑流程等。通常能不用分支语句，我尽量不会使用，因为我觉得if/else很丑，每每看到if/else代码，总会以挑剔的眼光看待它，想想能不能重构的更好。大多数时候，关于什么好的代码，大家的意见往往分歧很大，每个人都有各自的想法，审查你代码的人可能会选择另一种实现方式，这并不能说明谁对谁错。</p>
+        
+          <a class="article-more-a" href="/2016/11/08/if&else-代码重构方向原则指导/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/11/08/if&else-代码重构方向原则指导/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-Java-简易服务器的实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -915,75 +991,9 @@
 
 
   
-    <article id="post-开发团队的效率" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/24/开发团队的效率/">开发团队的效率</a>
-    </h1>
-  
-
-        
-        <a href="/2016/10/24/开发团队的效率/" class="archive-article-date">
-  	<time datetime="2016-10-24T14:43:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>我之前写过一篇叫《加班与效率》的文章，从概念上说了一些我对“效率”的认识，但是那篇文章趋于概念化，对于一些没有经历过这样的环境的同学来说，可能会觉得太抽象了。很早以前就想写一篇更具体一点的，可执行的文章与《加班与效率》这篇文章相辉映，并再把我两年前在杭州QCon上的那个“鼓吹工程师文化”的《建一支强大的小团队》（新浪微盘）的观点再加强一下。但是我遇到了一些思维方式上的麻烦—我讲的总是从我的经历背景出发，没有从其它人的经历背景来讲。这就好像，我在酷壳里说了很多东西（比如：专职的QA，Code Review很重要，编程年龄，创业的，Rework的……），有好些人觉得是不可能甚至太理想，其实我说的那些东西都是实实在在存在的，也是我所经历过的。于是，不同的经历，不同的环境，不同的眼界，造成了——有些人不理解我说的，而我也不能理解他们所说的。</p>
-<p>所以，过去的这段时间我一有机会就找一些人交流并观察一些身边的事情，并去试着跟从和理解那些我不能理解的东西。现在觉得差不多了，所以，写下了这篇文章。（但越是去理解对方，我就越坚持我的观点，所以这篇文章可能还是会出现鸡同鸭讲的情形，无所谓了）本文不讨论任何业务上的效率问题，只讨论软件开发或是软件工程中的效率问题。虽然产品和业务上的效率问题是根本，但是因为本文不是拉仇恨的，我也不想混在一起谈，所以请原谅我在这里先说开发团队的，以后重新开篇文章专门谈产品和业务的。</p>
-<p>我下面会罗列几个非常典型的开发方式——<strong>软件开发中的“锁”</strong>：<strong>接力棒式软件开发，保姆式软件开发，WatchDog软件开发，故障驱动式软件开发。</strong></p>
-        
-          <a class="article-more-a" href="/2016/10/24/开发团队的效率/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/life/" class="article-tag-list-link color5">life</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/10/24/开发团队的效率/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/5/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/7/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/5/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/7/">Next &raquo;</a>
     </nav>
   
 
@@ -1085,7 +1095,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">cpu</a>
+                <a href="javascript:void(0)" class="js-tag color2">c</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1097,19 +1111,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">http</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">c</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">jsp</a>
+                <a href="javascript:void(0)" class="js-tag color4">cpu</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1117,11 +1119,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">main</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">sqlite</a>
+                <a href="javascript:void(0)" class="js-tag color5">http</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1129,7 +1127,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">回调</a>
+                <a href="javascript:void(0)" class="js-tag color5">jdbc</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">jsp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">sqlite</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">main</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1141,7 +1151,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">jdbc</a>
+                <a href="javascript:void(0)" class="js-tag color3">回调</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1149,15 +1159,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">javaweb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">socket</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">wireshark</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1165,11 +1167,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">javaweb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color5">wireshark</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1177,11 +1183,27 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">代码重构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">json</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">代码重构</a>
+                <a href="javascript:void(0)" class="js-tag color3">架构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">线程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">单元测试</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1201,23 +1223,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">架构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">单元测试</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">线程</a>
+                <a href="javascript:void(0)" class="js-tag color3">os</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">mvc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">os</a>
               </li>
              
               <li class="article-tag-list-item">
