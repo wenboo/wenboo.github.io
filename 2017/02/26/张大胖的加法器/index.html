@@ -6,24 +6,32 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://wenboo.github.io">
-  <title>Java 多线程面试题及回答 | Hi~Welcome to Wenboo&#39;s Blog</title>
+  <title>张大胖的加法器 | Hi~Welcome to Wenboo&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="现在有T1、T2、T3三个线程，你怎样保证T2在T1执行完后执行，T3在T2执行完后执行？
-这个线程问题通常会在第一轮或电话面试阶段被问到，目的是检测你对”join”方法是否熟悉。这个多线程问题比较简单，可以用join方法实现。
-在Java中Lock接口比synchronized块的优势是什么？你需要实现一个高效的缓存，它允许多个用户读，但只允许一个用户写，以此来保持它的完整性，你会怎样去实现它？">
+  <meta name="description" content="加法器
+热爱编程的张大胖在大学时最烦的一门课之一就是《数字电路》 ， 他一直觉得和编程没什么关系。
+有一次课程设计是实现一个加法器， 大胖使用逻辑电路， 费了九牛二虎之力才实现了4位的加法。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java 多线程面试题及回答">
-<meta property="og:url" content="http://wenboo.github.io/2016/10/17/Java-多线程面试题及回答/index.html">
+<meta property="og:title" content="张大胖的加法器">
+<meta property="og:url" content="http://wenboo.github.io/2017/02/26/张大胖的加法器/index.html">
 <meta property="og:site_name" content="Hi~Welcome to Wenboo's Blog">
-<meta property="og:description" content="现在有T1、T2、T3三个线程，你怎样保证T2在T1执行完后执行，T3在T2执行完后执行？
-这个线程问题通常会在第一轮或电话面试阶段被问到，目的是检测你对”join”方法是否熟悉。这个多线程问题比较简单，可以用join方法实现。
-在Java中Lock接口比synchronized块的优势是什么？你需要实现一个高效的缓存，它允许多个用户读，但只允许一个用户写，以此来保持它的完整性，你会怎样去实现它？">
-<meta property="og:updated_time" content="2017-01-12T13:14:10.237Z">
+<meta property="og:description" content="加法器
+热爱编程的张大胖在大学时最烦的一门课之一就是《数字电路》 ， 他一直觉得和编程没什么关系。
+有一次课程设计是实现一个加法器， 大胖使用逻辑电路， 费了九牛二虎之力才实现了4位的加法。">
+<meta property="og:image" content="http://img.mp.itc.cn/upload/20161228/f706eae0049942619919d9681d21b2d4_th.jpeg">
+<meta property="og:image" content="http://img.mp.itc.cn/upload/20161228/8f0cc3d9d196433e84d411af33169151.png">
+<meta property="og:image" content="http://img.mp.itc.cn/upload/20161228/6ab1e6ab4d4d497f9a9aa0c62dca395b.png">
+<meta property="og:image" content="http://img.mp.itc.cn/upload/20161228/90e3c45b1b5c4aa8b4f096aad9ff0705.png">
+<meta property="og:image" content="http://img.mp.itc.cn/upload/20161228/8bbc7597c29d4a8d928a89733b3f4966.png">
+<meta property="og:image" content="http://img.mp.itc.cn/upload/20161228/d3f48a3b71b847e1ba782317c711d7aa.png">
+<meta property="og:image" content="http://img.mp.itc.cn/upload/20161228/3244d48fe8104f818be2f7e558135700.png">
+<meta property="og:updated_time" content="2017-02-26T10:43:12.669Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java 多线程面试题及回答">
-<meta name="twitter:description" content="现在有T1、T2、T3三个线程，你怎样保证T2在T1执行完后执行，T3在T2执行完后执行？
-这个线程问题通常会在第一轮或电话面试阶段被问到，目的是检测你对”join”方法是否熟悉。这个多线程问题比较简单，可以用join方法实现。
-在Java中Lock接口比synchronized块的优势是什么？你需要实现一个高效的缓存，它允许多个用户读，但只允许一个用户写，以此来保持它的完整性，你会怎样去实现它？">
+<meta name="twitter:title" content="张大胖的加法器">
+<meta name="twitter:description" content="加法器
+热爱编程的张大胖在大学时最烦的一门课之一就是《数字电路》 ， 他一直觉得和编程没什么关系。
+有一次课程设计是实现一个加法器， 大胖使用逻辑电路， 费了九牛二虎之力才实现了4位的加法。">
+<meta name="twitter:image" content="http://img.mp.itc.cn/upload/20161228/f706eae0049942619919d9681d21b2d4_th.jpeg">
   
     <link rel="alternative" href="/atom.xml" title="Hi~Welcome to Wenboo&#39;s Blog" type="application/atom+xml">
   
@@ -175,71 +183,75 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Java-多线程面试题及回答" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-张大胖的加法器" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Java 多线程面试题及回答
+      张大胖的加法器
     </h1>
   
 
         
-        <a href="/2016/10/17/Java-多线程面试题及回答/" class="archive-article-date">
-  	<time datetime="2016-10-17T14:15:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-17</time>
+        <a href="/2017/02/26/张大胖的加法器/" class="archive-article-date">
+  	<time datetime="2017-02-26T10:36:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-26</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>现在有T1、T2、T3三个线程，你怎样保证T2在T1执行完后执行，T3在T2执行完后执行？</strong></p>
-<p>这个线程问题通常会在第一轮或电话面试阶段被问到，目的是检测你对”join”方法是否熟悉。这个多线程问题比较简单，可以用join方法实现。</p>
-<p><strong>在Java中Lock接口比synchronized块的优势是什么？你需要实现一个高效的缓存，它允许多个用户读，但只允许一个用户写，以此来保持它的完整性，你会怎样去实现它？</strong></p>
-<p>lock接口在多线程和并发编程中最大的优势是它们为读和写分别提供了锁，它能满足你写像ConcurrentHashMap这样的高性能数据结构和有条件的阻塞。Java线程面试的问题越来越会根据面试者的回答来提问。我强烈建议在你去参加多线程的面试之前认真读一下Locks，因为当前其大量用于构建电子交易终统的客户端缓存和交易连接空间。</p>
-<p><strong>在java中wait和sleep方法的不同？</strong></p>
-<p>通常会在电话面试中经常被问到的Java线程面试问题。最大的不同是在等待时wait会释放锁，而sleep一直持有锁。Wait通常被用于线程间交互，sleep通常被用于暂停执行。</p>
-<p><strong>用Java实现阻塞队列</strong></p>
-<p>这是一个相对艰难的多线程面试问题，它能达到很多的目的。第一，它可以检测侯选者是否能实际的用Java线程写程序；第二，可以检测侯选者对并发场景的理解，并且你可以根据这个问很多问题。如果他用wait()和notify()方法来实现阻塞队列，你可以要求他用最新的Java 5中的并发类来再写一次。</p>
-<p> <strong>用Java写代码来解决生产者—消费者问题</strong></p>
-<p>与上面的问题很类似，但这个问题更经典，有些时候面试都会问下面的问题。在Java中怎么解决生产者——消费者问题，当然有很多解决方法，我已经分享了一种用阻塞队列实现的方法。有些时候他们甚至会问怎么实现哲学家进餐问题。</p>
-<p><strong>用Java编程一个会导致死锁的程序，你将怎么解决？</strong></p>
-<p>这是我最喜欢的Java线程面试问题，因为即使死锁问题在写多线程并发程序时非常普遍，但是很多侯选者并不能写deadlock free code（无死锁代码？），他们很挣扎。只要告诉他们，你有N个资源和N个线程，并且你需要所有的资源来完成一个操作。为了简单这里的n可以替换为2，越大的数据会使问题看起来更复杂。通过避免Java中的死锁来得到关于死锁的更多信息。</p>
-<p><strong>什么是原子操作，Java中的原子操作是什么？</strong></p>
-<p>非常简单的java线程面试问题，接下来的问题是你需要同步一个原子操作。</p>
-<p><strong>Java中的volatile关键是什么作用？怎样使用它？在Java中它跟synchronized方法有什么不同？</strong></p>
-<p>自从Java 5和Java内存模型改变以后，基于volatile关键字的线程问题越来越流行。应该准备好回答关于volatile变量怎样在并发环境中确保可见性、顺序性和一致性。</p>
-<p><strong>什么是竞争条件？你怎样发现和解决竞争？</strong></p>
-<p>这是一道出现在多线程面试的高级阶段的问题。大多数的面试官会问最近你遇到的竞争条件，以及你是怎么解决的。有些时间他们会写简单的代码，然后让你检测出代码的竞争条件。可以参考我之前发布的关于Java竞争条件的文章。在我看来这是最好的java线程面试问题之一，它可以确切的检测候选者解决竞争条件的经验，or writing code which is free of data race or any other race condition。关于这方面最好的书是《Concurrency practices in Java》。</p>
-<p><strong>你将如何使用thread dump？你将如何分析Thread dump？</strong></p>
-<p>在UNIX中你可以使用kill -3，然后thread dump将会打印日志，在windows中你可以使用”CTRL+Break”。非常简单和专业的线程面试问题，但是如果他问你怎样分析它，就会很棘手。</p>
-<p><strong>为什么我们调用start()方法时会执行run()方法，为什么我们不能直接调用run()方法？</strong></p>
-<p>这是另一个非常经典的java多线程面试问题。这也是我刚开始写线程程序时候的困惑。现在这个问题通常在电话面试或者是在初中级Java面试的第一轮被问到。这个问题的回答应该是这样的，当你调用start()方法时你将创建新的线程，并且执行在run()方法里的代码。但是如果你直接调用run()方法，它不会创建新的线程也不会执行调用线程的代码。阅读我之前写的《start与run方法的区别》这篇文章来获得更多信息。</p>
-<p><strong>Java中你怎样唤醒一个阻塞的线程？</strong></p>
-<p>这是个关于线程和阻塞的棘手的问题，它有很多解决方法。如果线程遇到了IO阻塞，我并且不认为有一种方法可以中止线程。如果线程因为调用wait()、sleep()、或者join()方法而导致的阻塞，你可以中断线程，并且通过抛出InterruptedException来唤醒它。我之前写的《How to deal with blocking methods in java》有很多关于处理线程阻塞的信息。</p>
-<p><strong>在Java中CycliBarriar和CountdownLatch有什么区别？</strong></p>
-<p>这个线程问题主要用来检测你是否熟悉JDK5中的并发包。这两个的区别是CyclicBarrier可以重复使用已经通过的障碍，而CountdownLatch不能重复使用。</p>
-<p><strong>什么是不可变对象，它对写并发应用有什么帮助？</strong></p>
-<p>另一个多线程经典面试问题，并不直接跟线程有关，但间接帮助很多。这个java面试问题可以变的非常棘手，如果他要求你写一个不可变对象，或者问你为什么String是不可变的。</p>
-<p><strong>你在多线程环境中遇到的共同的问题是什么？你是怎么解决它的？</strong></p>
-<p>多线程和并发程序中常遇到的有Memory-interface、竞争条件、死锁、活锁和饥饿。问题是没有止境的，如果你弄错了，将很难发现和调试。这是大多数基于面试的，而不是基于实际应用的Java线程问题。</p>
+        <p><strong>加法器</strong></p>
+<p>热爱编程的张大胖在大学时最烦的一门课之一就是《数字电路》 ， 他一直觉得和编程没什么关系。</p>
+<p>有一次课程设计是实现一个加法器， 大胖使用逻辑电路， 费了九牛二虎之力才实现了4位的加法。</p>
+<p><img src="http://img.mp.itc.cn/upload/20161228/f706eae0049942619919d9681d21b2d4_th.jpeg" alt="img"></p>
+<a id="more"></a>
+<p>这4个二进制位能表达的数有16个， 从0 到15 ：</p>
+<p><img src="http://img.mp.itc.cn/upload/20161228/8f0cc3d9d196433e84d411af33169151.png" alt="img"></p>
+<p>大胖用他的加法器计算了一下 8+3 ：<br>8+3 = 1000 + 0011 = 1011 = 11</p>
+<p>还不错， 再计算一下 9+7 ：<br>9+8 = 1001 + 1000= 0001</p>
+<p>怎么变成了1 ？  奥， 我这儿只有4位，能支持的最大数字就是 15 ，  而9+8的结果是 10001 （十进制16），计算结果溢出，   最高位的1被丢弃了！</p>
+<p>其实这也符合要求， 大胖顺利的交了作业。</p>
 <hr>
-<p><strong>补充的其它几个问题：</strong></p>
-<blockquote>
-<p>在java中绿色线程和本地线程区别？</p>
-<p>线程与进程的区别？</p>
-<p>什么是多线程中的上下文切换？</p>
-<p>死锁与活锁的区别，死锁与馅饼的区别？</p>
-<p>Java中用到的线程调度算法是什么？</p>
-<p>在Java中什么是线程调度？</p>
-<p>在线程中你怎么处理不可捕捉异常？</p>
-<p>什么是线程组，为什么在Java中不推荐使用？</p>
-<p>为什么使用Executor框架比使用应用创建和管理线程好？</p>
-<p>在Java中Executor和Executors的区别？</p>
-<p>如何在Windows和Linux上查找哪个线程使用的CPU时间最长？</p>
-</blockquote>
+<p><strong>用加法来表示减法</strong></p>
+<p>可是下一次课还是课程设计， 老师竟然要求在这个加法器上实现减法 ， 这可把大胖给难住了， 在加法器上实现减法， 真是个变态的需求。</p>
+<p>遇到了问题， 张大胖自然会“跪求”好基友， 电脑高手Bill。</p>
+<p>Bill 说： “这个要求一点都不变态，用加法器同时实现加法和减法， 能极大的节省CPU的电路设计。 ”</p>
+<p>“你就说该怎么实现吧”</p>
+<p>Bill说：“我先给你说一下原理， 在你定义的4位二进制中，一共可以表达16个数，  我们引入一个‘补数 ‘的概念， 例如 3的补数 是 13， 4的补数是12，  5 的补数是11， 当你计算7减去3 的时候， 可以变成 7加上3 的补数， 即 7 + 13 ”</p>
+<p>“可是7+13 是20 ， 但是7-3 等于4 啊”</p>
+<p>“20其实已经超出你4位二进制能表达的16个数了， 已经溢出了，对吧，  所以20还得减去16 ， 就是4 了。  你用二进制算一下。”</p>
+<p>7-3 = 0111- 0011 = 0111 + 1101（二进制13） = 10100</p>
+<p>10101已经溢出了， 去掉最高位是 0100 ，就是十进制4 了。</p>
+<p>“果然不错”   张大胖说  “这让我想到了钟表， 现在是7点， 我想让它回到4点， 有两种办法， 一种方法是让时针后退 3 格，  另外一种方法是让时针前进9格， 前进到12点的时候， 其实就相当于溢出了， 舍弃掉。  “</p>
+<p>Bill 说， “看来你已经Get了，  数学上有个词叫做求模， 说的就是这个运算， 还以时钟为例”</p>
+<p>向后退3格：  7 - 3 = 4<br>向前进9格 ： (7 + 9) mod 12 = 4<br>向前进21格： (7+9+12) mod 12 = 4<br>向前进33格： (7+9+12+12) mod 12 = 4<br>…..</p>
+<p>“这是一种以进为退的策略” Bill 接着说 “ 用这种办法就把减法变成了加法”</p>
+<p>“但是我怎么得到所谓的补数呢？  从3 怎么得到13 呢”</p>
+<p>“这很简单， 对于二进制， <strong>前辈们想出了一个异常简单， 又特别适合计算机的算法， 对二进制数的所有位取反， 然后加1</strong> ”</p>
+<p><img src="http://img.mp.itc.cn/upload/20161228/6ab1e6ab4d4d497f9a9aa0c62dca395b.png" alt="img"></p>
+<p>“神奇啊， 前辈们竟能想出这么巧妙的办法 ！”</p>
+<p>“这就是所谓的<strong>补码</strong>了” Bill总结道</p>
+<hr>
+<p><strong>负数的表示</strong></p>
+<p>Bill 问道： “刚才咱们说的都是整数的加减法，  负数你考虑了没有啊？  大胖？”</p>
+<p>“我也刚刚想到， 现在我知道 7-3  可以换算成 7+ 13  了，  如果是3 - 7 呢？ ”</p>
+<p>“负数一引入， 系统就变得更复杂了， 首先你得用一个标志位来表示整数还是负数吧： ”</p>
+<p><img src="http://img.mp.itc.cn/upload/20161228/90e3c45b1b5c4aa8b4f096aad9ff0705.png" alt="img"></p>
+<p>（表格1）</p>
+<p>张大胖说： “明白了， 最高位的0 表示正数， 1 表示负数， 真正有效的数字只剩下3位了， <strong>正数的范围是从1 到7 ，  负数的范围从 -1到-7 ，  不过这里出现了两个零！ 一个正0 ， 一个负0</strong> ， 这不妥吧。”</p>
+<p>“先别急， 之前说到减法可以变成加法， 秘密就是用补码，   例如8-3 相当于8+(-3)的补码 ， 那我们完全可以把表格1中的负数用补码表示， 然后<strong>把那个负0 特别当做 -8来处理</strong>：  ”</p>
+<p><img src="http://img.mp.itc.cn/upload/20161228/8bbc7597c29d4a8d928a89733b3f4966.png" alt="img"></p>
+<p>Bill 接着说： “按照上面的表格， 现在我们来计算一下 7-4 ,   7是 0111， -4是 1100， <strong>注意我们把符号位也算进去了</strong>， 两者相加：</p>
+<p><img src="http://img.mp.itc.cn/upload/20161228/d3f48a3b71b847e1ba782317c711d7aa.png" alt="img"></p>
+<p>“让我试试4-7, ” 张大胖说， 4是0100 ， -7是1001， 两者相加：</p>
+<p><img src="http://img.mp.itc.cn/upload/20161228/3244d48fe8104f818be2f7e558135700.png" alt="img"></p>
+<p>“妙啊”   张大胖不禁赞叹起来， “把负数用补码表示，不但减法变加法，  连符号位都可以参与运算了！”</p>
+<p>“ 是啊， 我们通过补码能极大的简化电路的设计， 你一定要记住， <strong>在计算机内部，是使用补码来表示二进制数， 如果是一个正数， 补码就是它本身，  如果是个负数， 需要把除了符号位之外的二进制数进行取反加一的操作</strong>“ </p>
+<p>“此外， 我想你也能总结出来， 你这个4位的系统如果只表示无符号数(没有负数的话) ， 它的范围是[0 , 2 ^ 4]  ，即[0, 16] ； </p>
+<p>如果要想表达有符号数(负数和整数)， 它的范围就是[-2^3, 2^3-1] , 即[-8, 7] 。  在高级编程语言像C, Java  ，你经常会看数据类型的取值范围， 你应该明白其中的原理了。  ”</p>
 
       
 
@@ -248,24 +260,13 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">多线程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
       
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
+        			<a href="/categories/cm/" class="article-tag-list-link color3">cm</a>
         		</li>
       		
 		</ul>
@@ -320,7 +321,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://wenboo.github.io/2016/10/17/Java-多线程面试题及回答/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://wenboo.github.io/2017/02/26/张大胖的加法器/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -334,18 +335,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2016/10/17/sizeof()-用法汇总/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/12/31/2017-年开发阅读书单/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          sizeof() 用法汇总
+          2017 年开发阅读书单
         
       </div>
     </a>
   
   
-    <a href="/2016/10/16/我是一块硬盘/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">我是一块硬盘</div>
+    <a href="/2017/02/26/冯·诺依曼计算机的诞生/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">冯·诺依曼计算机的诞生</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -359,7 +360,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Java-多线程面试题及回答" data-title="Java 多线程面试题及回答" data-url="http://wenboo.github.io/2016/10/17/Java-多线程面试题及回答/"></div>
+	<div class="ds-thread" data-thread-key="张大胖的加法器" data-title="张大胖的加法器" data-url="http://wenboo.github.io/2017/02/26/张大胖的加法器/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
