@@ -20,7 +20,7 @@
 回到2001年， 当时的老刘还是小刘， 在计算所跟着老板和四川的一个公司合作，做一个类似于OA(办公自动化)的项目。
 当时小刘刚毕业，写过一些asp的程序，在小刘的意识当中， 还是觉得只要你通过浏览器向服务器发出请求， 服务器处理以后， 需要刷新整个网页才能看到服务器处理的结果。
 但是有一天我突然看到项目中">
-<meta property="og:updated_time" content="2017-02-27T13:46:45.523Z">
+<meta property="og:updated_time" content="2017-02-27T13:50:10.509Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="给小白的 Java EE 指南（5）">
 <meta name="twitter:description" content="本文是给小白的Java EE生存指南的第5篇， 讲一下前端工程师必备的AJAX的来龙去脉。
@@ -218,7 +218,8 @@
 <p>AJAX这个词2005才出现，之前已经出现了大量的“AJAX”Web应用， 我认为其中最著名的就是Google Maps 它使用XMLHttpRequest异步调用服务器端来获取数据，并将数据应用在客户端，实现了无刷新的效果，极好的用户体验让Google Maps获取了巨大的成功。</p>
 <p><strong>XML Vs JSON</strong></p>
 <p>但是在javascript中使用XML有两个问题：</p>
-<p>1.XML 要求有开始标签和结束标签， 如<br><figure class="highlight plain"><figcaption><span>,name出现了两次， 这在网络传输中其实是一种冗余浪费。</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">2.javascript 需要解析xml , 然后展示到浏览器中。</div><div class="line"></div><div class="line">第二点尤其不爽， 所以就有人发展了一个叫JSON(JavaScript Object Notation) 的一个轻量级的数据格式。 JSON其实就是javascript 语法的子集， 就是javascript中的对象和数组。</div><div class="line"></div><div class="line">对象在js中表示为“&#123;&#125;”括起来的内容，数据结构为 &#123;key：value,key：value,...&#125;的键值对的结构。</div><div class="line"></div><div class="line">数组在js中是中括号“[]”括起来的内容，数据结构为 [&quot;java&quot;,&quot;javascript&quot;,&quot;vb&quot;,...]。</div><div class="line"></div><div class="line">这两种结构虽然很简单， 但是递归组合起来能表达任意的数据结构， 这就是简单的力量， 下面就是一个例子：</div></pre></td></tr></table></figure></p>
+<p>1.XML 要求有开始标签和结束标签， 如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;name&gt;liuxin&lt;/name&gt;</div><div class="line">``` </div><div class="line"></div><div class="line">name出现了两次， 这在网络传输中其实是一种冗余浪费。</div><div class="line"></div><div class="line">2.javascript 需要解析xml , 然后展示到浏览器中。</div><div class="line"></div><div class="line">第二点尤其不爽， 所以就有人发展了一个叫JSON(JavaScript Object Notation) 的一个轻量级的数据格式。 JSON其实就是javascript 语法的子集， 就是javascript中的对象和数组。</div><div class="line"></div><div class="line">对象在js中表示为“&#123;&#125;”括起来的内容，数据结构为 &#123;key：value,key：value,...&#125;的键值对的结构。</div><div class="line"></div><div class="line">数组在js中是中括号“[]”括起来的内容，数据结构为 [&quot;java&quot;,&quot;javascript&quot;,&quot;vb&quot;,...]。</div><div class="line"></div><div class="line">这两种结构虽然很简单， 但是递归组合起来能表达任意的数据结构， 这就是简单的力量， 下面就是一个例子：</div></pre></td></tr></table></figure>
 <p>{<br>“programmers”:<br>[{<br>“firstName”: “Brett”,<br>“lastName”: “McLaughlin”,<br>“email”: “aaaa”<br>}, {<br>“firstName”: “Jason”,<br>“lastName”: “Hunter”,<br>“email”: “bbbb”<br>}],<br>“authors”:<br>[{<br>“firstName”: “Isaac”,<br>“lastName”: “Asimov”,<br>“genre”: “sciencefiction”<br>}, {<br>“firstName”: “Tad”,<br>“lastName”: “Williams”,<br>“genre”: “fantasy”<br>}],<br>“musicians”:<br>[{<br>“firstName”: “Eric”,<br>“lastName”: “Clapton”,<br>“instrument”: “guitar”<br>}, {<br>“firstName”: “Sergei”,<br>“lastName”: “Rachmaninoff”,<br>“instrument”: “piano”<br>}]<br>}<br>```</p>
 <p>由于<strong>JSON本身就是Javascript 语法的一部分</strong>， javascipt代码可以直接把他们当成对象来处理， 根本不用解析XML了。<br>再加上JSON结构很紧凑， 很快就流行开来了， 现在AJAX 基本上都是在用JSON来传递数据了。</p>
 <p>题外话：第一次看到AJAX这个词的时候， 作为球迷的我脑海里第一反应是荷兰的阿贾克斯足球俱乐部， 在90年代， 阿贾克斯足球号称青年近卫军， 一帮小孩在欧冠决赛中把如日中天的AC米兰都搞定了， 后来由于《博斯曼法案》的实施，球员可以自由转会， 阿贾克斯就没落了。</p>
@@ -456,15 +457,15 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">c</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">面试</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">c</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -480,11 +481,27 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">jdbc</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">tool</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">jsp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">sqlite</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -496,27 +513,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">回调</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">回调</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">sqlite</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">socket</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">tcp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -532,14 +537,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">jdbc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">jvm</a>
               </li>
              
@@ -552,7 +549,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">tool</a>
+                <a href="javascript:void(0)" class="js-tag color4">tcp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -564,7 +565,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网卡</a>
+                <a href="javascript:void(0)" class="js-tag color2">socket</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -572,19 +573,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">进程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">线程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">键盘</a>
+                <a href="javascript:void(0)" class="js-tag color3">进程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -596,7 +589,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">网卡</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">内存</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">键盘</a>
               </li>
              
               <li class="article-tag-list-item">
