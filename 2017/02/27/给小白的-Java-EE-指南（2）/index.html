@@ -14,7 +14,7 @@
 <meta property="og:url" content="http://wenboo.github.io/2017/02/27/给小白的-Java-EE-指南（2）/index.html">
 <meta property="og:site_name" content="Hi~Welcome to Wenboo's Blog">
 <meta property="og:description" content="上次说到你发明了html , http, 浏览器， web服务器， 这下子把整个世界的信息都链接成了一个了一个大网： world wide web。可是你注意到一个问题没有， 这些html都是静态的 ， 也就是说你除了浏览你的网站和别人的网站之外，什么都做不成。 用你发明的HTTP术语来讲， 就是现在的互联网， 只支持 “GET”比如说， 你看了哥们的网站，知道广州恒大夺得了2015亚冠冠军， 想">
-<meta property="og:updated_time" content="2017-02-27T13:16:43.216Z">
+<meta property="og:updated_time" content="2017-02-27T13:35:23.158Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="给小白的 Java EE 指南（2）">
 <meta name="twitter:description" content="上次说到你发明了html , http, 浏览器， web服务器， 这下子把整个世界的信息都链接成了一个了一个大网： world wide web。可是你注意到一个问题没有， 这些html都是静态的 ， 也就是说你除了浏览你的网站和别人的网站之外，什么都做不成。 用你发明的HTTP术语来讲， 就是现在的互联网， 只支持 “GET”比如说， 你看了哥们的网站，知道广州恒大夺得了2015亚冠冠军， 想">
@@ -191,19 +191,19 @@
       
         <p>上次说到你发明了html , http, 浏览器， web服务器， 这下子把整个世界的信息都链接成了一个了一个大网： world wide web。可是你注意到一个问题没有， 这些html都是<strong>静态的</strong> ， 也就是说你除了浏览你的网站和别人的网站之外，什么都做不成。 用你发明的HTTP术语来讲， 就是现在的互联网， 只支持 “GET”比如说， 你看了哥们的网站，知道广州恒大夺得了2015亚冠冠军， 想给他留个言表示一下兴奋之情，这就做不到了。</p>
 <p>这是不能令你满意的， 对互联网做扩展吧。</p>
-<p>先扩展HTML ，加上一堆新标签 像<form>了， <input>了 什么type=text, radio, textarea,checkbox 。这样你就可以在html中支持输入各式各样的信息了。你还得扩展HTTP协议， 引入一个“POST”这样可以把数据发到Web服务器。Web 服务器当然也得扩展， 接收到POST过来的留言数据以后， 肯定得想办法处理啊 ，怎么处理?　无非就是新生成一个html ,除了把原有的数据保留以外，还要把新的留言相关的数据“动态”的加上去， 这就是所谓的动态页面。</form></p>
+<p>先扩展HTML ，加上一堆新标签 像<code>&lt;form&gt;</code>了， <code>&lt;input&gt;</code>了 什么type=text, radio, textarea,checkbox 。这样你就可以在html中支持输入各式各样的信息了。你还得扩展HTTP协议， 引入一个“POST”这样可以把数据发到Web服务器。Web 服务器当然也得扩展， 接收到POST过来的留言数据以后， 肯定得想办法处理啊 ，怎么处理?　无非就是新生成一个html ,除了把原有的数据保留以外，还要把新的留言相关的数据“动态”的加上去， 这就是所谓的动态页面。</p>
 <a id="more"></a>
 <p>必须得有程序来办这件事情， 你马上就面临两个问题：</p>
 <p>(1) 用什么语言来写， 毕竟有那么多语言像C, Perl , Python, 甚至Java 都在虎视眈眈呢<br>(2) 这个程序怎么和 Web 服务器交互</p>
 <p>解决方法也很简单， 你弄了了一个叫做 Common Gateway Interface (简称<strong>CGI</strong>) 的东西， 定义了标准的输入(STDIN)和输出(STDOUT)， 所有的程序都可以从STDIN 读入数据，处理后形成html, 然后向STDOUT 输出 。</p>
 <p>这下子任何语言都可以写cgi程序了， 网页也变成了“可交互式”的， 整个互联网又向前推进了一大步， 各种各样的商业网站如雨后春笋一般发展起来。</p>
-<p>( ps : 现在CGI 技术已经过时了， ASP, JSP, PHP等技术是主流。<br>在Java的世界里， 把Apache ,Ngnix 这样的服务器称为静态内容服务器， 主要处理像图片/文件件这样不变的，只读的静态资源，性能非常好； 把Tomcat, JBoss ，Websphere, Weblogic等称为动态内容服务器， 主要产生动态内容。一般的设计会把Apache/Ngnix 放的前边，接收所有的Http 请求，如果是静态资源，就直接处理掉， 如果是动态资源，就转发到Tomcat/Jboss 去处理。)</p>
+<p>( ps : 现在CGI 技术已经过时了， ASP, JSP, PHP等技术是主流。在Java的世界里， 把Apache ,Ngnix 这样的服务器称为静态内容服务器， 主要处理像图片/文件件这样不变的，只读的静态资源，性能非常好； 把Tomcat, JBoss ，Websphere, Weblogic等称为动态内容服务器， 主要产生动态内容。一般的设计会把Apache/Ngnix 放的前边，接收所有的Http 请求，如果是静态资源，就直接处理掉， 如果是动态资源，就转发到Tomcat/Jboss 去处理。)</p>
 <p>等等，还有个小问题， 我的留言我能看到， 别人的留言我也想看到改怎么办？ 很明显， 每个人通过浏览器提交的留言都需要保存起来， 在生成页面的时候动态的读取他们，形成html 。</p>
 <p>可以把所有的用户留言都存放到一个文件当中，读取文件形成html没有任何压力， 但是你要非常小心处理同步的问题：你提交留言的时候，别人也在提交， 可不能相互覆盖啊 ！这也是为什么Web程序都有一个数据库的原因， 数据库帮我们解决了这些乱七八糟的同步问题， 我们只需要向数据库发出 Select, Insert, Upate ,Delete 就好了。数据库的历史要比WWW久远的多， 早在大机时代就出现了， 现在已经发展的非常成熟 ， 直接拿过来用就可以了。</p>
 <p>解决了用户留言的问题， 你接下来要写一个网上售票的应用， 让大家在网上买球票， 买票的时候需要一个购物车， 大家可以把票暂时放到购物车里。</p>
 <p>开发购物车的时候发现了你设计的HTTP一个非常严重的缺陷 ： <strong>没有状态</strong> ， 因为用户往购物车里加了一个球票， 一刷新页面购物车就空了，里边的所有东西都丢失了。</p>
 <p>假设用户A在操作， 用户B也在操作， 你的Apache服务器实际上根本区分不出来谁是用户A, 谁是用户B, 只是看到了一个个毫无关联的GET和POST 。 根本记录不下来同一个用户在过去一段时间内做了什么事情。</p>
-<p>你想改一下HTTP协议， 可是悲催的是数以亿计的网站已经在用了， 你想改都改不了了。<br>于是你想了个办法， HTTP 协议不是有个header吗， 在里边做做手脚 ：</p>
+<p>你想改一下HTTP协议， 可是悲催的是数以亿计的网站已经在用了， 你想改都改不了了。于是你想了个办法， HTTP 协议不是有个header吗， 在里边做做手脚 ：</p>
 <p>浏览器A第一次给服务器发送请求时， 服务器通过header告诉它一个编号number_a，浏览器A需要记住这个编号， 然后下次请求的时候（以及后续所有请求的时候）也通过header 把number_a 发给服务器。 这样服务器一看， 奥，原来你是浏览器A 啊， 就可以把浏览器A相关的购物车数据从内存中取出来， 形成html 发回浏览器A了。</p>
 <p>浏览器A和服务器的这个通过这个编号来交互， 这个过程就称为 ： <strong>session</strong><br>用了这一个小伎俩， 这样服务器就把各个浏览器（各个用户）给区分开了。</p>
 <p>到目前为止，构建一个Web系统最基础的工作可以说已经完成了， 我想起来高中时物理老师说的一句话： 牛顿三定律出来以后 ，经典物理学的大厦已经建立起来了， 后人的工作无非是刷刷墙， 装饰装饰而已。</p>
@@ -459,15 +459,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">cpu</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -475,11 +467,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">tool</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">jdbc</a>
+                <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -487,15 +475,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">sqlite</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">main</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -507,7 +487,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">sqlite</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -523,11 +511,19 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">wireshark</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">wireshark</a>
+                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">jdbc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -543,11 +539,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">单元测试</a>
+                <a href="javascript:void(0)" class="js-tag color5">tool</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -555,11 +547,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网卡</a>
+                <a href="javascript:void(0)" class="js-tag color5">单元测试</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">线程</a>
+                <a href="javascript:void(0)" class="js-tag color3">网卡</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -568,6 +560,14 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">进程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">线程</a>
               </li>
              
               <li class="article-tag-list-item">

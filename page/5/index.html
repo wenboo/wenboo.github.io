@@ -167,6 +167,180 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-JDBC-的诞生" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/18/JDBC-的诞生/">JDBC 的诞生</a>
+    </h1>
+  
+
+        
+        <a href="/2017/01/18/JDBC-的诞生/" class="archive-article-date">
+  	<time datetime="2017-01-18T12:41:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>网络访问</strong></p>
+<p>随着 Oracle, Sybase, SQL Server ,DB2, Mysql 等人陆陆续续住进数据库村， 这里呈现出一片兴旺发达的景象， 无数的程序在村里忙忙碌碌， 读写数据库， 实际上一个村落已经容不下这么多人了， 数据库村变成了数据镇。这一天， 数据库镇发生了一件大事： 它连上了网络！外部的花花世界一下全部打开， 很多程序开始离开这个拥挤的城镇， 住到更加宜居的地方去。<br>可是他们的工作还是要读写数据库， 大家都在想办法能不能通过网络来访问数据库镇的数据库。其中移居到Tomcat村的Java 最为活跃， 这小子先去拜访了一下Mysql , 相对于Oracle, Sybase 等大佬， Mysql 还很弱小， 也许容易搞定。</p>
+<p>Java 说： “Mysql 先生， 现在已经网络时代了， 您也得与时俱进啊， 给我们开放下网络接口吧。 ”</p>
+<p>Mysql 说： “还网络时代， 你们这些家伙越来越懒了， 都不愿意到我们家里来了！ 说说吧， 你想怎么开放？ ”</p>
+<p>Java 说： “很简单， 您听说过TCP/IP还有Socket 没有？ 没有吗？！ 没关系， 您的操作系统肯定知道， 它内置实现了TCP/IP和socket, 您只需要和他商量一下， 需要申请一个ip ， 确定一个端口， 然后您在这个端口监听， 我每次想访问数据了， 就会创建一个socket ，向你发起连接请求， 你接受了就行了。 ”（刘欣注： 参见《张大胖的socket》）</p>
+<p>“这么麻烦啊？”</p>
+<p>“其实也简单， 您的操作系统会帮忙的， 他非常熟悉， 再说只需要做一次就行， 把这个网络访问建立起来， 到时候很多程序都会来访问您， 您会发财的。 ”</p>
+<p>“不会这么简单吧， 假设说， 我是说假设啊， 通过socket我们建立了连接， 通过这个连接， 你给我发送什么东西？ 我又给你发什么东西？” Mysql非常老练， 直击命门。</p>
+<p>“呃， 这个…. ”</p>
+<p>Java 其实心里其实非常明白， 这需要和Mysql定义一个应用层的协议， 就是所谓的你发什么请求， 我给你什么响应。</p>
+        
+          <a class="article-more-a" href="/2017/01/18/JDBC-的诞生/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">jdbc</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/01/18/JDBC-的诞生/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-nodejs-npm-常用命令" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/18/nodejs-npm-常用命令/">nodejs npm 常用命令</a>
+    </h1>
+  
+
+        
+        <a href="/2017/01/18/nodejs-npm-常用命令/" class="archive-article-date">
+  	<time datetime="2017-01-18T12:21:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>npm是一个node包管理和分发工具，已经成为了非官方的发布node模块（包）的标准。有了npm，可以很快的找到特定服务要使用的包，进行下载、安装以及管理已经安装的包。</p>
+<p>1、npm install moduleNames：安装Node模块<br>安装完毕后会产生一个node_modules目录，其目录下就是安装的各个node模块。node的安装分为全局模式和本地模式。<br>一般情况下会以本地模式运行，包会被安装到和你的应用程序代码的本地node_modules目录下。<br>在全局模式下，Node包会被安装到Node的安装目录下的node_modules下。全局安装命令为$npm install -g moduleName。<br>获知使用$npm set global=true来设定安装模式，$npm get global可以查看当前使用的安装模式。</p>
+<p>示例：</p>
+<blockquote>
+<p>npm install express </p>
+</blockquote>
+<p>默认会安装express的最新版本，也可以通过在后面加版本号的方式安装指定版本，如npm install express@3.0.6</p>
+<blockquote>
+<p>npm install <name> -g </p>
+</blockquote>
+<p>将包安装到全局环境中</p>
+<p>但是代码中，直接通过require()的方式是没有办法调用全局安装的包的。全局的安装是供命令行使用的，就好像全局安装了vmarket后，就可以在命令行中直接运行vm命令。</p>
+<blockquote>
+<p>npm install <name> –save </p>
+</blockquote>
+<p>安装的同时，将信息写入package.json中项目路径中如果有package.json文件时，直接使用npm install方法就可以根据dependencies配置安装所有的依赖包，这样代码提交到github时，就不用提交node_modules这个文件夹了。</p>
+        
+          <a class="article-more-a" href="/2017/01/18/nodejs-npm-常用命令/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/c/" class="article-tag-list-link color2">c</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/01/18/nodejs-npm-常用命令/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-架构浅谈之-MVC" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -801,153 +975,9 @@
 
 
   
-    <article id="post-2017-1-12-日志排版" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/12/2017-1-12-日志排版/">2017-1-12 日志排版</a>
-    </h1>
-  
-
-        
-        <a href="/2017/01/12/2017-1-12-日志排版/" class="archive-article-date">
-  	<time datetime="2017-01-12T13:43:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="http://upload-images.jianshu.io/upload_images/3309726-7dd3689350765f5a.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="img"></p>
-<p>花了整整一周时间把所有的 markdown 文章排版重新做了一遍</p>
-<p>干净整洁很多</p>
-<p>这确实很无聊</p>
-<p>。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/life/" class="article-tag-list-link color5">life</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/01/12/2017-1-12-日志排版/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-Wireshark-实用过滤表达式（针对ip、协议、端口、长度和内容）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/05/Wireshark-实用过滤表达式（针对ip、协议、端口、长度和内容）/">Wireshark 实用过滤表达式</a>
-    </h1>
-  
-
-        
-        <a href="/2017/01/05/Wireshark-实用过滤表达式（针对ip、协议、端口、长度和内容）/" class="archive-article-date">
-  	<time datetime="2017-01-05T12:36:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>首先说几个最常用的关键字，“eq” 和 “==”等同，可以使用 “and” 表示并且，“or”表示或者。“!“ 和 “not” 都表示取反。</p>
-<p><strong>1.针对wireshark最常用的自然是针对IP地址的过滤。其中有几种情况：</strong></p>
-<p>（1）对源地址为192.168.0.1的包的过滤，即抓取源地址满足要求的包。<br>　　 表达式为：ip.src == 192.168.0.1</p>
-<p>（2）对目的地址为192.168.0.1的包的过滤，即抓取目的地址满足要求的包。<br>　　 表达式为：ip.dst == 192.168.0.1</p>
-        
-          <a class="article-more-a" href="/2017/01/05/Wireshark-实用过滤表达式（针对ip、协议、端口、长度和内容）/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">wireshark</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/network/" class="article-tag-list-link color3">network</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/01/05/Wireshark-实用过滤表达式（针对ip、协议、端口、长度和内容）/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/6/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/6/">Next &raquo;</a>
     </nav>
   
 
@@ -1061,15 +1091,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">cpu</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1077,11 +1099,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">tool</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">jdbc</a>
+                <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1089,15 +1107,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">sqlite</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">main</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1109,7 +1119,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">sqlite</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1125,11 +1143,19 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">wireshark</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">wireshark</a>
+                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">jdbc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1145,11 +1171,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">单元测试</a>
+                <a href="javascript:void(0)" class="js-tag color5">tool</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1157,11 +1179,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网卡</a>
+                <a href="javascript:void(0)" class="js-tag color5">单元测试</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">线程</a>
+                <a href="javascript:void(0)" class="js-tag color3">网卡</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1170,6 +1192,14 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">进程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">线程</a>
               </li>
              
               <li class="article-tag-list-item">
