@@ -6,42 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://wenboo.github.io">
-  <title>HTTP 协议学习 | Hi~Welcome to Wenboo&#39;s Blog</title>
+  <title>给小白的 Java EE 指南（6） | Hi~Welcome to Wenboo&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="什么是 HTTP 协议
-HTTP协议是指计算机通信网络中两台计算机之间进行通信所必须共同遵守的规定或规则，超文本传输协议(HTTP)是一种通信协议，它允许将超文本标记语言(HTML)文档从Web服务器传送到客户端的浏览器。目前我们使用的是HTTP/1.1版本。
-Web服务器、浏览器、代理服务器
-当我们打开浏览器，在地址栏中输入URL，然后我们就看到了网页。原理是怎样的呢？实际上我们输入URL后，我">
+  <meta name="description" content="本文是给小白的Java EE生存指南的第6篇， 讲点稍微有深度的：反射。
+这里不定义什么叫反射，先来看个例子，假设我给你一个Java 类： 
+12345678package com.example;public class HelloWorld &amp;#123;    public HelloWorld()&amp;#123;    &amp;#125;    public void sayHello()&amp;#123;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="HTTP 协议学习">
-<meta property="og:url" content="http://wenboo.github.io/2016/10/22/HTTP-协议学习/index.html">
+<meta property="og:title" content="给小白的 Java EE 指南（6）">
+<meta property="og:url" content="http://wenboo.github.io/2017/02/28/给小白的-Java-EE-指南（6）/index.html">
 <meta property="og:site_name" content="Hi~Welcome to Wenboo's Blog">
-<meta property="og:description" content="什么是 HTTP 协议
-HTTP协议是指计算机通信网络中两台计算机之间进行通信所必须共同遵守的规定或规则，超文本传输协议(HTTP)是一种通信协议，它允许将超文本标记语言(HTML)文档从Web服务器传送到客户端的浏览器。目前我们使用的是HTTP/1.1版本。
-Web服务器、浏览器、代理服务器
-当我们打开浏览器，在地址栏中输入URL，然后我们就看到了网页。原理是怎样的呢？实际上我们输入URL后，我">
-<meta property="og:image" content="http://pic002.cnblogs.com/images/2012/263119/2012020910422542.png">
-<meta property="og:image" content="http://pic002.cnblogs.com/images/2012/263119/2012020910491417.png">
-<meta property="og:image" content="http://pic002.cnblogs.com/images/2012/263119/2012020914293943.png">
-<meta property="og:image" content="http://pic002.cnblogs.com/images/2012/263119/2012022009421183.png">
-<meta property="og:image" content="http://pic002.cnblogs.com/images/2012/263119/2012021309365350.png">
-<meta property="og:image" content="http://pic002.cnblogs.com/images/2012/263119/2012022009373182.png">
-<meta property="og:image" content="http://pic002.cnblogs.com/images/2012/263119/2012021114423456.png">
-<meta property="og:image" content="http://pic002.cnblogs.com/images/2012/263119/2012021115280744.png">
-<meta property="og:image" content="http://pic002.cnblogs.com/images/2012/263119/2012021115064471.png">
-<meta property="og:image" content="http://pic002.cnblogs.com/images/2012/263119/2012021114534541.png">
-<meta property="og:image" content="http://pic002.cnblogs.com/images/2012/263119/2012021116181545.png">
-<meta property="og:image" content="http://pic002.cnblogs.com/images/2012/263119/2012021322503738.png">
-<meta property="og:image" content="http://pic002.cnblogs.com/images/2012/263119/2012021117041918.png">
-<meta property="og:image" content="http://pic002.cnblogs.com/images/2012/263119/2012021116212815.png">
-<meta property="og:updated_time" content="2017-01-12T12:45:17.778Z">
+<meta property="og:description" content="本文是给小白的Java EE生存指南的第6篇， 讲点稍微有深度的：反射。
+这里不定义什么叫反射，先来看个例子，假设我给你一个Java 类： 
+12345678package com.example;public class HelloWorld &amp;#123;    public HelloWorld()&amp;#123;    &amp;#125;    public void sayHello()&amp;#123;">
+<meta property="og:updated_time" content="2017-02-28T14:34:46.645Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="HTTP 协议学习">
-<meta name="twitter:description" content="什么是 HTTP 协议
-HTTP协议是指计算机通信网络中两台计算机之间进行通信所必须共同遵守的规定或规则，超文本传输协议(HTTP)是一种通信协议，它允许将超文本标记语言(HTML)文档从Web服务器传送到客户端的浏览器。目前我们使用的是HTTP/1.1版本。
-Web服务器、浏览器、代理服务器
-当我们打开浏览器，在地址栏中输入URL，然后我们就看到了网页。原理是怎样的呢？实际上我们输入URL后，我">
-<meta name="twitter:image" content="http://pic002.cnblogs.com/images/2012/263119/2012020910422542.png">
+<meta name="twitter:title" content="给小白的 Java EE 指南（6）">
+<meta name="twitter:description" content="本文是给小白的Java EE生存指南的第6篇， 讲点稍微有深度的：反射。
+这里不定义什么叫反射，先来看个例子，假设我给你一个Java 类： 
+12345678package com.example;public class HelloWorld &amp;#123;    public HelloWorld()&amp;#123;    &amp;#125;    public void sayHello()&amp;#123;">
   
     <link rel="alternative" href="/atom.xml" title="Hi~Welcome to Wenboo&#39;s Blog" type="application/atom+xml">
   
@@ -193,293 +175,57 @@ Web服务器、浏览器、代理服务器
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-HTTP-协议学习" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-给小白的-Java-EE-指南（6）" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      HTTP 协议学习
+      给小白的 Java EE 指南（6）
     </h1>
   
 
         
-        <a href="/2016/10/22/HTTP-协议学习/" class="archive-article-date">
-  	<time datetime="2016-10-22T15:17:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-22</time>
+        <a href="/2017/02/28/给小白的-Java-EE-指南（6）/" class="archive-article-date">
+  	<time datetime="2017-02-28T14:26:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>什么是 HTTP 协议</strong></p>
-<p>HTTP协议是指计算机通信网络中两台计算机之间进行通信所必须共同遵守的规定或规则，超文本传输协议(HTTP)是一种通信协议，它允许将超文本标记语言(HTML)文档从Web服务器传送到客户端的浏览器。目前我们使用的是HTTP/1.1版本。</p>
-<p><strong>Web服务器、浏览器、代理服务器</strong></p>
-<p>当我们打开浏览器，在地址栏中输入URL，然后我们就看到了网页。原理是怎样的呢？实际上我们输入URL后，我们的浏览器给Web服务器发送了一个Request,Web服务器接到Request后进行处理，生成相应的Response，然后发送给浏览器，浏览器解析Response中的HTML,这样我们就看到了网页，过程如下图所示:</p>
-<a id="more"></a>
-<p><img src="http://pic002.cnblogs.com/images/2012/263119/2012020910422542.png" alt="pic"></p>
-<p>我们的Request有可能是经过了代理服务器，最后才到达Web服务器的。过程如下图所示:</p>
-<p><img src="http://pic002.cnblogs.com/images/2012/263119/2012020910491417.png" alt="pic"></p>
-<p>代理服务器就是网络信息的中转站，有什么功能呢？</p>
-<blockquote>
-<p>提高访问速度， 大多数的代理服务器都有缓存功能</p>
-<p>突破限制， 也就是FQ了</p>
-<p>隐藏身份</p>
-</blockquote>
-<hr>
-<p><strong>URL 详解</strong></p>
-<p>URL(Uniform Resource Locator) 地址用于描述一个网络上的资源,  基本格式如下:</p>
-<blockquote>
-<p>schema://host[:port#]/path/…/[?query-string][#anchor]</p>
-</blockquote>
-<p>1) scheme               指定低层使用的协议(例如：http, https, ftp)<br>2) host                   HTTP服务器的IP地址或者域名<br>3) port                 HTTP服务器的默认端口是80，这种情况下端口号可以省略。如果使用了别的端口，必须指明，例如 <a href="http://www.cnblogs.com:8080/" target="_blank" rel="external">http://www.cnblogs.com:8080/</a><br>4) path                   访问资源的路径<br>5) query-string       发送给http服务器的数据<br>6) anchor             锚</p>
-<p><strong>URL 的一个例子</strong></p>
-<p><a href="http://www.mywebsite.com/sj/test/test.aspx?name=sviergn&amp;x=true#stuff" target="_blank" rel="external">http://www.mywebsite.com/sj/test/test.aspx?name=sviergn&amp;x=true#stuff</a></p>
-<p>1) Schema:                 http<br>2) host:                   www.mywebsite.com<br>3) path:                   /sj/test/test.aspx<br>4) Query String:           name=sviergn&amp;x=true<br>5) Anchor:                 stuff</p>
-<hr>
-<p><strong>HTTP 协议是无状态的</strong></p>
-<p>HTTP协议是无状态的，同一个客户端的这次请求和上次请求是没有对应关系，对HTTP服务器来说，它并不知道这两个请求来自同一个客户端。 为了解决这个问题，Web程序引入了Cookie机制来维护状态。</p>
-<p><strong>打开一个网页需要浏览器发送很多次Request</strong></p>
-<p>1.当你在浏览器输入URL <a href="http://www.cnblogs.com" target="_blank" rel="external">http://www.cnblogs.com</a> 的时候，浏览器发送一个Request去获取 <a href="http://www.cnblogs.com" target="_blank" rel="external">http://www.cnblogs.com</a> 的html.  服务器把Response发送回给浏览器.</p>
-<p>2.浏览器分析Response中的 HTML，发现其中引用了很多其他文件，比如图片，CSS文件，JS文件。通过fiddler等抓包工具可以看到，请求资源文件往往是在访问html之后。</p>
-<p>3.浏览器会自动再次发送Request去获取图片，CSS文件，或者JS文件。</p>
-<p>4.等所有的文件都下载成功后。 网页就被显示出来了。</p>
-<hr>
-<p><strong>HTTP 消息结构</strong></p>
-<p>先看Request 消息的结构,   Request 消息分为3部分，第一部分叫Request line, 第二部分叫Request header, 第三部分是body. header和body之间有个空行， 结构如下图：</p>
-<p><img src="http://pic002.cnblogs.com/images/2012/263119/2012020914293943.png" alt="pic"></p>
-<p>第一行中的Method表示请求方法,比如”POST”,”GET”,  Path-to-resoure表示请求的资源， Http/version-number 表示HTTP协议的版本号</p>
-<p>当使用的是”GET” 方法的时候， body是为空的。</p>
-<p>比如我们打开博客园首页的request 如下:</p>
-<blockquote>
-<p>GET <a href="http://www.cnblogs.com/" target="_blank" rel="external">http://www.cnblogs.com/</a> HTTP/1.1<br>Host: www.cnblogs.com</p>
-</blockquote>
-<p>抽象的东西，难以理解，老感觉是虚的， 所谓眼见为实, 实际见到的东西，我们才能理解和记忆。 我们今天用Fiddler，实际的看看Request和Response。</p>
-<p>下面我们打开Fiddler 捕捉一个博客园登录的Request 然后分析下它的结构, 在Inspectors tab下以Raw的方式可以看到完整的Request的消息，如下图：</p>
-<p><img src="http://pic002.cnblogs.com/images/2012/263119/2012022009421183.png" alt="pic"></p>
-<p>我们再看Response消息的结构, 和Request消息的结构基本一样。 同样也分为三部分,第一部分叫Response line, 第二部分叫Response header，第三部分是body. header和body之间也有个空行,  结构如下图：</p>
-<p><img src="http://pic002.cnblogs.com/images/2012/263119/2012021309365350.png" alt="pic"></p>
-<p>HTTP/version-number表示HTTP协议的版本号，  status-code 和message 请看下节[状态代码]的详细解释。</p>
-<p>我们用Fiddler 捕捉一个博客园首页的Response然后分析下它的结构, 在Inspectors tab下以Raw的方式可以看到完整的Response的消息，如下图：</p>
-<p><img src="http://pic002.cnblogs.com/images/2012/263119/2012022009373182.png" alt="pic"></p>
-<hr>
-<p><strong>Get和Post方法的区别</strong></p>
-<p>Http协议定义了很多与服务器交互的方法，最基本的有4种，分别是GET,POST,PUT,DELETE. 一个URL地址用于描述一个网络上的资源，而HTTP中的GET, POST, PUT, DELETE就对应着对这个资源的查，改，增，删4个操作。 我们最常见的就是GET和POST了。GET一般用于获取/查询资源信息，而POST一般用于更新资源信息.</p>
-<p><strong>我们看看GET和POST的区别</strong></p>
-<p>1.GET提交的数据会放在URL之后，以?分割URL和传输数据，参数之间以&amp;相连，如EditPosts.aspx?name=test1&amp;id=123456。 POST方法是把提交的数据放在HTTP包的Body中。</p>
-<p>2.GET提交的数据大小有限制（因为浏览器对URL的长度有限制），而POST方法提交的数据没有限制。</p>
-<p>3.GET方式需要使用Request.QueryString来取得变量的值，而POST方式通过Request.Form来获取变量的值。</p>
-<p>4.GET方式提交数据，会带来安全问题，比如一个登录页面，通过GET方式提交数据时，用户名和密码将出现在URL上，如果页面可以被缓存或者其他人可以访问这台机器，就可以从历史记录获得该用户的账号和密码。</p>
-<p><strong>状态码</strong></p>
-<p>Response 消息中的第一行叫做状态行，由HTTP协议版本号，状态码，状态消息三部分组成。</p>
-<p>状态码用来告诉HTTP客户端,HTTP服务器是否产生了预期的Response.</p>
-<p>HTTP/1.1中定义了5类状态码， 状态码由三位数字组成，第一个数字定义了响应的类别：</p>
-<blockquote>
-<p>1XX  提示信息 - 表示请求已被成功接收，继续处理</p>
-<p>2XX  成功 - 表示请求已被成功接收，理解，接受</p>
-<p>3XX  重定向 - 要完成请求必须进行更进一步的处理</p>
-<p>4XX  客户端错误 -  请求有语法错误或请求无法实现</p>
-<p>5XX  服务器端错误 -   服务器未能实现合法的请求</p>
-</blockquote>
-<p><strong>看看一些常见的状态码</strong></p>
-<blockquote>
-<p>200 OK</p>
-</blockquote>
-<p>最常见的就是成功响应状态码200了， 这表明该请求被成功地完成，所请求的资源发送回客户端</p>
-<p>如下图， 打开博客园首页：</p>
-<p><img src="http://pic002.cnblogs.com/images/2012/263119/2012021114423456.png" alt="pic"></p>
-<blockquote>
-<p>302 Found</p>
-</blockquote>
-<p>重定向，新的URL会在response 中的Location中返回，浏览器将会自动使用新的URL发出新的Request</p>
-<p>例如在IE中输入， <a href="http://www.google.com" target="_blank" rel="external">http://www.google.com</a>. HTTP服务器会返回302， IE取到Response中Location header的新URL, 又重新发送了一个Request。</p>
-<p><img src="http://pic002.cnblogs.com/images/2012/263119/2012021115280744.png" alt="pic"></p>
-<blockquote>
-<p>304 Not Modified</p>
-</blockquote>
-<p>代表上次的文档已经被缓存了， 还可以继续使用，</p>
-<p>例如打开博客园首页, 发现很多Response 的status code 都是304。</p>
-<p><img src="http://pic002.cnblogs.com/images/2012/263119/2012021115064471.png" alt="pic"></p>
-<p>提示：　如果你不想使用本地缓存可以用Ctrl+F5 强制刷新页面</p>
-<blockquote>
-<p>400 Bad Request  客户端请求与语法错误，不能被服务器所理解</p>
-<p>403 Forbidden 服务器收到请求，但是拒绝提供服务</p>
-<p>404 Not Found 请求资源不存在（输错了URL）</p>
-</blockquote>
-<p>比如在IE中输入一个错误的URL， <a href="http://www.cnblogs.com/tesdf.aspx" target="_blank" rel="external">http://www.cnblogs.com/tesdf.aspx</a></p>
-<p><img src="http://pic002.cnblogs.com/images/2012/263119/2012021114534541.png" alt="pic"></p>
-<blockquote>
-<p>500 Internal Server Error 服务器发生了不可预期的错误</p>
-<p>503 Server Unavailable 服务器当前不能处理客户端的请求，一段时间后可能恢复正常</p>
-</blockquote>
-<hr>
-<p><strong>HTTP Request Header</strong></p>
-<p>使用Fiddler 能很方便的查看Reques header, 点击Inspectors tab -&gt;Request tab-&gt; headers  如下图所示：</p>
-<p><img src="http://pic002.cnblogs.com/images/2012/263119/2012021116181545.png" alt="pic"></p>
-<p>header 有很多，比较难以记忆，我们也按照Fiddler那样把header 进行分类，这样比较清晰也容易记忆。</p>
-<p><strong>Cache 头域</strong></p>
-<blockquote>
-<p>If-Modified-Since</p>
-</blockquote>
-<p>作用： 把浏览器端缓存页面的最后修改时间发送到服务器去，服务器会把这个时间与服务器上实际文件的最后修改时间进行对比。如果时间一致，那么返回304，客户端就直接使用本地缓存文件。如果时间不一致，就会返回200和新的文件内容。客户端接到之后，会丢弃旧文件，把新文件缓存起来，并显示在浏览器中。<br>（前端发布时需要文件的时间戳，原理如上，通过比较时间，请求新的文件）</p>
-<p>例如：If-Modified-Since: Thu, 09 Feb 2012 09:07:57 GMT</p>
-<p>实例如下图</p>
-<p><img src="http://pic002.cnblogs.com/images/2012/263119/2012021322503738.png" alt="pic"></p>
-<blockquote>
-<p>If-None-Match</p>
-</blockquote>
-<p>作用: If-None-Match和ETag一起工作，工作原理是在HTTP Response中添加ETag信息。 当用户再次请求该资源时，将在HTTP Request 中加入If-None-Match信息(ETag的值)。如果服务器验证资源的ETag没有改变（该资源没有更新），将返回一个304状态告诉客户端使用本地缓存文件。否则将返回200状态和新的资源和Etag.  使用这样的机制将提高网站的性能</p>
-<p>例如: If-None-Match: “03f2b33c0bfcc1:0”</p>
-<p>实例如下图</p>
-<p><img src="http://pic002.cnblogs.com/images/2012/263119/2012021117041918.png" alt="pic"></p>
-<blockquote>
-<p>Pragma</p>
-</blockquote>
-<p>作用： 防止页面被缓存， 在HTTP/1.1版本中，它和Cache-Control:no-cache作用一模一样</p>
-<p>Pargma只有一个用法， 例如： Pragma: no-cache</p>
-<p>注意: 在HTTP/1.0版本中，只实现了Pragema:no-cache, 没有实现Cache-Control</p>
-<blockquote>
-<p>Cache-Control</p>
-</blockquote>
-<p>作用: 这个是非常重要的规则。 这个用来指定Response-Request遵循的缓存机制。各个指令含义如下</p>
-<p>Cache-Control:Public   可以被任何缓存所缓存（）</p>
-<p>Cache-Control:Private     内容只缓存到私有缓存中</p>
-<p>Cache-Control:no-cache  所有内容都不会被缓存</p>
-<p><strong>Client 头域</strong></p>
-<blockquote>
-<p>Accept</p>
-</blockquote>
-<p>作用： 浏览器端可以接受的媒体类型,</p>
-<p>例如：  Accept: text/html  代表浏览器可以接受服务器回发的类型为 text/html  也就是我们常说的html文档,</p>
-<p>如果服务器无法返回text/html类型的数据,服务器应该返回一个406错误(non acceptable)</p>
-<p>通配符 /* 代表任意类型</p>
-<p>例如  Accept: /<em>///</em>  代表浏览器可以处理所有类型,(一般浏览器发给服务器都是发这个)</p>
-<blockquote>
-<p>Accept-Encoding：</p>
-</blockquote>
-<p>作用： 浏览器申明自己接收的编码方法，通常指定压缩方法，是否支持压缩，支持什么压缩方法（gzip，deflate），（注意：这不是只字符编码）;</p>
-<p>例如： Accept-Encoding: gzip, deflate</p>
-<blockquote>
-<p>Accept-Language</p>
-</blockquote>
-<p>作用： 浏览器申明自己接收的语言。 </p>
-<p>语言跟字符集的区别：中文是语言，中文有多种字符集，比如big5，gb2312，gbk等等；</p>
-<p>例如： Accept-Language: en-us</p>
-<blockquote>
-<p>User-Agent</p>
-</blockquote>
-<p>作用：告诉HTTP服务器， 客户端使用的操作系统和浏览器的名称和版本.</p>
-<p>我们上网登陆论坛的时候，往往会看到一些欢迎信息，其中列出了你的操作系统的名称和版本，你所使用的浏览器的名称和版本，这往往让很多人感到很神奇，实际上，服务器应用程序就是从User-Agent这个请求报头域中获取到这些信息User-Agent请求报头域允许客户端将它的操作系统、浏览器和其它属性告诉服务器。</p>
-<p>例如： User-Agent: Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.0; CIBA; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729; .NET4.0C; InfoPath.2; .NET4.0E)</p>
-<blockquote>
-<p>Accept-Charset</p>
-</blockquote>
-<p>作用：浏览器申明自己接收的字符集，这就是本文前面介绍的各种字符集和字符编码，如gb2312，utf-8（通常我们说Charset包括了相应的字符编码方案）。</p>
-<hr>
-<p><strong>Cookie/Login 头域</strong></p>
-<p>Cookie:</p>
-<p>作用： 最重要的header, 将cookie的值发送给HTTP 服务器</p>
-<p><strong>Entity 头域</strong></p>
-<blockquote>
-<p>Content-Length</p>
-</blockquote>
-<p>作用：发送给HTTP服务器数据的长度。</p>
-<p>例如： Content-Length: 38</p>
-<blockquote>
-<p>Content-Type</p>
-</blockquote>
-<p>作用：</p>
-<p>例如：Content-Type: application/x-www-form-urlencoded</p>
-<p><strong>Miscellaneous 头域</strong></p>
-<p>Referer:</p>
-<p>作用： 提供了Request的上下文信息的服务器，告诉服务器我是从哪个链接过来的，比如从我主页上链接到一个朋友那里，他的服务器就能够从HTTP Referer中统计出每天有多少用户点击我主页上的链接访问他的网站。</p>
-<p>例如: Referer:<a href="http://translate.google.cn/?hl=zh-cn&amp;tab=wT" target="_blank" rel="external">http://translate.google.cn/?hl=zh-cn&amp;tab=wT</a></p>
-<p><strong>Transport 头域</strong></p>
-<blockquote>
-<p>Connection</p>
-</blockquote>
-<p>例如：　Connection: keep-alive   当一个网页打开完成后，客户端和服务器之间用于传输HTTP数据的TCP连接不会关闭，如果客户端再次访问这个服务器上的网页，会继续使用这一条已经建立的连接</p>
-<p>例如：  Connection: close  代表一个Request完成后，客户端和服务器之间用于传输HTTP数据的TCP连接会关闭， 当客户端再次发送Request，需要重新建立TCP连接。</p>
-<blockquote>
-<p>Host（发送请求时，该报头域是必需的）</p>
-</blockquote>
-<p>作用: 请求报头域主要用于指定被请求资源的Internet主机和端口号，它通常从HTTP URL中提取出来的</p>
-<p>例如: 我们在浏览器中输入：<a href="http://www.guet.edu.cn/index.html" target="_blank" rel="external">http://www.guet.edu.cn/index.html</a></p>
-<p>浏览器发送的请求消息中，就会包含Host请求报头域，如下：</p>
-<p>Host：<a href="http://www.guet.edu.cn" target="_blank" rel="external">http://www.guet.edu.cn</a></p>
-<p>此处使用缺省端口号80，若指定了端口号，则变成：Host：指定端口号</p>
-<hr>
-<p><strong>HTTP Response Header</strong></p>
-<p>同样使用Fiddler 查看Response header, 点击Inspectors tab -&gt;Response tab-&gt; headers  如下图所示：</p>
-<p><img src="http://pic002.cnblogs.com/images/2012/263119/2012021116212815.png" alt="pic"></p>
-<p>我们也按照Fiddler那样把header 进行分类，这样比较清晰也容易记忆。</p>
-<p><strong>Entity 头域</strong> </p>
-<blockquote>
-<p>ETag</p>
-</blockquote>
-<p>作用:  和If-None-Match 配合使用。 （实例请看上节中If-None-Match的实例）</p>
-<p>例如: ETag: “03f2b33c0bfcc1:0”</p>
-<blockquote>
-<p>Last-Modified:</p>
-</blockquote>
-<p>作用： 用于指示资源的最后修改日期和时间。（实例请看上节的If-Modified-Since的实例）</p>
-<p>例如: Last-Modified: Wed, 21 Dec 2011 09:09:10 GMT</p>
-<blockquote>
-<p>Content-Type</p>
-</blockquote>
-<p>作用：WEB服务器告诉浏览器自己响应的对象的类型和字符集,</p>
-<p>例如:</p>
-<p>Content-Type: text/html; charset=utf-8</p>
-<p>Content-Type:text/html;charset=GB2312</p>
-<p>Content-Type: image/jpeg</p>
-<blockquote>
-<p>Content-Length</p>
-</blockquote>
-<p>指明实体正文的长度，以字节方式存储的十进制数字来表示。在数据下行的过程中，Content-Length的方式要预先在服务器中缓存所有数据，然后所有数据再一股脑儿地发给客户端。</p>
-<p>例如: Content-Length: 19847</p>
-<blockquote>
-<p>Content-Encoding</p>
-</blockquote>
-<p>WEB服务器表明自己使用了什么压缩方法（gzip，deflate）压缩响应中的对象。</p>
-<p>例如：Content-Encoding：gzip</p>
-<blockquote>
-<p>Content-Language</p>
-</blockquote>
-<p>作用： WEB服务器告诉浏览器自己响应的对象的语言者</p>
-<p>例如： Content-Language:da</p>
-<p><strong>Miscellaneous 头域</strong></p>
-<blockquote>
-<p>Server:</p>
-</blockquote>
-<p>作用：指明HTTP服务器的软件信息</p>
-<p>例如:Server: Microsoft-IIS/7.5</p>
-<blockquote>
-<p>X-AspNet-Version:</p>
-</blockquote>
-<p>作用：如果网站是用ASP.NET开发的，这个header用来表示ASP.NET的版本</p>
-<p>例如: X-AspNet-Version: 4.0.30319</p>
-<blockquote>
-<p>X-Powered-By:</p>
-</blockquote>
-<p>作用：表示网站是用什么技术开发的</p>
-<p>例如： X-Powered-By: ASP.NET</p>
-<p><strong>Transport 头域</strong></p>
-<blockquote>
-<p>Connection</p>
-</blockquote>
-<p>例如：　Connection: keep-alive   当一个网页打开完成后，客户端和服务器之间用于传输HTTP数据的TCP连接不会关闭，如果客户端再次访问这个服务器上的网页，会继续使用这一条已经建立的连接</p>
-<p>例如：  Connection: close  代表一个Request完成后，客户端和服务器之间用于传输HTTP数据的TCP连接会关闭， 当客户端再次发送Request，需要重新建立TCP连接。</p>
-<p><strong>Location头域</strong></p>
-<blockquote>
-<p>Location</p>
-</blockquote>
-<p>作用： 用于重定向一个新的位置, 包含新的URL地址</p>
-<p><strong>HTTP 协议是无状态的和 Connection: keep-alive 的区别</strong></p>
-<p>无状态是指协议对于事务处理没有记忆能力，服务器不知道客户端是什么状态。从另一方面讲，打开一个服务器上的网页和你之前打开这个服务器上的网页之间没有任何联系。</p>
-<p>HTTP是一个无状态的面向连接的协议，无状态不代表HTTP不能保持TCP连接，更不能代表HTTP使用的是UDP协议（无连接）。</p>
-<p>从HTTP/1.1起，默认都开启了Keep-Alive，保持连接特性，简单地说，当一个网页打开完成后，客户端和服务器之间用于传输HTTP数据的TCP连接不会关闭，如果客户端再次访问这个服务器上的网页，会继续使用这一条已经建立的连接。</p>
-<p>Keep-Alive不会永久保持连接，它有一个保持时间，可以在不同的服务器软件（如Apache）中设定这个时间。</p>
+        <p>本文是给小白的Java EE生存指南的第6篇， 讲点稍微有深度的：反射。</p>
+<p>这里不定义什么叫反射，先来看个例子，假设我给你一个Java 类： </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.example;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">HelloWorld</span><span class="params">()</span></span>&#123;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sayHello</span><span class="params">()</span></span>&#123;</div><div class="line">        System.out.println(<span class="string">"hello world!"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>现在要求:<br><a id="more"></a><br>(1) 你不能使用 HelloWorld hw = new HelloWorld() ， 但是要构建一个HelloWorld的实例来<br>(2) 调用sayHello() 方法，但是不能直接用 HelloWorld实例的 hw.sayHello()方法，说起来怪拗口的</p>
+<p>用Java的反射功能， 可以很轻松的完成上面的要求：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//第一步， 先把HelloWorld的类装载进来</div><div class="line">Class cls = Class.forName(&quot;com.example.HelloWorld&quot;);</div><div class="line">//第二步， 创建一个HelloWorld的实例， 注意， 这里并没有用强制转型把obj转成HelloWorld</div><div class="line">Object obj = cls.newInstance();</div><div class="line">//第三步， 得到这个类的方法， 注意， 一个类的方法也是对象啊</div><div class="line">Method m = cls.getDeclaredMethod(&quot;sayHello&quot;); </div><div class="line">//第四部， 方法调用， 输出&quot;hello world&quot;</div><div class="line">m.invoke(obj);</div></pre></td></tr></table></figure>
+<p>可能有人要问了， 为什么不直接new 出来呢？  通过反射来创建对象，调用方法多费劲啊 ？这是个好问题，关键点就是：很多时候我们并不能<strong>事先知道</strong>要new什么对象，  相反，我们可能只知道一个类的名称和方法名， 很多时候这些名称都是写在XML配置当中的。</p>
+<p>为了更好的说明问题， 来看看几个SSH的例子：</p>
+<p><strong>Struts的例子</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">//1. 在XML配置文件中定义Action</div><div class="line">&lt;action name=&quot;HelloWorld&quot; class=&quot;example.HelloWorld&quot;&gt;        </div><div class="line">        &lt;result&gt;/hello.jsp&lt;/result&gt;  </div><div class="line">&lt;/action&gt; </div><div class="line"></div><div class="line">//2. 定义Java 类</div><div class="line">public class HelloWorld extends ExampleSupport &#123;  </div><div class="line">    public String execute() throws Exception &#123;    </div><div class="line">        ......</div><div class="line">        return SUCCESS;                           </div><div class="line">    &#125;  </div><div class="line">    .......</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Struts 框架的作者事先肯定不知道你会配置一个HelloWorld的Action 。</p>
+<p>不过他可以这么做， Struts 在启动以后，解析你配置XML配置文件， 发现名称为HelloWorld的Action, 找到相对于的类名example.HelloWorld, 然后就可以通过反射去实例化这个类。 等到有人调用这个action 的时候， 可以通过反射来调用HelloWorld的execute() 方法。 </p>
+<p><strong>Hibernate的例子</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">//1.定义Java类和表之间映射， 类名叫Event, 对应的表名是EVENTS 。</div><div class="line">&lt;hibernate-mapping package=&quot;org.hibernate.tutorial.hbm&quot;&gt;</div><div class="line">    &lt;class name=&quot;Event&quot; table=&quot;EVENTS&quot;&gt;</div><div class="line">        &lt;id name=&quot;id&quot; column=&quot;EVENT_ID&quot;&gt;</div><div class="line">            &lt;generator class=&quot;increment&quot;/&gt;</div><div class="line">        &lt;/id&gt;</div><div class="line">        &lt;property name=&quot;date&quot; type=&quot;timestamp&quot; column=&quot;EVENT_DATE&quot;/&gt;</div><div class="line">        &lt;property name=&quot;title&quot;/&gt;</div><div class="line">    &lt;/class&gt;</div><div class="line">&lt;/hibernate-mapping&gt;</div><div class="line">//2.定义Event 类，如下所示：</div><div class="line">public class Event &#123;</div><div class="line">    private Long id;</div><div class="line">    private String title;</div><div class="line">    private Date date;</div><div class="line">    ...... 为了节省篇幅， 每个属性的getter /setter 方法略...</div><div class="line">&#125;</div><div class="line">//3.查询， 你可以用Hibernate 这么查询表中的数据了：</div><div class="line">List result = session.createQuery( &quot;from Event&quot; ).list();</div><div class="line">        for ( Event event : (List&lt;Event&gt;) result ) &#123;</div><div class="line">            System.out.println( &quot;Event (&quot; + event.getDate() + &quot;) : &quot; + event.getTitle() );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Struts 的作者事先也不知道你会配置一个叫Event的类。 </p>
+<p>不过他会这么处理： 类名(Event)-&gt; 数据库表名(EVENTS) -&gt; 发出SELECT查询表数据 -&gt; <strong>通过反射创建Event的实例</strong> -&gt; <strong>通过反射调用实例的setter方法把数据库的值设置进去</strong></p>
+<p><strong>Spring的例子</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">//1.配置一个Bean</div><div class="line">&lt;beanid=&quot;helloWorld&quot;class=&quot;example.HelloWorld&quot;&gt;</div><div class="line">    &lt;propertyname=&quot;message&quot;value=&quot;Hello World!&quot;/&gt;</div><div class="line">&lt;/bean&gt;</div><div class="line"></div><div class="line">//2.写一个Java 文件</div><div class="line">public  class   HelloWorld</div><div class="line">&#123;</div><div class="line">    private String message;</div><div class="line">    public void setMessage(String message)&#123;</div><div class="line">        this.message  = message;</div><div class="line">    &#125;</div><div class="line">    public void getMessage()&#123;</div><div class="line">        System.out.println(&quot;My Message : &quot;+ message);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//3.调用</div><div class="line">ApplicationContext context =newClassPathXmlApplicationContext(&quot;Beans.xml&quot;);</div><div class="line">HelloWorld hw=(HelloWorld) context.getBean(&quot;helloWorld&quot;);</div><div class="line">hw.getMessage();</div></pre></td></tr></table></figure>
+<p>我都懒得解释了， 无非是根据类的名称通过反射创建一个类HelloWorld的实例， 然后再通过反射调用setMessage方法， 这样当你getMessage就有值了。 </p>
+<p>所以反射是很重要的， 在Java EE世界里， 反射最大的用途就是支持<strong>以声明式的方法（在XML中）来描述应用的行为</strong>，   是Struts, Hibernate , Spring 的最核心的技术之一。 </p>
+<p>简单的来讲， 反射能让你在<strong>运行时而不是编程时</strong>做下面的事情：</p>
+<p>(1) 获取一个类的内部结构信息（或者成为元数据）， 包括包名，类名， 类所有的方法，<br>(2) 运行时对一个Java对象进行操作， 包括创建这个类的实例， 设置一个属性的值， 调用这个类的方法等等。 </p>
+<p>这篇文章只是介绍了反射的一点皮毛和用途， 具体的细节还是等待你自己去发掘吧。 </p>
+<p><strong>元编程</strong></p>
+<p>等等，还有一个小问题：为什么叫反射呢？</p>
+<p>我想可能是Java程序在运行时能够看到自己的结构和行为吧， 就像看到镜子当中的自己一样， 反射了出来 。</p>
+<p>如果扩展一点， 这种用代码来生成代码的方式， 其实叫做“元编程”。</p>
+<p>C语言就不具备这样的能力， 经过编译以后， C语言中的struct 名称 , 数组名等信息都已经消失了， 基本上就是指针了。 </p>
+<p>你可以这么试一试：写个程序，在运行时打印一下一个struct的名称， 看看能不能实现。</p>
+<p>但是像其他一些语言， 例如Ruby , 程序在运行时不但能检视自己， 还能动态的修改自己， 比如：给自己加上一个方法， 这种开放的能力给Ruby 编程来了巨大的飞跃， LISP的元编程能力更加强悍， 仅仅使用LISP自己就能定义一个新语言出来。 </p>
+<p>利用这种能力， 人们可以针对某个领域编写领域特定语言（Domain specific Language, 简称DSL）, 然后使用DSL这个语言来进行应用编程， 那效率可不是一般的高， 像Ruby on Rail 不就号称开发速度是Java的10倍嘛！</p>
 
       
 
@@ -493,7 +239,7 @@ Web服务器、浏览器、代理服务器
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">http</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">j2ee</a>
         		</li>
       		
 		</ul>
@@ -505,7 +251,7 @@ Web服务器、浏览器、代理服务器
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/network/" class="article-tag-list-link color3">network</a>
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
         		</li>
       		
 		</ul>
@@ -560,7 +306,7 @@ Web服务器、浏览器、代理服务器
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://wenboo.github.io/2016/10/22/HTTP-协议学习/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://wenboo.github.io/2017/02/28/给小白的-Java-EE-指南（6）/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -574,18 +320,18 @@ Web服务器、浏览器、代理服务器
   
 <nav id="article-nav">
   
-    <a href="/2016/10/23/Socket-和-ServerSocket-学习/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/12/31/2017-年开发阅读书单/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Socket 和 ServerSocket 学习
+          2017 年开发阅读书单
         
       </div>
     </a>
   
   
-    <a href="/2016/10/22/保持冷静，节制使用-Json/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">保持冷静，节制使用 JSON</div>
+    <a href="/2017/02/27/给小白的-Java-EE-指南（5）/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">给小白的 Java EE 指南（5）</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -599,7 +345,7 @@ Web服务器、浏览器、代理服务器
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="HTTP-协议学习" data-title="HTTP 协议学习" data-url="http://wenboo.github.io/2016/10/22/HTTP-协议学习/"></div>
+	<div class="ds-thread" data-thread-key="给小白的-Java-EE-指南（6）" data-title="给小白的 Java EE 指南（6）" data-url="http://wenboo.github.io/2017/02/28/给小白的-Java-EE-指南（6）/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
