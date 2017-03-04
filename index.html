@@ -243,6 +243,123 @@
 
 
   
+    <article id="post-嵌入式代码开发" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/04/嵌入式代码开发/">嵌入式代码开发</a>
+    </h1>
+  
+
+        
+        <a href="/2017/03/04/嵌入式代码开发/" class="archive-article-date">
+  	<time datetime="2017-03-04T11:29:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>嵌入式项目代码结构的分层——HAL（硬件抽象层）、FML（功能模块层）、APL（应用程序层）</p>
+<p><strong>一、遇到的问题</strong></p>
+<p>在“Zigbee之旅”系列博文中，每写一篇笔者都会编写一个小实验来展开讲解。通过这一段时间的实践，我积累了一些编码经验，但也体会到了之前的代码结构的缺陷：<br>（1）开发效率低：每次使用片内的某一资源（例如定时器等），笔者都要去查询CC2430中文手册，比较eggache<br>（2）代码重复较多：每个实验源码中，诸如 xtal_init ，led_init 等初始化函数每次都要编写<br>（3）不易修改：代码中的业务逻辑与SFR的操作混在一起，可读性较差，修改起来也费力正是由于以上问题，笔者决定暂停了该系列博文的续写，抽出时间来思考一下解决办法。</p>
+<p><strong>二、由网站分层引起的思考</strong></p>
+<p>笔者在学习嵌入式编程之前，曾有过 ASP.NET 网站开发经验，对其分层理论也有所实践，下面简单提一下：</p>
+<p>一般的有一定复杂度的网站可分为以下三层：</p>
+<p>（1）数据接入层（DAL）：负责与数据库的交互，供业务逻辑层调用<br>（2）业务逻辑层（BLL）：调用数据接入层以获取数据，并为具体的业务需求提供支持<br>（3）用户界面层（UIL）：负责呈现最终的用户界面</p>
+<p>相信博客园中很大一部分朋友都对此非常熟悉，在此不再赘述。总之，分层以后，大大提高了代码的复用性与扩展性。那么在嵌入式开发中，能否也利用分层的思想，来提高开发效率，增强其可维护性与可扩展性呢？下面，是一些笔者思考后的浅见。</p>
+<p><strong>三、嵌入式项目也来分个层</strong></p>
+<p>当然不能照搬ASP.NET 的具体分层思想，具体问题得具体分析嘛~</p>
+<p>首先，嵌入式开发的核心就是芯片，它提供固定的片内资源共开发者使用。而且它具有一个很重要的特点就是，不随项目的需求变动而变动。所以应将其作为最底层，为上层提供基础支持。我们将其命名为 硬件抽象层（Hardware Abstract Layer）。　　</p>
+<p>芯片有了当然还不够，通常我们会在片外扩展一些功能模块来满足具体的项目需求，例如：传感器、键盘、LCD屏等。这一层的特点是，随项目的变动而以模块为单位动态增减。这一层的运作需要芯片内部资源的支持，所以应处于硬件抽象层之上，并为上层调用。我们将其命名为 功能模块层（Functional Module Layer）。</p>
+<p>OK，现在原材料都准备齐了：芯片+扩展模块，接下来就要开始真正的加工了：我们需要灵活调用之前两层所提供的接口，实现具体的项目需求。我们将其命名为 应用程序层（Application Layer）。</p>
+<p><img src="http://pic002.cnblogs.com/images/2011/146150/2011030720064761.png" alt="img"></p>
+<p><strong>（1）硬件抽象层（HAL）</strong></p>
+<p>实现对片内资源 (如定时器、ADC、中断、I/O等) 的通用配置，隐藏具体的SFR操作细节，为上层提供简单清晰的调用接口。</p>
+<p><strong>（2）功能模块层（FML）</strong></p>
+<p>通过调用 HAL，实现项目中所涉及到的各片外功能模块，隐藏具体的模块操作细节，并为上层提供简单清晰的调用接口。</p>
+<p><strong>（3）应用程序层（APL）</strong></p>
+<p>通过调用 HAL 与 FML，实现最终的应用功能。</p>
+<p><strong>四、小试牛刀</strong></p>
+<p>OK，我们举一个具体的例子，来说明分层思想的运用。</p>
+<p>在写作“Zigbee之旅”系列的某一篇博文时，笔者需要完成一个略带综合性的小实验“温度监测系统”，需求分析大概如下：</p>
+<blockquote>
+<p>• CC2430节点实现对温度的定时采集，并可通过LED灯指示其采样频率<br>• 节点将数据传送至PC端<br>• 节点可以接收来自PC的控制指令，以调整采样速率和电源模式<br>• 具备停机自动复位能力<br>• 可进入睡眠状态，并可由按键唤醒</p>
+</blockquote>
+<p>从上面的需求中我们可以看出，本实验的核心芯片为CC2430，需要的片外扩展模块为LED灯与按键，预期要达到具体项目需求即以上五点。　　</p>
+<p>接下来，我们利用上面提到的分层理论小试牛刀，对“温度监测系统”这一实验的代码结构进行规划：</p>
+<p><strong>（1）应用程序层（APL）</strong></p>
+<p>[main.c] 引用 hal.h、ioCC2430.h 与 module.h，实现温度采集、与PC互通信、停机复位等具体的应用需求</p>
+<p><strong>（2）功能模块层（FML）</strong></p>
+<p>[module.h] 定义了一系列片外功能模块（LED、按键），以及一系列的相关函数的声明<br>[module.c] 引用 hal.h，实现各片外模块（LED、按键）的功能</p>
+<p><strong>（3）硬件抽象层（HAL）</strong></p>
+<p>[ioCC2430.h]（系统自带）：定义了CC2430的所有SFR 、中断向量　　　　<br>[hal.h] 包括常用类型定义、常用赋值宏、以及CC2430片上资源的配置（I/O、串口通讯、ADC、定时器、电源管理等）</p>
+<p>（注：由于本实验所涉及的片外模块——LED与按键——的使用极其简单，所以笔者将其合并入了单个源文件。若遇到较复杂的模块，可以单独新建 .h 与 .c 文件来实现，如LCD.h、LCD.c）　　</p>
+<p>经此设计，其优点逐渐浮出水面：</p>
+<blockquote>
+<p>• 高效的开发速率：编完 HAL 层中的 hal.h 之后，我们就可以很方便地调用，而不必反复地去查询SFR的具体设置细则<br>• 快速扩展：若需要加强系统功能，只需在 FML 层添加相应功能模块（即 .c 文件），并在 main.c 中调用即可<br>• 较高的代码重用性：HAL 层所提供的SFR操作可供通用，而且该层几乎不用修改就可直接用于新的CC2430项目中<br>• 较好的可维护性：项目代码结构清晰，HAL 与 FML 几乎不需要修改，只需修改 APL 即可</p>
+</blockquote>
+<p><strong>五、结语</strong></p>
+<p>可能对于嵌入式编程高手来说，上述理论可能完全算不得什么，甚至还存在着很大的错误。不过在一个初学者从入门走向精通的途中，像这种 发现问题 → 投入思考 → 提出方案 的学习模式，我相信是值得而且很有必要的。就像很多人说的那样：过程比结论更重要。</p>
+<p>接下来，笔者将会把大部分精力投入到“Zigbee之旅”的第一阶段的收尾工作中。希望在学习了C51编码规范，以及对代码分层的思考之后，我能够编写出一个虽然小但五脏俱全的项目代码。</p>
+<blockquote>
+<p>转载于<br>作者：hustlzp<br>网址：<a href="http://www.cnblogs.com/hustlzp/archive/2011/03/07/1972358.html" target="_blank" rel="external">http://www.cnblogs.com/hustlzp/archive/2011/03/07/1972358.html</a></p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">嵌入式</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/c/" class="article-tag-list-link color2">c</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/03/04/嵌入式代码开发/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-给小白的-Java-EE-指南（6）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -867,78 +984,6 @@
 
 
   
-    <article id="post-从1加到100：一道简单的数学题挑战下你的大脑" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/26/从1加到100：一道简单的数学题挑战下你的大脑/">从1加到100：一道简单的数学题挑战下你的大脑</a>
-    </h1>
-  
-
-        
-        <a href="/2017/02/26/从1加到100：一道简单的数学题挑战下你的大脑/" class="archive-article-date">
-  	<time datetime="2017-02-26T10:52:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>2017年的第一篇， 写给刚刚踏入计算机编程领域的小白吧。</p>
-<p>所谓编程，就是把自然语言的需求翻译成计算机语言， 让计算机去执行。 对于刚入行的人， 理解CPU和内存是怎么在一起工作的， 绝对是基础中的基础。</p>
-<hr>
-<p><strong>CPU和内存</strong></p>
-<p>如果我们简化一下， CPU和内存其实特别简单，内存就是一个个的小格子， 每个格子都有一个编号， 格子中的数据可以被CPU所读写。</p>
-<p><img src="http://img.mp.itc.cn/upload/20170103/e400d854f3a6477ea439719178f398d7_th.png" alt="img"></p>
-<p>CPU 内部的构造超级复杂， 但我们这次只关注两个东西：</p>
-<p>一是运算器，可以做各种运算， 但是有个限制，<strong>这个运算器不能直接操作内存进行运算</strong>， 他在运算时使用的是内部的数据格子（学名叫寄存器）， 为了区分开， 我把他们叫做R1,R2,R3,R4,假设只有这么4个， 统称Rx。 </p>
-<p>CPU必须把数据装载到寄存器中才能运算。</p>
-        
-          <a class="article-more-a" href="/2017/02/26/从1加到100：一道简单的数学题挑战下你的大脑/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cm/" class="article-tag-list-link color3">cm</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/02/26/从1加到100：一道简单的数学题挑战下你的大脑/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1039,6 +1084,18 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">面试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">书单</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
@@ -1047,19 +1104,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">书单</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面试</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">cpu</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1067,91 +1112,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">jdbc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">jsp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">sqlite</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">tool</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">log4j</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">回调</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">tcp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">main</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">javaweb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">wireshark</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">socket</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">代码重构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">json</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">单元测试</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">线程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">路由器</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网卡</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1159,7 +1120,63 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">键盘</a>
+                <a href="javascript:void(0)" class="js-tag color5">jdbc</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">sqlite</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">main</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">回调</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">log4j</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">javaweb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">socket</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">tcp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">wireshark</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">json</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">代码重构</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1167,7 +1184,23 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">嵌入式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">tool</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">进程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">线程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">网卡</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1175,7 +1208,23 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">键盘</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">j2ee</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">mvc</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">路由器</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">单元测试</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1183,7 +1232,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">j2ee</a>
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
             
             <div class="clearfix"></div>
