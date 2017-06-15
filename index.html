@@ -240,6 +240,237 @@
 
 
   
+    <article id="post-Java-面试问题分析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/15/Java-面试问题分析/">Java 面试问题分析</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/15/Java-面试问题分析/" class="archive-article-date">
+  	<time datetime="2017-06-15T12:24:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>作者：周志明</p>
+<p>介绍：远光软件开发部总经理，著有《深入理解Java虚拟机》等作品</p>
+<p>微博：<a href="http://weibo.com/icyfenix?is_all=1&amp;noscale_head=1#_0" target="_blank" rel="external">Iam周志明</a></p>
+</blockquote>
+<p>在公司当技术面试官几年间，从应届生到工作十几年的应聘者都遇到过。先表达一下我自己对面试的观点： </p>
+<p>1.笔试、面试去评价一个人肯定是不够准确的，了解一个人最准确的方式就是“路遥知马力，日久见人心”。通过一、二个小时内的做题、交流，只是没有其他办法下进行的无奈之举，所以通过了面试不代表有多成功，没通过也不代表有多失败。 </p>
+<p>2.好的面试官本身交谈的时候就不应当把自己一个居高临下的角色上，应当把自己和应聘者当做两个做技术的人平等的交流，把自己当作权威往往就会受到观点的角度、语言表达、工作领域的惯性的制约。 </p>
+<p>3.好的考察题目则是大家能经常接触，不同层次的人能有不同层次的答案，能从问题引申出后面继续讨论的话题。 </p>
+<p>举个例子抛砖引玉，下面这个问题是我以前常问的，从应届生到工作十几年的人都问过： </p>
+<p><strong>引用</strong></p>
+<blockquote>
+<p>“地球人都知道，Java有个东西叫垃圾收集器，它让创建的对象不需要像c/cpp那样delete、free掉，你能不能谈谈，<strong>GC是在什么时候</strong>，<strong>对什么东西</strong>，<strong>做了什么事情</strong>？”</p>
+</blockquote>
+<h2 id="GC-是在什么时候"><a href="#GC-是在什么时候" class="headerlink" title="GC 是在什么时候"></a>GC 是在什么时候</h2><p>我自己分析一下这个问题，首先是“什么时候”，不同层次的回答从低到高排列： </p>
+<p>1.系统空闲的时候。 </p>
+<p><strong>分析</strong>：这种回答大约占30%，遇到的话一般我就会准备转向别的话题，譬如算法、譬如SSH看看能否发掘一些他擅长的其他方面。 </p>
+<p>2.系统自身决定，不可预测的时间/调用System.gc()的时候。 </p>
+<p><strong>分析</strong>：这种回答大约占55%，大部分应届生都能回答到这个答案，起码不能算错误是吧，后续应当细分一下到底是语言表述导致答案太笼统，还是本身就只有这样一个模糊的认识。 </p>
+<p>3.能说出新生代、老年代结构，能提出 Minor GC / Full GC </p>
+<p><strong>分析</strong>：到了这个层次，基本上能说对GC运作有概念上的了解，譬如看过《深入JVM虚拟机》之类的。这部分不足10%。 </p>
+<p>4.能说明 Minor GC / Full GC 的触发条件、OOM的触发条件，降低GC的调优的策略。 </p>
+<p><strong>分析</strong>：列举一些我期望的回答：eden 满了 minor gc，升到老年代的对象大于老年代剩余空间 full gc，或者小于时被 HandlePromotionFailure 参数强制 full gc；gc 与非 gc 时间耗时超过了 GCTimeRatio 的限制引发 OOM，调优诸如通过 NewRatio 控制新生代老年代比例，通过 MaxTenuringThreshold 控制进入老年前生存次数等……能回答道这个阶段就会给我带来比较高的期望了，当然面试的时候正常人都不会记得每个参数的拼写，我自己写这段话的时候也是翻过手册的。回答道这部分的小于2%。 </p>
+<p>加起来不到100%，是因为有确实少数直接说不知道，或者直接拒绝回答的。</p>
+<h2 id="对什么东西"><a href="#对什么东西" class="headerlink" title="对什么东西"></a>对什么东西</h2><p>分析第二个问题：“对什么东西”： </p>
+<p>1.不使用的对象。 </p>
+<p><strong>分析</strong>：相当于没有回答，问题就是在问什么对象才是“不使用的对象”。大约占30%。 </p>
+<p>2.超出作用域的对象 / 引用计数为空的对象。 </p>
+<p><strong>分析</strong>：这2个回答站了60%，相当高的比例，估计学校教java的时候老师就是这样教的。第一个回答没有解决我的疑问，gc到底怎么判断哪些对象在不在作用域的？至于引用计数来判断对象是否可收集的，我可以会补充一个下面这个例子让面试者分析一下obj1、obj2是否会被GC掉？ </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// 循环引用案例</div><div class="line">class C&#123; </div><div class="line">     public Object x; </div><div class="line">&#125; </div><div class="line">C obj1、obj2 = new C(); </div><div class="line">obj1.x = obj2; </div><div class="line">obj2.x = obj1; </div><div class="line">obj1、obj2 = null;</div></pre></td></tr></table></figure>
+<p>3.从gc root开始搜索，搜索不到的对象。 </p>
+<p><strong>分析</strong>：根对象查找、标记已经算是不错了，小于5%的人可以回答道这步，估计是引用计数的方式太“深入民心”了。基本可以得到这个问题全部分数。 </p>
+<p>PS：有面试者在这个问补充强引用、弱引用、软引用、幻影引用区别等，不是我想问的答案，但可以加分。 </p>
+<p>4.从root搜索不到，而且经过第一次标记、清理后，仍然没有复活的对象。 </p>
+<p><strong>分析</strong>：我期待的答案。但是的确很少面试者会回答到这一点，所以在我心中回答道第3点我就给全部分数。</p>
+<h2 id="做什么事情"><a href="#做什么事情" class="headerlink" title="做什么事情"></a>做什么事情</h2><p>最后由一个问题：“做什么事情”，这个问发挥的空间就太大了，不同年代、不同收集器的动作非常多。 </p>
+<p>1.删除不使用的对象，腾出内存空间。 </p>
+<p><strong>分析</strong>：同问题2第一点。40%。 </p>
+<p>2.补充一些诸如停止其他线程执行、运行finalize等的说明。 </p>
+<p><strong>分析</strong>：起码把问题具体化了一些，如果像答案1那样我很难在回答中找到话题继续展开，大约占40%的人。 </p>
+<p>补充一点题外话，面试时我最怕遇到的回答就是“这个问题我说不上来，但是遇到的时候我上网搜一下能做出来”。做程序开发确实不是去锻炼茴香豆的“茴”有几种写法，不死记硬背我同意，我不会纠语法、单词，但是多少你说个思路呀，要直接回答一个上网搜，我完全没办法从中获取可以评价应聘者的信息，也很难从回答中继续发掘话题展开讨论。建议大家尽量回答引向自己熟悉的，可讨论的领域，展现给面试官最擅长的一面。 </p>
+<p>3.能说出诸如 <strong>新生代做的是复制清理</strong>、from survivor、to survivor是干啥用的、<strong>老年代做的是标记清理</strong>、标记清理后碎片要不要整理、复制清理和标记清理有有什么优劣势等。 </p>
+<p><strong>分析</strong>：也是看过《深入JVM虚拟机》的基本都能回答道这个程度，其实到这个程度我已经比较期待了。同样小于10%。 </p>
+<p>4.除了3外，还能讲清楚串行、并行（整理/不整理碎片）、CMS等搜集器可作用的年代、特点、优劣势，并且能说明控制/调整收集器选择的方式。 </p>
+<p><strong>分析</strong>：同上面2个问题的第四点。 </p>
+<p>最后介绍一下自己的背景，在一间不大不小的上市软件公司担任平台架构师，有3年左右的面试官经验，工作主要方向是大规模企业级应用，参与过若干个亿元级的项目的底层架构工作。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">面试</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/15/Java-面试问题分析/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-计算机是如何启动的" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/15/计算机是如何启动的/">计算机是如何启动的</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/15/计算机是如何启动的/" class="archive-article-date">
+  	<time datetime="2017-06-15T12:22:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>从打开电源到开始操作，计算机的启动是一个非常复杂的过程。</p>
+<p>我一直搞不清楚，这个过程到底是怎么回事，只看见屏幕快速滚动各种提示。这几天，我查了一些资料，试图搞懂它。下面就是我整理的笔记。</p>
+<p><strong>零、boot的含义</strong></p>
+<p>先问一个问题，”启动”用英语怎么说？</p>
+<p>回答是boot。可是，boot原来的意思是靴子，”启动”与靴子有什么关系呢？ 原来，这里的boot是bootstrap（鞋带）的缩写，它来自一句谚语：</p>
+<blockquote>
+<p>“pull oneself up by one’s bootstraps”</p>
+</blockquote>
+<p>字面意思是”拽着鞋带把自己拉起来”，这当然是不可能的事情。最早的时候，工程师们用它来比喻，计算机启动是一个很矛盾的过程：必须先运行程序，然后计算机才能启动，但是计算机不启动就无法运行程序！</p>
+<p>早期真的是这样，必须想尽各种办法，把一小段程序装进内存，然后计算机才能正常运行。所以，工程师们把这个过程叫做”拉鞋带”，久而久之就简称为boot了。</p>
+<p>计算机的整个启动过程分成四个阶段。</p>
+<h2 id="第一阶段：BIOS"><a href="#第一阶段：BIOS" class="headerlink" title="第一阶段：BIOS"></a>第一阶段：BIOS</h2><p>上个世纪70年代初，”只读内存”（read-only memory，缩写为ROM）发明，开机程序被刷入ROM芯片，计算机通电后，第一件事就是读取它。</p>
+<p><img src="http://image.beekka.com/blog/201302/bg2013021502.jpg" alt="img"></p>
+<p>这块芯片里的程序叫做”基本輸出輸入系統”（Basic Input/Output System），简称为BIOS。</p>
+<h3 id="1-1-硬件自检"><a href="#1-1-硬件自检" class="headerlink" title="1.1 硬件自检"></a>1.1 硬件自检</h3><p>BIOS程序首先检查，计算机硬件能否满足运行的基本条件，这叫做”硬件自检”（Power-On Self-Test），缩写为POST。</p>
+<p>如果硬件出现问题，主板会发出不同含义的蜂鸣，启动中止。如果没有问题，屏幕就会显示出CPU、内存、硬盘等信息。</p>
+<p><img src="http://image.beekka.com/blog/201302/bg2013021503.png" alt="img"></p>
+<h3 id="1-2-启动顺序"><a href="#1-2-启动顺序" class="headerlink" title="1.2 启动顺序"></a>1.2 启动顺序</h3><p>硬件自检完成后，BIOS把控制权转交给下一阶段的启动程序。</p>
+<p>这时，BIOS需要知道，”下一阶段的启动程序”具体存放在哪一个设备。也就是说，BIOS需要有一个外部储存设备的排序，排在前面的设备就是优先转交控制权的设备。这种排序叫做”启动顺序”（Boot Sequence）。</p>
+<p>打开BIOS的操作界面，里面有一项就是”设定启动顺序”。</p>
+<p><img src="http://image.beekka.com/blog/201302/bg2013021504.jpg" alt="img"></p>
+<h2 id="第二阶段：主引导记录"><a href="#第二阶段：主引导记录" class="headerlink" title="第二阶段：主引导记录"></a>第二阶段：主引导记录</h2><p>BIOS按照”启动顺序”，把控制权转交给排在第一位的储存设备。<br>这时，计算机读取该设备的第一个扇区，也就是读取最前面的512个字节。如果这512个字节的最后两个字节是0x55和0xAA，表明这个设备可以用于启动；如果不是，表明设备不能用于启动，控制权于是被转交给”启动顺序”中的下一个设备。</p>
+<p>这最前面的512个字节，就叫做”主引导记录”（Master boot record，缩写为MBR）。</p>
+<h3 id="2-1-主引导记录的结构"><a href="#2-1-主引导记录的结构" class="headerlink" title="2.1 主引导记录的结构"></a>2.1 主引导记录的结构</h3><p>“主引导记录”只有512个字节，放不了太多东西。它的主要作用是，告诉计算机到硬盘的哪一个位置去找操作系统。</p>
+<p>主引导记录由三个部分组成：</p>
+<blockquote>
+<p>（1） 第1-446字节：调用操作系统的机器码。</p>
+<p>（2） 第447-510字节：分区表（Partition table）。</p>
+<p>（3） 第511-512字节：主引导记录签名（0x55和0xAA）。</p>
+</blockquote>
+<p>其中，第二部分”分区表”的作用，是将硬盘分成若干个区。</p>
+<h3 id="2-2-分区表"><a href="#2-2-分区表" class="headerlink" title="2.2 分区表"></a>2.2 分区表</h3><p>硬盘分区有很多好处。考虑到每个区可以安装不同的操作系统，”主引导记录”因此必须知道将控制权转交给哪个区。</p>
+<p>分区表的长度只有64个字节，里面又分成四项，每项16个字节。所以，一个硬盘最多只能分四个一级分区，又叫做”主分区”。</p>
+<p>每个主分区的16个字节，由6个部分组成：</p>
+<blockquote>
+<p>（1） 第1个字节：如果为0x80，就表示该主分区是激活分区，控制权要转交给这个分区。四个主分区里面只能有一个是激活的。</p>
+<p>（2） 第2-4个字节：主分区第一个扇区的物理位置（柱面、磁头、扇区号等等）。</p>
+<p>（3） 第5个字节：主分区类型。</p>
+<p>（4） 第6-8个字节：主分区最后一个扇区的物理位置。</p>
+<p>（5） 第9-12字节：该主分区第一个扇区的逻辑地址。</p>
+<p>（6） 第13-16字节：主分区的扇区总数。</p>
+</blockquote>
+<p>最后的四个字节（”主分区的扇区总数”），决定了这个主分区的长度。也就是说，一个主分区的扇区总数最多不超过2的32次方。</p>
+<p>如果每个扇区为512个字节，就意味着单个分区最大不超过2TB。再考虑到扇区的逻辑地址也是32位，所以单个硬盘可利用的空间最大也不超过2TB。如果想使用更大的硬盘，只有2个方法：一是提高每个扇区的字节数，二是增加扇区总数。</p>
+<h2 id="三、第三阶段：硬盘启动"><a href="#三、第三阶段：硬盘启动" class="headerlink" title="三、第三阶段：硬盘启动"></a>三、第三阶段：硬盘启动</h2><p>这时，计算机的控制权就要转交给硬盘的某个分区了，这里又分成三种情况。</p>
+<h3 id="3-1-情况A：卷引导记录"><a href="#3-1-情况A：卷引导记录" class="headerlink" title="3.1 情况A：卷引导记录"></a>3.1 情况A：卷引导记录</h3><p>上一节提到，四个主分区里面，只有一个是激活的。计算机会读取激活分区的第一个扇区，叫做”卷引导记录”（Volume boot record，缩写为VBR）。</p>
+<p>“卷引导记录”的主要作用是，告诉计算机，操作系统在这个分区里的位置。然后，计算机就会加载操作系统了。</p>
+<h3 id="3-2-情况B：扩展分区和逻辑分区"><a href="#3-2-情况B：扩展分区和逻辑分区" class="headerlink" title="3.2 情况B：扩展分区和逻辑分区"></a>3.2 情况B：扩展分区和逻辑分区</h3><p>随着硬盘越来越大，四个主分区已经不够了，需要更多的分区。但是，分区表只有四项，因此规定有且仅有一个区可以被定义成”扩展分区”（Extended partition）。</p>
+<p>所谓”扩展分区”，就是指这个区里面又分成多个区。这种分区里面的分区，就叫做”逻辑分区”（logical partition）。</p>
+<p>计算机先读取扩展分区的第一个扇区，叫做”扩展引导记录”（Extended boot record，缩写为EBR）。它里面也包含一张64字节的分区表，但是最多只有两项（也就是两个逻辑分区）。</p>
+<p>计算机接着读取第二个逻辑分区的第一个扇区，再从里面的分区表中找到第三个逻辑分区的位置，以此类推，直到某个逻辑分区的分区表只包含它自身为止（即只有一个分区项）。因此，扩展分区可以包含无数个逻辑分区。</p>
+<p>但是，似乎很少通过这种方式启动操作系统。如果操作系统确实安装在扩展分区，一般采用下一种方式启动。</p>
+<h3 id="3-3-情况C：启动管理器"><a href="#3-3-情况C：启动管理器" class="headerlink" title="3.3 情况C：启动管理器"></a>3.3 情况C：启动管理器</h3><p>在这种情况下，计算机读取”主引导记录”前面446字节的机器码之后，不再把控制权转交给某一个分区，而是运行事先安装的”启动管理器”（boot loader），由用户选择启动哪一个操作系统。</p>
+<p>Linux环境中，目前最流行的启动管理器是Grub。</p>
+<p><img src="http://image.beekka.com/blog/201302/bg2013021505.png" alt="img"></p>
+<h2 id="四、第四阶段：操作系统"><a href="#四、第四阶段：操作系统" class="headerlink" title="四、第四阶段：操作系统"></a>四、第四阶段：操作系统</h2><p>控制权转交给操作系统后，操作系统的内核首先被载入内存。</p>
+<p>以Linux系统为例，先载入/boot目录下面的kernel。内核加载成功后，第一个运行的程序是/sbin/init。它根据配置文件（Debian系统是/etc/initab）产生init进程。这是Linux启动后的第一个进程，pid进程编号为1，其他进程都是它的后代。</p>
+<p>然后，init线程加载系统的各个模块，比如窗口程序和网络程序，直至执行/bin/login程序，跳出登录界面，等待用户输入用户名和密码。<br>至此，全部启动过程完成。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/cm/" class="article-tag-list-link color3">cm</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/15/计算机是如何启动的/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-类加载机制" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -434,7 +665,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">jvm</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">classloader</a>
         		</li>
       		
 		</ul>
@@ -509,7 +740,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">jvm</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">classloader</a>
         		</li>
       		
 		</ul>
@@ -759,149 +990,6 @@
 
 
   
-    <article id="post-Java-进阶：关于初始化的那些事" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/15/Java-进阶：关于初始化的那些事/">Java 进阶：关于初始化的那些事</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/15/Java-进阶：关于初始化的那些事/" class="archive-article-date">
-  	<time datetime="2017-06-15T11:49:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>不管是哪种编程语言，都有一个很重要的问题，那就是成员的初始化，如果我们对自定义的变量没有进行适当的初始化，那么就有可能造成一些意想不到的错误，在写程序的时候，我们必须要对成员变量进行正确的初始化，所以今天我们就来讨论一下关于初始化的那些事。</p>
-<p>先来看一些Java中有关初始化的小细节： </p>
-<ol>
-<li><p>在方法中的局部变量未初始化的话编译器会报错，在类中则不会。 </p>
-</li>
-<li><p>如果类的数据成员是基本类型的话，那么每个基本类型数据成员都会有一个初始值。 </p>
-</li>
-<li><p>无法阻止自动初始化的进行，他们会在构造器被调用之前发生。</p>
-</li>
-</ol>
-        
-          <a class="article-more-a" href="/2017/06/15/Java-进阶：关于初始化的那些事/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/15/Java-进阶：关于初始化的那些事/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-Java-进阶：final-关键字" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/15/Java-进阶：final-关键字/">Java 进阶：final 关键字</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/15/Java-进阶：final-关键字/" class="archive-article-date">
-  	<time datetime="2017-06-15T11:45:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在Java中，<strong>编译器</strong> 可以将final常量代入任何可能用到它的计算式中，也就是说，可以在 <strong>编译时进行计算</strong>，这减轻了一些运行时的负担。final常量必须是基本类型。</p>
-<p>对于对象引用，final使引用恒定不变。一旦引用被初始化指向一个对象，就无法再把它改为指向另一个对象。然而，对象其自身却是可以被修改的，既是final又是static的域，将用大写表示，并使用下划线分割各个单词。</p>
-        
-          <a class="article-more-a" href="/2017/06/15/Java-进阶：final-关键字/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">final</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/15/Java-进阶：final-关键字/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1002,15 +1090,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">书单</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">cpu</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">书单</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1034,7 +1122,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
+                <a href="javascript:void(0)" class="js-tag color2">classloader</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1043,6 +1131,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">main</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">log4j</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1058,7 +1150,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">log4j</a>
+                <a href="javascript:void(0)" class="js-tag color5">this</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1066,7 +1162,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">this</a>
+                <a href="javascript:void(0)" class="js-tag color1">final</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">socket</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1078,7 +1178,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">socket</a>
+                <a href="javascript:void(0)" class="js-tag color5">wireshark</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1086,19 +1186,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">wireshark</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">final</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">代码重构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">json</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1111,6 +1199,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">json</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1134,11 +1226,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mvc</a>
+                <a href="javascript:void(0)" class="js-tag color3">os</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">os</a>
+                <a href="javascript:void(0)" class="js-tag color4">mvc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1151,10 +1243,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">j2ee</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">classloader</a>
               </li>
             
             <div class="clearfix"></div>
