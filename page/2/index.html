@@ -167,6 +167,230 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-嵌入式代码开发" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/04/嵌入式代码开发/">嵌入式代码开发</a>
+    </h1>
+  
+
+        
+        <a href="/2017/03/04/嵌入式代码开发/" class="archive-article-date">
+  	<time datetime="2017-03-04T11:29:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>嵌入式项目代码结构的分层——HAL（硬件抽象层）、FML（功能模块层）、APL（应用程序层）</p>
+<p><strong>一、遇到的问题</strong></p>
+<p>在“Zigbee之旅”系列博文中，每写一篇笔者都会编写一个小实验来展开讲解。通过这一段时间的实践，我积累了一些编码经验，但也体会到了之前的代码结构的缺陷：<br>（1）开发效率低：每次使用片内的某一资源（例如定时器等），笔者都要去查询CC2430中文手册，比较eggache<br>（2）代码重复较多：每个实验源码中，诸如 xtal_init ，led_init 等初始化函数每次都要编写<br>（3）不易修改：代码中的业务逻辑与SFR的操作混在一起，可读性较差，修改起来也费力正是由于以上问题，笔者决定暂停了该系列博文的续写，抽出时间来思考一下解决办法。</p>
+        
+          <a class="article-more-a" href="/2017/03/04/嵌入式代码开发/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">嵌入式</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/c/" class="article-tag-list-link color2">c</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/03/04/嵌入式代码开发/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-给小白的-Java-EE-指南（6）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/28/给小白的-Java-EE-指南（6）/">给小白的 Java EE 指南（6）</a>
+    </h1>
+  
+
+        
+        <a href="/2017/02/28/给小白的-Java-EE-指南（6）/" class="archive-article-date">
+  	<time datetime="2017-02-28T14:26:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文是给小白的Java EE生存指南的第6篇， 讲点稍微有深度的：反射。</p>
+<p>这里不定义什么叫反射，先来看个例子，假设我给你一个Java 类： </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.example;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">HelloWorld</span><span class="params">()</span></span>&#123;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sayHello</span><span class="params">()</span></span>&#123;</div><div class="line">        System.out.println(<span class="string">"hello world!"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>现在要求:<br>
+        
+          <a class="article-more-a" href="/2017/02/28/给小白的-Java-EE-指南（6）/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">j2ee</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/02/28/给小白的-Java-EE-指南（6）/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-给小白的-Java-EE-指南（5）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/27/给小白的-Java-EE-指南（5）/">给小白的 Java EE 指南（5）</a>
+    </h1>
+  
+
+        
+        <a href="/2017/02/27/给小白的-Java-EE-指南（5）/" class="archive-article-date">
+  	<time datetime="2017-02-27T13:46:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文是给小白的Java EE生存指南的第5篇， 讲一下前端工程师必备的AJAX的来龙去脉。</p>
+<p>回到2001年， 当时的老刘还是小刘， 在计算所跟着老板和四川的一个公司合作，做一个类似于OA(办公自动化)的项目。</p>
+<p>当时小刘刚毕业，写过一些asp的程序，在小刘的意识当中， 还是觉得只要你通过浏览器向服务器发出请求， 服务器处理以后， 需要<strong>刷新整个网页</strong>才能看到服务器处理的结果。</p>
+<p>但是有一天我突然看到项目中大牛写的一个页面，这个页面上面是菜单，中间是一个树形结构，代表了一个公司的各个部门。</p>
+        
+          <a class="article-more-a" href="/2017/02/27/给小白的-Java-EE-指南（5）/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">j2ee</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/02/27/给小白的-Java-EE-指南（5）/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-给小白的-Java-EE-指南（4）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -686,214 +910,9 @@
 
 
   
-    <article id="post-张大胖的加法器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/26/张大胖的加法器/">张大胖的加法器</a>
-    </h1>
-  
-
-        
-        <a href="/2017/02/26/张大胖的加法器/" class="archive-article-date">
-  	<time datetime="2017-02-26T10:36:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>加法器</strong></p>
-<p>热爱编程的张大胖在大学时最烦的一门课之一就是《数字电路》 ， 他一直觉得和编程没什么关系。</p>
-<p>有一次课程设计是实现一个加法器， 大胖使用逻辑电路， 费了九牛二虎之力才实现了4位的加法。</p>
-<p><img src="http://img.mp.itc.cn/upload/20161228/f706eae0049942619919d9681d21b2d4_th.jpeg" alt="img"></p>
-        
-          <a class="article-more-a" href="/2017/02/26/张大胖的加法器/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cm/" class="article-tag-list-link color3">cm</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/02/26/张大胖的加法器/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-冯·诺依曼计算机的诞生" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/26/冯·诺依曼计算机的诞生/">冯·诺依曼计算机的诞生</a>
-    </h1>
-  
-
-        
-        <a href="/2017/02/26/冯·诺依曼计算机的诞生/" class="archive-article-date">
-  	<time datetime="2017-02-26T10:31:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>早期的计算机都是专用计算机，是不可编程的， 例如常见的计算器， 虽然能轻松的完成基本数学运算， 但是你要是想拿来做文字处理， 表格处理，或者玩游戏那是肯定不可能了。 </p>
-<p>因为这些机器内部的电路和一个特定的程序密切相关， 对于这些计算机来讲， 重新编程就意味着完全从头开始设计， 加工，制造一个全新的机器出来，当然新的机器依然是专用的。 </p>
-<p>假设时间回到上个世纪40年代，  领导让你设计一台通用计算机， 你会怎么做？</p>
-<p>首先你要考虑的是，这样的计算机<strong>在理论上是否可行</strong>， 如果理论上都造不出来，那就别白费力气了。</p>
-<p>你最不擅长的就是数学理论， 苦思冥想还是找不到答案，突然有一天看到一篇划时代的论文，就像跌入山崖而无意中得到一本武林秘籍一样让你欣喜若狂。  </p>
-        
-          <a class="article-more-a" href="/2017/02/26/冯·诺依曼计算机的诞生/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cm/" class="article-tag-list-link color3">cm</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/02/26/冯·诺依曼计算机的诞生/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-节约标兵-IE-的自述" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/26/节约标兵-IE-的自述/">节约标兵 IE 的自述</a>
-    </h1>
-  
-
-        
-        <a href="/2017/02/26/节约标兵-IE-的自述/" class="archive-article-date">
-  	<time datetime="2017-02-26T10:20:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最近计算机系统党委发起一场杜绝浪费，厉行节约的整风运动， 要求每个人都要切实落实领导指示， 坚决自查， 互查， 找出浪费，提出解决方案。 </p>
-<p>在这场轰轰烈烈的运动中，我不等不靠， 主动参与其中，在领导的教导下， 同事的帮助下， 做了很多优化和改进， 并评为节约标兵，  现在给大家分享下我的经验， 共同进步。 </p>
-<p>忘了自我介绍了，我是IE,  作为人类的代理(User Agent)， 我是为人类访问互联网而生。 </p>
-<p>人类每次想访问互联网了，就会告诉我一个网址， 比如www.jd.com ,  我就会让TCP这个小伙子帮我和这个网址的服务器建立一个连接， 然后通过这个连接通道给服务器发消息， 消息格式是我和服务器约定好的。 </p>
-<p>这个服务器也会按照约定， 给我发回整个页面的数据(俗称 <strong>HTML 文档</strong>) ， 当然也是通过同一个连接通道。 </p>
-        
-          <a class="article-more-a" href="/2017/02/26/节约标兵-IE-的自述/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">http</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/network/" class="article-tag-list-link color3">network</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/02/26/节约标兵-IE-的自述/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
   
 
@@ -983,15 +1002,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">c</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">书单</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1007,7 +1030,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">jdbc</a>
+                <a href="javascript:void(0)" class="js-tag color5">tool</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1015,15 +1038,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
+                <a href="javascript:void(0)" class="js-tag color5">jdbc</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">sqlite</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">tool</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1035,11 +1054,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">线程</a>
+                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
+                <a href="javascript:void(0)" class="js-tag color3">线程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1048,6 +1067,14 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">final</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">this</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1063,19 +1090,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">javaweb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">wireshark</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">javaweb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1091,11 +1114,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">架构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">单元测试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">网卡</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1107,19 +1138,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">键盘</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">os</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">mvc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">架构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">volatile</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1131,11 +1158,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">键盘</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网卡</a>
+                <a href="javascript:void(0)" class="js-tag color4">volatile</a>
               </li>
             
             <div class="clearfix"></div>

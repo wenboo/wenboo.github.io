@@ -167,6 +167,226 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Servlet-并发小结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/14/Servlet-并发小结/">Servlet 并发小结</a>
+    </h1>
+  
+
+        
+        <a href="/2016/11/14/Servlet-并发小结/" class="archive-article-date">
+  	<time datetime="2016-11-14T12:56:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-11-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>Servelet的特点：单实例多线程</strong></p>
+<p>Servlet（struts类似）的生命周期是由Web容器负责的,当客户端第一次请求Servlet时,容器负责初始化Servlet,也就是实例化这个Servlet 类。以后这个实例就负责多个客户端的请求,一般不会再实例化一个Servlet类,也就是有多个线程在使用这个实例。Servlet之所以比CGI效率高就是因为Servlet是多线程的。</p>
+<p>Servlet采用多线程来处理多个请求同时访问，Servelet容器维护了一个线程池来服务请求。线程池实际上是等待执行代码的一组线程叫做工作者线程(WorkerThread)，Servlet容器使用一个调度线程来管理工作者线程(DispatcherThread)。当容器收到一个访问Servlet的请求，调度者线程从线程池中选出一个工作者线程，将请求传递给该线程，然后由该线程来执行Servlet的service方法。当这个线程正在执行的时候，容器收到另外一个请求，调度者线程将从池中选出另外一个工作者线程来服务新的请求，容器并不关心这个请求是否访问的是同一个Servlet还是另外一个Servlet。当容器同时收到对同一Servlet的多个请求，那这个Servlet的service方法将在多线程中并发的执行。</p>
+<p>Servlet容器默认采用单实例多线程的方式来处理请求，这样减少产生Servlet实例的开销，提升了对请求的响应时间。对于Tomcat可以在server.xml中通过<Connector>元素设置线程池中线程的数目。就实现来说：调度者线程类所担负的责任如其名字，该类的责任是调度线程，只需要利用自己的属性完成自己的责任。所以该类是承担了责任的，并且该类的责任又集中到唯一的单体对象中。而其他对象又依赖于该特定对象所承担的责任，我们就需要得到该特定对象。那该类就是一个单例模式的实现了。</p>
+        
+          <a class="article-more-a" href="/2016/11/14/Servlet-并发小结/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">tomcat</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/11/14/Servlet-并发小结/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-if&amp;else-代码重构方向原则指导" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/08/if&else-代码重构方向原则指导/">if&amp;else 代码重构方向原则指导</a>
+    </h1>
+  
+
+        
+        <a href="/2016/11/08/if&else-代码重构方向原则指导/" class="archive-article-date">
+  	<time datetime="2016-11-08T14:04:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-11-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>几天前的一次上线，脑残手抖不小心写了bug，虽然组里的老大没有说什么，但心里面很是难过。同事说我之所以写虫子是因为我讨厌if/else，这个习惯不好。的确，if/else可以帮助我们很方便的写出流程控制代码，简洁明了，这个条件做什么，那个条件做什么，说得很清楚。说真的，我从来不反对if/else，从经验上看，越复杂的业务场景下，代码写的越简单单一，通常越不容易出错。以结果为导向的现代项目管理方式，这是一种很有效实践经验。</p>
+<p>同事说的没错，我的确很讨厌if/else。这个习惯很大程度是受Thoughtworks一位咨询师朋友影响，他经常在我耳边唠叨，写代码要干净，要简洁，要灵活多变，不要固守城规，不要动不动就if/else，switch/case。初入it领域，我一直把这句话奉为经典。在以后的学习工作中也时刻提醒自己要让自己的代码尽可能的看起来简洁，不失灵活。不喜欢if/else并不意味着拒绝它，该使用的时候必要使用，比如函数接口入参check，处理异常分支逻辑流程等。通常能不用分支语句，我尽量不会使用，因为我觉得if/else很丑，每每看到if/else代码，总会以挑剔的眼光看待它，想想能不能重构的更好。大多数时候，关于什么好的代码，大家的意见往往分歧很大，每个人都有各自的想法，审查你代码的人可能会选择另一种实现方式，这并不能说明谁对谁错。</p>
+        
+          <a class="article-more-a" href="/2016/11/08/if&else-代码重构方向原则指导/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/11/08/if&else-代码重构方向原则指导/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-Java-简易服务器的实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/06/Java-简易服务器的实现/">Java 简易服务器的实现</a>
+    </h1>
+  
+
+        
+        <a href="/2016/11/06/Java-简易服务器的实现/" class="archive-article-date">
+  	<time datetime="2016-11-06T13:16:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-11-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>使用telnet客户端测试。telnet客户端windows默认是禁掉的，需要设置： 控制面板 &gt; 程序 &gt; 打开或关闭Windows功能 &gt; Telnet客户端 &gt; OK 。</p>
+        
+          <a class="article-more-a" href="/2016/11/06/Java-简易服务器的实现/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/11/06/Java-简易服务器的实现/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-Java中-RandomAccessFile-用法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -742,224 +962,9 @@
 
 
   
-    <article id="post-Java-集合类问题集" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/26/Java-集合类问题集/">Java 集合类问题集</a>
-    </h1>
-  
-
-        
-        <a href="/2016/10/26/Java-集合类问题集/" class="archive-article-date">
-  	<time datetime="2016-10-26T13:52:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>1.Java集合框架是什么？说出一些集合框架的优点？</strong></p>
-<p>每种编程语言中都有集合，最初的Java版本包含几种集合类：Vector、Stack、HashTable和Array。随着集合的广泛使用，Java1.2提出了囊括所有集合接口、实现和算法的集合框架。在保证线程安全的情况下使用泛型和并发集合类，Java已经经历了很久。它还包括在Java并发包中，阻塞接口以及它们的实现。<strong>集合框架的部分优点如下：</strong></p>
-<p>（1）使用核心集合类降低开发成本，而非实现我们自己的集合类。<br>（2）随着使用经过严格测试的集合框架类，代码质量会得到提高。<br>（3）通过使用JDK附带的集合类，可以降低代码维护成本。<br>（4）复用性和可操作性。</p>
-        
-          <a class="article-more-a" href="/2016/10/26/Java-集合类问题集/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/10/26/Java-集合类问题集/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-开发团队的效率" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/24/开发团队的效率/">开发团队的效率</a>
-    </h1>
-  
-
-        
-        <a href="/2016/10/24/开发团队的效率/" class="archive-article-date">
-  	<time datetime="2016-10-24T14:43:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>我之前写过一篇叫《加班与效率》的文章，从概念上说了一些我对“效率”的认识，但是那篇文章趋于概念化，对于一些没有经历过这样的环境的同学来说，可能会觉得太抽象了。很早以前就想写一篇更具体一点的，可执行的文章与《加班与效率》这篇文章相辉映，并再把我两年前在杭州QCon上的那个“鼓吹工程师文化”的《建一支强大的小团队》（新浪微盘）的观点再加强一下。但是我遇到了一些思维方式上的麻烦—我讲的总是从我的经历背景出发，没有从其它人的经历背景来讲。这就好像，我在酷壳里说了很多东西（比如：专职的QA，Code Review很重要，编程年龄，创业的，Rework的……），有好些人觉得是不可能甚至太理想，其实我说的那些东西都是实实在在存在的，也是我所经历过的。于是，不同的经历，不同的环境，不同的眼界，造成了——有些人不理解我说的，而我也不能理解他们所说的。</p>
-<p>所以，过去的这段时间我一有机会就找一些人交流并观察一些身边的事情，并去试着跟从和理解那些我不能理解的东西。现在觉得差不多了，所以，写下了这篇文章。（但越是去理解对方，我就越坚持我的观点，所以这篇文章可能还是会出现鸡同鸭讲的情形，无所谓了）本文不讨论任何业务上的效率问题，只讨论软件开发或是软件工程中的效率问题。虽然产品和业务上的效率问题是根本，但是因为本文不是拉仇恨的，我也不想混在一起谈，所以请原谅我在这里先说开发团队的，以后重新开篇文章专门谈产品和业务的。</p>
-<p>我下面会罗列几个非常典型的开发方式——<strong>软件开发中的“锁”</strong>：<strong>接力棒式软件开发，保姆式软件开发，WatchDog软件开发，故障驱动式软件开发。</strong></p>
-        
-          <a class="article-more-a" href="/2016/10/24/开发团队的效率/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/life/" class="article-tag-list-link color5">life</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/10/24/开发团队的效率/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-TCP-的那些事儿" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/24/TCP-的那些事儿/">TCP 的那些事儿</a>
-    </h1>
-  
-
-        
-        <a href="/2016/10/24/TCP-的那些事儿/" class="archive-article-date">
-  	<time datetime="2016-10-24T14:21:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>TCP 头格式</strong></p>
-<p><img src="http://coolshell.cn/wp-content/uploads/2014/05/TCP-Header-01.jpg" alt="pic"></p>
-<p>1) TCP的包是没有IP地址的，那是IP层上的事。但是有源端口和目标端口。</p>
-<p>2) 一个TCP连接需要四个元组来表示是同一个连接（src_ip, src_port, dst_ip, dst_port）准确说是五元组，还有一个是协议。但因为这里只是说TCP协议，所以，这里我只说四元组。</p>
-<p>注意上图中的四个非常重要的内容：</p>
-<p><strong>Sequence Number</strong>是包的序号，用来解决<strong>网络包乱序（reordering）</strong>问题。<br><strong>Acknowledgement Number</strong>就是ACK——用于确认收到，用来解决<strong>不丢包</strong>的问题。<br><strong>Window</strong>又叫Advertised-Window，也就是著名的滑动窗口（Sliding Window），用于解决<strong>流控</strong>的。<br><strong>TCP Flag</strong>，也就是包的类型，主要是用于<strong>操控TCP的状态机</strong>的。</p>
-<p><img src="http://coolshell.cn/wp-content/uploads/2014/05/TCP-Header-02.jpg" alt="pic"></p>
-        
-          <a class="article-more-a" href="/2016/10/24/TCP-的那些事儿/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">tcp</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/network/" class="article-tag-list-link color3">network</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/10/24/TCP-的那些事儿/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/7/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/9/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/7/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/9/">Next &raquo;</a>
     </nav>
   
 
@@ -1049,15 +1054,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">c</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">书单</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1073,7 +1082,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">jdbc</a>
+                <a href="javascript:void(0)" class="js-tag color5">tool</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1081,15 +1090,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
+                <a href="javascript:void(0)" class="js-tag color5">jdbc</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">sqlite</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">tool</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1101,11 +1106,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">线程</a>
+                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
+                <a href="javascript:void(0)" class="js-tag color3">线程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1114,6 +1119,14 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">final</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">this</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1129,19 +1142,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">javaweb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">wireshark</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">javaweb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1157,11 +1166,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">架构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">单元测试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">网卡</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1173,19 +1190,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">键盘</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">os</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">mvc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">架构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">volatile</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1197,11 +1210,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">键盘</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网卡</a>
+                <a href="javascript:void(0)" class="js-tag color4">volatile</a>
               </li>
             
             <div class="clearfix"></div>
