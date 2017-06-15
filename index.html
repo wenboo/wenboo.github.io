@@ -263,10 +263,6 @@
         <p>嵌入式项目代码结构的分层——HAL（硬件抽象层）、FML（功能模块层）、APL（应用程序层）</p>
 <p><strong>一、遇到的问题</strong></p>
 <p>在“Zigbee之旅”系列博文中，每写一篇笔者都会编写一个小实验来展开讲解。通过这一段时间的实践，我积累了一些编码经验，但也体会到了之前的代码结构的缺陷：<br>（1）开发效率低：每次使用片内的某一资源（例如定时器等），笔者都要去查询CC2430中文手册，比较eggache<br>（2）代码重复较多：每个实验源码中，诸如 xtal_init ，led_init 等初始化函数每次都要编写<br>（3）不易修改：代码中的业务逻辑与SFR的操作混在一起，可读性较差，修改起来也费力正是由于以上问题，笔者决定暂停了该系列博文的续写，抽出时间来思考一下解决办法。</p>
-<p><strong>二、由网站分层引起的思考</strong></p>
-<p>笔者在学习嵌入式编程之前，曾有过 ASP.NET 网站开发经验，对其分层理论也有所实践，下面简单提一下：</p>
-<p>一般的有一定复杂度的网站可分为以下三层：</p>
-<p>（1）数据接入层（DAL）：负责与数据库的交互，供业务逻辑层调用<br>（2）业务逻辑层（BLL）：调用数据接入层以获取数据，并为具体的业务需求提供支持<br>（3）用户界面层（UIL）：负责呈现最终的用户界面</p>
         
           <a class="article-more-a" href="/2017/03/04/嵌入式代码开发/#more">more >></a>
         
@@ -1006,15 +1002,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面试</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">c</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">面试</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1054,6 +1050,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">main</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">log4j</a>
               </li>
              
@@ -1066,15 +1066,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">main</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">socket</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1082,7 +1074,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">wireshark</a>
+                <a href="javascript:void(0)" class="js-tag color2">socket</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1090,11 +1082,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">代码重构</a>
+                <a href="javascript:void(0)" class="js-tag color5">wireshark</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1102,15 +1090,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">json</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">嵌入式</a>
+                <a href="javascript:void(0)" class="js-tag color3">架构</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">架构</a>
+                <a href="javascript:void(0)" class="js-tag color4">嵌入式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1122,10 +1114,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">线程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">网卡</a>
               </li>
              
@@ -1134,7 +1122,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">进程</a>
+                <a href="javascript:void(0)" class="js-tag color3">线程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1142,7 +1130,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">进程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">os</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">代码重构</a>
               </li>
              
               <li class="article-tag-list-item">
