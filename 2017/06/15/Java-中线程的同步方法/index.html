@@ -6,20 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://wenboo.github.io">
-  <title>程序员对内存的理解 | Hi~Welcome to Wenboo&#39;s Blog</title>
+  <title>Java 中线程的同步方法 | Hi~Welcome to Wenboo&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在C和C++语言开发中，指针、内存一直是学习的重点。因为C语言作为一种偏底层的中低级语言，提供了大量的内存直接操作的方法，这一方面使程序的灵活度最大化，同时也为bug埋下很多隐患。因此，无论如何，我们都要对内存有一个清晰的理解。">
+  <meta name="description" content="线程的同步是保证多线程安全访问竞争资源的一种手段。线程的同步是Java多线程编程的难点，往往开发者搞不清楚什么是竞争资源、什么时候需要考虑同步，怎么同步等等问题，当然，这些问题没有很明确的答案，但有些原则问题需要考虑，是否有竞争资源被同时改动的问题？
+对于同步，在具体的Java代码中需要完成一下两个操作：
+1，把竞争访问的资源标识为private；2，同步哪些修改变量的代码，使用synchroni">
 <meta property="og:type" content="article">
-<meta property="og:title" content="程序员对内存的理解">
-<meta property="og:url" content="http://wenboo.github.io/2017/01/02/程序员对内存的理解/index.html">
+<meta property="og:title" content="Java 中线程的同步方法">
+<meta property="og:url" content="http://wenboo.github.io/2017/06/15/Java-中线程的同步方法/index.html">
 <meta property="og:site_name" content="Hi~Welcome to Wenboo's Blog">
-<meta property="og:description" content="在C和C++语言开发中，指针、内存一直是学习的重点。因为C语言作为一种偏底层的中低级语言，提供了大量的内存直接操作的方法，这一方面使程序的灵活度最大化，同时也为bug埋下很多隐患。因此，无论如何，我们都要对内存有一个清晰的理解。">
-<meta property="og:image" content="http://images.cnblogs.com/cnblogs_com/iuices/201111/201111242150462923.jpg">
-<meta property="og:updated_time" content="2017-01-05T14:08:12.841Z">
+<meta property="og:description" content="线程的同步是保证多线程安全访问竞争资源的一种手段。线程的同步是Java多线程编程的难点，往往开发者搞不清楚什么是竞争资源、什么时候需要考虑同步，怎么同步等等问题，当然，这些问题没有很明确的答案，但有些原则问题需要考虑，是否有竞争资源被同时改动的问题？
+对于同步，在具体的Java代码中需要完成一下两个操作：
+1，把竞争访问的资源标识为private；2，同步哪些修改变量的代码，使用synchroni">
+<meta property="og:updated_time" content="2017-06-15T11:35:16.817Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="程序员对内存的理解">
-<meta name="twitter:description" content="在C和C++语言开发中，指针、内存一直是学习的重点。因为C语言作为一种偏底层的中低级语言，提供了大量的内存直接操作的方法，这一方面使程序的灵活度最大化，同时也为bug埋下很多隐患。因此，无论如何，我们都要对内存有一个清晰的理解。">
-<meta name="twitter:image" content="http://images.cnblogs.com/cnblogs_com/iuices/201111/201111242150462923.jpg">
+<meta name="twitter:title" content="Java 中线程的同步方法">
+<meta name="twitter:description" content="线程的同步是保证多线程安全访问竞争资源的一种手段。线程的同步是Java多线程编程的难点，往往开发者搞不清楚什么是竞争资源、什么时候需要考虑同步，怎么同步等等问题，当然，这些问题没有很明确的答案，但有些原则问题需要考虑，是否有竞争资源被同时改动的问题？
+对于同步，在具体的Java代码中需要完成一下两个操作：
+1，把竞争访问的资源标识为private；2，同步哪些修改变量的代码，使用synchroni">
   
     <link rel="alternative" href="/atom.xml" title="Hi~Welcome to Wenboo&#39;s Blog" type="application/atom+xml">
   
@@ -171,67 +175,47 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-程序员对内存的理解" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Java-中线程的同步方法" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      程序员对内存的理解
+      Java 中线程的同步方法
     </h1>
   
 
         
-        <a href="/2017/01/02/程序员对内存的理解/" class="archive-article-date">
-  	<time datetime="2017-01-02T11:10:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-02</time>
+        <a href="/2017/06/15/Java-中线程的同步方法/" class="archive-article-date">
+  	<time datetime="2017-06-15T11:34:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-15</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在C和C++语言开发中，指针、内存一直是学习的重点。因为C语言作为一种偏底层的中低级语言，提供了大量的内存直接操作的方法，这一方面使程序的灵活度最大化，同时也为bug埋下很多隐患。因此，无论如何，我们都要对内存有一个清晰的理解。</p>
+        <p>线程的同步是保证多线程安全访问竞争资源的一种手段。线程的同步是Java多线程编程的难点，往往开发者搞不清楚什么是竞争资源、什么时候需要考虑同步，怎么同步等等问题，当然，这些问题没有很明确的答案，但有些原则问题需要考虑，是否有竞争资源被同时改动的问题？</p>
+<p>对于同步，在具体的Java代码中需要完成一下两个操作：</p>
+<p>1，把竞争访问的资源标识为private；<br>2，同步哪些修改变量的代码，使用synchronized关键字同步方法或代码。</p>
+<p>当然这不是唯一控制并发安全的途径。</p>
 <a id="more"></a>
-<p><strong>1. 对内的分配</strong></p>
-<p>32位操作系统支持4GB内存的连续访问，但通常把内存分为两个2GB的空间，每个进程在运行时最大可以使用2GB的私有内存（0x00000000—0x7FFFFFFF）。即理论上支持如下的大数组：</p>
-<blockquote>
-<p>char szBuffer[2*1024*1024*1024];</p>
-</blockquote>
-<p>当然，由于在实际运行时，程序还有代码段、临时变量段、动态内存申请等，实际上是不可能用到上述那么大的数组的。至于高端的2GB内存地址（0x80000000—0xFFFFFFFF），操作系统一般内部保留使用，即供操作系统内核代码使用。在Windows和Linux平台上，一些动态链接库（Windows的dll，Linux的so）以及ocx控件等，由于是跨进程服务的，因此一般也在高2GB内存空间运行。</p>
-<p>可以看到，每个进程都能看到自己的2GB内存以及系统的2GB内存，但是不同进程之间是无法彼此看到对方的。当然，操作系统在底层做了很多工作，比如磁盘上的虚拟内存交换（请看下以标题），不同的内存块动态映射等等。</p>
-<p><strong>2. 虚拟内存</strong></p>
-<p>虚拟内存的基本思想是：用廉价但缓慢的磁盘来扩充快速却昂贵的内存。在一定时刻，程序实际需要使用的虚拟内存区段的内容就被载入物理内存中。当物理内存中的数据有一段时间未被使用，它们就可能被转移到硬盘中，节省下来的物理内存空间用于载入需要使用的其他数据。</p>
-<p>在进程执行过程中，操作系统负责具体细节，使每个进程都以为自己拥有整个地址空间的独家访问权。这个幻觉是通过“虚拟内存”实现的。所有进程共享机器的物理内存，当内存使用完时就用磁盘保存数据。在进程运行时，数据在磁盘和内存之间来回移动。内存管理硬件负责把虚拟地址翻译为物理地址，并让一个进程始终运行于系统的真正内存中，应用程序员只看到虚拟地址，并不知道自己的进程在磁盘与内存之间来回切换。</p>
-<p>从潜在的可能性上说，与进程有关的所有内存都将被系统所使用，如果该进程可能不会马上运行（可能它的优先级低，也可能是它处于睡眠状态），操作系统可以暂时取回所有分配给它的物理内存资源，将该进程的所有相关信息都备份到磁盘上。</p>
-<p>  进程只能操作位于物理内存中的页面。当进程引用一个不在物理内存中的页面时，MMU就会产生一个页错误。内存对此事做出响应，并判断该引用是否有效。如果无效，内核向进程发出一个“segmentation violation（段违规）”的信号，内核从磁盘取回该页，换入内存中，一旦页面进入内存，进程便被解锁，可以重新运行——进程本身并不知道它曾经因为页面换入事件等待了一会。</p>
-<p><strong>3. 内存的使用</strong></p>
-<p>对于程序员，我们最重要的是能理解不同进程间私有内存空间的含义。C和C++的编译器把私有内存分为3块：基栈、浮动栈和堆。如下图：</p>
-<p><img src="http://images.cnblogs.com/cnblogs_com/iuices/201111/201111242150462923.jpg"></p>
-<blockquote>
-<p>基栈：也叫静态存储区，这是编译器在编译期间就已经固定下来必须要使用的内存，如程序的代码段、静态变量、全局变量、const常量等。</p>
-<p>浮动栈：很多书上称为“栈”，就是程序开始运行，随着函数、对象的一段执行，函数内部变量、对象的内部成员变量开始动态占用内存，浮动栈一般都有生命周期，函数结束或者对象析构，其对应的浮动栈空间的就拆除了，这部分内容总是变来变去，内存占用也不是固定，因此叫浮动栈。</p>
-<p>堆：C和C++语言都支持动态内存申请，即程序运行期可以自由申请内存，这部分内存就是在堆空间申请的。堆位于2GB的最顶端，自上向下分配，这是避免和浮动栈混到一起，不好管理。我们用到malloc和new都是从堆空间申请的内存，new比malloc多了对象的支持，可以自动调用构造函数。另外，new创建对象，其成员变量位于堆里面。</p>
-</blockquote>
-<p>我们来看一个例子：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> n = <span class="number">100</span>;</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">Func</span><span class="params">(<span class="keyword">void</span>)</span></span></div><div class="line"> </div><div class="line">&#123;</div><div class="line">    <span class="keyword">char</span> ch = <span class="number">0</span>;</div><div class="line">    <span class="keyword">char</span>* pBuff = (<span class="keyword">char</span>*)<span class="built_in">malloc</span>(<span class="number">10</span>);</div><div class="line">    <span class="comment">//…</span></div><div class="line"> </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这个函数如果运行，其中n由于是全局静态变量，位于基栈，i和pBuff这两个函数内部变量，i位于浮动栈，而pBuff指向的由malloc分配的内存区，则位于堆栈。</p>
-<p>在内存理解上，最著名的例子就是线程启动时的参数传递。</p>
-<p>函数启动一个线程，很多时候需要向线程传参数，但是线程是异步启动的，即很可能启动函数已经退出了，而线程函数都还没有正式开始运行，因此，绝不能用启动函数的内部变量给线程传参。道理很简单，函数的内部变量在浮动栈，但函数退出时，浮动栈自动拆除，内存空间已经被释放了。当线程启动时，按照给的参数指针去查询变量，实际上是在读一块无效的内存区域，程序会因此而崩溃。</p>
-<p>那怎么办呢？我们应该直接用malloc函数给需要传递的参数分配一块内存区域，将指针传入线程，线程收到后使用，最后线程退出时，free释放。</p>
-<p>我们来看例子：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//这个结构体就是参数表</span></div><div class="line"> </div><div class="line">typedef struct _CListen_ListenAcceptTask_Param_ </div><div class="line">&#123; </div><div class="line">    Linux_Win_SOCKET m_nSocket; </div><div class="line">    <span class="comment">//其他参量… …</span></div><div class="line">&#125;SCListenAcceptTaskParam; </div><div class="line"> </div><div class="line"><span class="comment">//习惯性写法，设置结构体后，立即声明结构体的尺寸，为后续malloc提供方便</span></div><div class="line"><span class="keyword">const</span> ULONG SCListenAcceptTaskParamSize=sizeof(SCListenAcceptTaskParam); </div><div class="line"> </div><div class="line"><span class="comment">//这里接收到连接请求，申请参数区域，将关键信息带入参数区域，帮助后续线程工作。</span></div><div class="line">bool CListen::ListenTaskCallback(<span class="keyword">void</span>* pCallParam,<span class="keyword">int</span>&amp; nStatus) </div><div class="line">&#123; </div><div class="line"> </div><div class="line">    <span class="comment">//正常的函数逻辑… …</span></div><div class="line">    <span class="comment">//假定s是accept到的socket，需要传入后续线程工作</span></div><div class="line">    <span class="comment">//在此准备一块参数区域，从远堆上申请</span></div><div class="line">    SCListenAcceptTaskParam* pParam=(SCListenAcceptTaskParam*) malloc(SCListenAcceptTaskParamSize); </div><div class="line"> </div><div class="line">    <span class="comment">//给参数区域赋值</span></div><div class="line">    pParam-&gt;m_nSocket=s; </div><div class="line">    <span class="comment">//此处启动线程，将pParam传递给线程… …</span></div><div class="line">    <span class="comment">//正常的函数逻辑… …</span></div><div class="line"> </div><div class="line">&#125; </div><div class="line"> </div><div class="line"><span class="comment">//这是线程函数，负责处理上文accept到的socket </span></div><div class="line">bool CListen::ListenAcceptTask(<span class="keyword">void</span>* pCallParam,<span class="keyword">int</span>&amp; nStatus) </div><div class="line">&#123; </div><div class="line"> </div><div class="line">    <span class="comment">//第一句话就是强制指针类型转换，获得外界传入的参数区域</span></div><div class="line">    SCListenAcceptTaskParam* pParam= (SCListenAcceptTaskParam*)pCallParam; </div><div class="line"> </div><div class="line">    <span class="comment">//正常的函数逻辑… …</span></div><div class="line">    <span class="comment">//退出前，必须要做的工作，确保资源不被泄露</span></div><div class="line">    close(pParam-&gt;m_nSocket); <span class="comment">//关闭socket </span></div><div class="line">    free(pCallParam); <span class="comment">// free传入的参数区域</span></div><div class="line">    <span class="comment">//… … </span></div><div class="line"> </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><strong>4. 内存bug</strong></p>
-<p>无规则的滥用内存和指针会导致大量的bug，程序员应该对内存的使用保持高度的敏感性和警惕性，谨慎地使用内存资源。</p>
-<p>使用内存时最容易出现的bug是：</p>
-<p>(1) 坏指针值错误：在指针赋值之前就用它来引用内存，或者向库函数传送一个坏指针，第三种可能导致坏指针的原因是对指针进行释放之后再访问它的内容。可以修改free语句，在指针释放之后再将它置为空值。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">free</span>(p); p = <span class="literal">NULL</span>;</div></pre></td></tr></table></figure>
-<p>这样，如果在指针释放之后继续使用该指针，至少程序能在终止之前进行信息转储。</p>
-<p>(2) 改写（overwrite）错误：越过数组边界写入数据，在动态分配的内存两端之外写入数据，或改写一些堆管理数据结构（在动态分配内存之前的区域写入数据就很容易发生这种情况）</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">p = <span class="built_in">malloc</span>(<span class="number">256</span>); p[<span class="number">-1</span>] = <span class="number">0</span>; p[<span class="number">256</span>] = <span class="number">0</span>;</div></pre></td></tr></table></figure>
-<p>(3) 指针释放引起的错误：释放同一个内存块两次，或释放一块未曾使用malloc分配的内存，或释放仍在使用中的内存，或释放一个无效的指针。一个极为常见的与释放内存有关的错误就是在for(p=start;p=p-&gt;next)这样的循环中迭代一个链表，并在循环体内使用free(p)语句。这样，在下一次循环迭代时，程序就会对已经释放的指针进行解除引用操作，从而导致不可预料的结果。</p>
-<p>我们可以这样迭代：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">struct</span> node *p, *tart, *temp;</div><div class="line"><span class="keyword">for</span>(p = start; p ; p = temp)</div><div class="line">&#123;</div><div class="line">    temp = p-&gt;next;</div><div class="line">    <span class="built_in">free</span>(p);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="synchronized关键字使用说明"><a href="#synchronized关键字使用说明" class="headerlink" title="synchronized关键字使用说明"></a>synchronized关键字使用说明</h2><p>synchronized只能标记 <strong>非抽象的方法</strong>，不能标识成员变量。</p>
+<p>为了演示同步方法的使用，构建了一个信用卡账户，起初信用额为100w，然后模拟透支、存款等多个操作。显然银行账户User对象是个竞争资源，而多个并发操作的是账户方法oper(int x)，当然应该在此方法上加上同步，并将账户的余额设为私有变量，禁止直接访问。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div></pre></td><td class="code"><pre><div class="line">public class Test &#123; </div><div class="line">        public static void main(String[] args) &#123; </div><div class="line">                User u = new User(&quot;张三&quot;, 100); </div><div class="line">                MyThread t1 = new MyThread(&quot;线程A&quot;, u, 20); </div><div class="line">                MyThread t2 = new MyThread(&quot;线程B&quot;, u, -60); </div><div class="line">                MyThread t3 = new MyThread(&quot;线程C&quot;, u, -80); </div><div class="line">                MyThread t4 = new MyThread(&quot;线程D&quot;, u, -30); </div><div class="line">                MyThread t5 = new MyThread(&quot;线程E&quot;, u, 32); </div><div class="line">                MyThread t6 = new MyThread(&quot;线程F&quot;, u, 21); </div><div class="line"></div><div class="line">                t1.start(); </div><div class="line">                t2.start(); </div><div class="line">                t3.start(); </div><div class="line">                t4.start(); </div><div class="line">                t5.start(); </div><div class="line">                t6.start(); </div><div class="line">        &#125; </div><div class="line">&#125; </div><div class="line"></div><div class="line">class MyThread extends Thread &#123; </div><div class="line">        private User u; </div><div class="line">        private int y = 0; </div><div class="line"></div><div class="line">        MyThread(String name, User u, int y) &#123; </div><div class="line">                super(name); </div><div class="line">                this.u = u; </div><div class="line">                this.y = y; </div><div class="line">        &#125; </div><div class="line"></div><div class="line">        public void run() &#123; </div><div class="line">                u.oper(y); </div><div class="line">        &#125; </div><div class="line">&#125; </div><div class="line"></div><div class="line">class User &#123; </div><div class="line">        private String code; </div><div class="line">        private int cash; </div><div class="line"></div><div class="line">        User(String code, int cash) &#123; </div><div class="line">                this.code = code; </div><div class="line">                this.cash = cash; </div><div class="line">        &#125; </div><div class="line"></div><div class="line">        public String getCode() &#123; </div><div class="line">                return code; </div><div class="line">        &#125; </div><div class="line"></div><div class="line">        public void setCode(String code) &#123; </div><div class="line">                this.code = code; </div><div class="line">        &#125; </div><div class="line"></div><div class="line">        /** </div><div class="line">         * 业务方法 </div><div class="line">         * @param x 添加x万元 </div><div class="line">         */ </div><div class="line">        public synchronized void oper(int x) &#123; </div><div class="line">                try &#123; </div><div class="line">                        Thread.sleep(10L); </div><div class="line">                        this.cash += x; </div><div class="line">                        System.out.println(Thread.currentThread().getName() + &quot;运行结束，增加“&quot; + x + &quot;”，当前用户账户余额为：&quot; + cash); </div><div class="line">                        Thread.sleep(10L); </div><div class="line">                &#125; catch (InterruptedException e) &#123; </div><div class="line">                        e.printStackTrace(); </div><div class="line">                &#125; </div><div class="line">        &#125; </div><div class="line"></div><div class="line">        @Override </div><div class="line">        public String toString() &#123; </div><div class="line">                return &quot;User&#123;&quot; + </div><div class="line">                                &quot;code=&apos;&quot; + code + &apos;\&apos;&apos; + </div><div class="line">                                &quot;, cash=&quot; + cash + </div><div class="line">                                &apos;&#125;&apos;; </div><div class="line">        &#125; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">线程A运行结束，增加“20”，当前用户账户余额为：120 </div><div class="line">线程F运行结束，增加“21”，当前用户账户余额为：141 </div><div class="line">线程E运行结束，增加“32”，当前用户账户余额为：173 </div><div class="line">线程C运行结束，增加“-80”，当前用户账户余额为：93 </div><div class="line">线程B运行结束，增加“-60”，当前用户账户余额为：33 </div><div class="line">线程D运行结束，增加“-30”，当前用户账户余额为：3</div></pre></td></tr></table></figure>
+<p>反面教材，<strong>不同步的情况</strong>，也就是去掉oper(int x)方法的synchronized修饰符，然后运行程序，结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">线程A运行结束，增加“20”，当前用户账户余额为：61 </div><div class="line">线程D运行结束，增加“-30”，当前用户账户余额为：63 </div><div class="line">线程B运行结束，增加“-60”，当前用户账户余额为：3 </div><div class="line">线程F运行结束，增加“21”，当前用户账户余额为：61 </div><div class="line">线程E运行结束，增加“32”，当前用户账户余额为：93 </div><div class="line">线程C运行结束，增加“-80”，当前用户账户余额为：61</div></pre></td></tr></table></figure>
+<p>很显然，上面的结果是错误的，导致错误的原因是多个线程并发访问了竞争资源u，并对u的属性做了改动。可见同步的重要性。</p>
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p>通过前文可知，线程退出同步方法时将释放掉方法所属对象的锁，但还应该注意的是，同步方法中还可以使用特定的方法对线程进行调度。这些方法来自于java.lang.Object类。</p>
+<p><strong>void notify()</strong><br>唤醒在此对象监视器上等待的单个线程。</p>
+<p><strong>void notifyAll()</strong><br>唤醒在此对象监视器上等待的所有线程。</p>
+<p><strong>void wait()</strong><br>导致当前的线程等待，直到其他线程调用此对象的 notify() 方法或 notifyAll() 方法。</p>
+<p><strong>void wait(long timeout)</strong><br>导致当前的线程等待，直到其他线程调用此对象的 notify() 方法或 notifyAll() 方法，或者超过指定的时间量。    </p>
+<p><strong>void wait(long timeout, int nanos)</strong><br>导致当前的线程等待，直到其他线程调用此对象的 notify() 方法或 notifyAll() 方法，或者其他某个线程中断当前线程，或者已超过某个实际时间量。</p>
+<p>结合以上方法，处理多线程同步与互斥问题非常重要，著名的生产者-消费者例子就是一个经典的例子，任何语言多线程必学的例子。</p>
+
       
 
       
@@ -244,7 +228,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">内存</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">线程</a>
         		</li>
       		
 		</ul>
@@ -256,7 +240,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/cm/" class="article-tag-list-link color3">cm</a>
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
         		</li>
       		
 		</ul>
@@ -311,7 +295,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://wenboo.github.io/2017/01/02/程序员对内存的理解/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://wenboo.github.io/2017/06/15/Java-中线程的同步方法/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -325,18 +309,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/01/03/Java-中-main-函数为什么要加-static/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/12/31/2017-年开发阅读书单/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Java 中 main 函数为什么要加 static
+          2017 年开发阅读书单
         
       </div>
     </a>
   
   
-    <a href="/2016/12/31/2016-年末总结/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">2016年末总结</div>
+    <a href="/2017/06/15/Java-线程的同步与锁/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Java 线程的同步与锁</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -349,7 +333,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="程序员对内存的理解" data-title="程序员对内存的理解" data-url="http://wenboo.github.io/2017/01/02/程序员对内存的理解/"></div>
+	<div class="ds-thread" data-thread-key="Java-中线程的同步方法" data-title="Java 中线程的同步方法" data-url="http://wenboo.github.io/2017/06/15/Java-中线程的同步方法/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
