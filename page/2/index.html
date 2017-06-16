@@ -167,6 +167,220 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Java-进阶：浅析垃圾回收和终结处理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/15/Java-进阶：浅析垃圾回收和终结处理/">Java 进阶：浅析垃圾回收和终结处理</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/15/Java-进阶：浅析垃圾回收和终结处理/" class="archive-article-date">
+  	<time datetime="2017-06-15T11:56:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>从接触第一门编程语言开始我们就在不断强调，初始化变量是很重要的一件事情，尤其在C和C++中很明显，对于指针来说，定义一个指针不对它进行初始化，很有可能引发内存上的严重问题。但是我们也会常常忘记同样重要的清理工作。在Java中，垃圾回收器就负责回收无用对象占据的内存资源。</p>
+<h2 id="我们必须实施清理"><a href="#我们必须实施清理" class="headerlink" title="我们必须实施清理"></a>我们必须实施清理</h2><p>在C++中，所有对象都会被销毁，或者说应该被销毁。如果C++创建了一个局部对象，此时的销毁动作发生在“右括号”为边界，此对象作用域的末尾处。如果对象是用new创建的，那么我们应该调用C++的delete操作符，也就会调用相应的析构函数，如果我们忘记调用delete，那么永远不会调用析构函数，这样就会出现内存泄漏，对象的其他部分也就得不到清理。</p>
+<p>相反的是，Java不允许创建局部对象，必须使用new创建对象。在Java中也没有用于释放对象的delete，所以垃圾回收器会帮你释放存储空间。但是随着我们学习的深入，发现垃圾回收并不是万能的，也就是说我们不能认为垃圾回收器可以替代C++中的析构函数。所以如果我们希望进行除释放空间之外的清理工作，还是得明确调用某个恰当的Java方法。</p>
+<p>我们须记得，无论是“垃圾回收”还是“终结”，都不一定保证会发生，如果Java虚拟机并未面临内存耗尽的情形，他是不会浪费时间去执行垃圾回收以恢复内存的。</p>
+        
+          <a class="article-more-a" href="/2017/06/15/Java-进阶：浅析垃圾回收和终结处理/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">jvm</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/15/Java-进阶：浅析垃圾回收和终结处理/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-Java-进阶：一切都是对象" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/15/Java-进阶：一切都是对象/">Java 进阶：一切都是对象</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/15/Java-进阶：一切都是对象/" class="archive-article-date">
+  	<time datetime="2017-06-15T11:55:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Java操作标识符"><a href="#Java操作标识符" class="headerlink" title="Java操作标识符"></a>Java操作标识符</h2><p>Java中的操纵标识符实际上是对象的一个“引用”，你拥有一个引用，并不一定需要有一个对象与它关联。因此，想要操纵一个句子或词，可以创建一个String引用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">String s;</div></pre></td></tr></table></figure>
+<p>这里创建的只是一个引用，并不是对象，并且Java中的引用，在语法上更接近C++的引用而不是指针。为了安全起见，创建一个引用的同时便进行初始化：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">String s = null;</div></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2017/06/15/Java-进阶：一切都是对象/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/15/Java-进阶：一切都是对象/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-Java-进阶：this-关键字" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/15/Java-进阶：this-关键字/">Java 进阶：this 关键字</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/15/Java-进阶：this-关键字/" class="archive-article-date">
+  	<time datetime="2017-06-15T11:53:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="this-调用所操作对象的引用"><a href="#this-调用所操作对象的引用" class="headerlink" title="this 调用所操作对象的引用"></a>this 调用所操作对象的引用</h2><p><strong>问题</strong>：假如统一类型的两个对象，分别是a和b，其中还有一个方法peel()，那么我们怎么才能分辨这个方法到底是被a调用还是被b调用呢？</p>
+<p>其实，在这期间编译器做了一些事后工作，它暗自把“<strong>所操作对象的引用</strong>”作为地一个参数传递给了peel()。假设你希望在方法的内部获得对当前对象的引用，就可以使用this关键字。</p>
+<p>代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">class Banana &#123;</div><div class="line">    void peel(int i)&#123;</div><div class="line">        out.println(i);</div><div class="line">    &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">public class BananaPeel &#123;</div><div class="line">    public static void main(String[] args)&#123;</div><div class="line">        Banana a = new Banana();</div><div class="line">        Banana b = new Banana();</div><div class="line"></div><div class="line">        a.peel(1);</div><div class="line">        b.peel(2);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2017/06/15/Java-进阶：this-关键字/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">this</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/15/Java-进阶：this-关键字/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-Java-进阶：关于初始化的那些事" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -668,235 +882,9 @@
 
 
   
-    <article id="post-给小白的-Java-EE-指南（6）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/28/给小白的-Java-EE-指南（6）/">给小白的 Java EE 指南（6）</a>
-    </h1>
-  
-
-        
-        <a href="/2017/02/28/给小白的-Java-EE-指南（6）/" class="archive-article-date">
-  	<time datetime="2017-02-28T14:26:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>本文是给小白的Java EE生存指南的第6篇， 讲点稍微有深度的：反射。</p>
-<p>这里不定义什么叫反射，先来看个例子，假设我给你一个Java 类： </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.example;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">HelloWorld</span><span class="params">()</span></span>&#123;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sayHello</span><span class="params">()</span></span>&#123;</div><div class="line">        System.out.println(<span class="string">"hello world!"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>现在要求:<br>
-        
-          <a class="article-more-a" href="/2017/02/28/给小白的-Java-EE-指南（6）/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">j2ee</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/02/28/给小白的-Java-EE-指南（6）/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-给小白的-Java-EE-指南（5）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/27/给小白的-Java-EE-指南（5）/">给小白的 Java EE 指南（5）</a>
-    </h1>
-  
-
-        
-        <a href="/2017/02/27/给小白的-Java-EE-指南（5）/" class="archive-article-date">
-  	<time datetime="2017-02-27T13:46:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>本文是给小白的Java EE生存指南的第5篇， 讲一下前端工程师必备的AJAX的来龙去脉。</p>
-<p>回到2001年， 当时的老刘还是小刘， 在计算所跟着老板和四川的一个公司合作，做一个类似于OA(办公自动化)的项目。</p>
-<p>当时小刘刚毕业，写过一些asp的程序，在小刘的意识当中， 还是觉得只要你通过浏览器向服务器发出请求， 服务器处理以后， 需要<strong>刷新整个网页</strong>才能看到服务器处理的结果。</p>
-<p>但是有一天我突然看到项目中大牛写的一个页面，这个页面上面是菜单，中间是一个树形结构，代表了一个公司的各个部门。</p>
-        
-          <a class="article-more-a" href="/2017/02/27/给小白的-Java-EE-指南（5）/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">j2ee</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/02/27/给小白的-Java-EE-指南（5）/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-给小白的-Java-EE-指南（4）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/27/给小白的-Java-EE-指南（4）/">给小白的 Java EE 指南（4）</a>
-    </h1>
-  
-
-        
-        <a href="/2017/02/27/给小白的-Java-EE-指南（4）/" class="archive-article-date">
-  	<time datetime="2017-02-27T13:36:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>本文是给小白的Java EE生存指南的第4篇， 讲一下几乎100%Java 开发人员都要用的 Tomcat。为什么有Tomcat ？ 其实需要从Servlet 说起。</p>
-<p>记得《给小白的Java EE生存指南(2)》提到的动态网页吗？　常见的实现动态网页的技术就是CGI。</p>
-<p>但是作为Java 的发明人， Sun肯定要搞一个超越CGI的技术出来， 之前Sun 通过Applet出了一个超级大风头， 让整个世界一下子认识了Java ， 不过很快发现悲催的Applet其实用途不大， 眼看着互联网开始起势， 一定要搭上千载难逢的快车啊。</p>
-<p>于是Servlet 就应运而生了， Servlet 其实就是Sun为了<strong>让Java 能实现动态的可交互的网页， 从而进入Web编程的领域而定义的一套标准</strong>。</p>
-<p>这套标准说了：</p>
-        
-          <a class="article-more-a" href="/2017/02/27/给小白的-Java-EE-指南（4）/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">j2ee</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/02/27/给小白的-Java-EE-指南（4）/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
   
 
@@ -982,11 +970,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">面试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">c</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面试</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1010,10 +1002,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">tool</a>
               </li>
              
@@ -1027,6 +1015,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">classloader</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1046,10 +1038,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">回调</a>
               </li>
              
@@ -1062,10 +1050,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
               </li>
              
@@ -1074,11 +1058,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">javaweb</a>
+                <a href="javascript:void(0)" class="js-tag color4">tcp</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">tcp</a>
+                <a href="javascript:void(0)" class="js-tag color3">javaweb</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1094,15 +1078,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">json</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">架构</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">嵌入式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">json</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1118,10 +1106,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">键盘</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">路由器</a>
               </li>
              
@@ -1130,11 +1114,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">os</a>
+                <a href="javascript:void(0)" class="js-tag color3">键盘</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mvc</a>
+                <a href="javascript:void(0)" class="js-tag color3">os</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1147,6 +1131,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">j2ee</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">mvc</a>
               </li>
             
             <div class="clearfix"></div>
