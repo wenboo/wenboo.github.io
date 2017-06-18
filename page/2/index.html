@@ -167,6 +167,320 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Java-面试问题分析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/15/Java-面试问题分析/">Java 面试问题分析</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/15/Java-面试问题分析/" class="archive-article-date">
+  	<time datetime="2017-06-15T12:24:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>作者：周志明</p>
+<p>介绍：远光软件开发部总经理，著有《深入理解Java虚拟机》等作品</p>
+<p>微博：<a href="http://weibo.com/icyfenix?is_all=1&amp;noscale_head=1#_0">Iam周志明</a></p>
+</blockquote>
+<p>在公司当技术面试官几年间，从应届生到工作十几年的应聘者都遇到过。先表达一下我自己对面试的观点： </p>
+<p>1.笔试、面试去评价一个人肯定是不够准确的，了解一个人最准确的方式就是“路遥知马力，日久见人心”。通过一、二个小时内的做题、交流，只是没有其他办法下进行的无奈之举，所以通过了面试不代表有多成功，没通过也不代表有多失败。 </p>
+<p>2.好的面试官本身交谈的时候就不应当把自己一个居高临下的角色上，应当把自己和应聘者当做两个做技术的人平等的交流，把自己当作权威往往就会受到观点的角度、语言表达、工作领域的惯性的制约。 </p>
+<p>3.好的考察题目则是大家能经常接触，不同层次的人能有不同层次的答案，能从问题引申出后面继续讨论的话题。 </p>
+<p>举个例子抛砖引玉，下面这个问题是我以前常问的，从应届生到工作十几年的人都问过： </p>
+<p><strong>引用</strong></p>
+<blockquote>
+<p>“地球人都知道，Java有个东西叫垃圾收集器，它让创建的对象不需要像c/cpp那样delete、free掉，你能不能谈谈，<strong>GC是在什么时候</strong>，<strong>对什么东西</strong>，<strong>做了什么事情</strong>？”</p>
+</blockquote>
+        
+          <a class="article-more-a" href="/2017/06/15/Java-面试问题分析/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">面试</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/15/Java-面试问题分析/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-计算机是如何启动的" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/15/计算机是如何启动的/">计算机是如何启动的</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/15/计算机是如何启动的/" class="archive-article-date">
+  	<time datetime="2017-06-15T12:22:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>从打开电源到开始操作，计算机的启动是一个非常复杂的过程。</p>
+<p>我一直搞不清楚，这个过程到底是怎么回事，只看见屏幕快速滚动各种提示。这几天，我查了一些资料，试图搞懂它。下面就是我整理的笔记。</p>
+<p><strong>零、boot的含义</strong></p>
+<p>先问一个问题，”启动”用英语怎么说？</p>
+<p>回答是boot。可是，boot原来的意思是靴子，”启动”与靴子有什么关系呢？ 原来，这里的boot是bootstrap（鞋带）的缩写，它来自一句谚语：</p>
+<blockquote>
+<p>“pull oneself up by one’s bootstraps”</p>
+</blockquote>
+<p>字面意思是”拽着鞋带把自己拉起来”，这当然是不可能的事情。最早的时候，工程师们用它来比喻，计算机启动是一个很矛盾的过程：必须先运行程序，然后计算机才能启动，但是计算机不启动就无法运行程序！</p>
+<p>早期真的是这样，必须想尽各种办法，把一小段程序装进内存，然后计算机才能正常运行。所以，工程师们把这个过程叫做”拉鞋带”，久而久之就简称为boot了。</p>
+<p>计算机的整个启动过程分成四个阶段。</p>
+        
+          <a class="article-more-a" href="/2017/06/15/计算机是如何启动的/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/cm/" class="article-tag-list-link color3">cm</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/15/计算机是如何启动的/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-类加载机制" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/15/类加载机制/">类加载机制</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/15/类加载机制/" class="archive-article-date">
+  	<time datetime="2017-06-15T12:14:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="类加载过程"><a href="#类加载过程" class="headerlink" title="类加载过程"></a>类加载过程</h3><p>类从被加载到虚拟机内存中开始，到卸载出内存为止，它的整个生命周期包括：<strong>加载</strong>、<strong>验证</strong>、<strong>准备</strong>、<strong>解析</strong>、<strong>初始化</strong>、<strong>使用</strong> 和 <strong>卸载</strong> 七个阶段。它们开始的顺序如下图所示：</p>
+<p><img src="http://wiki.jikexueyuan.com/project/java-vm/images/classonload.png" alt="img"></p>
+<p>其中 <strong>类加载</strong> 的过程包括了加载、验证、准备、解析、初始化五个阶段。在这五个阶段中，加载、验证、准备和初始化这四个阶段发生的顺序是确定的，而解析阶段则不一定，它在某些情况下可以在初始化阶段之后开始，这是为了支持 Java 语言的运行时绑定（也成为动态绑定或晚期绑定）。另外注意这里的几个阶段是按顺序开始，而不是按顺序进行或完成，因为这些阶段通常都是互相交叉地混合进行的，通常在一个阶段执行的过程中调用或激活另一个阶段。</p>
+<p>这里简要说明下 Java 中的 <strong>绑定</strong>：绑定指的是把一个方法的调用与方法所在的类(方法主体)关联起来，对 Java 来说，绑定分为静态绑定和动态绑定：</p>
+<blockquote>
+<ul>
+<li><strong>静态绑定</strong>：即前期绑定。在程序执行前方法已经被绑定，此时由编译器或其它连接程序实现。针对 Java，简单的可以理解为程序编译期的绑定。Java 当中的方法只有 final，static，private 和构造方法是前期绑定的。</li>
+<li><strong>动态绑定</strong>：即晚期绑定，也叫运行时绑定。在运行时根据具体对象的类型进行绑定。在 Java 中，几乎所有的方法都是后期绑定的。</li>
+</ul>
+</blockquote>
+<p>下面详细讲述类加载过程中每个阶段所做的工作。</p>
+        
+          <a class="article-more-a" href="/2017/06/15/类加载机制/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">classloader</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/15/类加载机制/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-美团点评实习生面试经历" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/15/美团点评实习生面试经历/">美团点评实习生面试经历</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/15/美团点评实习生面试经历/" class="archive-article-date">
+  	<time datetime="2017-06-15T12:13:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>转载：<a href="https://www.nowcoder.com/discuss/20645?type=0&amp;order=0&amp;pos=4&amp;page=1">https://www.nowcoder.com/discuss/20645?type=0&amp;order=0&amp;pos=4&amp;page=1</a></p>
+</blockquote>
+<p>我是通过实习生转正拿到的美团点评offer，岗位为：美团外卖结算组的后端开发工程师（Java）。</p>
+<h3 id="实习生面试"><a href="#实习生面试" class="headerlink" title="实习生面试"></a>实习生面试</h3><p>美团点评的实习生招聘比较喜欢内推，没有网申和笔试的环节，这一点大家要注意。2016年的5月号，我听到在大众点评工作的同学说美团点评开始招聘暑期实习生了，我查看了一下美团点评各个业务线主要负责的内容，加上同学的建议，最后选择了美团外卖事业部。</p>
+        
+          <a class="article-more-a" href="/2017/06/15/美团点评实习生面试经历/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">面试</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/life/" class="article-tag-list-link color5">life</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/15/美团点评实习生面试经历/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-浅谈-JVM-：图解类加载机制" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -598,290 +912,6 @@
 
 
   
-    <article id="post-Java-进阶：final-关键字" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/15/Java-进阶：final-关键字/">Java 进阶：final 关键字</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/15/Java-进阶：final-关键字/" class="archive-article-date">
-  	<time datetime="2017-06-15T11:45:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在Java中，<strong>编译器</strong> 可以将final常量代入任何可能用到它的计算式中，也就是说，可以在 <strong>编译时进行计算</strong>，这减轻了一些运行时的负担。final常量必须是基本类型。</p>
-<p>对于对象引用，final使引用恒定不变。一旦引用被初始化指向一个对象，就无法再把它改为指向另一个对象。然而，对象其自身却是可以被修改的，既是final又是static的域，将用大写表示，并使用下划线分割各个单词。</p>
-        
-          <a class="article-more-a" href="/2017/06/15/Java-进阶：final-关键字/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">final</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/15/Java-进阶：final-关键字/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-Java-进阶：Integer-与-int-的种种比较" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/15/Java-进阶：Integer-与-int-的种种比较/">Java 进阶：Integer 与 int 的种种比较</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/15/Java-进阶：Integer-与-int-的种种比较/" class="archive-article-date">
-  	<time datetime="2017-06-15T11:44:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>如果面试官问Integer与int的区别：估计大多数人只会说道两点，Ingeter是int的包装类，int的初值为0，Ingeter的初值为null。但是如果面试官再问一下 <code>Integer i = 1;int ii = 1; i==ii</code> 为true还是为false？估计就有一部分人答不出来了，如果再问一下其他的，估计更多的人会头脑一片混乱。所以我对它们进行了总结，希望对大家有帮助。</p>
-<p>首先看代码：</p>
-        
-          <a class="article-more-a" href="/2017/06/15/Java-进阶：Integer-与-int-的种种比较/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/15/Java-进阶：Integer-与-int-的种种比较/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-浅谈-volatile" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/15/浅谈-volatile/">浅谈 volatile</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/15/浅谈-volatile/" class="archive-article-date">
-  	<time datetime="2017-06-15T11:42:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>首先声明：现在JVM经过优化，已不会出现liveness failure 。所以没事别用volatile。</p>
-<p>在了解volatile之前，先介绍一个名词：liveness failure ，直译叫作 <strong>活性失败</strong>。因为这是volatile很重要的一个应用场景：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">public class volatileDemo &#123;</div><div class="line">    private static boolean stopFlag;</div><div class="line">    public static void main(String[] args) throws InterruptedException &#123;</div><div class="line">        Thread volatileThread =new Thread()&#123;</div><div class="line">            @Override</div><div class="line">            public void run() &#123;</div><div class="line">                while(!stopFlag)&#123;</div><div class="line">                    System.out.print(Calendar.getInstance().get(Calendar.SECOND)+&quot;,&quot;);</div><div class="line">                    try &#123;</div><div class="line">                        Thread.sleep(300);</div><div class="line">                    &#125; catch (InterruptedException e) &#123;</div><div class="line">                        e.printStackTrace();</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line">        volatileThread.start();</div><div class="line">        Thread.sleep(3000);</div><div class="line">        stopFlag=true;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2017/06/15/浅谈-volatile/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">volatile</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/15/浅谈-volatile/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-Java-中线程的同步方法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/15/Java-中线程的同步方法/">Java 中线程的同步方法</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/15/Java-中线程的同步方法/" class="archive-article-date">
-  	<time datetime="2017-06-15T11:34:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>线程的同步是保证多线程安全访问竞争资源的一种手段。线程的同步是Java多线程编程的难点，往往开发者搞不清楚什么是竞争资源、什么时候需要考虑同步，怎么同步等等问题，当然，这些问题没有很明确的答案，但有些原则问题需要考虑，是否有竞争资源被同时改动的问题？</p>
-<p>对于同步，在具体的Java代码中需要完成一下两个操作：</p>
-<p>1，把竞争访问的资源标识为private；<br>2，同步哪些修改变量的代码，使用synchronized关键字同步方法或代码。</p>
-<p>当然这不是唯一控制并发安全的途径。</p>
-        
-          <a class="article-more-a" href="/2017/06/15/Java-中线程的同步方法/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">线程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/15/Java-中线程的同步方法/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -970,15 +1000,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">callback</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">面试</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">c</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -998,19 +1032,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">http</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">jdbc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">classloader</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">http</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">jvm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">tool</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1022,14 +1056,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">main</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">log4j</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">jsp</a>
               </li>
              
@@ -1038,11 +1064,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
+                <a href="javascript:void(0)" class="js-tag color3">回调</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">回调</a>
+                <a href="javascript:void(0)" class="js-tag color5">main</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">jdbc</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">log4j</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1050,15 +1084,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">final</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">this</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">wireshark</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1071,10 +1109,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">javaweb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">wireshark</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1094,11 +1128,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">嵌入式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color3">网卡</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1110,19 +1148,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网卡</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">进程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">键盘</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">os</a>
+                <a href="javascript:void(0)" class="js-tag color4">volatile</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1130,7 +1156,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">volatile</a>
+                <a href="javascript:void(0)" class="js-tag color3">进程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1142,7 +1168,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">tool</a>
+                <a href="javascript:void(0)" class="js-tag color3">键盘</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">os</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">final</a>
               </li>
             
             <div class="clearfix"></div>
