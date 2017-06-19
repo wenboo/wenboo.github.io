@@ -167,6 +167,750 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Java-设计模式之策略模式-1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/18/Java-设计模式之策略模式-1/">Java 设计模式之策略模式</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/18/Java-设计模式之策略模式-1/" class="archive-article-date">
+  	<time datetime="2017-06-18T14:59:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="策略模式的定义"><a href="#策略模式的定义" class="headerlink" title="策略模式的定义:"></a>策略模式的定义:</h2><p>策略模式定义了一系列的算法，并将每一个 <strong>算法封装</strong> 起来，而且使它们还可以 <strong>相互替换</strong>，策略模式让算法独立于使用它的客户而独立变化。</p>
+<p>策略模式使这些算法在客户端调用它们的时候能够 <strong>互不影响</strong> 地变化。</p>
+<h2 id="策略模式的意义"><a href="#策略模式的意义" class="headerlink" title="策略模式的意义:"></a>策略模式的意义:</h2><p>策略模式使开发人员能够开发出由许多可替换的部分组成的软件，并且各个部分之间是 <strong>低耦合</strong> 的关系。</p>
+<p>低耦合的特性使软件具有更强的可扩展性，易于维护；更重要的是，它大大提高了软件的可重用性。</p>
+<p>三者之间的关系可以用下图来表示：</p>
+<p><img src="http://img.blog.csdn.net/20160528224525434" alt="img"></p>
+        
+          <a class="article-more-a" href="/2017/06/18/Java-设计模式之策略模式-1/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/18/Java-设计模式之策略模式-1/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-编程世界的那把锁" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/18/编程世界的那把锁/">编程世界的那把锁</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/18/编程世界的那把锁/" class="archive-article-date">
+  	<time datetime="2017-06-18T14:56:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>##1 共享变量惹得祸</p>
+<p>我们这里是个典型的弱肉强食的世界， 人口多而资源少，为了争抢有限的资源，大家都在自己能运行的CPU时间片里拼了老命，经常为了一个变量的修改而打的头破血流。</p>
+<p>100纳秒以前， 我有幸占据了CPU,从内存中读取了一个变量x == 100, 我把它加了1， 休息了一会儿后我打算把它写回内存， 但是惊奇的发现： 内存中的x 已经变成102了。</p>
+<p>估计是哪个不着调的线程在我休息的时候也读取并且修改了x， 有不少好心的线程在冲我喊：不要写回了！ 但是写回内存是我的指令啊， 你不让我执行，难道让我退出？ 我只能毫不客气的把101写入内存， 把那个不符合我逻辑的值102给覆盖掉， 这样我才能执行下一条指令。</p>
+<p>你看，单线程的逻辑正确并不表示多线程并发运行时的逻辑也能正确。</p>
+<p>这样的事情发生的多了，程序总是无法正确运行， 引起了人类的强烈不满，小道消息说他们在考虑kill掉我们， 换编程语言了。</p>
+<p>但是换编程语言有什么用，只要有共享变量，多线程读写的时候就是会出现不一致啊。</p>
+<p>除非你消除共享变量，让每个线程只访问一个函数内的局部变量， 这些局部变量我们每个线程都会有一份， 函数结束以后就会销毁，所以线程之间就隔离了，就安全了。</p>
+<p>消除共享变量谈何容易， 人类使用的很多语言例如C++, Java，那些共享变量大多数一个对象的字段， 你想把字段去掉， 只留下函数， 那类也没有存在的必要了， 就类似于函数式编程了， 一切都是函数。 有时候我挺羡慕函数式的世界， </p>
+<p>那种无状态应该是一种非常美妙的感觉吧。</p>
+        
+          <a class="article-more-a" href="/2017/06/18/编程世界的那把锁/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/c/" class="article-tag-list-link color2">c</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/18/编程世界的那把锁/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-Java-设计模式之策略模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/16/Java-设计模式之策略模式/">Java 设计模式之策略模式</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/16/Java-设计模式之策略模式/" class="archive-article-date">
+  	<time datetime="2017-06-16T14:30:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>策略</strong>（<strong>Strategy</strong>）<strong>模式</strong>：又名Policy，它的用意是定义一组算法，把它们一个个封装起来，并且使他们可以相互替换。策略模式可以独立于使用他们的客户端而变化。GOF策略模式静态结构类图如下：</p>
+<p><img src="http://dl2.iteye.com/upload/attachment/0087/8884/0d024111-f198-3ff6-947e-8d75a7544901.png" alt="img"></p>
+<p>通过上图可以看出策略模式有以下角色构成：</p>
+<blockquote>
+<p>1、<strong>抽象策略</strong>（Strategy）角色：抽象策略角色由抽象类或接口来承担，它给出具体策略角色需要实现的接口；</p>
+<p>2、<strong>具体策略</strong>（ConcreteStrategy）角色：实现封装了具体的算法或行为；</p>
+<p>3、<strong>场景</strong>（Context）角色：持有抽象策略类的引用。</p>
+</blockquote>
+<p>策略模式重点是 <strong>封装不同的算法和行为</strong>，<strong>不同的场景下可以相互替换</strong>。策略模式是 <strong>开闭原则</strong> 的体现，开闭原则讲的是一个软件实体应该对扩展开放对修改关闭。策略模式在新的策略增加时，不会影响其他类的修改，增加了扩展性，也就是对扩展是开放的；对于场景来说，只依赖于抽象，而不依赖于具体实现，所以对修改是关闭的。策略模式的认识可以借助《Java与模式》一书中写到诸葛亮的锦囊妙计来学习，在不同的场景下赵云打开不同的锦囊，便化险为夷，锦囊便是抽象策略，具体的锦囊里面的计策便是具体的策略角色，场景就是赵云，变化的处境选择具体策略的条件。</p>
+<p>策略模式在程序设计中也很常用，在板桥（banq）的博客里有篇文章叫 “你还在用if else吗？”<br>“<a href="http://www.jdon.com/artichect/ifelse.htm”讲的很好，策略模式不但是继承的代替方案而且能很好地解决if" target="_blank" rel="external">http://www.jdon.com/artichect/ifelse.htm”讲的很好，策略模式不但是继承的代替方案而且能很好地解决if</a> else问题，下面举个实例来说明，怎么使用策略模式。</p>
+<!-- more ->
+
+
+**需求如下**：
+
+某支付系统接入以下几种商户进行充值：易宝网易，快线网银，19pay手机支付，支付宝支付，骏网一卡通，由于每家充值系统的结算比例不一样，而且 同一家商户的不同充值方式也有所不同，具体系统情况比较复杂，像支付宝既有支付宝账号支付和支付宝网银支付等这些暂时不考虑，为了讲述策略模式这里简单描 述，假如分为四种，手机支付，网银支付，商户账号支付和点卡支付。因为没个支付结算比例不同，所以对手续费低的做一些优惠活动，尽可能让用户使用手续费低 的支付方式来充值，这样降低渠道费用，增加收入，具体优惠政策如下：
+
+> ① 网银充值，8.5折；
+
+> ② 商户充值，9折；
+
+> ③ 手机充值，没有优惠；
+
+> ④ 点卡充值，收取1%的渠道费；
+
+对于一个新手的代码如下：
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">package strategy;</div><div class="line"> </div><div class="line">public class Example &#123;</div><div class="line"> </div><div class="line">   </div><div class="line">    public Double calRecharge(Double charge ,RechargeTypeEnum type )&#123;</div><div class="line">      </div><div class="line">       if(type.equals(RechargeTypeEnum.E_BANK))&#123;</div><div class="line">           return charge*0.85;</div><div class="line">       &#125;else if(type.equals(RechargeTypeEnum.BUSI_ACCOUNTS))&#123;</div><div class="line">           return charge*0.90;</div><div class="line">       &#125;else if(type.equals(RechargeTypeEnum.MOBILE))&#123;</div><div class="line">           return charge;</div><div class="line">       &#125;else if(type.equals(RechargeTypeEnum.CARD_RECHARGE))&#123;</div><div class="line">           return charge+charge*0.01;</div><div class="line">       &#125;else&#123;</div><div class="line">           return null;</div><div class="line">       &#125;</div><div class="line"> </div><div class="line">    &#125;</div><div class="line">   </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">package strategy;</div><div class="line"> </div><div class="line">public enum RechargeTypeEnum &#123;</div><div class="line"> </div><div class="line">    E_BANK(1, &quot;网银&quot;),</div><div class="line">   </div><div class="line">    BUSI_ACCOUNTS(2, &quot;商户账号&quot;),</div><div class="line">   </div><div class="line">    MOBILE(3,&quot;手机卡充值&quot;),</div><div class="line">   </div><div class="line">    CARD_RECHARGE(4,&quot;充值卡&quot;)</div><div class="line">    ;</div><div class="line">   </div><div class="line">   </div><div class="line">    private int value;</div><div class="line">   </div><div class="line">   </div><div class="line">    private String description;</div><div class="line">   </div><div class="line">   </div><div class="line">   </div><div class="line">    private RechargeTypeEnum(int value, String description) &#123;</div><div class="line">       this.value = value;</div><div class="line">       this.description = description;</div><div class="line">    &#125;</div><div class="line">      </div><div class="line">    public int value() &#123;</div><div class="line">       return value;</div><div class="line">    &#125;</div><div class="line">    public String description() &#123;</div><div class="line">       return description;</div><div class="line">    &#125;</div><div class="line">   </div><div class="line"> </div><div class="line">    public static RechargeTypeEnum valueOf(int value) &#123;</div><div class="line">        for(RechargeTypeEnum type : RechargeTypeEnum.values()) &#123;</div><div class="line">            if(type.value() == value) &#123;</div><div class="line">                return type;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return null;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>使用策略模式入下</strong>：</p>
+<p>策略接口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">package strategy.strategy;</div><div class="line"> </div><div class="line">import strategy.RechargeTypeEnum;</div><div class="line"> </div><div class="line"> </div><div class="line">public interface Strategy &#123;</div><div class="line"> </div><div class="line">   </div><div class="line">    public Double calRecharge(Double charge ,RechargeTypeEnum type );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>EBank 策略</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">package strategy.strategy;</div><div class="line"> </div><div class="line">import strategy.RechargeTypeEnum;</div><div class="line"> </div><div class="line">public class EBankStrategy implements Strategy&#123;</div><div class="line"> </div><div class="line">    @Override</div><div class="line">    public Double calRecharge(Double charge, RechargeTypeEnum type) &#123;</div><div class="line">       return charge*0.85;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>BusiAcct 策略</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">package strategy.strategy;</div><div class="line"> </div><div class="line">import strategy.RechargeTypeEnum;</div><div class="line"> </div><div class="line">public class BusiAcctStrategy implements Strategy&#123;</div><div class="line"> </div><div class="line">    @Override</div><div class="line">    public Double calRecharge(Double charge, RechargeTypeEnum type) &#123;</div><div class="line">       // TODO Auto-generated method stub</div><div class="line">       return charge*0.90;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Mobile 策略</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">package strategy.strategy;</div><div class="line"> </div><div class="line">import strategy.RechargeTypeEnum;</div><div class="line"> </div><div class="line">public class MobileStrategy implements Strategy &#123;</div><div class="line"> </div><div class="line">    @Override</div><div class="line">    public Double calRecharge(Double charge, RechargeTypeEnum type) &#123;</div><div class="line">       // TODO Auto-generated method stub</div><div class="line">       return charge;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Card 策略</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">package strategy.strategy;</div><div class="line"> </div><div class="line">import strategy.RechargeTypeEnum;</div><div class="line"> </div><div class="line">public class CardStrategy implements Strategy&#123;</div><div class="line"> </div><div class="line">    @Override</div><div class="line">    public Double calRecharge(Double charge, RechargeTypeEnum type) &#123;</div><div class="line">       return charge+charge*0.01;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Context 实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">package strategy.strategy;</div><div class="line"> </div><div class="line">import strategy.RechargeTypeEnum;</div><div class="line"> </div><div class="line"> </div><div class="line">public class Context &#123;</div><div class="line"> </div><div class="line">    private Strategy strategy;</div><div class="line">   </div><div class="line">    public Double calRecharge(Double charge, Integer type) &#123;</div><div class="line">       strategy = StrategyFactory.getInstance().creator(type);</div><div class="line">       return strategy.calRecharge(charge, RechargeTypeEnum.valueOf(type));</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    public Strategy getStrategy() &#123;</div><div class="line">       return strategy;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    public void setStrategy(Strategy strategy) &#123;</div><div class="line">       this.strategy = strategy;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>StrategyFactory 实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">package strategy.strategy;</div><div class="line"> </div><div class="line">import java.util.HashMap;</div><div class="line">import java.util.Map;</div><div class="line"> </div><div class="line">import strategy.RechargeTypeEnum;</div><div class="line"> </div><div class="line">public class StrategyFactory &#123;</div><div class="line"> </div><div class="line">    private static StrategyFactory factory = new StrategyFactory();</div><div class="line">    private StrategyFactory()&#123;</div><div class="line">    &#125;</div><div class="line">    private static Map strategyMap = new HashMap&lt;&gt;();</div><div class="line">    static&#123;</div><div class="line">       strategyMap.put(RechargeTypeEnum.E_BANK.value(), new EBankStrategy());</div><div class="line">       strategyMap.put(RechargeTypeEnum.BUSI_ACCOUNTS.value(), new BusiAcctStrategy());</div><div class="line">       strategyMap.put(RechargeTypeEnum.MOBILE.value(), new MobileStrategy());</div><div class="line">       strategyMap.put(RechargeTypeEnum.CARD_RECHARGE.value(), new CardStrategy());</div><div class="line">    &#125;</div><div class="line">    public Strategy creator(Integer type)&#123;</div><div class="line">       return strategyMap.get(type);</div><div class="line">    &#125;</div><div class="line">    public static StrategyFactory getInstance()&#123;</div><div class="line">       return factory;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Test </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">package strategy.strategy;</div><div class="line"> </div><div class="line">import strategy.RechargeTypeEnum;</div><div class="line"> </div><div class="line">public class Client &#123;</div><div class="line"> </div><div class="line">   </div><div class="line">    public static void main(String[] args) &#123;</div><div class="line"> </div><div class="line">       Context context = new Context();</div><div class="line">       // 网银充值100 需要付多少</div><div class="line">       Double money = context.calRecharge(100D,</div><div class="line">              RechargeTypeEnum.E_BANK.value());</div><div class="line">       System.out.println(money);</div><div class="line"> </div><div class="line">       // 商户账户充值100 需要付多少</div><div class="line">       Double money2 = context.calRecharge(100D,</div><div class="line">              RechargeTypeEnum.BUSI_ACCOUNTS.value());</div><div class="line">       System.out.println(money2);</div><div class="line"> </div><div class="line">       // 手机充值100 需要付多少</div><div class="line">       Double money3 = context.calRecharge(100D,</div><div class="line">              RechargeTypeEnum.MOBILE.value());</div><div class="line">       System.out.println(money3);</div><div class="line"> </div><div class="line">       // 充值卡充值100 需要付多少</div><div class="line">       Double money4 = context.calRecharge(100D,</div><div class="line">              RechargeTypeEnum.CARD_RECHARGE.value());</div><div class="line">       System.out.println(money4);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">85.0</div><div class="line">90.0</div><div class="line">100.0</div><div class="line">101.0</div></pre></td></tr></table></figure>
+<p>从上面类图和代码可以看出，策略模式把具体的算法封装到了具体策略角色内部，<strong>增强了可扩展性</strong>，<strong>隐蔽了实现细节</strong>；它替代继承来实现，避免了 <code>if- else</code> 这种不易维护的条件语句。当然我们也可以看到，策略模式由于独立策略实现，使得系统内增加了很多策略类；对客户端来说必须知道兜友哪些具体策略， 而且需要知道选择具体策略的条件。</p>
+-->
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/16/Java-设计模式之策略模式/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-Java-虚拟机：新生代与老年代-GC" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/16/Java-虚拟机：新生代与老年代-GC/">Java 虚拟机：新生代与老年代 GC</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/16/Java-虚拟机：新生代与老年代-GC/" class="archive-article-date">
+  	<time datetime="2017-06-16T14:28:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>堆设置 摘要</strong>：</p>
+<p><code>-Xms</code>：初始堆大小 </p>
+<p><code>-Xmx</code>：最大堆大小 </p>
+<p><code>-XX:NewSize=n</code>：设置年轻代大小 </p>
+<p><code>-XX:NewRatio=n</code>：设置年轻代和年老代的比值。如:为3，表示年轻代与年老代比值为1：3，年轻代占整个年轻代年老代和的1/4 </p>
+<p><code>-XX:SurvivorRatio=n</code>：年轻代中Eden区与两个Survivor区的比值。注意Survivor区有两个。如：3，表示Eden：Survivor=3：2，一个Survivor区占整个年轻代的1/5 </p>
+<p><code>-XX:MaxPermSize=n</code>：设置持久代大小 收集器设置 </p>
+<p><code>-XX:+UseSerialGC</code>：设置串行收集器 -XX: …</p>
+<h2 id="1．-Java堆中各代分布"><a href="#1．-Java堆中各代分布" class="headerlink" title="1． Java堆中各代分布"></a>1． Java堆中各代分布</h2><p>图1：Java堆中各代分布</p>
+<p><img src="http://static.oschina.net/uploads/img/201410/16150211_aRgY.jpg" alt="img"></p>
+<p><strong>Young</strong>：主要是用来存放新生的对象。</p>
+<p><strong>Old</strong>：主要存放应用程序中生命周期长的内存对象。</p>
+<p><strong>Permanent</strong>：是指内存的永久保存区域，主要存放Class和Meta的信息,Class在被 Load的时候被放入PermGen space区域. 它和和存放Instance的Heap区域不同,GC(Garbage Collection)不会在主程序运行期对PermGen space进行清理，所以如果你的APP会LOAD很多CLASS的话,就很可能出现PermGen space错误。</p>
+        
+          <a class="article-more-a" href="/2017/06/16/Java-虚拟机：新生代与老年代-GC/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">gc</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/16/Java-虚拟机：新生代与老年代-GC/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-JVM-内存查看与分析工具" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/16/JVM-内存查看与分析工具/">JVM 内存查看与分析工具</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/16/JVM-内存查看与分析工具/" class="archive-article-date">
+  	<time datetime="2017-06-16T14:26:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-gc-日志输出"><a href="#1-gc-日志输出" class="headerlink" title="1. gc 日志输出"></a>1. gc 日志输出</h2><p>在jvm启动参数中加入 <code>-XX:+PrintGC -XX:+PrintGCDetails -XX:+PrintGCTimestamps -XX:+PrintGCApplicationStopedTime</code>，jvm将会按照这些参数顺序输出gc概要信息，详细信息，gc时间信息，gc造成的应用暂停时间。如果在刚才的参数后面加入参数 <code>-Xloggc:文件路径</code>，gc信息将会输出到指定的文件中。其他参数还有 <code>-verbose:gc</code> 和 <code>-XX:+PrintTenuringDistribution</code> 等。</p>
+<h2 id="2-jconsole"><a href="#2-jconsole" class="headerlink" title="2. jconsole"></a>2. jconsole</h2><p>jconsole是jdk自带的一个内存分析工具，它提供了图形界面。可以查看到被监控的jvm的内存信息，线程信息，类加载信息，MBean信息。</p>
+<p>jconsole位于jdk目录下的bin目录，在windows下是jconsole.exe，在unix和Linux下是jconsole.sh，jconsole可以监控本地应用，也可以监控远程应用。 要监控本地应用，执行jconsole pid，pid就是运行的java进程id，如果不带上pid参数，则执行jconsole命令后，会看到一个对话框弹出，上面列出了本地的java进程，可以选择一个进行监控。如果要远程监控，则要在远程服务器的jvm参数里加入一些东西，因为jconsole的远程监控基于jmx的。</p>
+        
+          <a class="article-more-a" href="/2017/06/16/JVM-内存查看与分析工具/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">jvm</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/16/JVM-内存查看与分析工具/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-Java-JVM：垃圾回收" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/16/Java-JVM：垃圾回收/">Java JVM：垃圾回收</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/16/Java-JVM：垃圾回收/" class="archive-article-date">
+  	<time datetime="2017-06-16T14:24:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>参考了 一个面试官对面试问题的分析 中关于 GC 的分析，垃圾回收需要搞清楚 <strong>在什么时候</strong>，<strong>对什么东西</strong>，<strong>做了什么事情</strong>。</p>
+<h2 id="在什么时候"><a href="#在什么时候" class="headerlink" title="在什么时候"></a>在什么时候</h2><p>首先需要知道，GC又分为 <strong>Minor GC</strong> 和 <strong>Full GC</strong> (也称为Major GC)。Java 堆内存分为 <strong>新生代</strong> 和 <strong>老年代</strong>，新生代中又分为1个 <strong>Eden 区域</strong> 和两个 <strong>Survivor 区域</strong>。</p>
+<p>那么对于 Minor GC 的 <strong>触发条件</strong>：大多数情况下，直接在 Eden 区中进行分配。如果 Eden 区域没有足够的空间，那么就会发起一次 Minor GC；对于 Full GC（Major GC）的触发条件：也是如果老年代没有足够空间的话，那么就会进行一次 Full GC。</p>
+<p>PS：上面所说的只是一般情况下，实际上，需要考虑一个空间分配担保的问题：</p>
+<p>在发生Minor GC之前，虚拟机会先检查老年代最大可用的连续空间是否大于新生代所有对象的总空间。如果大于则进行Minor GC，如果小于则看HandlePromotionFailure设置是否允许担保失败（不允许则直接Full GC）。如果允许，那么会继续检查老年代最大可用的连续空间是否大于历次晋升到老年代对象的平均大小，如果大于则尝试Minor GC（如果尝试失败也会触发Full GC），如果小于则进行Full GC。</p>
+<p>但是，具体到什么时刻执行，这个是由系统来进行决定，是无法预测的。</p>
+        
+          <a class="article-more-a" href="/2017/06/16/Java-JVM：垃圾回收/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">gc</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/16/Java-JVM：垃圾回收/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-JVM-知识点总览" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/16/JVM-知识点总览/">JVM 知识点总览</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/16/JVM-知识点总览/" class="archive-article-date">
+  	<time datetime="2017-06-16T14:21:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>摘自：<a href="http://www.ityouknow.com/java/2017/03/01/jvm-overview.html">http://www.ityouknow.com/java/2017/03/01/jvm-overview.html</a></p>
+</blockquote>
+<h2 id="jvm-总体梳理"><a href="#jvm-总体梳理" class="headerlink" title="jvm 总体梳理"></a>jvm 总体梳理</h2><p>jvm体系总体分四大块：</p>
+<ul>
+<li>类的加载机制</li>
+<li>jvm内存结构</li>
+<li>GC算法 垃圾回收</li>
+<li>GC分析 命令调优</li>
+</ul>
+<h2 id="类的加载机制"><a href="#类的加载机制" class="headerlink" title="类的加载机制"></a>类的加载机制</h2><p>主要关注点：</p>
+<ul>
+<li>什么是类的加载</li>
+<li>类的生命周期</li>
+<li>类加载器</li>
+<li>双亲委派模型</li>
+</ul>
+        
+          <a class="article-more-a" href="/2017/06/16/JVM-知识点总览/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">jvm</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/16/JVM-知识点总览/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-Java-面试问题分析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/15/Java-面试问题分析/">Java 面试问题分析</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/15/Java-面试问题分析/" class="archive-article-date">
+  	<time datetime="2017-06-15T12:24:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>作者：周志明</p>
+<p>介绍：远光软件开发部总经理，著有《深入理解Java虚拟机》等作品</p>
+<p>微博：<a href="http://weibo.com/icyfenix?is_all=1&amp;noscale_head=1#_0">Iam周志明</a></p>
+</blockquote>
+<p>在公司当技术面试官几年间，从应届生到工作十几年的应聘者都遇到过。先表达一下我自己对面试的观点： </p>
+<p>1.笔试、面试去评价一个人肯定是不够准确的，了解一个人最准确的方式就是“路遥知马力，日久见人心”。通过一、二个小时内的做题、交流，只是没有其他办法下进行的无奈之举，所以通过了面试不代表有多成功，没通过也不代表有多失败。 </p>
+<p>2.好的面试官本身交谈的时候就不应当把自己一个居高临下的角色上，应当把自己和应聘者当做两个做技术的人平等的交流，把自己当作权威往往就会受到观点的角度、语言表达、工作领域的惯性的制约。 </p>
+<p>3.好的考察题目则是大家能经常接触，不同层次的人能有不同层次的答案，能从问题引申出后面继续讨论的话题。 </p>
+<p>举个例子抛砖引玉，下面这个问题是我以前常问的，从应届生到工作十几年的人都问过： </p>
+<p><strong>引用</strong></p>
+<blockquote>
+<p>“地球人都知道，Java有个东西叫垃圾收集器，它让创建的对象不需要像c/cpp那样delete、free掉，你能不能谈谈，<strong>GC是在什么时候</strong>，<strong>对什么东西</strong>，<strong>做了什么事情</strong>？”</p>
+</blockquote>
+        
+          <a class="article-more-a" href="/2017/06/15/Java-面试问题分析/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">面试</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/15/Java-面试问题分析/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-计算机是如何启动的" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/15/计算机是如何启动的/">计算机是如何启动的</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/15/计算机是如何启动的/" class="archive-article-date">
+  	<time datetime="2017-06-15T12:22:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>从打开电源到开始操作，计算机的启动是一个非常复杂的过程。</p>
+<p>我一直搞不清楚，这个过程到底是怎么回事，只看见屏幕快速滚动各种提示。这几天，我查了一些资料，试图搞懂它。下面就是我整理的笔记。</p>
+<p><strong>零、boot的含义</strong></p>
+<p>先问一个问题，”启动”用英语怎么说？</p>
+<p>回答是boot。可是，boot原来的意思是靴子，”启动”与靴子有什么关系呢？ 原来，这里的boot是bootstrap（鞋带）的缩写，它来自一句谚语：</p>
+<blockquote>
+<p>“pull oneself up by one’s bootstraps”</p>
+</blockquote>
+<p>字面意思是”拽着鞋带把自己拉起来”，这当然是不可能的事情。最早的时候，工程师们用它来比喻，计算机启动是一个很矛盾的过程：必须先运行程序，然后计算机才能启动，但是计算机不启动就无法运行程序！</p>
+<p>早期真的是这样，必须想尽各种办法，把一小段程序装进内存，然后计算机才能正常运行。所以，工程师们把这个过程叫做”拉鞋带”，久而久之就简称为boot了。</p>
+<p>计算机的整个启动过程分成四个阶段。</p>
+        
+          <a class="article-more-a" href="/2017/06/15/计算机是如何启动的/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/cm/" class="article-tag-list-link color3">cm</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/15/计算机是如何启动的/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-类加载机制" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -249,651 +993,9 @@
 
 
   
-    <article id="post-美团点评实习生面试经历" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/15/美团点评实习生面试经历/">美团点评实习生面试经历</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/15/美团点评实习生面试经历/" class="archive-article-date">
-  	<time datetime="2017-06-15T12:13:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>转载：<a href="https://www.nowcoder.com/discuss/20645?type=0&amp;order=0&amp;pos=4&amp;page=1">https://www.nowcoder.com/discuss/20645?type=0&amp;order=0&amp;pos=4&amp;page=1</a></p>
-</blockquote>
-<p>我是通过实习生转正拿到的美团点评offer，岗位为：美团外卖结算组的后端开发工程师（Java）。</p>
-<h3 id="实习生面试"><a href="#实习生面试" class="headerlink" title="实习生面试"></a>实习生面试</h3><p>美团点评的实习生招聘比较喜欢内推，没有网申和笔试的环节，这一点大家要注意。2016年的5月号，我听到在大众点评工作的同学说美团点评开始招聘暑期实习生了，我查看了一下美团点评各个业务线主要负责的内容，加上同学的建议，最后选择了美团外卖事业部。</p>
-        
-          <a class="article-more-a" href="/2017/06/15/美团点评实习生面试经历/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">面试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/life/" class="article-tag-list-link color5">life</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/15/美团点评实习生面试经历/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-浅谈-JVM-：图解类加载机制" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/15/浅谈-JVM-：图解类加载机制/">浅谈 JVM ：图解类加载机制</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/15/浅谈-JVM-：图解类加载机制/" class="archive-article-date">
-  	<time datetime="2017-06-15T12:02:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、目录"><a href="#一、目录" class="headerlink" title="一、目录"></a>一、目录</h2><p><img src="http://images2015.cnblogs.com/blog/1066658/201702/1066658-20170216202404894-377903885.png" alt="img"></p>
-        
-          <a class="article-more-a" href="/2017/06/15/浅谈-JVM-：图解类加载机制/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">classloader</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/15/浅谈-JVM-：图解类加载机制/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-JVM-中的类加载机制" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/15/JVM-中的类加载机制/">JVM 中的类加载机制</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/15/JVM-中的类加载机制/" class="archive-article-date">
-  	<time datetime="2017-06-15T12:01:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1，类与类加载器的关系"><a href="#1，类与类加载器的关系" class="headerlink" title="1，类与类加载器的关系"></a>1，类与类加载器的关系</h2><p>一个类需要由加载它的类加载器和这个类本身一同来确定这个类在Java虚拟机中的唯一性。  </p>
-<p>注：每一个类加载器，都有一个独立的类命名空间。  </p>
-<p><strong>判断两个类是否相等</strong>：  </p>
-<p>只有当两个类是由同一个类加载器加载时，判断它们是否相等才有意义。 如果两个类不是由同一个类加载器加载的，即使这两个类来源于同一个Class文件，被同一个虚拟机加载，只要加载它们的类加载器不同，那么这两个类一定不相等。  </p>
-        
-          <a class="article-more-a" href="/2017/06/15/JVM-中的类加载机制/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">classloader</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/15/JVM-中的类加载机制/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-Java-进阶：浅析垃圾回收和终结处理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/15/Java-进阶：浅析垃圾回收和终结处理/">Java 进阶：浅析垃圾回收和终结处理</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/15/Java-进阶：浅析垃圾回收和终结处理/" class="archive-article-date">
-  	<time datetime="2017-06-15T11:56:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>从接触第一门编程语言开始我们就在不断强调，初始化变量是很重要的一件事情，尤其在C和C++中很明显，对于指针来说，定义一个指针不对它进行初始化，很有可能引发内存上的严重问题。但是我们也会常常忘记同样重要的清理工作。在Java中，垃圾回收器就负责回收无用对象占据的内存资源。</p>
-<h2 id="我们必须实施清理"><a href="#我们必须实施清理" class="headerlink" title="我们必须实施清理"></a>我们必须实施清理</h2><p>在C++中，所有对象都会被销毁，或者说应该被销毁。如果C++创建了一个局部对象，此时的销毁动作发生在“右括号”为边界，此对象作用域的末尾处。如果对象是用new创建的，那么我们应该调用C++的delete操作符，也就会调用相应的析构函数，如果我们忘记调用delete，那么永远不会调用析构函数，这样就会出现内存泄漏，对象的其他部分也就得不到清理。</p>
-<p>相反的是，Java不允许创建局部对象，必须使用new创建对象。在Java中也没有用于释放对象的delete，所以垃圾回收器会帮你释放存储空间。但是随着我们学习的深入，发现垃圾回收并不是万能的，也就是说我们不能认为垃圾回收器可以替代C++中的析构函数。所以如果我们希望进行除释放空间之外的清理工作，还是得明确调用某个恰当的Java方法。</p>
-<p>我们须记得，无论是“垃圾回收”还是“终结”，都不一定保证会发生，如果Java虚拟机并未面临内存耗尽的情形，他是不会浪费时间去执行垃圾回收以恢复内存的。</p>
-        
-          <a class="article-more-a" href="/2017/06/15/Java-进阶：浅析垃圾回收和终结处理/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">jvm</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/15/Java-进阶：浅析垃圾回收和终结处理/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-Java-进阶：一切都是对象" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/15/Java-进阶：一切都是对象/">Java 进阶：一切都是对象</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/15/Java-进阶：一切都是对象/" class="archive-article-date">
-  	<time datetime="2017-06-15T11:55:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Java操作标识符"><a href="#Java操作标识符" class="headerlink" title="Java操作标识符"></a>Java操作标识符</h2><p>Java中的操纵标识符实际上是对象的一个“引用”，你拥有一个引用，并不一定需要有一个对象与它关联。因此，想要操纵一个句子或词，可以创建一个String引用。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">String s;</div></pre></td></tr></table></figure>
-<p>这里创建的只是一个引用，并不是对象，并且Java中的引用，在语法上更接近C++的引用而不是指针。为了安全起见，创建一个引用的同时便进行初始化：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">String s = null;</div></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2017/06/15/Java-进阶：一切都是对象/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/15/Java-进阶：一切都是对象/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-Java-进阶：this-关键字" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/15/Java-进阶：this-关键字/">Java 进阶：this 关键字</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/15/Java-进阶：this-关键字/" class="archive-article-date">
-  	<time datetime="2017-06-15T11:53:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="this-调用所操作对象的引用"><a href="#this-调用所操作对象的引用" class="headerlink" title="this 调用所操作对象的引用"></a>this 调用所操作对象的引用</h2><p><strong>问题</strong>：假如统一类型的两个对象，分别是a和b，其中还有一个方法peel()，那么我们怎么才能分辨这个方法到底是被a调用还是被b调用呢？</p>
-<p>其实，在这期间编译器做了一些事后工作，它暗自把“<strong>所操作对象的引用</strong>”作为地一个参数传递给了peel()。假设你希望在方法的内部获得对当前对象的引用，就可以使用this关键字。</p>
-<p>代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">class Banana &#123;</div><div class="line">    void peel(int i)&#123;</div><div class="line">        out.println(i);</div><div class="line">    &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">public class BananaPeel &#123;</div><div class="line">    public static void main(String[] args)&#123;</div><div class="line">        Banana a = new Banana();</div><div class="line">        Banana b = new Banana();</div><div class="line"></div><div class="line">        a.peel(1);</div><div class="line">        b.peel(2);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2017/06/15/Java-进阶：this-关键字/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">this</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/15/Java-进阶：this-关键字/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-Java-进阶：关于初始化的那些事" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/15/Java-进阶：关于初始化的那些事/">Java 进阶：关于初始化的那些事</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/15/Java-进阶：关于初始化的那些事/" class="archive-article-date">
-  	<time datetime="2017-06-15T11:49:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>不管是哪种编程语言，都有一个很重要的问题，那就是成员的初始化，如果我们对自定义的变量没有进行适当的初始化，那么就有可能造成一些意想不到的错误，在写程序的时候，我们必须要对成员变量进行正确的初始化，所以今天我们就来讨论一下关于初始化的那些事。</p>
-<p>先来看一些Java中有关初始化的小细节： </p>
-<ol>
-<li><p>在方法中的局部变量未初始化的话编译器会报错，在类中则不会。 </p>
-</li>
-<li><p>如果类的数据成员是基本类型的话，那么每个基本类型数据成员都会有一个初始值。 </p>
-</li>
-<li><p>无法阻止自动初始化的进行，他们会在构造器被调用之前发生。</p>
-</li>
-</ol>
-        
-          <a class="article-more-a" href="/2017/06/15/Java-进阶：关于初始化的那些事/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/15/Java-进阶：关于初始化的那些事/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-Java-进阶：final-关键字" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/15/Java-进阶：final-关键字/">Java 进阶：final 关键字</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/15/Java-进阶：final-关键字/" class="archive-article-date">
-  	<time datetime="2017-06-15T11:45:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在Java中，<strong>编译器</strong> 可以将final常量代入任何可能用到它的计算式中，也就是说，可以在 <strong>编译时进行计算</strong>，这减轻了一些运行时的负担。final常量必须是基本类型。</p>
-<p>对于对象引用，final使引用恒定不变。一旦引用被初始化指向一个对象，就无法再把它改为指向另一个对象。然而，对象其自身却是可以被修改的，既是final又是static的域，将用大写表示，并使用下划线分割各个单词。</p>
-        
-          <a class="article-more-a" href="/2017/06/15/Java-进阶：final-关键字/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">final</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/15/Java-进阶：final-关键字/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-Java-进阶：Integer-与-int-的种种比较" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/15/Java-进阶：Integer-与-int-的种种比较/">Java 进阶：Integer 与 int 的种种比较</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/15/Java-进阶：Integer-与-int-的种种比较/" class="archive-article-date">
-  	<time datetime="2017-06-15T11:44:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>如果面试官问Integer与int的区别：估计大多数人只会说道两点，Ingeter是int的包装类，int的初值为0，Ingeter的初值为null。但是如果面试官再问一下 <code>Integer i = 1;int ii = 1; i==ii</code> 为true还是为false？估计就有一部分人答不出来了，如果再问一下其他的，估计更多的人会头脑一片混乱。所以我对它们进行了总结，希望对大家有帮助。</p>
-<p>首先看代码：</p>
-        
-          <a class="article-more-a" href="/2017/06/15/Java-进阶：Integer-与-int-的种种比较/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/15/Java-进阶：Integer-与-int-的种种比较/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
     </nav>
   
 
@@ -987,10 +1089,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">书单</a>
               </li>
              
@@ -1007,7 +1105,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">http</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1016,10 +1122,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">jdbc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1035,11 +1137,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">gc</a>
+                <a href="javascript:void(0)" class="js-tag color2">sqlite</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">sqlite</a>
+                <a href="javascript:void(0)" class="js-tag color3">并发</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1067,7 +1169,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">this</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">final</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1087,11 +1197,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">this</a>
+                <a href="javascript:void(0)" class="js-tag color5">代码重构</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux</a>
+                <a href="javascript:void(0)" class="js-tag color2">锁</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">gc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1099,11 +1213,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">代码重构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">json</a>
+                <a href="javascript:void(0)" class="js-tag color2">return</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1123,19 +1233,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网卡</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">路由器</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">进程</a>
+                <a href="javascript:void(0)" class="js-tag color3">网卡</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">键盘</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">进程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1163,7 +1273,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">return</a>
+                <a href="javascript:void(0)" class="js-tag color5">json</a>
               </li>
             
             <div class="clearfix"></div>
