@@ -240,6 +240,229 @@
 
 
   
+    <article id="post-装饰器模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/20/装饰器模式/">装饰器模式</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/20/装饰器模式/" class="archive-article-date">
+  	<time datetime="2017-06-20T14:04:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>装饰器模式</strong>（Decorator Pattern）允许 <strong>向一个现有的对象添加新的功能，同时又不改变其结构</strong>。这种类型的设计模式属于结构型模式，它是作为现有的类的一个 <strong>包装</strong>。</p>
+<p>这种模式创建了一个装饰类，用来包装原有的类，并在保持类方法签名完整性的前提下，提供了额外的功能。</p>
+<p>我们通过下面的实例来演示装饰器模式的用法。其中，我们将把一个形状装饰上不同的颜色，同时又不改变形状类。</p>
+        
+          <a class="article-more-a" href="/2017/06/20/装饰器模式/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/20/装饰器模式/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-装饰器模式（Decorator）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/20/装饰器模式（Decorator）/">装饰器模式（Decorator）</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/20/装饰器模式（Decorator）/" class="archive-article-date">
+  	<time datetime="2017-06-20T14:03:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-认识装饰器模式"><a href="#1-认识装饰器模式" class="headerlink" title="1.认识装饰器模式"></a>1.认识装饰器模式</h2><p>装饰模式能够实现动态的为对象添加功能，是从一个对象外部来给对象添加功能。通常给对象添加功能，要么直接修改对象添加相应的功能，要么派生对应的子类来扩展，抑或是使用对象组合的方式。显然，直接修改对应的类这种方式并不可取。在面向对象的设计中，而我们也应该 <strong>尽量使用对象组合，而不是对象继承来扩展和复用功能</strong>。装饰器模式就是基于 <strong>对象组合</strong> 的方式，可以很灵活的给对象添加所需要的功能。装饰器模式的本质就是 <strong>动态组合</strong>。动态是手段，组合才是目的。总之，装饰模式是通过把复杂的功能简单化，分散化，然后再运行期间，根据需要来动态组合的这样一个模式。</p>
+<h2 id="2-模式结构和说明"><a href="#2-模式结构和说明" class="headerlink" title="2.模式结构和说明"></a>2.模式结构和说明</h2><p>装饰模式的结构如下图所示。</p>
+<p><img src="http://my.csdn.net/uploads/201208/19/1345385564_5334.jpg" alt="img"></p>
+<p><strong>Component</strong>：组件对象的接口，可以给这些对象动态的添加职责；</p>
+        
+          <a class="article-more-a" href="/2017/06/20/装饰器模式（Decorator）/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/20/装饰器模式（Decorator）/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-设计模式之装饰器模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/20/设计模式之装饰器模式/">设计模式之装饰器模式</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/20/设计模式之装饰器模式/" class="archive-article-date">
+  	<time datetime="2017-06-20T14:02:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>首先解释一下忘记接口的同学难点，接口其实就是java的抽象机制，不提供方法的具体实现，但是可以有多个类来实现这个接口，一个类也可以实现多个接口，接口带来的好处是创建实例时，用户不必关注具体的实现，比如我例子中的DecoratorPattern.java文件中 ，创建实现Basket接口的一个实例时，返回值是接口，下面再使用show方法时，我们就不必去关注谁实现了。接口作为返回值的一个经典的应用是使用ArrayList时，他的iterator方法会返回一个Iterator接口。这样开发者使用it.next方法，再不用去研究每一种list是怎么实现查询了。</p>
+<p>下面解释装饰器模式是如何引起的，深入浅出模式设计的例子很好，就是喝咖啡，有个调料的类，你可以加糖、冰、牛奶等等好多原料，那么生成调配方案时，可以通过继承来实现，但是大家也都知道排列组合，继承的类系统庞大可想而知了。这就诞生了装饰器模式，他的原则是，保持原有的接口，并为原来的动态的添加新的功能。</p>
+<p>下面是维基百科的解释：相信大家都可以看懂</p>
+        
+          <a class="article-more-a" href="/2017/06/20/设计模式之装饰器模式/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/20/设计模式之装饰器模式/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-Java-装饰者模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -647,213 +870,6 @@
 
 
   
-    <article id="post-Android-在争议中逃离-GPL-束缚" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/20/Android-在争议中逃离-GPL-束缚/">Android 在争议中逃离 GPL 束缚</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/20/Android-在争议中逃离-GPL-束缚/" class="archive-article-date">
-  	<time datetime="2017-06-20T13:37:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Linux-内核的-GPL-约束"><a href="#Linux-内核的-GPL-约束" class="headerlink" title="Linux 内核的 GPL 约束"></a>Linux 内核的 GPL 约束</h2><p>总所周知，Linux 内核以 GNU 通用公共许可证第二版（GPL V2）的授权使用协议下发行。GNU 通用公共许可证是一种 “Copyleft” 形式的“版权”，保障任何人都能够对 Linux 内核以及其衍生产品的使用、修改和重新发布的权力，前题是 <strong>不能修改发布条款</strong>。什么意思呢，任何 Linux 内核的衍生产品（Derived Work）必须遵循 GPL 协议进行发布。然而问题的核心在于 <strong>什么是 Linux 内核的衍生产品</strong>，其中有几个致命问题，业界争论了十年有多。</p>
-<blockquote>
-<p>1、使用 Linux 内核的头文件定义，进行系统调用的程序是否会被定性为衍生产品？</p>
-<p>2、链接使用了其他 GPL 的类库的程序是否会被定性为衍生产品？</p>
-<p>3、Linux 内核动态载入的模块 LKM（Loadable Kernel Modules）是否会被定性为衍生产品，以 LKM 形式开发的 Linux 驱动程序是不是衍生产品？</p>
-</blockquote>
-<p><strong>如果</strong> 上述问题答案均为“<strong>是</strong>”，GPL 将为 Linux 打造一个的“<strong>封闭</strong>”的开源世界，什么意思呢？一个 Linux GPL的操作系统核心运行在 “ 内核空间 ” ，上层的类库、框架、服务、应用运行在 “ 用户空间 ” 。用户空间上的任何服务不可避免的需要Linux 内核的头文件，进行系统调用，因此，中间层服务必须遵循 GPL 进行开放源代码。调用中间服务层的框架或者其他服务使用了 GPL 的类库，因此，也必须是 GPL 的。同理，上层应用也被 “ 传染 ” ，必须是 GPL 的。于是，从内核到驱动到中间服务到上层应用，形成了一个 GPL 一体化软件授权的软件发布整体。可以认为，这个整体上任何开发成果都是 GPL 的，除非极少数的例外程序能够证明自身独立于系统的GPL环境。这样的一个“软件闭包”排斥的商业化的软件模块以及“想要钱”普通开发者，将整个软件世界划分为“ GPL 与 GPL 兼容的”的和非 GPL 的，每个开发从业者面临着选择，要么 Linux+GPL ，要么 Linux 与你无关。</p>
-<p>重新回到这三个问题。</p>
-        
-          <a class="article-more-a" href="/2017/06/20/Android-在争议中逃离-GPL-束缚/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/c/" class="article-tag-list-link color2">c</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/20/Android-在争议中逃离-GPL-束缚/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-开源那么重要，开源协议你认识吗？" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/20/开源那么重要，开源协议你认识吗？/">开源那么重要，开源协议你认识吗？</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/20/开源那么重要，开源协议你认识吗？/" class="archive-article-date">
-  	<time datetime="2017-06-20T13:35:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>近日，著名开发者论坛XDA专门发表了文章指责小米违反了GPLv2授权要求的做法。Android系统使用的是Linux内核，许可证来自 GPLv2，根据后者的授权要求，所有Linux衍生版本修改后的源代码必须公开，但是小米到目前为止依然没有公开自己修改的源代码，这违反了GPLv2 的授权要求。</p>
-<p>在2012年就有人指出小米的MIUI可能违反开源协议GPLv2，但是小米一直没有做出反应，这次有人如此高调指责小米，不知道小米会继续不予理睬还是应要求公开代码呢？</p>
-<p>说到开源协议，很多人是不怎么清楚，如今的开源协议达到60多种，其中主流的包括以下这些。</p>
-<h2 id="1，BSD"><a href="#1，BSD" class="headerlink" title="1，BSD"></a>1，BSD</h2><p>BSD开源协议是一个给于使用者很大自由的协议。基本上使用者可以”为所欲为”，可以自由的使用，修改源代码，也可以将修改后的代码作为开源或者专有软件再发布。</p>
-<p>但”为所欲为”的前提当你发布使用了BSD协议的代码，或则以BSD协议代码为基础做二次开发自己的产品时，需要满足三个条件：</p>
-<blockquote>
-<p>如果再发布的产品中包含源代码，则在源代码中必须带有原来代码中的BSD协议。</p>
-<p>如果再发布的只是二进制类库/软件，则需要在类库/软件的文档和版权声明中包含原来代码中的BSD协议。</p>
-<p>不可以用开源代码的作者/机构名字和原来产品的名字做市场推广。</p>
-</blockquote>
-<p>BSD 代码鼓励代码共享，但需要尊重代码作者的著作权。BSD由于允许使用者修改和重新发布代码，也允许使用或在BSD代码上开发商业软件发布和销售，因此是对 商业集成很友好的协议。而很多的公司企业在选用开源产品的时候都首选BSD协议，因为可以完全控制这些第三方的代码，在必要的时候可以修改或者二次开发。</p>
-<p>包括苹果的MAC OS，Webkit浏览器内核在内的软件都使用了BSD协议。</p>
-        
-          <a class="article-more-a" href="/2017/06/20/开源那么重要，开源协议你认识吗？/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/c/" class="article-tag-list-link color2">c</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/20/开源那么重要，开源协议你认识吗？/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-自由软件许可证-GPL" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/20/自由软件许可证-GPL/">自由软件许可证 GPL</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/20/自由软件许可证-GPL/" class="archive-article-date">
-  	<time datetime="2017-06-20T13:34:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>自从版权制度问世，大多数人就形成了一种观念：只要是正版软件，就一定会收费。</p>
-<p>如果一种正版软件可以无限制的免费使用，甚至还允许你复制和出售，不少人就会产生怀疑：难道世界上真的有免费的午餐？如果不收费，程序员靠什么活着呢？</p>
-<p>没错，世界上就是有免费的午餐，那就是自由软件。</p>
-<p>所谓”自由软件”，就是让你可以自由使用的正版软件。典型代表就是使用GPL许可证的软件。只要一个软件的许可证是GPL，那么这种软件就是自由软件，所有人都可以自由使用。</p>
-<p>软件作者这样做，并不是因为他们发疯了，也不是因为他们不需要钱，而是因为他们觉得，自由比金钱更重要。保障所有人都可以自由地获得软件，要比把软件封闭起来，只给出钱的人使用更好。从根本上看，自由软件和GPL许可证并不仅仅与软件有关，还与人类自由有关。</p>
-<p>1980年，一个叫Richard Stallman的美国程序员，因为无法容忍软件私有化造成的代码封闭，而创立了GPL许可证。他认为，软件的源代码是全人类的财富，应该允许程序员自由共享。</p>
-<p>他在1986年的《字节》杂志上写道：</p>
-        
-          <a class="article-more-a" href="/2017/06/20/自由软件许可证-GPL/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/c/" class="article-tag-list-link color2">c</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/20/自由软件许可证-GPL/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -946,6 +962,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">书单</a>
               </li>
              
@@ -954,15 +974,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">c</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -970,27 +982,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">http</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">classloader</a>
+                <a href="javascript:void(0)" class="js-tag color2">c</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">jdbc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">gc</a>
+                <a href="javascript:void(0)" class="js-tag color5">http</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -998,7 +998,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">sqlite</a>
+                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1006,15 +1006,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">jdbc</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">并发</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">线程</a>
+                <a href="javascript:void(0)" class="js-tag color5">main</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">log4j</a>
+                <a href="javascript:void(0)" class="js-tag color3">gc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1022,7 +1026,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">main</a>
+                <a href="javascript:void(0)" class="js-tag color1">log4j</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">线程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">sqlite</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">classloader</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1038,7 +1054,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">this</a>
+                <a href="javascript:void(0)" class="js-tag color3">restful</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1046,15 +1062,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">restful</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">socket</a>
+                <a href="javascript:void(0)" class="js-tag color5">this</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1062,15 +1070,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">wireshark</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">锁</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">代码重构</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1078,7 +1082,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">return</a>
+                <a href="javascript:void(0)" class="js-tag color2">socket</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">代码重构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">锁</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1090,7 +1102,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">单元测试</a>
+                <a href="javascript:void(0)" class="js-tag color4">嵌入式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1098,11 +1110,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">嵌入式</a>
+                <a href="javascript:void(0)" class="js-tag color2">return</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">路由器</a>
+                <a href="javascript:void(0)" class="js-tag color5">单元测试</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1114,7 +1126,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">路由器</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">os</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">mvc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1122,19 +1142,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">键盘</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">知乎</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">内存</a>
+                <a href="javascript:void(0)" class="js-tag color3">键盘</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mvc</a>
+                <a href="javascript:void(0)" class="js-tag color3">内存</a>
               </li>
              
               <li class="article-tag-list-item">

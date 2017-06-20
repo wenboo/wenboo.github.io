@@ -167,6 +167,239 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Java-中的-String-StringBuilder-和-StringBuffer" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/03/Java-中的-String-StringBuilder-和-StringBuffer/">Java 中的 String StringBuilder 和 StringBuffer</a>
+    </h1>
+  
+
+        
+        <a href="/2016/11/03/Java-中的-String-StringBuilder-和-StringBuffer/" class="archive-article-date">
+  	<time datetime="2016-11-03T13:57:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-11-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>String对象的创建</strong></p>
+<p> 1、关于类对象的创建，很普通的一种方式就是利用构造器，String类也不例外：String s=new String(“Hello world”); 问题是参数”Hello world”是什么东西，也是字符串对象吗?莫非用字符串对象创建一个字符串对象?</p>
+<p> 2、当然，String类对象还有一种大家都很喜欢的创建方式：String s=”Hello world”; 但是有点怪呀，怎么与基本数据类型的赋值操作（int i=1）很像?</p>
+<p><strong>Java class 文件结构和常量池</strong></p>
+<p>我们知道，Java程序要运行，首先需要编译器将源代码文件编译成字节码文件(也就是.class文件)。然后在由JVM解释执行。class文件是8位字节的二进制流 。这些二进制流的涵义由一些紧凑的有意义的项 组成。比如class字节流中最开始的4个字节组成的项叫做魔数 (magic)，其意义在于分辨class文件(值为0xCAFEBABE)与非class文件。class字节流大致结构如下图左侧。</p>
+<p><img src="http://dl.iteye.com/upload/picture/pic/50015/1f7bd098-2b41-3f95-b129-460190f351ba.gif" alt="pic"></p>
+<p>其中，在class文件中有一个非常重要的项——常量池 。这个常量池专门放置源代码中的符号信息(并且不同的符号信息放置在不同标志的常量表中)。如上图右侧是HelloWorld代码中的常量表（HelloWorld代码如下），其中有四个不同类型的常量表(四个不同的常量池入口)。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span></span>&#123;  </div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">hello</span><span class="params">()</span></span>&#123;  </div><div class="line">        System.out.println(<span class="string">"Hello world"</span>);  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2016/11/03/Java-中的-String-StringBuilder-和-StringBuffer/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/11/03/Java-中的-String-StringBuilder-和-StringBuffer/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-Java-中的日志-log4j" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/01/Java-中的日志-log4j/">Java 中的日志 log4j</a>
+    </h1>
+  
+
+        
+        <a href="/2016/11/01/Java-中的日志-log4j/" class="archive-article-date">
+  	<time datetime="2016-11-01T14:28:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-11-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>日志是应用软件中不可缺少的部分，Apache的开源项目log4j是一个功能强大的日志组件,提供方便的日志记录。在apache网站：jakarta.apache.org/log4j 可以免费下载到Log4j最新版本的软件包。</p>
+<p><strong>入门实例</strong></p>
+<p><strong>1. 新建一个Java工程，导入导入包log4j-1.2.17.jar，整个工程最终目录如下</strong></p>
+<p><img src="http://static.codeceo.com/images/2015/05/4b08140cb7fc48b1af2646ad4b021735.jpg" alt="pic"></p>
+<p><strong>2. src同级创建并设置log4j.properties</strong></p>
+        
+          <a class="article-more-a" href="/2016/11/01/Java-中的日志-log4j/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">log4j</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/11/01/Java-中的日志-log4j/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-为什么-Java-中-1000-1000-为-false-而-100-100-为-true" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/31/为什么-Java-中-1000-1000-为-false-而-100-100-为-true/">为什么 Java 中1000==1000为 false 而100==100为 true</a>
+    </h1>
+  
+
+        
+        <a href="/2016/10/31/为什么-Java-中-1000-1000-为-false-而-100-100-为-true/" class="archive-article-date">
+  	<time datetime="2016-10-31T13:59:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-31</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这是一个挺有意思的讨论话题。</p>
+<p>如果你运行下面的代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Integer a = <span class="number">1000</span>, b = <span class="number">1000</span>;</div><div class="line">System.out.println(a == b);<span class="comment">//1 Integer c = 100, d = 100;  </span></div><div class="line">System.out.println(c == d);<span class="comment">//2</span></div></pre></td></tr></table></figure>
+<p>你会得到：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">false</span></div><div class="line"><span class="keyword">true</span></div></pre></td></tr></table></figure>
+<p><strong>基本知识：</strong>我们知道，如果两个引用指向同一个对象，用==表示它们是相等的。如果两个引用指向不同的对象，用==表示它们是不相等的，即使它们的内容相同。</p>
+<p>因此，后面一条语句也应该是false 。</p>
+        
+          <a class="article-more-a" href="/2016/10/31/为什么-Java-中-1000-1000-为-false-而-100-100-为-true/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/10/31/为什么-Java-中-1000-1000-为-false-而-100-100-为-true/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-阿里面试回来，想和-Java-程序员谈一谈" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -728,234 +961,6 @@
 
 
   
-    <article id="post-Socket-和-ServerSocket-学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/23/Socket-和-ServerSocket-学习/">Socket 和 ServerSocket 学习</a>
-    </h1>
-  
-
-        
-        <a href="/2016/10/23/Socket-和-ServerSocket-学习/" class="archive-article-date">
-  	<time datetime="2016-10-23T08:53:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>对于即时类应用或者即时类的游戏，HTTP协议很多时候无法满足于我们的需求。这会，Socket对于我们来说就非常实用了。</p>
-<p><strong>异常类型</strong></p>
-<p>在了解Socket的内容之前，先要了解一下涉及到的一些异常类型。以下四种类型都是继承于IOException，所以很多之后直接弹出IOException即可。</p>
-<blockquote>
-<p>UnkownHostException:主机名字或IP错误</p>
-<p>ConnectException:服务器拒绝连接、服务器没有启动、（超出队列数，拒绝连接）</p>
-<p>SocketTimeoutException:连接超时</p>
-<p>BindException:Socket对象无法与制定的本地IP地址或端口绑定</p>
-</blockquote>
-        
-          <a class="article-more-a" href="/2016/10/23/Socket-和-ServerSocket-学习/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">socket</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/network/" class="article-tag-list-link color3">network</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/10/23/Socket-和-ServerSocket-学习/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-HTTP-协议学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/22/HTTP-协议学习/">HTTP 协议学习</a>
-    </h1>
-  
-
-        
-        <a href="/2016/10/22/HTTP-协议学习/" class="archive-article-date">
-  	<time datetime="2016-10-22T15:17:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>什么是 HTTP 协议</strong></p>
-<p>HTTP协议是指计算机通信网络中两台计算机之间进行通信所必须共同遵守的规定或规则，超文本传输协议(HTTP)是一种通信协议，它允许将超文本标记语言(HTML)文档从Web服务器传送到客户端的浏览器。目前我们使用的是HTTP/1.1版本。</p>
-<p><strong>Web服务器、浏览器、代理服务器</strong></p>
-<p>当我们打开浏览器，在地址栏中输入URL，然后我们就看到了网页。原理是怎样的呢？实际上我们输入URL后，我们的浏览器给Web服务器发送了一个Request,Web服务器接到Request后进行处理，生成相应的Response，然后发送给浏览器，浏览器解析Response中的HTML,这样我们就看到了网页，过程如下图所示:</p>
-        
-          <a class="article-more-a" href="/2016/10/22/HTTP-协议学习/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">http</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/network/" class="article-tag-list-link color3">network</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/10/22/HTTP-协议学习/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-保持冷静，节制使用-Json" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/22/保持冷静，节制使用-Json/">保持冷静，节制使用 JSON</a>
-    </h1>
-  
-
-        
-        <a href="/2016/10/22/保持冷静，节制使用-Json/" class="archive-article-date">
-  	<time datetime="2016-10-22T14:21:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>JSON (JavaScript Object Notation)是一种轻量级的数据交换格式。它容易被人们阅读和编写，也容易被软件所读取和生成。如下是用JSON描述的一份客户数据。它能很好的用在交换和集成商。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="string">"Name"</span> : <span class="string">"Jane Smith"</span>,</div><div class="line">    <span class="string">"DOB"</span>  : <span class="string">"1990-01-30"</span>,</div><div class="line">    <span class="string">"Billing"</span> : [</div><div class="line">        &#123;</div><div class="line">            <span class="string">"type"</span>    : <span class="string">"visa"</span>,</div><div class="line">            <span class="string">"cardnum"</span> : <span class="string">"5827-2842-2847-3909"</span>,</div><div class="line">            <span class="string">"expiry"</span>  : <span class="string">"2019-03"</span></div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            <span class="string">"type"</span>    : <span class="string">"master"</span>,</div><div class="line">            <span class="string">"cardnum"</span> : <span class="string">"6274-2542-5847-3949"</span>,</div><div class="line">            <span class="string">"expiry"</span>  : <span class="string">"2018-12"</span></div><div class="line">        &#125;</div><div class="line">    ],</div><div class="line">   <span class="string">"address"</span>: </div><div class="line">      &#123;</div><div class="line">  <span class="string">"street"</span>  : <span class="string">"9462, Fillmore"</span>,</div><div class="line">  <span class="string">"city"</span>    : <span class="string">"San Francisco"</span>,</div><div class="line">            <span class="string">"state"</span>   : <span class="string">"California"</span>,</div><div class="line">            <span class="string">"zip"</span>     : <span class="number">94401</span></div><div class="line">      &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2016/10/22/保持冷静，节制使用-Json/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">json</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/10/22/保持冷静，节制使用-Json/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/12/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/14/">Next &raquo;</a>
@@ -1048,6 +1053,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">书单</a>
               </li>
              
@@ -1056,15 +1065,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">c</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1072,27 +1073,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">http</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">classloader</a>
+                <a href="javascript:void(0)" class="js-tag color2">c</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">jdbc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">gc</a>
+                <a href="javascript:void(0)" class="js-tag color5">http</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1100,7 +1089,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">sqlite</a>
+                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1108,15 +1097,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">jdbc</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">并发</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">线程</a>
+                <a href="javascript:void(0)" class="js-tag color5">main</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">log4j</a>
+                <a href="javascript:void(0)" class="js-tag color3">gc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1124,7 +1117,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">main</a>
+                <a href="javascript:void(0)" class="js-tag color1">log4j</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">线程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">sqlite</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">classloader</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1140,7 +1145,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">this</a>
+                <a href="javascript:void(0)" class="js-tag color3">restful</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1148,15 +1153,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">restful</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">socket</a>
+                <a href="javascript:void(0)" class="js-tag color5">this</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1164,15 +1161,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">wireshark</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">锁</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">代码重构</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1180,7 +1173,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">return</a>
+                <a href="javascript:void(0)" class="js-tag color2">socket</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">代码重构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">锁</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1192,7 +1193,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">单元测试</a>
+                <a href="javascript:void(0)" class="js-tag color4">嵌入式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1200,11 +1201,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">嵌入式</a>
+                <a href="javascript:void(0)" class="js-tag color2">return</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">路由器</a>
+                <a href="javascript:void(0)" class="js-tag color5">单元测试</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1216,7 +1217,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">路由器</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">os</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">mvc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1224,19 +1233,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">键盘</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">知乎</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">内存</a>
+                <a href="javascript:void(0)" class="js-tag color3">键盘</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mvc</a>
+                <a href="javascript:void(0)" class="js-tag color3">内存</a>
               </li>
              
               <li class="article-tag-list-item">
