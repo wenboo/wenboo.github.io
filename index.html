@@ -240,31 +240,107 @@
 
 
   
-    <article id="post-装饰器模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-TCP-拥塞控制" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/20/装饰器模式/">装饰器模式</a>
+      <a class="article-title" href="/2017/06/22/TCP-拥塞控制/">TCP 拥塞控制</a>
     </h1>
   
 
         
-        <a href="/2017/06/20/装饰器模式/" class="archive-article-date">
-  	<time datetime="2017-06-20T14:04:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-20</time>
+        <a href="/2017/06/22/TCP-拥塞控制/" class="archive-article-date">
+  	<time datetime="2017-06-22T13:46:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-22</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>装饰器模式</strong>（Decorator Pattern）允许 <strong>向一个现有的对象添加新的功能，同时又不改变其结构</strong>。这种类型的设计模式属于结构型模式，它是作为现有的类的一个 <strong>包装</strong>。</p>
-<p>这种模式创建了一个装饰类，用来包装原有的类，并在保持类方法签名完整性的前提下，提供了额外的功能。</p>
-<p>我们通过下面的实例来演示装饰器模式的用法。其中，我们将把一个形状装饰上不同的颜色，同时又不改变形状类。</p>
+        <h3 id="一-拥塞的发生与其不可避免"><a href="#一-拥塞的发生与其不可避免" class="headerlink" title="一. 拥塞的发生与其不可避免"></a>一. 拥塞的发生与其不可避免</h3><p>拥塞发生的主要原因在于网络能够提供的资源不足以满足用户的需求，这些资源包括缓存空间、链路带宽容量和中间节点的处理能力。由于互联网的设计机制导致其缺乏“接纳控制”能力，因此在网络资源不足时不能限制用户数量，而只能靠降低服务质量来继续为用户服务，也就是“尽力而为”的服务。</p>
+<p>但是，是不是说只要增加网络资源，就能避免拥塞呢？答案却是否定的！拥塞虽然是由于网络资源的稀缺引起的，但单纯增加资源并不能避免拥塞的发生。例如增加缓存空间到一定程度时，只会加重拥塞，而不是减轻拥塞，这是因为当数据包经过长时间排队完成转发时，它们很可能早已超时，从而引起源端超时重发，而这些数据包还会继续传输到下一路由器，从而浪费网络资源，加重网络拥塞。事实上，缓存空间不足导致的丢包更多的是拥塞的“症状”而非原因。另外，增加链路带宽及提高处理能力也不能解决拥塞问题。</p>
+<p>例如：我们有四台主机ABCD连接路由器R，所有链路带宽都是1Gbps，如果A和B同时向C以1Gbps的速率发送数据，则路由器R的输入速率为2Gbps，而输出速率只能为1Gbps，从而产生拥塞。避免拥塞的方法只能是控制AB的速率，例如，都是0.5Gbps，但是，这只是一种情况，倘若D也向R发送数据，且速率为1Gbps，那么，我们先前的修正又是不成立的，<strong>可见，拥塞其实是一个动态问题，我们没有办法用一个静态方案去解决，从这个意义上来说，拥塞是不可避免的。</strong></p>
         
-          <a class="article-more-a" href="/2017/06/20/装饰器模式/#more">more >></a>
+          <a class="article-more-a" href="/2017/06/22/TCP-拥塞控制/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">tcp</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/network/" class="article-tag-list-link color3">network</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/22/TCP-拥塞控制/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-Java-设计模式之适配器模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/22/Java-设计模式之适配器模式/">Java 设计模式之适配器模式</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/22/Java-设计模式之适配器模式/" class="archive-article-date">
+  	<time datetime="2017-06-22T13:45:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="一-适配器模式简介"><a href="#一-适配器模式简介" class="headerlink" title="一 适配器模式简介"></a>一 适配器模式简介</h3><p><strong>适配器模式</strong>（Adapter）：将一个类的接口转换成客户希望的另外一个接口。Adapter 模式使得原本由于接口不兼容而不能一起工作的那些类可以一起工作。</p>
+<p><strong>适用场景</strong>：</p>
+<p>1、已经存在的类的接口不符合我们的需求；<br>2、创建一个可以复用的类，使得该类可以与其他不相关的类或不可预见的类（即那些接口可能不一定兼容的类）协同工作；<br>3、在不对每一个都进行子类化以匹配它们的接口的情况下，使用一些已经存在的子类。</p>
+<p><strong>其实现方式主要有两种</strong>：</p>
+<p>1.类的适配器模式（采用继承实现）<br>2.对象适配器（采用对象组合方式实现）</p>
+        
+          <a class="article-more-a" href="/2017/06/22/Java-设计模式之适配器模式/#more">more >></a>
         
       
 
@@ -299,7 +375,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/20/装饰器模式/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/06/22/Java-设计模式之适配器模式/">展开全文 >></a>
         </p>
       
 
@@ -314,32 +390,32 @@
 
 
   
-    <article id="post-装饰器模式（Decorator）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-一个实例让你明白适配器模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/20/装饰器模式（Decorator）/">装饰器模式（Decorator）</a>
+      <a class="article-title" href="/2017/06/22/一个实例让你明白适配器模式/">一个实例让你明白适配器模式</a>
     </h1>
   
 
         
-        <a href="/2017/06/20/装饰器模式（Decorator）/" class="archive-article-date">
-  	<time datetime="2017-06-20T14:03:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-20</time>
+        <a href="/2017/06/22/一个实例让你明白适配器模式/" class="archive-article-date">
+  	<time datetime="2017-06-22T13:43:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-22</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1-认识装饰器模式"><a href="#1-认识装饰器模式" class="headerlink" title="1.认识装饰器模式"></a>1.认识装饰器模式</h2><p>装饰模式能够实现动态的为对象添加功能，是从一个对象外部来给对象添加功能。通常给对象添加功能，要么直接修改对象添加相应的功能，要么派生对应的子类来扩展，抑或是使用对象组合的方式。显然，直接修改对应的类这种方式并不可取。在面向对象的设计中，而我们也应该 <strong>尽量使用对象组合，而不是对象继承来扩展和复用功能</strong>。装饰器模式就是基于 <strong>对象组合</strong> 的方式，可以很灵活的给对象添加所需要的功能。装饰器模式的本质就是 <strong>动态组合</strong>。动态是手段，组合才是目的。总之，装饰模式是通过把复杂的功能简单化，分散化，然后再运行期间，根据需要来动态组合的这样一个模式。</p>
-<h2 id="2-模式结构和说明"><a href="#2-模式结构和说明" class="headerlink" title="2.模式结构和说明"></a>2.模式结构和说明</h2><p>装饰模式的结构如下图所示。</p>
-<p><img src="http://my.csdn.net/uploads/201208/19/1345385564_5334.jpg" alt="img"></p>
-<p><strong>Component</strong>：组件对象的接口，可以给这些对象动态的添加职责；</p>
+        <p><strong>实现电源适配器</strong></p>
+<p>代码中有两个接口，分别为德标接口和国标接口，分别命名为DBSocketInterface和GBSocketInterface，此外还有两个实现类，分别为德国插座和中国插座，分别为DBSocket和GBSocket。为了提供两套接口之间的适配，我们提供了一个适配器，叫做SocketAdapter。除此之外，还有一个客户端，比如是我们去德国旅游时住的一家宾馆，叫Hotel，在这个德国旅馆中使用德国接口。</p>
+<p><strong>德标接口</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* 德标接口 */</span> </div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">DBSocketInterface</span> </div><div class="line"></span>&#123;  </div><div class="line">  <span class="comment">/* 这个方法的名字叫做：使用两项圆头的插口供电 本人英语就这个水平 */</span> </div><div class="line">  <span class="function"><span class="keyword">void</span> <span class="title">powerWithTwoRound</span><span class="params">()</span></span>; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
         
-          <a class="article-more-a" href="/2017/06/20/装饰器模式（Decorator）/#more">more >></a>
+          <a class="article-more-a" href="/2017/06/22/一个实例让你明白适配器模式/#more">more >></a>
         
       
 
@@ -374,7 +450,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/20/装饰器模式（Decorator）/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/06/22/一个实例让你明白适配器模式/">展开全文 >></a>
         </p>
       
 
@@ -389,31 +465,31 @@
 
 
   
-    <article id="post-设计模式之装饰器模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-static-修饰类、变量、方法和代码块" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/20/设计模式之装饰器模式/">设计模式之装饰器模式</a>
+      <a class="article-title" href="/2017/06/22/static-修饰类、变量、方法和代码块/">static 修饰类、变量、方法和代码块</a>
     </h1>
   
 
         
-        <a href="/2017/06/20/设计模式之装饰器模式/" class="archive-article-date">
-  	<time datetime="2017-06-20T14:02:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-20</time>
+        <a href="/2017/06/22/static-修饰类、变量、方法和代码块/" class="archive-article-date">
+  	<time datetime="2017-06-22T13:42:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-22</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>首先解释一下忘记接口的同学难点，接口其实就是java的抽象机制，不提供方法的具体实现，但是可以有多个类来实现这个接口，一个类也可以实现多个接口，接口带来的好处是创建实例时，用户不必关注具体的实现，比如我例子中的DecoratorPattern.java文件中 ，创建实现Basket接口的一个实例时，返回值是接口，下面再使用show方法时，我们就不必去关注谁实现了。接口作为返回值的一个经典的应用是使用ArrayList时，他的iterator方法会返回一个Iterator接口。这样开发者使用it.next方法，再不用去研究每一种list是怎么实现查询了。</p>
-<p>下面解释装饰器模式是如何引起的，深入浅出模式设计的例子很好，就是喝咖啡，有个调料的类，你可以加糖、冰、牛奶等等好多原料，那么生成调配方案时，可以通过继承来实现，但是大家也都知道排列组合，继承的类系统庞大可想而知了。这就诞生了装饰器模式，他的原则是，保持原有的接口，并为原来的动态的添加新的功能。</p>
-<p>下面是维基百科的解释：相信大家都可以看懂</p>
+        <p>先来简单说下被static修饰后的效果，被static修饰后的类或者变量，方法，代码块，编译器会在栈内存为它分配一个空间，这个空间大小不会因为类创建多少实例而已改变，也就是说，被static修饰后，它只与类对应，所有类对象对应static变量的操作其实就是操作同一个，上一个对象操作改变了其大小，下一个对象对他引用就是当前的最新值。</p>
+<p>当然所有的静态方法、代码块也只能调用静态变量，可以理解为，只能使用同一个内存空间里的资源，因为这个空间不会随着类实例创建而已改变，而普通变量会随着实例的创建而开辟新的空间，这就是动态变量了，他只能在类初始化实例之后创建，而被static修饰的确实在类初始化之后，创建实例之前就执行的，执行顺序跟代码的顺序一样，并且支持向前引用。</p>
+<p>那什么时候会进行类初始化呢？就是在该类第一次创建对象实例的时候，或者第一次访问static区的方法或变量的时候，加载器才会历遍类进行加载。，每次先加载的是父类的static字段，再是子类的static字段，如果父类还有父类，就是爷爷类先加载，当然有老祖宗类就以此类推了，毕竟要尊敬长辈，让它们先来。</p>
         
-          <a class="article-more-a" href="/2017/06/20/设计模式之装饰器模式/#more">more >></a>
+          <a class="article-more-a" href="/2017/06/22/static-修饰类、变量、方法和代码块/#more">more >></a>
         
       
 
@@ -427,7 +503,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">static</a>
         		</li>
       		
 		</ul>
@@ -448,7 +524,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/20/设计模式之装饰器模式/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/06/22/static-修饰类、变量、方法和代码块/">展开全文 >></a>
         </p>
       
 
@@ -463,31 +539,36 @@
 
 
   
-    <article id="post-Java-装饰者模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-关于二叉树的几种遍历方法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/20/Java-装饰者模式/">Java 装饰者模式</a>
+      <a class="article-title" href="/2017/06/22/关于二叉树的几种遍历方法/">关于二叉树的几种遍历方法</a>
     </h1>
   
 
         
-        <a href="/2017/06/20/Java-装饰者模式/" class="archive-article-date">
-  	<time datetime="2017-06-20T13:49:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-20</time>
+        <a href="/2017/06/22/关于二叉树的几种遍历方法/" class="archive-article-date">
+  	<time datetime="2017-06-22T13:40:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-22</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>装饰者模式的组成和实现</p>
-<h2 id="组成"><a href="#组成" class="headerlink" title="组成"></a>组成</h2><p>组件接口，组件具体类，抽象装饰类，具体装饰类</p>
-<p><strong>组件具体类</strong>：定义组件所需要装饰接口的类<br><strong>抽象装饰类</strong>：持有装饰对象，并且实现组件接口结构<br><strong>具体装饰类</strong>：实现抽象装饰类，和装饰具体实现</p>
+        <h3 id="一-二叉树的一些概念"><a href="#一-二叉树的一些概念" class="headerlink" title="一 二叉树的一些概念"></a>一 二叉树的一些概念</h3><p>二叉树就是每个结点最多有两个子树的树形存储结构。</p>
+<p><img src="http://img.blog.csdn.net/20140805205228812?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9ueV9tYWdnaWU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="img"></p>
+<p><strong>1 满二叉树和完全二叉树</strong></p>
+<p>上图就是典型的二叉树，其中左边的图还叫做满二叉树，右边是完全二叉树。然后我们可以得出结论，满二叉树一定是完全二叉树，但是反过来就不一定。满二叉树的定义是除了叶子结点，其它结点左右孩子都有,深度为k的满二叉树，结点数就是2的k次方减1。完全二叉树是每个结点都与深度为k的满二叉树中编号从1到n一一对应。</p>
+<p><strong>2 树的深度</strong></p>
+<p>树的最大层次就是深度，比如上图，深度是4。很容易得出，深度为k的树，拥有的最大结点数是2的k次方减1。</p>
+<p><strong>3 树的孩子，兄弟，双亲</strong></p>
+<p>上图中，B,C是A的孩子，B,C之间互为兄弟，A是B,C的双亲。</p>
         
-          <a class="article-more-a" href="/2017/06/20/Java-装饰者模式/#more">more >></a>
+          <a class="article-more-a" href="/2017/06/22/关于二叉树的几种遍历方法/#more">more >></a>
         
       
 
@@ -501,77 +582,12 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">二叉树</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/20/Java-装饰者模式/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-Android-如何突破开源认证传染性并实现商业开发" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/20/Android-如何突破开源认证传染性并实现商业开发/">Android 如何突破开源认证传染性并实现商业开发</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/20/Android-如何突破开源认证传染性并实现商业开发/" class="archive-article-date">
-  	<time datetime="2017-06-20T13:47:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>谷歌引领开发的Android系统占据智能手机操作系统市场份额之首，其成功之道在于巧妙规避知识产权风险和逐步夺取生态控制权。一方面，谷歌通过对类库和驱动的改变巧妙的将GPL许可证的传染性阻隔于Linux内核层，采取净室开发模式重新开发了兼容Java接口的Dalvik虚拟机，以规避著作权侵权风险。另一方面，谷歌牵头成立和主导控制开放手持设备联盟并不断隐藏设置技术和专利陷阱。这一系列技术、商业和法律问题上的巧妙处理，对国内厂商合理利用开源进行商业产品开发和对发展我国主导操作系统平台的产业生态具有重要的启示意义。</p>
-<h2 id="一、谷歌巧妙处理许可证的“传染性”问题，吸引硬件设备厂商进入-Android-阵营"><a href="#一、谷歌巧妙处理许可证的“传染性”问题，吸引硬件设备厂商进入-Android-阵营" class="headerlink" title="一、谷歌巧妙处理许可证的“传染性”问题，吸引硬件设备厂商进入 Android 阵营"></a>一、谷歌巧妙处理许可证的“传染性”问题，吸引硬件设备厂商进入 Android 阵营</h2><p>Android的设计者通过对类库和驱动的改变巧妙的将GPL许可证的“传染性”阻隔于Linux内核层，吸引硬件厂商纷纷加入 Android阵营。</p>
-<p>谷歌重新开发类库使许可证应用更加灵活。图1是Android授权许可证结构，底层Linux内核使用了GPL许可证，GPL许可证是一种“Copyleft”形式的版权，要求任何Linux内核的衍生产品必须遵循GPL协议进行公开发布，即所谓的“传染性”，这是许多硬件设备厂商最关注的问题——Linux驱动的GPL约束，公开驱动程序源代码将会泄漏设备的硬件规格，这些被厂商视为核心知识产权不愿公开。一方面，Android系统是基于采用GPL许可证的Linux内核进行的开发。而上层的类库、运行时环境、应用框架以及所谓用户空间部分，则大部分使用了“温和”的Apache v2.0许可证授权，为的是吸引更多的开发者进入Android生态。</p>
-<p>图1 Android授权许可证结构示意图</p>
-<p><img src="http://www.0532pfd.com/pic/20170128/24/article_4010124_12722f96f9319b21.jpeg" alt="img"></p>
-        
-          <a class="article-more-a" href="/2017/06/20/Android-如何突破开源认证传染性并实现商业开发/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
       
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
@@ -587,7 +603,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/20/Android-如何突破开源认证传染性并实现商业开发/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/06/22/关于二叉树的几种遍历方法/">展开全文 >></a>
         </p>
       
 
@@ -602,39 +618,34 @@
 
 
   
-    <article id="post-Android-开源还是闭源？" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-深入理解-Java-中文编码问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/20/Android-开源还是闭源？/">Android 开源还是闭源？</a>
+      <a class="article-title" href="/2017/06/22/深入理解-Java-中文编码问题/">深入理解 Java 中文编码问题</a>
     </h1>
   
 
         
-        <a href="/2017/06/20/Android-开源还是闭源？/" class="archive-article-date">
-  	<time datetime="2017-06-20T13:45:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-20</time>
+        <a href="/2017/06/22/深入理解-Java-中文编码问题/" class="archive-article-date">
+  	<time datetime="2017-06-22T13:38:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-22</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>满大街都在谈论Android。</p>
-<p>它是当红炸子鸡。许多人觉得，iPhone将受到它的强力挑战。</p>
-<p><img src="http://www.ruanyifeng.com/blog/upload/2010/02/bg2010020401.png" alt="img"></p>
-<p>我也曾经对它充满了期待，但是后来的事态发展，令我改变了看法。前几天，我就在网志上写了自己的担忧：</p>
+        <h3 id="几种常见的编码格式"><a href="#几种常见的编码格式" class="headerlink" title="几种常见的编码格式"></a>几种常见的编码格式</h3><p><strong>为什么要编码</strong></p>
+<p>不知道大家有没有想过一个问题，那就是为什么要编码？我们能不能不编码？要回答这个问题必须要回到计算机是如何表示我们人类能够理解的符号的，这些符号也就是我们人类使用的语言。由于人类的语言有太多，因而表示这些语言的符号太多，无法用计算机中一个基本的存储单元—— byte 来表示，因而必须要经过拆分或一些翻译工作，才能让计算机能理解。我们可以把计算机能够理解的语言假定为英语，其它语言要能够在计算机中使用必须经过一次翻译，把它翻译成英语。这个翻译的过程就是编码。所以可以想象只要不是说英语的国家要能够使用计算机就必须要经过编码。这看起来有些霸道，但是这就是现状，这也和我们国家现在在大力推广汉语一样，希望其它国家都会说汉语，以后其它的语言都翻译成汉语，我们可以把计算机中存储信息的最小单位改成汉字，这样我们就不存在编码问题了。</p>
+<p>所以总的来说，<strong>编码的原因可以总结为</strong>：</p>
 <blockquote>
-<p>“首先，Android应用程序只能用java语言开发，莫非所有的应用程序都运行在一个巨大的虚拟机上？（【更正】网友留言指出，2009年6月Android发布NDK工具包，支持C/C++语言编程，不过性能不如SKD工具包中的Java语言。 ）<br>其次，Google对Android采用了一种全面霸权式的管理，完全不是其他开源软件的开发方式，一切都由Google说了算，很多地方是黑箱，外界不得而知。”</p>
+<p>1.计算机中存储信息的最小单元是一个字节即 8 个 bit，所以能表示的字符范围是 0~255 个<br>2.人类要表示的符号太多，无法用一个字节来完全表示<br>3.要解决这个矛盾必须需要一个新的数据结构 char，从 char 到 byte 必须编码</p>
 </blockquote>
-<p>没有想到，仅仅过了两天，担忧就变成了现实。Linux Kernel的维护者Greg Kroah-Hartman宣布，将Android 代码从 Linux kernel 代码库中删除。这意味着，Linux Kernel的开发小组不认可Android的贡献，两者产生了冲突。</p>
-<p>消息公布以后，外界普遍觉得惊讶和可惜。好不容易，才有了一个这么受欢迎的开源手机系统，应该齐心协力、共同开发才对，为什么要”窝里斗”呢？到底是什么矛盾，使得Linux Kernel小组剔除Android代码呢？</p>
-<p>Greg Kroah-Hartman写了一篇详细的文章，解释这个决定。下面就来看看，他是怎么说的，以及Android到底是一个什么样的系统。</p>
-<p>在这之前，你最好知道Greg Kroah-Hartman是谁。他是目前Linux Kernel的核心开发人员，负责stable软件包的发布。就是说，每一个新版本的Linux Kernel，都是经过他的手流出来的。此外，他还负责硬件驱动的部署。而他的手机就是HTC G1，每天都在使用。所以，他是绝对有资格谈论这个问题的，他的看法代表了Linux社区对Android的看法。</p>
         
-          <a class="article-more-a" href="/2017/06/20/Android-开源还是闭源？/#more">more >></a>
+          <a class="article-more-a" href="/2017/06/22/深入理解-Java-中文编码问题/#more">more >></a>
         
       
 
@@ -649,7 +660,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/c/" class="article-tag-list-link color2">c</a>
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
         		</li>
       		
 		</ul>
@@ -658,7 +669,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/20/Android-开源还是闭源？/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/06/22/深入理解-Java-中文编码问题/">展开全文 >></a>
         </p>
       
 
@@ -673,33 +684,37 @@
 
 
   
-    <article id="post-关于-GPL-的一些知识" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-深入理解-Java-垃圾收集机制" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/20/关于-GPL-的一些知识/">关于 GPL 的一些知识</a>
+      <a class="article-title" href="/2017/06/22/深入理解-Java-垃圾收集机制/">深入理解 Java 垃圾收集机制</a>
     </h1>
   
 
         
-        <a href="/2017/06/20/关于-GPL-的一些知识/" class="archive-article-date">
-  	<time datetime="2017-06-20T13:44:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-20</time>
+        <a href="/2017/06/22/深入理解-Java-垃圾收集机制/" class="archive-article-date">
+  	<time datetime="2017-06-22T13:36:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-22</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1-什么是-GPL"><a href="#1-什么是-GPL" class="headerlink" title="1.什么是 GPL"></a>1.什么是 GPL</h2><p><strong>GPL许可协议</strong>(GNU General Public License)：只要软件中包含有其他GPL协议的产品或代码，那么该软件就必须也采用GPL许可协议且开源及免费。具有以下特点:</p>
-<p><strong>复制自由</strong>：允许将软件复制到任何人的电脑中，并且不限制复制的数量。</p>
-<p><strong>传播自由</strong>：允许以各种形式进行传播。</p>
-<p><strong>收费传播</strong>：允许在各种媒介上出售该软件，但必需提前让买家知道这个软件是可以免费获得的，并解释收费的理由（一般来讲都是能够为用户提供某种服务，以技术服务的形式来收费）。</p>
-<p><strong>修改自由</strong>：允许开发人员增加或删除软件的功能，但必须依然基于GPL许可协议授权。一句话，<strong>修改后必须以 GPL 授权开源发布</strong>。</p>
+        <h2 id="对象引用"><a href="#对象引用" class="headerlink" title="对象引用"></a>对象引用</h2><p>Java 中的垃圾回收一般是在 Java 堆中进行，因为堆中几乎存放了 Java 中所有的对象实例。谈到 Java 堆中的垃圾回收，自然要谈到引用。在 JDK1.2 之前，Java 中的引用定义很很纯粹：如果 reference 类型的数据中存储的数值代表的是另外一块内存的起始地址，就称这块内存代表着一个引用。但在 JDK1.2 之后，Java 对引用的概念进行了扩充，将其分为强引用（Strong Reference）、软引用（Soft Reference）、弱引用（Weak Reference）、虚引用（Phantom Reference）四种，引用强度依次减弱。</p>
+<blockquote>
+<ul>
+<li>强引用：如“Object obj = new Object（）”，这类引用是 Java 程序中最普遍的。只要强引用还存在，垃圾收集器就永远不会回收掉被引用的对象。</li>
+<li>软引用：它用来描述一些可能还有用，但并非必须的对象。在系统内存不够用时，这类引用关联的对象将被垃圾收集器回收。JDK1.2 之后提供了 SoftReference 类来实现软引用。</li>
+<li>弱引用：它也是用来描述非需对象的，但它的强度比软引用更弱些，被弱引用关联的对象只能生存到下一次垃圾收集发生之前。当垃圾收集器工作时，无论当前内存是否足够，都会回收掉只被弱引用关联的对象。在 JDK1.2 之后，提供了 WeakReference 类来实现弱引用。</li>
+<li>虚引用：最弱的一种引用关系，完全不会对其生存时间构成影响，也无法通过虚引用来取得一个对象实例。为一个对象设置虚引用关联的唯一目的是希望能在这个对象被收集器回收时收到一个系统通知。JDK1.2 之后提供了 PhantomReference 类来实现虚引用。</li>
+</ul>
+</blockquote>
         
-          <a class="article-more-a" href="/2017/06/20/关于-GPL-的一些知识/#more">more >></a>
+          <a class="article-more-a" href="/2017/06/22/深入理解-Java-垃圾收集机制/#more">more >></a>
         
       
 
@@ -708,13 +723,24 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">gc</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/c/" class="article-tag-list-link color2">c</a>
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
         		</li>
       		
 		</ul>
@@ -723,7 +749,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/20/关于-GPL-的一些知识/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/06/22/深入理解-Java-垃圾收集机制/">展开全文 >></a>
         </p>
       
 
@@ -738,34 +764,41 @@
 
 
   
-    <article id="post-Android-是如何规避-GPL-传染性的？" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-淘宝大秒系统设计详解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/20/Android-是如何规避-GPL-传染性的？/">Android 是如何规避 GPL 传染性的？</a>
+      <a class="article-title" href="/2017/06/22/淘宝大秒系统设计详解/">淘宝大秒系统设计详解</a>
     </h1>
   
 
         
-        <a href="/2017/06/20/Android-是如何规避-GPL-传染性的？/" class="archive-article-date">
-  	<time datetime="2017-06-20T13:43:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-20</time>
+        <a href="/2017/06/22/淘宝大秒系统设计详解/" class="archive-article-date">
+  	<time datetime="2017-06-22T13:35:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-22</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、首先得了解-Android-体系结构"><a href="#一、首先得了解-Android-体系结构" class="headerlink" title="一、首先得了解 Android 体系结构"></a>一、首先得了解 Android 体系结构</h2><p><img src="http://static.oschina.net/uploads/space/2013/0703/194302_87lQ_1162866.gif" alt="img"></p>
-<p>从下到上介绍上图</p>
-<p>Linux Kernel: 完全开源，GPLv2协议</p>
-<p>Libraryies: 含少量开源库</p>
-<p>Android Runtime: Android 优化的JAVA虚拟机，更适合嵌入式系统。</p>
-<p>Application Framework和Application都是JAVA程序。</p>
+        <h2 id="一些数据"><a href="#一些数据" class="headerlink" title="一些数据"></a>一些数据</h2><p>大家还记得2013年的小米秒杀吗？三款小米手机各11万台开卖，走的都是大秒系统，3分钟后成为双十一第一家也是最快破亿的旗舰店。经过日志统计，前端系统双11峰值有效请求约60w以上的QPS ，而后端cache的集群峰值近2000w/s、单机也近30w/s，但到真正的写时流量要小很多了，当时最高下单减库存tps是红米创造，达到1500/s。</p>
+<h2 id="热点隔离"><a href="#热点隔离" class="headerlink" title="热点隔离"></a>热点隔离</h2><p>秒杀系统设计的第一个原则就是将这种热点数据隔离出来，不要让1%的请求影响到另外的99%，隔离出来后也更方便对这1%的请求做针对性优化。针对秒杀我们做了多个层次的隔离：</p>
+<blockquote>
+<ul>
+<li><p>业务隔离。把秒杀做成一种营销活动，卖家要参加秒杀这种营销活动需要单独报名，从技术上来说，卖家报名后对我们来说就是已知热点，当真正开始时我们可以提前做好预热。</p>
+</li>
+<li><p>系统隔离。系统隔离更多是运行时的隔离，可以通过分组部署的方式和另外99%分开。秒杀还申请了单独的域名，目的也是让请求落到不同的集群中。</p>
+</li>
+<li><p>数据隔离。秒杀所调用的数据大部分都是热数据，比如会启用单独cache集群或MySQL数据库来放热点数据，目前也是不想0.01%的数据影响另外99.99%。</p>
+</li>
+</ul>
+</blockquote>
+<p>当然实现隔离很有多办法，如可以按照用户来区分，给不同用户分配不同cookie，在接入层路由到不同服务接口中；还有在接入层可以对URL的不同Path来设置限流策略等。服务层通过调用不同的服务接口；数据层可以给数据打上特殊的标来区分。目的都是把已经识别出来的热点和普通请求区分开来。</p>
         
-          <a class="article-more-a" href="/2017/06/20/Android-是如何规避-GPL-传染性的？/#more">more >></a>
+          <a class="article-more-a" href="/2017/06/22/淘宝大秒系统设计详解/#more">more >></a>
         
       
 
@@ -780,7 +813,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/c/" class="article-tag-list-link color2">c</a>
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
         		</li>
       		
 		</ul>
@@ -789,7 +822,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/20/Android-是如何规避-GPL-传染性的？/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/06/22/淘宝大秒系统设计详解/">展开全文 >></a>
         </p>
       
 
@@ -804,34 +837,31 @@
 
 
   
-    <article id="post-Copyright-与-Copyleft" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Java-代码编译和执行的整个过程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/20/Copyright-与-Copyleft/">Copyright 与 Copyleft</a>
+      <a class="article-title" href="/2017/06/22/Java-代码编译和执行的整个过程/">Java 代码编译和执行的整个过程</a>
     </h1>
   
 
         
-        <a href="/2017/06/20/Copyright-与-Copyleft/" class="archive-article-date">
-  	<time datetime="2017-06-20T13:38:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-20</time>
+        <a href="/2017/06/22/Java-代码编译和执行的整个过程/" class="archive-article-date">
+  	<time datetime="2017-06-22T13:34:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-22</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>两种截然相反的版权所有方式：Copyleft(Ɔ)，Copyright(C)。</p>
-<p><strong>Copyright(C)</strong>：版权所有，即软件的一切权利归软件作者私有。</p>
-<p><strong>许可</strong>：各种保护软件版权私有的许可。</p>
-<p><strong>包括</strong>：开源软件、免费软件、共享软件、传统商业软件。</p>
-<p><strong>特点</strong>：软件的版权和其它一切权利归软件作者所私有。用户只有使用权，没有其它权利，包括没有复制软件的权利。</p>
-<p><strong>盈利方式</strong>：出售私有软件（包括：出售软件、出售源码、出售编译源码的方法和编译器）的使用权。</p>
+        <p>Java 代码编译是由 Java 源码编译器来完成，流程图如下所示：</p>
+<p><img src="http://wiki.jikexueyuan.com/project/java-vm/images/javadebug.gif" alt="img"></p>
+<p>Java 字节码的执行是由 JVM 执行引擎来完成，流程图如下所示：</p>
         
-          <a class="article-more-a" href="/2017/06/20/Copyright-与-Copyleft/#more">more >></a>
+          <a class="article-more-a" href="/2017/06/22/Java-代码编译和执行的整个过程/#more">more >></a>
         
       
 
@@ -846,7 +876,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/c/" class="article-tag-list-link color2">c</a>
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
         		</li>
       		
 		</ul>
@@ -855,7 +885,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/20/Copyright-与-Copyleft/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/06/22/Java-代码编译和执行的整个过程/">展开全文 >></a>
         </p>
       
 
@@ -872,7 +902,7 @@
   
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 
@@ -966,7 +996,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">书单</a>
+                <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -974,15 +1004,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">cpu</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -990,19 +1012,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">dns</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">http</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">tool</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">jsp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1010,11 +1024,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">并发</a>
+                <a href="javascript:void(0)" class="js-tag color5">tool</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">main</a>
+                <a href="javascript:void(0)" class="js-tag color2">classloader</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1022,7 +1040,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
+                <a href="javascript:void(0)" class="js-tag color2">sqlite</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">并发</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">jsp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1034,11 +1064,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">sqlite</a>
+                <a href="javascript:void(0)" class="js-tag color5">main</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">classloader</a>
+                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1050,15 +1080,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">书单</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">final</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">restful</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1066,7 +1092,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">tcp</a>
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1074,15 +1100,23 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">wireshark</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">javaweb</a>
+                <a href="javascript:void(0)" class="js-tag color3">restful</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">socket</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">tcp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">wireshark</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">static</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1094,7 +1128,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">字节码</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">json</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">return</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1110,10 +1152,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">return</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">单元测试</a>
               </li>
              
@@ -1122,11 +1160,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">路由器</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">进程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">路由器</a>
+                <a href="javascript:void(0)" class="js-tag color3">键盘</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">javaweb</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1138,15 +1184,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">二叉树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">volatile</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">知乎</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">键盘</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -167,32 +167,32 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-给小白的-Java-EE-指南（3）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Java-进阶：浅析垃圾回收和终结处理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/27/给小白的-Java-EE-指南（3）/">给小白的 Java EE 指南（3）</a>
+      <a class="article-title" href="/2017/06/15/Java-进阶：浅析垃圾回收和终结处理/">Java 进阶：浅析垃圾回收和终结处理</a>
     </h1>
   
 
         
-        <a href="/2017/02/27/给小白的-Java-EE-指南（3）/" class="archive-article-date">
-  	<time datetime="2017-02-27T13:22:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-27</time>
+        <a href="/2017/06/15/Java-进阶：浅析垃圾回收和终结处理/" class="archive-article-date">
+  	<time datetime="2017-06-15T11:56:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-15</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>其实Web应用程序开发也有个极为常见的技术： XML . 很多小白在问，为什么有XML, 要XML干嘛？不是有HTML了吗 ？ 晕倒</p>
-<p>对一项技术我的风格是喜欢刨根问底， 不但要知道how, 还要知道why , 了解了一个技术的成因， 才能真正掌握。</p>
-<p>假设你用Java 写了一个很棒的Web应用， 这个程序可以在线购书， 在互联网刚起步的时代这个应用火的一塌糊涂 ， 后来有个出版社看到了机遇， 就想和你搞合作： 我这儿也有个Web应用，可以给你提供很多书籍的资源， 你能不能开发个程序把这些书的信息读出来，放到你的网站上？</p>
-<p>这没啥难的， 首先得定义一下你的应用和出版社的应用中间怎么进行数据交换， 你要定义一个格式，像这样：</p>
+        <p>从接触第一门编程语言开始我们就在不断强调，初始化变量是很重要的一件事情，尤其在C和C++中很明显，对于指针来说，定义一个指针不对它进行初始化，很有可能引发内存上的严重问题。但是我们也会常常忘记同样重要的清理工作。在Java中，垃圾回收器就负责回收无用对象占据的内存资源。</p>
+<h2 id="我们必须实施清理"><a href="#我们必须实施清理" class="headerlink" title="我们必须实施清理"></a>我们必须实施清理</h2><p>在C++中，所有对象都会被销毁，或者说应该被销毁。如果C++创建了一个局部对象，此时的销毁动作发生在“右括号”为边界，此对象作用域的末尾处。如果对象是用new创建的，那么我们应该调用C++的delete操作符，也就会调用相应的析构函数，如果我们忘记调用delete，那么永远不会调用析构函数，这样就会出现内存泄漏，对象的其他部分也就得不到清理。</p>
+<p>相反的是，Java不允许创建局部对象，必须使用new创建对象。在Java中也没有用于释放对象的delete，所以垃圾回收器会帮你释放存储空间。但是随着我们学习的深入，发现垃圾回收并不是万能的，也就是说我们不能认为垃圾回收器可以替代C++中的析构函数。所以如果我们希望进行除释放空间之外的清理工作，还是得明确调用某个恰当的Java方法。</p>
+<p>我们须记得，无论是“垃圾回收”还是“终结”，都不一定保证会发生，如果Java虚拟机并未面临内存耗尽的情形，他是不会浪费时间去执行垃圾回收以恢复内存的。</p>
         
-          <a class="article-more-a" href="/2017/02/27/给小白的-Java-EE-指南（3）/#more">more >></a>
+          <a class="article-more-a" href="/2017/06/15/Java-进阶：浅析垃圾回收和终结处理/#more">more >></a>
         
       
 
@@ -206,7 +206,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">j2ee</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">jvm</a>
         		</li>
       		
 		</ul>
@@ -227,7 +227,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/02/27/给小白的-Java-EE-指南（3）/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/06/15/Java-进阶：浅析垃圾回收和终结处理/">展开全文 >></a>
         </p>
       
 
@@ -242,31 +242,96 @@
 
 
   
-    <article id="post-给小白的-Java-EE-指南（2）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Java-进阶：一切都是对象" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/27/给小白的-Java-EE-指南（2）/">给小白的 Java EE 指南（2）</a>
+      <a class="article-title" href="/2017/06/15/Java-进阶：一切都是对象/">Java 进阶：一切都是对象</a>
     </h1>
   
 
         
-        <a href="/2017/02/27/给小白的-Java-EE-指南（2）/" class="archive-article-date">
-  	<time datetime="2017-02-27T12:53:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-27</time>
+        <a href="/2017/06/15/Java-进阶：一切都是对象/" class="archive-article-date">
+  	<time datetime="2017-06-15T11:55:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-15</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>上次说到你发明了html , http, 浏览器， web服务器， 这下子把整个世界的信息都链接成了一个了一个大网： world wide web。可是你注意到一个问题没有， 这些html都是<strong>静态的</strong> ， 也就是说你除了浏览你的网站和别人的网站之外，什么都做不成。 用你发明的HTTP术语来讲， 就是现在的互联网， 只支持 “GET”比如说， 你看了哥们的网站，知道广州恒大夺得了2015亚冠冠军， 想给他留个言表示一下兴奋之情，这就做不到了。</p>
-<p>这是不能令你满意的， 对互联网做扩展吧。</p>
-<p>先扩展HTML ，加上一堆新标签 像<code>&lt;form&gt;</code>了， <code>&lt;input&gt;</code>了 什么type=text, radio, textarea,checkbox 。这样你就可以在html中支持输入各式各样的信息了。你还得扩展HTTP协议， 引入一个“POST”这样可以把数据发到Web服务器。Web 服务器当然也得扩展， 接收到POST过来的留言数据以后， 肯定得想办法处理啊 ，怎么处理?　无非就是新生成一个html ,除了把原有的数据保留以外，还要把新的留言相关的数据“动态”的加上去， 这就是所谓的动态页面。</p>
+        <h2 id="Java操作标识符"><a href="#Java操作标识符" class="headerlink" title="Java操作标识符"></a>Java操作标识符</h2><p>Java中的操纵标识符实际上是对象的一个“引用”，你拥有一个引用，并不一定需要有一个对象与它关联。因此，想要操纵一个句子或词，可以创建一个String引用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">String s;</div></pre></td></tr></table></figure>
+<p>这里创建的只是一个引用，并不是对象，并且Java中的引用，在语法上更接近C++的引用而不是指针。为了安全起见，创建一个引用的同时便进行初始化：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">String s = null;</div></pre></td></tr></table></figure>
         
-          <a class="article-more-a" href="/2017/02/27/给小白的-Java-EE-指南（2）/#more">more >></a>
+          <a class="article-more-a" href="/2017/06/15/Java-进阶：一切都是对象/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/15/Java-进阶：一切都是对象/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-Java-进阶：this-关键字" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/15/Java-进阶：this-关键字/">Java 进阶：this 关键字</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/15/Java-进阶：this-关键字/" class="archive-article-date">
+  	<time datetime="2017-06-15T11:53:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="this-调用所操作对象的引用"><a href="#this-调用所操作对象的引用" class="headerlink" title="this 调用所操作对象的引用"></a>this 调用所操作对象的引用</h2><p><strong>问题</strong>：假如统一类型的两个对象，分别是a和b，其中还有一个方法peel()，那么我们怎么才能分辨这个方法到底是被a调用还是被b调用呢？</p>
+<p>其实，在这期间编译器做了一些事后工作，它暗自把“<strong>所操作对象的引用</strong>”作为地一个参数传递给了peel()。假设你希望在方法的内部获得对当前对象的引用，就可以使用this关键字。</p>
+<p>代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">class Banana &#123;</div><div class="line">    void peel(int i)&#123;</div><div class="line">        out.println(i);</div><div class="line">    &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">public class BananaPeel &#123;</div><div class="line">    public static void main(String[] args)&#123;</div><div class="line">        Banana a = new Banana();</div><div class="line">        Banana b = new Banana();</div><div class="line"></div><div class="line">        a.peel(1);</div><div class="line">        b.peel(2);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2017/06/15/Java-进阶：this-关键字/#more">more >></a>
         
       
 
@@ -280,7 +345,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">j2ee</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">this</a>
         		</li>
       		
 		</ul>
@@ -301,7 +366,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/02/27/给小白的-Java-EE-指南（2）/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/06/15/Java-进阶：this-关键字/">展开全文 >></a>
         </p>
       
 
@@ -316,32 +381,100 @@
 
 
   
-    <article id="post-给小白的-Java-EE-指南（1）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Java-进阶：关于初始化的那些事" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/27/给小白的-Java-EE-指南（1）/">给小白的 Java EE 指南（1）</a>
+      <a class="article-title" href="/2017/06/15/Java-进阶：关于初始化的那些事/">Java 进阶：关于初始化的那些事</a>
     </h1>
   
 
         
-        <a href="/2017/02/27/给小白的-Java-EE-指南（1）/" class="archive-article-date">
-  	<time datetime="2017-02-27T12:52:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-27</time>
+        <a href="/2017/06/15/Java-进阶：关于初始化的那些事/" class="archive-article-date">
+  	<time datetime="2017-06-15T11:49:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-15</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>前言</strong></p>
-<p>这是写给零基础小白的一系列文章。</p>
-<p>为啥叫生存指南呢， 因为Java发展了20年， 现在已经不仅仅是一个单纯的语言了， 而是一套完整的生态系统， 其中的术语像 HTML, XML, CSS, Javascript , AJAX, JQuery,Prototype, HTTP, Tomcat, JBoss, Nginx , Memecached , Redis, MVC ,Servlet, JSP, Struts, Hibernate, myBatis , Spring, JFinal, MySql, JDBC, EJB, JMS, Swing , AWT, Reflection, OSGi… 铺面而来， 搞的你头晕脑胀， 无所适从，很容易就Lost了。</p>
-<p>所以写这个文章的目的就是帮助小白能在Java 的汪洋大海里生存， 时不时的能冒出水面喘口气， 看看空中的生存指南， 把握自己的方向继续向前。<br>
+        <p>不管是哪种编程语言，都有一个很重要的问题，那就是成员的初始化，如果我们对自定义的变量没有进行适当的初始化，那么就有可能造成一些意想不到的错误，在写程序的时候，我们必须要对成员变量进行正确的初始化，所以今天我们就来讨论一下关于初始化的那些事。</p>
+<p>先来看一些Java中有关初始化的小细节： </p>
+<ol>
+<li><p>在方法中的局部变量未初始化的话编译器会报错，在类中则不会。 </p>
+</li>
+<li><p>如果类的数据成员是基本类型的话，那么每个基本类型数据成员都会有一个初始值。 </p>
+</li>
+<li><p>无法阻止自动初始化的进行，他们会在构造器被调用之前发生。</p>
+</li>
+</ol>
         
-          <a class="article-more-a" href="/2017/02/27/给小白的-Java-EE-指南（1）/#more">more >></a>
+          <a class="article-more-a" href="/2017/06/15/Java-进阶：关于初始化的那些事/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/15/Java-进阶：关于初始化的那些事/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-Java-进阶：final-关键字" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/15/Java-进阶：final-关键字/">Java 进阶：final 关键字</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/15/Java-进阶：final-关键字/" class="archive-article-date">
+  	<time datetime="2017-06-15T11:45:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在Java中，<strong>编译器</strong> 可以将final常量代入任何可能用到它的计算式中，也就是说，可以在 <strong>编译时进行计算</strong>，这减轻了一些运行时的负担。final常量必须是基本类型。</p>
+<p>对于对象引用，final使引用恒定不变。一旦引用被初始化指向一个对象，就无法再把它改为指向另一个对象。然而，对象其自身却是可以被修改的，既是final又是static的域，将用大写表示，并使用下划线分割各个单词。</p>
+        
+          <a class="article-more-a" href="/2017/06/15/Java-进阶：final-关键字/#more">more >></a>
         
       
 
@@ -355,7 +488,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">j2ee</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">final</a>
         		</li>
       		
 		</ul>
@@ -376,7 +509,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/02/27/给小白的-Java-EE-指南（1）/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/06/15/Java-进阶：final-关键字/">展开全文 >></a>
         </p>
       
 
@@ -391,30 +524,93 @@
 
 
   
-    <article id="post-Java-EE-的历史" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Java-进阶：Integer-与-int-的种种比较" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/26/Java-EE-的历史/">Java EE 的历史</a>
+      <a class="article-title" href="/2017/06/15/Java-进阶：Integer-与-int-的种种比较/">Java 进阶：Integer 与 int 的种种比较</a>
     </h1>
   
 
         
-        <a href="/2017/02/26/Java-EE-的历史/" class="archive-article-date">
-  	<time datetime="2017-02-26T13:47:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-26</time>
+        <a href="/2017/06/15/Java-进阶：Integer-与-int-的种种比较/" class="archive-article-date">
+  	<time datetime="2017-06-15T11:44:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-15</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>前言</strong></p>
-<p>昨天下午有同学问我Java EE是干什么用的，能开发什么系统， 我在QQ中敲了很多字，掰扯了半天，终于给他整明白了。<br>我突然意识在其实很多初学者对Java EE的来龙去脉并去清楚， 大家并不知道为什么会出现这个技术， 要解决什么问题。 所以就写了这篇文章介绍下Java EE的历史。</p>
+        <p>如果面试官问Integer与int的区别：估计大多数人只会说道两点，Ingeter是int的包装类，int的初值为0，Ingeter的初值为null。但是如果面试官再问一下 <code>Integer i = 1;int ii = 1; i==ii</code> 为true还是为false？估计就有一部分人答不出来了，如果再问一下其他的，估计更多的人会头脑一片混乱。所以我对它们进行了总结，希望对大家有帮助。</p>
+<p>首先看代码：</p>
         
-          <a class="article-more-a" href="/2017/02/26/Java-EE-的历史/#more">more >></a>
+          <a class="article-more-a" href="/2017/06/15/Java-进阶：Integer-与-int-的种种比较/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/15/Java-进阶：Integer-与-int-的种种比较/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-浅谈-volatile" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/15/浅谈-volatile/">浅谈 volatile</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/15/浅谈-volatile/" class="archive-article-date">
+  	<time datetime="2017-06-15T11:42:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>首先声明：现在JVM经过优化，已不会出现liveness failure 。所以没事别用volatile。</p>
+<p>在了解volatile之前，先介绍一个名词：liveness failure ，直译叫作 <strong>活性失败</strong>。因为这是volatile很重要的一个应用场景：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">public class volatileDemo &#123;</div><div class="line">    private static boolean stopFlag;</div><div class="line">    public static void main(String[] args) throws InterruptedException &#123;</div><div class="line">        Thread volatileThread =new Thread()&#123;</div><div class="line">            @Override</div><div class="line">            public void run() &#123;</div><div class="line">                while(!stopFlag)&#123;</div><div class="line">                    System.out.print(Calendar.getInstance().get(Calendar.SECOND)+&quot;,&quot;);</div><div class="line">                    try &#123;</div><div class="line">                        Thread.sleep(300);</div><div class="line">                    &#125; catch (InterruptedException e) &#123;</div><div class="line">                        e.printStackTrace();</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line">        volatileThread.start();</div><div class="line">        Thread.sleep(3000);</div><div class="line">        stopFlag=true;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2017/06/15/浅谈-volatile/#more">more >></a>
         
       
 
@@ -428,7 +624,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">volatile</a>
         		</li>
       		
 		</ul>
@@ -449,7 +645,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/02/26/Java-EE-的历史/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/06/15/浅谈-volatile/">展开全文 >></a>
         </p>
       
 
@@ -464,34 +660,32 @@
 
 
   
-    <article id="post-动物王国的面向对象" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Java-中线程的同步方法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/26/动物王国的面向对象/">动物王国的面向对象</a>
+      <a class="article-title" href="/2017/06/15/Java-中线程的同步方法/">Java 中线程的同步方法</a>
     </h1>
   
 
         
-        <a href="/2017/02/26/动物王国的面向对象/" class="archive-article-date">
-  	<time datetime="2017-02-26T13:20:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-26</time>
+        <a href="/2017/06/15/Java-中线程的同步方法/" class="archive-article-date">
+  	<time datetime="2017-06-15T11:34:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-15</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>动物世界最近出现了两个动物， 不知道是从哪儿new 出来的。<br>当他们在大街上走的时候， 我们只能看到两团迷雾，看不出来里边具体是什么动物， 幸好迷雾上方一直浮着一个标签： Animal 。<br>让我们知道他们应该是动物，不是怪物。</p>
-<p>有一天，这两个家伙见面了， 我们暂时称呼他们A1 和A2 吧。</p>
-<p>A1 : 哥们，咱俩这么像，你是谁啊</p>
-<p>A2:  我一直想搞清楚我到底是谁，  我被new 出来的时候只知道我是个Animal 。</p>
-<p>A1:  我也是， 我们一起研究下， 要不先看看Animal 的定义了啥吧</p>
-<p>A2:  我看看， 有个 int age;  变量，  我访问下试试  , System.out.println(A2.age)   , 返回4， 看来我4岁了</p>
+        <p>线程的同步是保证多线程安全访问竞争资源的一种手段。线程的同步是Java多线程编程的难点，往往开发者搞不清楚什么是竞争资源、什么时候需要考虑同步，怎么同步等等问题，当然，这些问题没有很明确的答案，但有些原则问题需要考虑，是否有竞争资源被同时改动的问题？</p>
+<p>对于同步，在具体的Java代码中需要完成一下两个操作：</p>
+<p>1，把竞争访问的资源标识为private；<br>2，同步哪些修改变量的代码，使用synchronized关键字同步方法或代码。</p>
+<p>当然这不是唯一控制并发安全的途径。</p>
         
-          <a class="article-more-a" href="/2017/02/26/动物王国的面向对象/#more">more >></a>
+          <a class="article-more-a" href="/2017/06/15/Java-中线程的同步方法/#more">more >></a>
         
       
 
@@ -505,7 +699,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">线程</a>
         		</li>
       		
 		</ul>
@@ -526,7 +720,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/02/26/动物王国的面向对象/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/06/15/Java-中线程的同步方法/">展开全文 >></a>
         </p>
       
 
@@ -541,231 +735,30 @@
 
 
   
-    <article id="post-从1加到100：一道简单的数学题挑战下你的大脑" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Java-线程的同步与锁" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/26/从1加到100：一道简单的数学题挑战下你的大脑/">从1加到100：一道简单的数学题挑战下你的大脑</a>
+      <a class="article-title" href="/2017/06/15/Java-线程的同步与锁/">Java 线程的同步与锁</a>
     </h1>
   
 
         
-        <a href="/2017/02/26/从1加到100：一道简单的数学题挑战下你的大脑/" class="archive-article-date">
-  	<time datetime="2017-02-26T10:52:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-26</time>
+        <a href="/2017/06/15/Java-线程的同步与锁/" class="archive-article-date">
+  	<time datetime="2017-06-15T11:25:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-15</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>2017年的第一篇， 写给刚刚踏入计算机编程领域的小白吧。</p>
-<p>所谓编程，就是把自然语言的需求翻译成计算机语言， 让计算机去执行。 对于刚入行的人， 理解CPU和内存是怎么在一起工作的， 绝对是基础中的基础。</p>
-<hr>
-<p><strong>CPU和内存</strong></p>
-<p>如果我们简化一下， CPU和内存其实特别简单，内存就是一个个的小格子， 每个格子都有一个编号， 格子中的数据可以被CPU所读写。</p>
-<p><img src="http://img.mp.itc.cn/upload/20170103/e400d854f3a6477ea439719178f398d7_th.png" alt="img"></p>
-<p>CPU 内部的构造超级复杂， 但我们这次只关注两个东西：</p>
-<p>一是运算器，可以做各种运算， 但是有个限制，<strong>这个运算器不能直接操作内存进行运算</strong>， 他在运算时使用的是内部的数据格子（学名叫寄存器）， 为了区分开， 我把他们叫做R1,R2,R3,R4,假设只有这么4个， 统称Rx。 </p>
-<p>CPU必须把数据装载到寄存器中才能运算。</p>
+        <h2 id="一、同步问题提出"><a href="#一、同步问题提出" class="headerlink" title="一、同步问题提出"></a>一、同步问题提出</h2><p>线程的同步是为了防止多个线程访问一个数据对象时，对数据造成的破坏。例如：两个线程ThreadA、ThreadB都操作同一个对象Foo对象，并修改Foo对象上的数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">public class Foo &#123; </div><div class="line">    private int x = 100; </div><div class="line"></div><div class="line">    public int getX() &#123; </div><div class="line">        return x; </div><div class="line">    &#125; </div><div class="line"></div><div class="line">    public int fix(int y) &#123; </div><div class="line">        x = x - y; </div><div class="line">        return x; </div><div class="line">    &#125; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
         
-          <a class="article-more-a" href="/2017/02/26/从1加到100：一道简单的数学题挑战下你的大脑/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cm/" class="article-tag-list-link color3">cm</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/02/26/从1加到100：一道简单的数学题挑战下你的大脑/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-张大胖的加法器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/26/张大胖的加法器/">张大胖的加法器</a>
-    </h1>
-  
-
-        
-        <a href="/2017/02/26/张大胖的加法器/" class="archive-article-date">
-  	<time datetime="2017-02-26T10:36:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>加法器</strong></p>
-<p>热爱编程的张大胖在大学时最烦的一门课之一就是《数字电路》 ， 他一直觉得和编程没什么关系。</p>
-<p>有一次课程设计是实现一个加法器， 大胖使用逻辑电路， 费了九牛二虎之力才实现了4位的加法。</p>
-<p><img src="http://img.mp.itc.cn/upload/20161228/f706eae0049942619919d9681d21b2d4_th.jpeg" alt="img"></p>
-        
-          <a class="article-more-a" href="/2017/02/26/张大胖的加法器/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cm/" class="article-tag-list-link color3">cm</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/02/26/张大胖的加法器/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-冯·诺依曼计算机的诞生" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/26/冯·诺依曼计算机的诞生/">冯·诺依曼计算机的诞生</a>
-    </h1>
-  
-
-        
-        <a href="/2017/02/26/冯·诺依曼计算机的诞生/" class="archive-article-date">
-  	<time datetime="2017-02-26T10:31:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>早期的计算机都是专用计算机，是不可编程的， 例如常见的计算器， 虽然能轻松的完成基本数学运算， 但是你要是想拿来做文字处理， 表格处理，或者玩游戏那是肯定不可能了。 </p>
-<p>因为这些机器内部的电路和一个特定的程序密切相关， 对于这些计算机来讲， 重新编程就意味着完全从头开始设计， 加工，制造一个全新的机器出来，当然新的机器依然是专用的。 </p>
-<p>假设时间回到上个世纪40年代，  领导让你设计一台通用计算机， 你会怎么做？</p>
-<p>首先你要考虑的是，这样的计算机<strong>在理论上是否可行</strong>， 如果理论上都造不出来，那就别白费力气了。</p>
-<p>你最不擅长的就是数学理论， 苦思冥想还是找不到答案，突然有一天看到一篇划时代的论文，就像跌入山崖而无意中得到一本武林秘籍一样让你欣喜若狂。  </p>
-        
-          <a class="article-more-a" href="/2017/02/26/冯·诺依曼计算机的诞生/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cm/" class="article-tag-list-link color3">cm</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/02/26/冯·诺依曼计算机的诞生/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-节约标兵-IE-的自述" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/26/节约标兵-IE-的自述/">节约标兵 IE 的自述</a>
-    </h1>
-  
-
-        
-        <a href="/2017/02/26/节约标兵-IE-的自述/" class="archive-article-date">
-  	<time datetime="2017-02-26T10:20:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最近计算机系统党委发起一场杜绝浪费，厉行节约的整风运动， 要求每个人都要切实落实领导指示， 坚决自查， 互查， 找出浪费，提出解决方案。 </p>
-<p>在这场轰轰烈烈的运动中，我不等不靠， 主动参与其中，在领导的教导下， 同事的帮助下， 做了很多优化和改进， 并评为节约标兵，  现在给大家分享下我的经验， 共同进步。 </p>
-<p>忘了自我介绍了，我是IE,  作为人类的代理(User Agent)， 我是为人类访问互联网而生。 </p>
-<p>人类每次想访问互联网了，就会告诉我一个网址， 比如www.jd.com ,  我就会让TCP这个小伙子帮我和这个网址的服务器建立一个连接， 然后通过这个连接通道给服务器发消息， 消息格式是我和服务器约定好的。 </p>
-<p>这个服务器也会按照约定， 给我发回整个页面的数据(俗称 <strong>HTML 文档</strong>) ， 当然也是通过同一个连接通道。 </p>
-        
-          <a class="article-more-a" href="/2017/02/26/节约标兵-IE-的自述/#more">more >></a>
+          <a class="article-more-a" href="/2017/06/15/Java-线程的同步与锁/#more">more >></a>
         
       
 
@@ -779,7 +772,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">http</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">线程</a>
         		</li>
       		
 		</ul>
@@ -791,7 +784,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/network/" class="article-tag-list-link color3">network</a>
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
         		</li>
       		
 		</ul>
@@ -800,7 +793,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/02/26/节约标兵-IE-的自述/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/06/15/Java-线程的同步与锁/">展开全文 >></a>
         </p>
       
 
@@ -815,35 +808,31 @@
 
 
   
-    <article id="post-我是如何开发公司年会抽奖系统的" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-嵌入式代码开发" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/26/我是如何开发公司年会抽奖系统的/">我是如何开发公司年会抽奖系统的</a>
+      <a class="article-title" href="/2017/03/04/嵌入式代码开发/">嵌入式代码开发</a>
     </h1>
   
 
         
-        <a href="/2017/02/26/我是如何开发公司年会抽奖系统的/" class="archive-article-date">
-  	<time datetime="2017-02-26T10:00:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-26</time>
+        <a href="/2017/03/04/嵌入式代码开发/" class="archive-article-date">
+  	<time datetime="2017-03-04T11:29:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-04</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote>
-<p>By 知乎：通哥</p>
-</blockquote>
-<p><strong>需求出现</strong></p>
-<p>年会将近，而年会抽奖环节必不可少，但是抽奖系统却还没有。所以某一天，PM走过来说：小伙，手头的需求修完成了吧！在年会开始之前必须做出一个抽奖系统。这个系统很简单，后台可以设置总金额，然后每个用户可以获得的金额范围，金额派完则显示很遗憾没有中奖，还要设置抽奖活动时间。</p>
-<p><img src="https://pic4.zhimg.com/v2-e4923b26998470fb49f14712da520ddf_r.png" alt="img"></p>
-<p><strong>需求分析</strong></p>
+        <p>嵌入式项目代码结构的分层——HAL（硬件抽象层）、FML（功能模块层）、APL（应用程序层）</p>
+<p><strong>一、遇到的问题</strong></p>
+<p>在“Zigbee之旅”系列博文中，每写一篇笔者都会编写一个小实验来展开讲解。通过这一段时间的实践，我积累了一些编码经验，但也体会到了之前的代码结构的缺陷：<br>（1）开发效率低：每次使用片内的某一资源（例如定时器等），笔者都要去查询CC2430中文手册，比较eggache<br>（2）代码重复较多：每个实验源码中，诸如 xtal_init ，led_init 等初始化函数每次都要编写<br>（3）不易修改：代码中的业务逻辑与SFR的操作混在一起，可读性较差，修改起来也费力正是由于以上问题，笔者决定暂停了该系列博文的续写，抽出时间来思考一下解决办法。</p>
         
-          <a class="article-more-a" href="/2017/02/26/我是如何开发公司年会抽奖系统的/#more">more >></a>
+          <a class="article-more-a" href="/2017/03/04/嵌入式代码开发/#more">more >></a>
         
       
 
@@ -852,13 +841,24 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">嵌入式</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/life/" class="article-tag-list-link color5">life</a>
+        			<a href="/categories/c/" class="article-tag-list-link color2">c</a>
         		</li>
       		
 		</ul>
@@ -867,7 +867,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/02/26/我是如何开发公司年会抽奖系统的/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/03/04/嵌入式代码开发/">展开全文 >></a>
         </p>
       
 
@@ -884,7 +884,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/6/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/8/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/6/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/8/">Next &raquo;</a>
     </nav>
   
 
@@ -978,7 +978,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">书单</a>
+                <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -986,15 +986,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">cpu</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1002,19 +994,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">dns</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">http</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">tool</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">jsp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1022,11 +1006,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">并发</a>
+                <a href="javascript:void(0)" class="js-tag color5">tool</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">main</a>
+                <a href="javascript:void(0)" class="js-tag color2">classloader</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1034,7 +1022,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
+                <a href="javascript:void(0)" class="js-tag color2">sqlite</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">并发</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">jsp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1046,11 +1046,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">sqlite</a>
+                <a href="javascript:void(0)" class="js-tag color5">main</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">classloader</a>
+                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1062,15 +1062,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">书单</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">final</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">restful</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1078,7 +1074,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">tcp</a>
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1086,15 +1082,23 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">wireshark</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">javaweb</a>
+                <a href="javascript:void(0)" class="js-tag color3">restful</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">socket</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">tcp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">wireshark</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">static</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1106,7 +1110,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">字节码</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">json</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">return</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1122,10 +1134,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">return</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">单元测试</a>
               </li>
              
@@ -1134,11 +1142,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">路由器</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">进程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">路由器</a>
+                <a href="javascript:void(0)" class="js-tag color3">键盘</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">javaweb</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1150,15 +1166,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">二叉树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">volatile</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">知乎</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">键盘</a>
               </li>
              
               <li class="article-tag-list-item">
