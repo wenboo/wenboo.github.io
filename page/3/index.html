@@ -167,6 +167,298 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-StringBuilder-StringBuffer-与-Java-字符串处理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/22/StringBuilder-StringBuffer-与-Java-字符串处理/">StringBuilder,StringBuffer 与 Java 字符串处理</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/22/StringBuilder-StringBuffer-与-Java-字符串处理/" class="archive-article-date">
+  	<time datetime="2017-06-22T13:30:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>以前经常在网上看到关于Java字符串拼接等方面的讨论。看到有些Java开发人员在给新手程序员的建议中类似如下写道：</p>
+<blockquote>
+<p>不要使用+号拼接字符串，要使用StringBuffer或StringBuilder的append()方法来拼接字符串。</p>
+</blockquote>
+<p>不过，用+号拼接字符串就真的那么令人讨厌，难道使用+号拼接字符串就没有一点可取之处吗？</p>
+<p>通过查阅Java API文档中关于String类的部分内容，我们可以看到如下片段：</p>
+<p><img src="http://codeplayer.qiniudn.com/string-api.jpg" alt="img"></p>
+<p>这段话很明确地告诉我们，在Java中使用+号拼接字符串，实际上使用的就是StringBuffer或StringBuilder及其append方法来实现的。</p>
+        
+          <a class="article-more-a" href="/2017/06/22/StringBuilder-StringBuffer-与-Java-字符串处理/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/22/StringBuilder-StringBuffer-与-Java-字符串处理/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-使用-Javap-反编译-Java-字节码文件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/22/使用-Javap-反编译-Java-字节码文件/">使用 Javap 反编译 Java 字节码文件</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/22/使用-Javap-反编译-Java-字节码文件/" class="archive-article-date">
+  	<time datetime="2017-06-22T13:03:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>我们如何反编译指定的Java字节码文件呢？其实，在Sun公司提供的JDK中，就已经内置了Java字节码文件反编译工具javap.exe(位于JDK安装目录的bin文件夹下)。</p>
+<p>我们可以在dos窗口中使用javap来反汇编指定的Java字节码文件。在使用javap的相关dos命令之前，你必须确保已经将JDK安装目录\bin添加到环境变量path中。</p>
+<p>接着，我们就可以使用javap来反编译指定的Java字节码文件了。在此之前，我们先通过javap的帮助命令javap -help查看javap相关指令的用法。</p>
+        
+          <a class="article-more-a" href="/2017/06/22/使用-Javap-反编译-Java-字节码文件/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">字节码</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/22/使用-Javap-反编译-Java-字节码文件/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-Java-ClassLoader-类解析之双亲委托机制" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/22/Java-ClassLoader-类解析之双亲委托机制/">Java ClassLoader 类解析之双亲委托机制</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/22/Java-ClassLoader-类解析之双亲委托机制/" class="archive-article-date">
+  	<time datetime="2017-06-22T13:01:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>做Java开发，对于ClassLoader的机制是必须要熟悉的基础知识，本文针对Java ClassLoader的机制做一个简要的总结。因为不同的JVM的实现不同，本文所描述的内容均只限于Hotspot JVM。本文将会从JDK默认的提供的ClassLoader，双亲委托模型，如何自定义ClassLoader以及Java中打破双亲委托机制的场景四个方面入手去讨论和总结一下。</p>
+<h2 id="JDK-默认-ClassLoader"><a href="#JDK-默认-ClassLoader" class="headerlink" title="JDK 默认 ClassLoader"></a>JDK 默认 ClassLoader</h2><p>JDK 默认提供了如下几种ClassLoader</p>
+<h3 id="1-Bootstrp-loader"><a href="#1-Bootstrp-loader" class="headerlink" title="1.Bootstrp loader"></a>1.Bootstrp loader</h3><p>Bootstrp加载器是用C++语言写的，它是在Java虚拟机启动后初始化的，它主要负责加载 <code>%JAVA_HOME%/jre/lib,-Xbootclasspath</code> 参数指定的路径以及 <code>%JAVA_HOME%/jre/classes</code> 中的类。</p>
+<h3 id="2-ExtClassLoader"><a href="#2-ExtClassLoader" class="headerlink" title="2.ExtClassLoader"></a>2.ExtClassLoader</h3><p>Bootstrp loader加载ExtClassLoader,并且将ExtClassLoader的父加载器设置为Bootstrploader.ExtClassLoader是用Java写的，具体来说就是 sun.misc.Launcher$ExtClassLoader，ExtClassLoader主要加载 <code>%JAVA_HOME%/jre/lib/ext</code> ，此路径下的所有classes目录以及java.ext.dirs系统变量指定的路径中类库。</p>
+<h3 id="3-AppClassLoader"><a href="#3-AppClassLoader" class="headerlink" title="3.AppClassLoader"></a>3.AppClassLoader</h3><p>Bootstrp loader加载完ExtClassLoader后，就会加载AppClassLoader,并且将AppClassLoader的父加载器指定为 ExtClassLoader。AppClassLoader也是用Java写成的，它的实现类是sun.misc.Launcher$AppClassLoader，另外我们知道ClassLoader中有个getSystemClassLoader方法,此方法返回的正是AppclassLoader.AppClassLoader主要负责加载classpath所指定的位置的类或者是jar文档，它也是Java程序默认的类加载器。</p>
+        
+          <a class="article-more-a" href="/2017/06/22/Java-ClassLoader-类解析之双亲委托机制/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">classloader</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/22/Java-ClassLoader-类解析之双亲委托机制/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-装饰器模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/20/装饰器模式/">装饰器模式</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/20/装饰器模式/" class="archive-article-date">
+  	<time datetime="2017-06-20T14:04:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>装饰器模式</strong>（Decorator Pattern）允许 <strong>向一个现有的对象添加新的功能，同时又不改变其结构</strong>。这种类型的设计模式属于结构型模式，它是作为现有的类的一个 <strong>包装</strong>。</p>
+<p>这种模式创建了一个装饰类，用来包装原有的类，并在保持类方法签名完整性的前提下，提供了额外的功能。</p>
+<p>我们通过下面的实例来演示装饰器模式的用法。其中，我们将把一个形状装饰上不同的颜色，同时又不改变形状类。</p>
+        
+          <a class="article-more-a" href="/2017/06/20/装饰器模式/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/20/装饰器模式/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-装饰器模式（Decorator）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -591,278 +883,6 @@
 
 
   
-    <article id="post-Android-是如何规避-GPL-传染性的？" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/20/Android-是如何规避-GPL-传染性的？/">Android 是如何规避 GPL 传染性的？</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/20/Android-是如何规避-GPL-传染性的？/" class="archive-article-date">
-  	<time datetime="2017-06-20T13:43:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、首先得了解-Android-体系结构"><a href="#一、首先得了解-Android-体系结构" class="headerlink" title="一、首先得了解 Android 体系结构"></a>一、首先得了解 Android 体系结构</h2><p><img src="http://static.oschina.net/uploads/space/2013/0703/194302_87lQ_1162866.gif" alt="img"></p>
-<p>从下到上介绍上图</p>
-<p>Linux Kernel: 完全开源，GPLv2协议</p>
-<p>Libraryies: 含少量开源库</p>
-<p>Android Runtime: Android 优化的JAVA虚拟机，更适合嵌入式系统。</p>
-<p>Application Framework和Application都是JAVA程序。</p>
-        
-          <a class="article-more-a" href="/2017/06/20/Android-是如何规避-GPL-传染性的？/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/c/" class="article-tag-list-link color2">c</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/20/Android-是如何规避-GPL-传染性的？/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-Copyright-与-Copyleft" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/20/Copyright-与-Copyleft/">Copyright 与 Copyleft</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/20/Copyright-与-Copyleft/" class="archive-article-date">
-  	<time datetime="2017-06-20T13:38:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>两种截然相反的版权所有方式：Copyleft(Ɔ)，Copyright(C)。</p>
-<p><strong>Copyright(C)</strong>：版权所有，即软件的一切权利归软件作者私有。</p>
-<p><strong>许可</strong>：各种保护软件版权私有的许可。</p>
-<p><strong>包括</strong>：开源软件、免费软件、共享软件、传统商业软件。</p>
-<p><strong>特点</strong>：软件的版权和其它一切权利归软件作者所私有。用户只有使用权，没有其它权利，包括没有复制软件的权利。</p>
-<p><strong>盈利方式</strong>：出售私有软件（包括：出售软件、出售源码、出售编译源码的方法和编译器）的使用权。</p>
-        
-          <a class="article-more-a" href="/2017/06/20/Copyright-与-Copyleft/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/c/" class="article-tag-list-link color2">c</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/20/Copyright-与-Copyleft/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-Android-在争议中逃离-GPL-束缚" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/20/Android-在争议中逃离-GPL-束缚/">Android 在争议中逃离 GPL 束缚</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/20/Android-在争议中逃离-GPL-束缚/" class="archive-article-date">
-  	<time datetime="2017-06-20T13:37:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Linux-内核的-GPL-约束"><a href="#Linux-内核的-GPL-约束" class="headerlink" title="Linux 内核的 GPL 约束"></a>Linux 内核的 GPL 约束</h2><p>总所周知，Linux 内核以 GNU 通用公共许可证第二版（GPL V2）的授权使用协议下发行。GNU 通用公共许可证是一种 “Copyleft” 形式的“版权”，保障任何人都能够对 Linux 内核以及其衍生产品的使用、修改和重新发布的权力，前题是 <strong>不能修改发布条款</strong>。什么意思呢，任何 Linux 内核的衍生产品（Derived Work）必须遵循 GPL 协议进行发布。然而问题的核心在于 <strong>什么是 Linux 内核的衍生产品</strong>，其中有几个致命问题，业界争论了十年有多。</p>
-<blockquote>
-<p>1、使用 Linux 内核的头文件定义，进行系统调用的程序是否会被定性为衍生产品？</p>
-<p>2、链接使用了其他 GPL 的类库的程序是否会被定性为衍生产品？</p>
-<p>3、Linux 内核动态载入的模块 LKM（Loadable Kernel Modules）是否会被定性为衍生产品，以 LKM 形式开发的 Linux 驱动程序是不是衍生产品？</p>
-</blockquote>
-<p><strong>如果</strong> 上述问题答案均为“<strong>是</strong>”，GPL 将为 Linux 打造一个的“<strong>封闭</strong>”的开源世界，什么意思呢？一个 Linux GPL的操作系统核心运行在 “ 内核空间 ” ，上层的类库、框架、服务、应用运行在 “ 用户空间 ” 。用户空间上的任何服务不可避免的需要Linux 内核的头文件，进行系统调用，因此，中间层服务必须遵循 GPL 进行开放源代码。调用中间服务层的框架或者其他服务使用了 GPL 的类库，因此，也必须是 GPL 的。同理，上层应用也被 “ 传染 ” ，必须是 GPL 的。于是，从内核到驱动到中间服务到上层应用，形成了一个 GPL 一体化软件授权的软件发布整体。可以认为，这个整体上任何开发成果都是 GPL 的，除非极少数的例外程序能够证明自身独立于系统的GPL环境。这样的一个“软件闭包”排斥的商业化的软件模块以及“想要钱”普通开发者，将整个软件世界划分为“ GPL 与 GPL 兼容的”的和非 GPL 的，每个开发从业者面临着选择，要么 Linux+GPL ，要么 Linux 与你无关。</p>
-<p>重新回到这三个问题。</p>
-        
-          <a class="article-more-a" href="/2017/06/20/Android-在争议中逃离-GPL-束缚/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/c/" class="article-tag-list-link color2">c</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/20/Android-在争议中逃离-GPL-束缚/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-开源那么重要，开源协议你认识吗？" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/20/开源那么重要，开源协议你认识吗？/">开源那么重要，开源协议你认识吗？</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/20/开源那么重要，开源协议你认识吗？/" class="archive-article-date">
-  	<time datetime="2017-06-20T13:35:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>近日，著名开发者论坛XDA专门发表了文章指责小米违反了GPLv2授权要求的做法。Android系统使用的是Linux内核，许可证来自 GPLv2，根据后者的授权要求，所有Linux衍生版本修改后的源代码必须公开，但是小米到目前为止依然没有公开自己修改的源代码，这违反了GPLv2 的授权要求。</p>
-<p>在2012年就有人指出小米的MIUI可能违反开源协议GPLv2，但是小米一直没有做出反应，这次有人如此高调指责小米，不知道小米会继续不予理睬还是应要求公开代码呢？</p>
-<p>说到开源协议，很多人是不怎么清楚，如今的开源协议达到60多种，其中主流的包括以下这些。</p>
-<h2 id="1，BSD"><a href="#1，BSD" class="headerlink" title="1，BSD"></a>1，BSD</h2><p>BSD开源协议是一个给于使用者很大自由的协议。基本上使用者可以”为所欲为”，可以自由的使用，修改源代码，也可以将修改后的代码作为开源或者专有软件再发布。</p>
-<p>但”为所欲为”的前提当你发布使用了BSD协议的代码，或则以BSD协议代码为基础做二次开发自己的产品时，需要满足三个条件：</p>
-<blockquote>
-<p>如果再发布的产品中包含源代码，则在源代码中必须带有原来代码中的BSD协议。</p>
-<p>如果再发布的只是二进制类库/软件，则需要在类库/软件的文档和版权声明中包含原来代码中的BSD协议。</p>
-<p>不可以用开源代码的作者/机构名字和原来产品的名字做市场推广。</p>
-</blockquote>
-<p>BSD 代码鼓励代码共享，但需要尊重代码作者的著作权。BSD由于允许使用者修改和重新发布代码，也允许使用或在BSD代码上开发商业软件发布和销售，因此是对 商业集成很友好的协议。而很多的公司企业在选用开源产品的时候都首选BSD协议，因为可以完全控制这些第三方的代码，在必要的时候可以修改或者二次开发。</p>
-<p>包括苹果的MAC OS，Webkit浏览器内核在内的软件都使用了BSD协议。</p>
-        
-          <a class="article-more-a" href="/2017/06/20/开源那么重要，开源协议你认识吗？/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/c/" class="article-tag-list-link color2">c</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/20/开源那么重要，开源协议你认识吗？/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
@@ -951,11 +971,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">c</a>
+                <a href="javascript:void(0)" class="js-tag color3">面试</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面试</a>
+                <a href="javascript:void(0)" class="js-tag color4">callback</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -963,7 +983,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">callback</a>
+                <a href="javascript:void(0)" class="js-tag color3">书单</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -972,6 +992,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">cpu</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">c</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -987,11 +1011,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">jdbc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">jsp</a>
+                <a href="javascript:void(0)" class="js-tag color2">classloader</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -999,7 +1019,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">classloader</a>
+                <a href="javascript:void(0)" class="js-tag color5">jdbc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1007,23 +1027,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">sqlite</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">main</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">线程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">log4j</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">回调</a>
+                <a href="javascript:void(0)" class="js-tag color5">tool</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1031,11 +1035,27 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color4">jsp</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">书单</a>
+                <a href="javascript:void(0)" class="js-tag color2">sqlite</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">线程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">main</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1047,11 +1067,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux</a>
+                <a href="javascript:void(0)" class="js-tag color3">回调</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">restful</a>
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1063,7 +1083,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">socket</a>
+                <a href="javascript:void(0)" class="js-tag color3">restful</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">log4j</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1071,15 +1095,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">wireshark</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">static</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">代码重构</a>
+                <a href="javascript:void(0)" class="js-tag color2">socket</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1087,7 +1107,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">json</a>
+                <a href="javascript:void(0)" class="js-tag color4">字节码</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">wireshark</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1099,7 +1123,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">嵌入式</a>
+                <a href="javascript:void(0)" class="js-tag color5">代码重构</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1111,15 +1135,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">tool</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网卡</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">字节码</a>
+                <a href="javascript:void(0)" class="js-tag color5">json</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1127,19 +1143,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">键盘</a>
+                <a href="javascript:void(0)" class="js-tag color4">嵌入式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">os</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">路由器</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mvc</a>
+                <a href="javascript:void(0)" class="js-tag color3">网卡</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1147,7 +1155,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">路由器</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">知乎</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">mvc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1159,11 +1175,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
+                <a href="javascript:void(0)" class="js-tag color3">进程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">进程</a>
+                <a href="javascript:void(0)" class="js-tag color3">os</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">键盘</a>
               </li>
             
             <div class="clearfix"></div>
