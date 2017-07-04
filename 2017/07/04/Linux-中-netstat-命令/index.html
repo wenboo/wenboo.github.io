@@ -6,14 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://wenboo.github.io">
-  <title>Tag: tool | Hi~Welcome to Wenboo&#39;s Blog</title>
+  <title>Linux 中 netstat 命令 | Hi~Welcome to Wenboo&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hi~Welcome to Wenboo's Blog">
-<meta property="og:url" content="http://wenboo.github.io/tags/tool/index.html">
+  <meta name="description" content="netstat命令用来打印Linux中网络系统的状态信息，可让你得知整个Linux系统的网络情况。
+语法1netstat(选项)
+选项123456789101112131415161718192021222324-a或--all：显示所有连线中的Socket；-A&amp;lt;网络类型&amp;gt;或--&amp;lt;网络类型&amp;gt;：列出该网络类型连线中的相关地址；-c或--continuous：持续列出网络状态">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux 中 netstat 命令">
+<meta property="og:url" content="http://wenboo.github.io/2017/07/04/Linux-中-netstat-命令/index.html">
 <meta property="og:site_name" content="Hi~Welcome to Wenboo's Blog">
+<meta property="og:description" content="netstat命令用来打印Linux中网络系统的状态信息，可让你得知整个Linux系统的网络情况。
+语法1netstat(选项)
+选项123456789101112131415161718192021222324-a或--all：显示所有连线中的Socket；-A&amp;lt;网络类型&amp;gt;或--&amp;lt;网络类型&amp;gt;：列出该网络类型连线中的相关地址；-c或--continuous：持续列出网络状态">
+<meta property="og:updated_time" content="2017-07-04T13:23:59.950Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hi~Welcome to Wenboo's Blog">
+<meta name="twitter:title" content="Linux 中 netstat 命令">
+<meta name="twitter:description" content="netstat命令用来打印Linux中网络系统的状态信息，可让你得知整个Linux系统的网络情况。
+语法1netstat(选项)
+选项123456789101112131415161718192021222324-a或--all：显示所有连线中的Socket；-A&amp;lt;网络类型&amp;gt;或--&amp;lt;网络类型&amp;gt;：列出该网络类型连线中的相关地址；-c或--continuous：持续列出网络状态">
   
     <link rel="alternative" href="/atom.xml" title="Hi~Welcome to Wenboo&#39;s Blog" type="application/atom+xml">
   
@@ -165,71 +175,206 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Linux-中-netstat-命令" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/10/14/Hexo-用法指南/" class="archive-article-date">
-  	<time datetime="2016-10-14T15:56:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-14</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/10/14/Hexo-用法指南/">Hexo 用法指南</a>
+    <h1 class="article-title" itemprop="name">
+      Linux 中 netstat 命令
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/07/04/Linux-中-netstat-命令/" class="archive-article-date">
+  	<time datetime="2017-07-04T13:23:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>netstat命令用来打印Linux中网络系统的状态信息，可让你得知整个Linux系统的网络情况。</p>
+<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">netstat(选项)</div></pre></td></tr></table></figure>
+<h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">-a或--all：显示所有连线中的Socket；</div><div class="line">-A&lt;网络类型&gt;或--&lt;网络类型&gt;：列出该网络类型连线中的相关地址；</div><div class="line">-c或--continuous：持续列出网络状态； </div><div class="line">-C或--cache：显示路由器配置的快取信息；</div><div class="line">-e或--extend：显示网络其他相关信息； </div><div class="line">-F或--fib：显示FIB；</div><div class="line">-g或--groups：显示多重广播功能群组组员名单； </div><div class="line">-h或--help：在线帮助；</div><div class="line">-i或--interfaces：显示网络界面信息表单； </div><div class="line">-l或--listening：显示监控中的服务器的Socket；</div><div class="line">-M或--masquerade：显示伪装的网络连线； </div><div class="line">-n或--numeric：直接使用ip地址，而不通过域名服务器；</div><div class="line">-N或--netlink或--symbolic：显示网络硬件外围设备的符号连接名称； </div><div class="line">-o或--timers：显示计时器；</div><div class="line">-p或--programs：显示正在使用Socket的程序识别码和程序名称； </div><div class="line">-r或--route：显示Routing Table；</div><div class="line">-s或--statistice：显示网络工作信息统计表； </div><div class="line">-t或--tcp：显示TCP传输协议的连线状况；</div><div class="line">-u或--udp：显示UDP传输协议的连线状况； </div><div class="line">-v或--verbose：显示指令执行过程；</div><div class="line">-V或--version：显示版本信息； </div><div class="line">-w或--raw：显示RAW传输协议的连线状况；</div><div class="line">-x或--unix：此参数的效果和指定<span class="string">"-A unix"</span>参数相同； </div><div class="line">--ip或--inet：此参数的效果和指定<span class="string">"-A inet"</span>参数相同。</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><h3 id="列出所有端口-包括监听和未监听的"><a href="#列出所有端口-包括监听和未监听的" class="headerlink" title="列出所有端口 (包括监听和未监听的)"></a>列出所有端口 (包括监听和未监听的)</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">netstat -a #列出所有端口 </div><div class="line">netstat -at #列出所有tcp端口 </div><div class="line">netstat -au #列出所有udp端口</div></pre></td></tr></table></figure>
+<h3 id="列出所有处于监听状态的-Sockets"><a href="#列出所有处于监听状态的-Sockets" class="headerlink" title="列出所有处于监听状态的 Sockets"></a>列出所有处于监听状态的 Sockets</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">netstat -l #只显示监听端口 </div><div class="line">netstat -lt #只列出所有监听 tcp 端口 </div><div class="line">netstat -lu #只列出所有监听 udp 端口 </div><div class="line">netstat -lx #只列出所有监听 UNIX 端口</div></pre></td></tr></table></figure>
+<h3 id="显示每个协议的统计信息"><a href="#显示每个协议的统计信息" class="headerlink" title="显示每个协议的统计信息"></a>显示每个协议的统计信息</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">netstat -s 显示所有端口的统计信息 </div><div class="line">netstat -st 显示TCP端口的统计信息 </div><div class="line">netstat -su 显示UDP端口的统计信息</div></pre></td></tr></table></figure>
+<h3 id="在netstat输出中显示-PID-和进程名称"><a href="#在netstat输出中显示-PID-和进程名称" class="headerlink" title="在netstat输出中显示 PID 和进程名称"></a>在netstat输出中显示 PID 和进程名称</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">netstat -pt</div></pre></td></tr></table></figure>
+<p><code>netstat -p</code> 可以与其它开关一起使用，就可以添加 <code>PID/进程名称</code> 到netstat输出中，这样debugging的时候可以很方便的发现特定端口运行的程序。 </p>
+<p><strong>在netstat输出中不显示主机，端口和用户名(host, port or user)</strong></p>
+<p>当你不想让主机，端口和用户名显示，使用 <code>netstat -n</code>。将会使用数字代替那些名称。同样可以加速输出，因为不用进行比对查询。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">netstat -an</div></pre></td></tr></table></figure>
+<p>如果只是不想让这三个名称中的一个被显示，使用以下命令: </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">netsat -a --numeric-ports </div><div class="line">netsat -a --numeric-hosts </div><div class="line">netsat -a --numeric-users</div></pre></td></tr></table></figure>
+<p><strong>持续输出netstat信息</strong></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">netstat -c #每隔一秒输出网络信息</div></pre></td></tr></table></figure>
+<p><strong>显示系统不支持的地址族(Address Families)</strong> </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">netstat --verbose</div></pre></td></tr></table></figure>
+<p>在输出的末尾，会有如下的信息： </p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">netstat: no support for `AF IPX' on this system. </div><div class="line">netstat: no support for `AF AX25' on this system. </div><div class="line">netstat: no support for `AF X25' on this system. </div><div class="line">netstat: no support for `AF NETROM' on this system.</div></pre></td></tr></table></figure>
+<p><strong>显示核心路由信息</strong> </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">netstat -r</div></pre></td></tr></table></figure>
+<p>使用 <code>netstat -rn</code> 显示数字格式，不查询主机名称。</p>
+<p><strong>找出程序运行的端口</strong> </p>
+<p>并不是所有的进程都能找到，没有权限的会不显示，使用 root 权限查看所有的信息。 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">netstat -ap | grep ssh</div></pre></td></tr></table></figure>
+<p>找出运行在指定端口的进程： </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">netstat -an | grep <span class="string">':80'</span></div></pre></td></tr></table></figure>
+<p><strong>显示网络接口列表</strong> </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">netstat -i</div></pre></td></tr></table></figure>
+<p>显示详细信息，像是ifconfig使用 <code>netstat -ie</code>。</p>
+<p><strong>IP和TCP分析</strong> </p>
+<p>查看连接某服务端口最多的的IP地址： </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">netstat -ntu | grep :<span class="number">80</span> | awk <span class="string">'&#123;print $5&#125;'</span> | cut -d: -f1 | awk <span class="string">'&#123;++ip[$1]&#125; END &#123;for(i in ip) print ip[i],"\t",i&#125;'</span> | sort -nr</div></pre></td></tr></table></figure>
+<p>TCP各种状态列表： </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">netstat -nt | grep -e <span class="number">127.0</span>.0.1 -e <span class="number">0.0</span>.0.0 -e ::: -v | awk <span class="string">'/^tcp/ &#123;++state[$NF]&#125; END &#123;for(i in state) print i,"\t",state[i]&#125;'</span></div></pre></td></tr></table></figure>
+<p>查看phpcgi进程数，如果接近预设值，说明不够用，需要增加： </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">netstat -anpo | grep <span class="string">"php-cgi"</span> | wc -l</div></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">tool</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/work/" class="article-tag-list-link color5">work</a>
+        			<a href="/categories/c/" class="article-tag-list-link color2">c</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://wenboo.github.io/2017/07/04/Linux-中-netstat-命令/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2017/12/31/2017-年开发阅读书单/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          2017 年开发阅读书单
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2017/07/04/Ubuntu-下使用-ls-命令显示文件颜色相关内容及修改/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Ubuntu 下使用 ls 命令显示文件颜色相关内容及修改</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Linux-中-netstat-命令" data-title="Linux 中 netstat 命令" data-url="http://wenboo.github.io/2017/07/04/Linux-中-netstat-命令/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"‘wenboo-hexo’"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+  
+  
   
 
-    
+  
+
+  
 
 
           </div>
@@ -252,9 +397,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		root: "/",
