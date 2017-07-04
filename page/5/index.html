@@ -167,6 +167,82 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Linux-中的-SWAP-交换分区" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/19/Linux-中的-SWAP-交换分区/">Linux 中的 SWAP 交换分区</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/19/Linux-中的-SWAP-交换分区/" class="archive-article-date">
+  	<time datetime="2017-06-19T13:48:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>大多数 Linux 在系统安装时都会提醒并建议你划分一个 SWAP 交换分区，如果你是从 Windows 切换到 Linux 的新用户，兴许对这个 SWAP 会感到十分疑惑。</p>
+<p>SWAP 交换分区到底是干什么用的呢？我们是否真的需要划一个 SWAP 分区呢？答案是：视情况而定！SWAP 分区在一些情况下可以提升 Linux 操作系统性能，但在某些情况下又会成为系统运行的瓶颈，下面我们就来详细介绍下 Linux 中的 SWAP 交换分区。</p>
+<h2 id="存放内存溢出来的数据"><a href="#存放内存溢出来的数据" class="headerlink" title="存放内存溢出来的数据"></a>存放内存溢出来的数据</h2><p>简单来说，SWAP 交换分区是用来存放内存溢出来的数据。我们可以将内存想像成一个盆子，运行程序时的数据都被作为水放在内存这个盆子当中。如果你运行太多的应用程序，导致水过多而（内存这个）盆子已经装不下时，就会将多于部分的水装到 SWAP 交换分区当中。</p>
+<p>从理论上讲，SWAP 交换分区增大了可以使用的内存空间，但事实并非如此。因为内存的数据交换速度是非常快的，而 SWAP 交换分区是把物理磁盘当成内存的载体，也就是说：虽然使用 SWAP 可以让我们运行更多或更大的应用程序了，但物理磁盘的数据交换速度远比不上物理内存，因此也就可能造成运行性能的下降。而对硬盘特别是 SSD 磁盘的频繁读写，也会造成磁盘寿命的缩短和性能下降。</p>
+<p>其实，我们可以把 SWAP 交换分区比喻成 Windows 中的 pagefile 页面文件，但两者在技术实现上仍有许多差异。</p>
+        
+          <a class="article-more-a" href="/2017/06/19/Linux-中的-SWAP-交换分区/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/c/" class="article-tag-list-link color2">c</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/19/Linux-中的-SWAP-交换分区/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-Java-中抽象类与接口的区别" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -827,91 +903,6 @@
 
 
   
-    <article id="post-知乎（一）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/19/知乎（一）/">知乎（一）</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/19/知乎（一）/" class="archive-article-date">
-  	<time datetime="2017-06-19T13:26:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p><a href="https://www.zhihu.com/question/59725713/answer/168709945?utm_source=wechat_session&amp;utm_medium=social&amp;utm_campaign=ge13_2&amp;utm_division=ge13_5">北京，2017，多少k的java web程序员应该懂多线程和jvm优化？
-</a></p>
-</blockquote>
-<p>作者：知乎用户<br>链接：<a href="https://www.zhihu.com/question/59725713/answer/168709945">https://www.zhihu.com/question/59725713/answer/168709945</a><br>来源：知乎<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
-<hr>
-<p>这几天比较忙。加个插曲。</p>
-<p>前两天面试了一个四年工作经验的Java工程师，挺失望的。工作换了四五家，大多浅尝则止，基础太差了。面试别人，一般基于其项目经历和简历的技能栈交流。没想到，这次交流成了授课了。“大处着眼，小处落手”，一个技术人员既要具备技术视野，也要理解技术细节。</p>
-<p>比较有感触的有下面几个问题。首先，我问了一个很多人平时意识不到的问题：一个.java文本文件，是如何运行起来的？本来是想检查下对Jave程序语言的运行机制的理解。如果回答可以就可以切入到虚拟机和java程序性能调优。没想到大失所望，该同学对此几乎没有概念。接下来，我问，HashMap的内部实现，不清楚，key是否可以是null，不知道。让其写一个简单的栈Stack类，实现基本的存取功能，我把结构都写了，让他下笔，写不出来。本来是考察对基本数据结构的理解，可能的话切入内存泄露。<br>到此，我已经基本确认该同学之前基本不写代码了。但他应聘的是中高级工程师，本着负责的态度。该问的还得继续。看项目经历吧，有个做OA系统的经验，熟悉Jbpm，看简历写着熟悉设计模式。好吧，我问：如果让你设计一个简单的流程引擎，你怎么设计，大概会用到什么设计模式。我想着，怎么着，你也应该知道责任链模式和观察者模式吧，退一步讲，一个好的系统，工厂模式、建造者模式不可能没有。对方一脸懵逼，说，没去了解过。说实在的，当时真的是有点不耐烦了。</p>
-<p>看到简历有mybatis技能，问动态sql拼装有哪些常用标签，回答差强人意。问得深一点：平时使用mybatis基本都是使用接口声明，然后注入直接调用接口方法，即可完成数据库操作。有没有疑惑过，为什么没看到实现该接口的类，就可以调用方法。要知道接口是不能实例化的。本意是考察对代理类生成（代理模式）的理解，不出所料，完全没有概念。随后简单问了下数据库，居然不知道索引是一棵树。</p>
-<p>随后草草收场。</p>
-<p>简单描述本次面试经历，我是觉得该面试者是一个典型。“大处着眼”，他不知道技术和框架出现的背景是什么，技术视野窄，不知道用什么技术解决实际问题，也没有关心前沿技术（分布式、服务化、大数据）；“小处着手”，他没有探究内部原理的好奇心和意识，小一点说连“点进去JDK类的实现方法”的欲望都没有。</p>
-<p>我不知道这样技术深度和广度都没有的水平，怎么能实现他所说的“三年成为一个优秀的架构师”的愿望。</p>
-<p>感慨万千啊。</p>
-        
-          <a class="article-more-a" href="/2017/06/19/知乎（一）/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">知乎</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/19/知乎（一）/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/6/">Next &raquo;</a>
@@ -1000,11 +991,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">c</a>
+                <a href="javascript:void(0)" class="js-tag color3">面试</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">书单</a>
+                <a href="javascript:void(0)" class="js-tag color2">c</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1012,15 +1003,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面试</a>
+                <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">书单</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1029,6 +1020,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">dns</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1044,7 +1039,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
+                <a href="javascript:void(0)" class="js-tag color5">tool</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1056,10 +1051,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">sqlite</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">并发</a>
               </li>
              
@@ -1068,31 +1059,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">线程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">tool</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">log4j</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">main</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color3">线程</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">回调</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1112,7 +1091,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
+                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">log4j</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1120,15 +1103,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">socket</a>
+                <a href="javascript:void(0)" class="js-tag color2">sqlite</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">javaweb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">static</a>
+                <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1136,7 +1115,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">代码重构</a>
+                <a href="javascript:void(0)" class="js-tag color2">socket</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">static</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">javaweb</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1145,6 +1132,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">字节码</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">代码重构</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1168,23 +1159,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">嵌入式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">单元测试</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">路由器</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">进程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">os</a>
+                <a href="javascript:void(0)" class="js-tag color4">嵌入式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1200,11 +1179,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">键盘</a>
+                <a href="javascript:void(0)" class="js-tag color4">路由器</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mvc</a>
+                <a href="javascript:void(0)" class="js-tag color3">内存</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">进程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1212,7 +1195,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">内存</a>
+                <a href="javascript:void(0)" class="js-tag color3">os</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">键盘</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">mvc</a>
               </li>
             
             <div class="clearfix"></div>
