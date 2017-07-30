@@ -167,6 +167,520 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-HTTP-协议学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/22/HTTP-协议学习/">HTTP 协议学习</a>
+    </h1>
+  
+
+        
+        <a href="/2016/10/22/HTTP-协议学习/" class="archive-article-date">
+  	<time datetime="2016-10-22T15:17:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>什么是 HTTP 协议</strong></p>
+<p>HTTP协议是指计算机通信网络中两台计算机之间进行通信所必须共同遵守的规定或规则，超文本传输协议(HTTP)是一种通信协议，它允许将超文本标记语言(HTML)文档从Web服务器传送到客户端的浏览器。目前我们使用的是HTTP/1.1版本。</p>
+<p><strong>Web服务器、浏览器、代理服务器</strong></p>
+<p>当我们打开浏览器，在地址栏中输入URL，然后我们就看到了网页。原理是怎样的呢？实际上我们输入URL后，我们的浏览器给Web服务器发送了一个Request,Web服务器接到Request后进行处理，生成相应的Response，然后发送给浏览器，浏览器解析Response中的HTML,这样我们就看到了网页，过程如下图所示:</p>
+        
+          <a class="article-more-a" href="/2016/10/22/HTTP-协议学习/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">http</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/network/" class="article-tag-list-link color3">network</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/10/22/HTTP-协议学习/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-保持冷静，节制使用-Json" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/22/保持冷静，节制使用-Json/">保持冷静，节制使用 JSON</a>
+    </h1>
+  
+
+        
+        <a href="/2016/10/22/保持冷静，节制使用-Json/" class="archive-article-date">
+  	<time datetime="2016-10-22T14:21:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>JSON (JavaScript Object Notation)是一种轻量级的数据交换格式。它容易被人们阅读和编写，也容易被软件所读取和生成。如下是用JSON描述的一份客户数据。它能很好的用在交换和集成商。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="string">"Name"</span> : <span class="string">"Jane Smith"</span>,</div><div class="line">    <span class="string">"DOB"</span>  : <span class="string">"1990-01-30"</span>,</div><div class="line">    <span class="string">"Billing"</span> : [</div><div class="line">        &#123;</div><div class="line">            <span class="string">"type"</span>    : <span class="string">"visa"</span>,</div><div class="line">            <span class="string">"cardnum"</span> : <span class="string">"5827-2842-2847-3909"</span>,</div><div class="line">            <span class="string">"expiry"</span>  : <span class="string">"2019-03"</span></div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            <span class="string">"type"</span>    : <span class="string">"master"</span>,</div><div class="line">            <span class="string">"cardnum"</span> : <span class="string">"6274-2542-5847-3949"</span>,</div><div class="line">            <span class="string">"expiry"</span>  : <span class="string">"2018-12"</span></div><div class="line">        &#125;</div><div class="line">    ],</div><div class="line">   <span class="string">"address"</span>: </div><div class="line">      &#123;</div><div class="line">  <span class="string">"street"</span>  : <span class="string">"9462, Fillmore"</span>,</div><div class="line">  <span class="string">"city"</span>    : <span class="string">"San Francisco"</span>,</div><div class="line">            <span class="string">"state"</span>   : <span class="string">"California"</span>,</div><div class="line">            <span class="string">"zip"</span>     : <span class="number">94401</span></div><div class="line">      &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2016/10/22/保持冷静，节制使用-Json/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">json</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/10/22/保持冷静，节制使用-Json/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-计算机网络术语" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/22/计算机网络术语/">计算机网络术语</a>
+    </h1>
+  
+
+        
+        <a href="/2016/10/22/计算机网络术语/" class="archive-article-date">
+  	<time datetime="2016-10-21T16:11:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>OSI 参考模型</strong></p>
+<p><img src="http://zezhi.qiniudn.com/wp-content/uploads/2014/07/OSI.jpeg" alt="pic"></p>
+        
+          <a class="article-more-a" href="/2016/10/22/计算机网络术语/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">tcp</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/network/" class="article-tag-list-link color3">network</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/10/22/计算机网络术语/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-图解-TCP-IP-协议" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/21/图解-TCP-IP-协议/">图解 TCP/IP 协议</a>
+    </h1>
+  
+
+        
+        <a href="/2016/10/21/图解-TCP-IP-协议/" class="archive-article-date">
+  	<time datetime="2016-10-21T15:47:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文通过两个图来梳理TCP-IP协议相关知识。TCP通信过程包括三个步骤：建立TCP连接通道，传输数据，断开TCP连接通道。</p>
+<p><img src="http://cricode.qiniudn.com/tcp-ip-handshark.png" alt="pic"></p>
+        
+          <a class="article-more-a" href="/2016/10/21/图解-TCP-IP-协议/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">tcp</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/network/" class="article-tag-list-link color3">network</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/10/21/图解-TCP-IP-协议/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-HTTP-HTTP2-0-SPDY-HTTPS你应该知道的一些事" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/21/HTTP-HTTP2-0-SPDY-HTTPS你应该知道的一些事/">HTTP,HTTP2.0,SPDY,HTTPS 你应该知道的一些事</a>
+    </h1>
+  
+
+        
+        <a href="/2016/10/21/HTTP-HTTP2-0-SPDY-HTTPS你应该知道的一些事/" class="archive-article-date">
+  	<time datetime="2016-10-21T14:27:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>1 - WEB 始祖 HTTP</strong></p>
+<p>全称：超文本传输协议(HyperText Transfer Protocol)</p>
+<p>伴随着计算机网络和浏览器的诞生，HTTP1.0也随之而来，处于计算机网络中的应用层，HTTP是建立在TCP协议之上，所以HTTP协议的瓶颈及其优化技巧都是基于TCP协议本身的特性，例如tcp建立连接的3次握手和断开连接的4次挥手以及每次建立连接带来的RTT延迟时间。</p>
+        
+          <a class="article-more-a" href="/2016/10/21/HTTP-HTTP2-0-SPDY-HTTPS你应该知道的一些事/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">http</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/network/" class="article-tag-list-link color3">network</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/10/21/HTTP-HTTP2-0-SPDY-HTTPS你应该知道的一些事/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-进程与线程的一个简单解释" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/20/进程与线程的一个简单解释/">进程与线程的一个简单解释</a>
+    </h1>
+  
+
+        
+        <a href="/2016/10/20/进程与线程的一个简单解释/" class="archive-article-date">
+  	<time datetime="2016-10-19T16:13:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1 计算机的核心是CPU，它承担了所有的计算任务。它就像一座工厂，时刻在运行。</p>
+<p><img src="http://images.cnitblog.com/news/145819/201304/24231003-62541ee9b2f74245996a2bdd5cb71be1.jpg" alt="1"></p>
+        
+          <a class="article-more-a" href="/2016/10/20/进程与线程的一个简单解释/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">os</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/cm/" class="article-tag-list-link color3">cm</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/10/20/进程与线程的一个简单解释/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-编译器的工作原理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/19/编译器的工作原理/">编译器的工作原理</a>
+    </h1>
+  
+
+        
+        <a href="/2016/10/19/编译器的工作原理/" class="archive-article-date">
+  	<time datetime="2016-10-19T15:34:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>源码要运行，必须先转成二进制的机器码。这是编译器的任务。<br>比如，下面这段源码（假定文件名叫做test.c）。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></div><div class="line"></span>&#123;</div><div class="line">  <span class="built_in">fputs</span>(<span class="string">"Hello, world!\n"</span>, <span class="built_in">stdout</span>);</div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2016/10/19/编译器的工作原理/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">微机原理</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/cm/" class="article-tag-list-link color3">cm</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/10/19/编译器的工作原理/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-12个有趣的C语言面试题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -461,772 +975,9 @@
 
 
   
-    <article id="post-sizeof()-用法汇总" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/17/sizeof()-用法汇总/">sizeof() 用法汇总</a>
-    </h1>
-  
-
-        
-        <a href="/2016/10/17/sizeof()-用法汇总/" class="archive-article-date">
-  	<time datetime="2016-10-17T14:28:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>与strlen()比较</strong></p>
-<p>strlen()计算字符数组的字符数，以”\0”为结束判断，不计算为’\0’的数组元素。<br>sizeof计算数据（包括数组、变量、类型、结构体等）所占内存空间，用字节数表示。</p>
-        
-          <a class="article-more-a" href="/2016/10/17/sizeof()-用法汇总/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">c</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/c/" class="article-tag-list-link color2">c</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/10/17/sizeof()-用法汇总/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-Java-多线程面试题及回答" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/17/Java-多线程面试题及回答/">Java 多线程面试题及回答</a>
-    </h1>
-  
-
-        
-        <a href="/2016/10/17/Java-多线程面试题及回答/" class="archive-article-date">
-  	<time datetime="2016-10-17T14:15:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>现在有T1、T2、T3三个线程，你怎样保证T2在T1执行完后执行，T3在T2执行完后执行？</strong></p>
-<p>这个线程问题通常会在第一轮或电话面试阶段被问到，目的是检测你对”join”方法是否熟悉。这个多线程问题比较简单，可以用join方法实现。</p>
-<p><strong>在Java中Lock接口比synchronized块的优势是什么？你需要实现一个高效的缓存，它允许多个用户读，但只允许一个用户写，以此来保持它的完整性，你会怎样去实现它？</strong></p>
-<p>lock接口在多线程和并发编程中最大的优势是它们为读和写分别提供了锁，它能满足你写像ConcurrentHashMap这样的高性能数据结构和有条件的阻塞。Java线程面试的问题越来越会根据面试者的回答来提问。我强烈建议在你去参加多线程的面试之前认真读一下Locks，因为当前其大量用于构建电子交易终统的客户端缓存和交易连接空间。</p>
-<p><strong>在java中wait和sleep方法的不同？</strong></p>
-<p>通常会在电话面试中经常被问到的Java线程面试问题。最大的不同是在等待时wait会释放锁，而sleep一直持有锁。Wait通常被用于线程间交互，sleep通常被用于暂停执行。</p>
-<p><strong>用Java实现阻塞队列</strong></p>
-<p>这是一个相对艰难的多线程面试问题，它能达到很多的目的。第一，它可以检测侯选者是否能实际的用Java线程写程序；第二，可以检测侯选者对并发场景的理解，并且你可以根据这个问很多问题。如果他用wait()和notify()方法来实现阻塞队列，你可以要求他用最新的Java 5中的并发类来再写一次。</p>
-<p> <strong>用Java写代码来解决生产者—消费者问题</strong></p>
-<p>与上面的问题很类似，但这个问题更经典，有些时候面试都会问下面的问题。在Java中怎么解决生产者——消费者问题，当然有很多解决方法，我已经分享了一种用阻塞队列实现的方法。有些时候他们甚至会问怎么实现哲学家进餐问题。</p>
-<p><strong>用Java编程一个会导致死锁的程序，你将怎么解决？</strong></p>
-<p>这是我最喜欢的Java线程面试问题，因为即使死锁问题在写多线程并发程序时非常普遍，但是很多侯选者并不能写deadlock free code（无死锁代码？），他们很挣扎。只要告诉他们，你有N个资源和N个线程，并且你需要所有的资源来完成一个操作。为了简单这里的n可以替换为2，越大的数据会使问题看起来更复杂。通过避免Java中的死锁来得到关于死锁的更多信息。</p>
-<p><strong>什么是原子操作，Java中的原子操作是什么？</strong></p>
-<p>非常简单的java线程面试问题，接下来的问题是你需要同步一个原子操作。</p>
-<p><strong>Java中的volatile关键是什么作用？怎样使用它？在Java中它跟synchronized方法有什么不同？</strong></p>
-<p>自从Java 5和Java内存模型改变以后，基于volatile关键字的线程问题越来越流行。应该准备好回答关于volatile变量怎样在并发环境中确保可见性、顺序性和一致性。</p>
-<p><strong>什么是竞争条件？你怎样发现和解决竞争？</strong></p>
-<p>这是一道出现在多线程面试的高级阶段的问题。大多数的面试官会问最近你遇到的竞争条件，以及你是怎么解决的。有些时间他们会写简单的代码，然后让你检测出代码的竞争条件。可以参考我之前发布的关于Java竞争条件的文章。在我看来这是最好的java线程面试问题之一，它可以确切的检测候选者解决竞争条件的经验，or writing code which is free of data race or any other race condition。关于这方面最好的书是《Concurrency practices in Java》。</p>
-<p><strong>你将如何使用thread dump？你将如何分析Thread dump？</strong></p>
-<p>在UNIX中你可以使用kill -3，然后thread dump将会打印日志，在windows中你可以使用”CTRL+Break”。非常简单和专业的线程面试问题，但是如果他问你怎样分析它，就会很棘手。</p>
-<p><strong>为什么我们调用start()方法时会执行run()方法，为什么我们不能直接调用run()方法？</strong></p>
-<p>这是另一个非常经典的java多线程面试问题。这也是我刚开始写线程程序时候的困惑。现在这个问题通常在电话面试或者是在初中级Java面试的第一轮被问到。这个问题的回答应该是这样的，当你调用start()方法时你将创建新的线程，并且执行在run()方法里的代码。但是如果你直接调用run()方法，它不会创建新的线程也不会执行调用线程的代码。阅读我之前写的《start与run方法的区别》这篇文章来获得更多信息。</p>
-<p><strong>Java中你怎样唤醒一个阻塞的线程？</strong></p>
-<p>这是个关于线程和阻塞的棘手的问题，它有很多解决方法。如果线程遇到了IO阻塞，我并且不认为有一种方法可以中止线程。如果线程因为调用wait()、sleep()、或者join()方法而导致的阻塞，你可以中断线程，并且通过抛出InterruptedException来唤醒它。我之前写的《How to deal with blocking methods in java》有很多关于处理线程阻塞的信息。</p>
-<p><strong>在Java中CycliBarriar和CountdownLatch有什么区别？</strong></p>
-<p>这个线程问题主要用来检测你是否熟悉JDK5中的并发包。这两个的区别是CyclicBarrier可以重复使用已经通过的障碍，而CountdownLatch不能重复使用。</p>
-<p><strong>什么是不可变对象，它对写并发应用有什么帮助？</strong></p>
-<p>另一个多线程经典面试问题，并不直接跟线程有关，但间接帮助很多。这个java面试问题可以变的非常棘手，如果他要求你写一个不可变对象，或者问你为什么String是不可变的。</p>
-<p><strong>你在多线程环境中遇到的共同的问题是什么？你是怎么解决它的？</strong></p>
-<p>多线程和并发程序中常遇到的有Memory-interface、竞争条件、死锁、活锁和饥饿。问题是没有止境的，如果你弄错了，将很难发现和调试。这是大多数基于面试的，而不是基于实际应用的Java线程问题。</p>
-<hr>
-<p><strong>补充的其它几个问题：</strong></p>
-<blockquote>
-<p>在java中绿色线程和本地线程区别？</p>
-<p>线程与进程的区别？</p>
-<p>什么是多线程中的上下文切换？</p>
-<p>死锁与活锁的区别，死锁与馅饼的区别？</p>
-<p>Java中用到的线程调度算法是什么？</p>
-<p>在Java中什么是线程调度？</p>
-<p>在线程中你怎么处理不可捕捉异常？</p>
-<p>什么是线程组，为什么在Java中不推荐使用？</p>
-<p>为什么使用Executor框架比使用应用创建和管理线程好？</p>
-<p>在Java中Executor和Executors的区别？</p>
-<p>如何在Windows和Linux上查找哪个线程使用的CPU时间最长？</p>
-</blockquote>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">多线程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/10/17/Java-多线程面试题及回答/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-我是一块硬盘" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/16/我是一块硬盘/">我是一块硬盘</a>
-    </h1>
-  
-
-        
-        <a href="/2016/10/16/我是一块硬盘/" class="archive-article-date">
-  	<time datetime="2016-10-16T14:21:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>1 序</strong></p>
-<p>我知道CPU和内存是计算机的核心， 毕竟所有的运算最后都得通过他们俩来完成， CPU从内存里要取一条指令， 做计算，然后再写回内存， 如此周而复始。</p>
-<p>但是这俩货却瞧不起我，说这是什么年代了，还在用机械式操作， 读写数据的时候， 还得一个磁头在多个盘片上滑来滑去，找来找去， 速度慢的要死。</p>
-<p><img src="http://img.mp.itc.cn/upload/20160825/49d58241abec49158f39b196cc8b72b1.jpeg" alt="此处输入图片的描述"></p>
-<p>  内存说：“CPU比我快100倍， 比你快100万倍，整个系统的速度都被你给拖慢了。”</p>
-<p>这是典型的五十步笑百步。</p>
-<p>他俩还嘲笑我很娇气，得真空、密闭、不能有浮尘、运行时不能震动， 一动就坏了。</p>
-<p>但这俩二货总是会忘记他俩的最大问题，所以我只用一句就把他们俩给噎死： 你们俩断电了怎么办？</p>
-<p>还有我的容量都是按TB, 甚至PB 来算的， 就你们俩那点容量，还笑我?</p>
-<p>还有，没有我来存储程序，你们从哪儿得到程序， 难道要像牵牛星（如下图）一样， 手工拨动一排开关来输入程序吗？</p>
-<p><img src="http://img.mp.itc.cn/upload/20160825/cf9645eeddb44cd1b50ed6bf9154ebcd_th.jpeg" alt="此处输入图片的描述"></p>
-<p>其实我也很纳闷，  为什么你们人类造不出来一个能够<strong>断电存储</strong>的， <strong>大容量的</strong>， <strong>访问速度快的</strong>，当然还要<strong>便宜的</strong>硬盘来 ，你们不都上天了吗？要登陆火星了吗？ 这些基础的材料怎么还无法突破？</p>
-<p>我憧憬着这么一天的来临， 如果能制造出来了， CPU就可以直接访问硬盘了， 内存就一边凉快去吧。</p>
-<p>在制造出来之前， 你们必须得容忍CPU-内存-硬盘之间的速度不匹配， 并且想出办法来解决这种速度的不匹配， 比如用缓存、 直接内存访问、 多进程/线程切换等等方法。</p>
-<hr>
-<p><strong>2 内部结构</strong></p>
-<p>其实我的内部是长这个样子的：</p>
-<p><img src="http://img.mp.itc.cn/upload/20160825/9cda278c97d8485194269010b2c813c6_th.jpeg" alt="此处输入图片的描述"></p>
-<p>  看到没有，我有很多个盘片像串糖葫芦一样被串在一个主轴上， 主轴带着他们疯狂的旋转。 </p>
-<p>每个盘片都有很多一圈一圈的磁道， 每个磁道又分为一个一个的扇区。</p>
-<p>多个盘片上的同一位置的磁道组成了一个柱面 (需要发挥一下你的想象力)</p>
-<p>最后每个盘片上都有可以读写数据的磁头。<br>所以，如果你想访问我的数据，可以说： 把0柱面， 0磁头， 1扇区的数据给我拿来。 </p>
-<p>我就把磁头挪到您指定的柱面，对每个磁盘来讲其实就是指定的磁道， 所以这叫“寻道时间”</p>
-<p>然后再旋转磁盘，让磁头指向您指定的扇区，这才能开始读取数据， 这叫“旋转时间”，转速快的硬盘能更快的旋转到特定扇区， 所以性能会更好些。</p>
-<hr>
-<p><strong>3 文件</strong></p>
-<p>当然，对于绝大部分人来说，都不想去了解什么柱面，磁头，扇区这些非人的术语，所以我为懒人们专门提供了一个叫做逻辑块的方式，你看到磁盘就是有一个个“块”组成的，编号为1, 2, 3, ..n 。</p>
-<p>想取哪一块就取哪一块， 比如你说：把第1024号的“块” 的数据给我取过来， 我在内部就把1024转化成柱面，磁头，扇区， 按照上面说的方法寻道，旋转，读取数据。</p>
-<p>但是这还远远不够，比方说你想写个文档，输入了很多字和图片，最后想存到我这个硬盘上，你该怎么操作？</p>
-<p>一种方法是这样的：</p>
-<p>你： 硬盘，给我找20个空闲的磁盘块， 我想存我的文档<br>我：空闲的磁盘块编号是1024， 2048， 2049 ，3000 ,……<br>你： 把这些文字和图片存到这些磁盘块上<br>我： 好的，存完了， 你得记住这些块啊， 这样下次才能读取。<br>你： 拿一支笔把这些磁盘块编号都记到本子上<br>过了几天……<br>你： 硬盘， 把1024,2048,2049,3000这些数据给我取出来，我要编辑。<br>我： 好的，这是你的数据</p>
-<p>没有人喜欢这种方式， 太折磨人了！每个人喜欢这么做：<br>打开word -&gt; 新建一个文件-&gt; 输入文字和图片-&gt; 保存到C盘“我的文档”目录下。</p>
-<p>这个所谓的“文件”和“目录”就是我的杰作啊，你再也不需要和烦人的磁盘块打交道， 只需要记住你的文件名和路径， 一切工作交由我和操作系统老大来搞定。</p>
-<p>我和老大商量好了，文件对人类来说是最小存储单位， 你想存任何东西，无论多么小，非得建个文件不可。</p>
-<p>此外为了让这个世界整洁有序， 多个文件可以放到一个目录（其实也是个特殊的文件）里， 目录之上还可以有目录，形成一个树的结构。</p>
-<p>文件这个东西是个伟大的发明， 我估计你们还得再用100年。</p>
-<hr>
-<p><strong>4 文件的存放</strong></p>
-<p>我日常的主要工作就是对目录和文件做操作，当然需要操作系统老大的配合，好吧，其实是老大在主导。</p>
-<p>这其中最重要的一个问题怎么去记录各个文件都用到哪些磁盘块？</p>
-<p>内存给我支了一招：你可以采用连续记录的方式啊， 就像这样。</p>
-<p><img src="http://img.mp.itc.cn/upload/20160825/01d83b1999994a90bc25f0e09013b02e.png" alt="此处输入图片的描述"></p>
-<p>文件1 占据磁盘块 1-3<br>文件2 占据磁盘块 8-12<br>文件3 占据磁盘块 15-20</p>
-<p>内存说： 这种方法在随机访问文件是效率极好，因为你只要知道了开头和长度，就像数组一样可以随便访问， 就像CPU访问我一样， 只要给出地址，立刻就能定位到指定的位置。</p>
-<p>我仔细想了想， 内存出的是一个损招， 比如说内存磁盘块 4 -7 ，以及13-14怎么没用？  </p>
-<p>那是因为之前那里也有文件，后来被删除了，留下了空洞， 如果之后没有大小合适的文件过来，他们就永远空在那里了。</p>
-<p>对我来说这是严重的浪费， 这是我不能容忍的。 </p>
-<p>我说：“小样你以为我看不出来啊，你不就是嫉妒我容量大，让我浪费一点嘛”</p>
-<p>内存坏笑了一下又说： 不喜欢也没关系嘛，试试采用链式啊：</p>
-<p><img src="http://img.mp.itc.cn/upload/20160825/cc7c5b447261492888f0504fe1eb9093.png" alt="此处输入图片的描述"></p>
-<p>  这个文件从第一块磁盘开始，形成一个链 1-&gt;9-&gt;18-&gt;8-&gt;3   , 每一块空闲的磁盘都会得到充分的利用， 效率非常高。</p>
-<p>我心想： 这些码农说的数据结构和算法还真是有用啊， 这里也用上链表了。</p>
-<p>可是这种方式随机的访问效果太差， 每次都得从第一块开始，沿着绳子往后找，太痛苦了。</p>
-<p>现在内存已经嘲笑我慢了，用这种很慢的办法，还不得笑死我？</p>
-<p>操作系统老大说：“别听内存在那里BB了， 用索引式！”</p>
-<p><img src="http://read.html5.qq.com/image?src=forum&amp;q=5&amp;r=0&amp;imgflag=7&amp;imageUrl=http://mmbiz.qpic.cn/mmbiz_png/KyXfCrME6UKEwsTbaictKOckLQhuE79L4ic7tTOCmIx1fk7PvfC03ofXOJwvVM6tnzNec92RfslgWjKXm5yh2fEA/640?wx_fmt=png" alt="此处输入图片的描述"></p>
-<p>  例如第16号磁盘块专门用来存放文件属性以及该文件所使用的磁盘块。</p>
-<p>老大把这个磁盘块叫做inode,通过它可以轻松的找到这个文件所使用的所有磁盘块， 无论是顺序访问还是随机访问都很快。</p>
-<p>唯一的缺点是得用额外的磁盘块单独存放inode 。</p>
-<p>我觉得挺好，没有十全十美的东西，折中达到平衡最重要 ！ 就是它了！</p>
-<hr>
-<p><strong>5 目录</strong></p>
-<p>我问老大： 每个文件都需要有个inode来描述,  每个目录是不是也需要一个？ </p>
-<p>”这是自然，和文件一样， 每个目录也是一个inode,  其中有目录的属性，还有存放这个目录内容的磁盘块号，在磁盘块中才真正的存放着目录下的内容“</p>
-<p><img src="http://read.html5.qq.com/image?src=forum&amp;q=5&amp;r=0&amp;imgflag=7&amp;imageUrl=http://mmbiz.qpic.cn/mmbiz_png/KyXfCrME6ULu5uegUBxu8afic7eQ47NJcuzEUxJ8icWicHglOeneicbEMxLw5ZZqib7fnJgVVk46hEEmCTtJLZKwib5Q/640?wx_fmt=png" alt="此处输入图片的描述"></p>
-<p>  “举个例子来说吧： 有人要读取  <strong>/tmp/test.log</strong>  这个文件， 查找次序是这样的：根目录inode-&gt;根目录磁盘块-&gt;tmp目录inode-&gt;tmp目录磁盘块-&gt;test.log的 inode-&gt;读取磁盘块”</p>
-<p>  <img src="http://read.html5.qq.com/image?src=forum&amp;q=5&amp;r=0&amp;imgflag=7&amp;imageUrl=http://mmbiz.qpic.cn/mmbiz_png/KyXfCrME6ULu5uegUBxu8afic7eQ47NJcag3AEK5VyDausdicHhpTbgAj0CJhkftuxY5D8U8g7kLoib6y86V8xLYQ/640?wx_fmt=png" alt="此处输入图片的描述"></p>
-<p>  内存说： “我赛，这也太绕了吧，比CPU访问我的数据麻烦多了， 硬盘，你要小心点， 这要是操作不当的很容易出乱子的。”</p>
-<p>我心想内存这次没坑我，他提醒的对， 这操作确实有点复杂，读数据的时候还行， 如果是修改，尤其是删除就很容易出事，例如想删除上面的文件/tmp/test.log，需要这些步骤：</p>
-<p>(1) 在目录中删除文件<br>(2) 释放inode 到空闲的节点池， 这样可以复用<br>(3) 将磁盘块释放到空闲的磁盘块池</p>
-<p>在操作某一步的时候出现系统崩溃，那我这些个目录和文件就凌乱了， 可能会出现空间无法释放的情况。 </p>
-<p>老大说： “这确实比较烦， 不过也能解决，听说过数据库是怎么办的吗： 记录日志！ ”</p>
-<p>”就是把要做的事记录下来？“</p>
-<p>“是的， 在做操作之前， 记录要做的事情，形成日志， 把他们成功写入磁盘以后再正式动手操作，  等到所有步骤都搞完，才可以擦除日志项。  你想想，如果执行到某一步崩溃， 系统重启时检查日志项，就知道哪些没做，哪些已经做了， 对于没做的日志，重新来一遍就是了” 。</p>
-<p>其实说的很轻松，实施起来还是挺难的， 重新执行就意味着那些操作一定是可以重复执行， 并且不会带来破坏才行。 </p>
-<p>（注：这叫做日志(Journal)文件系统）</p>
-<hr>
-<p><strong>6 管理空闲块</strong></p>
-<p>目录和文件的存储问题解决了， 接下来我需要一个大管家，把那些没有使用的、空白的、数量上亿的磁盘块给管理起来，只有这样， 新的文件来的时候，才能分配空间存储。</p>
-<p>操作系统老大给我推荐了两位， 第一位主张是链式大法好， 无非就是把空闲磁盘块组成一个链表（又是链表！） ，但是我心里盘算了一下： 如果磁盘块号是32位的，每个块都得花费我32位的空间，如果我有5亿个空闲块， 那仅仅为了记录他们就要占用接近2G的磁盘空间！  这浪费可是有点大啊。</p>
-<p>还有一位主张位图法， 这个方法更简单， 对每个磁盘块，如果已经被使用，那就标记为1，   没被使用就是0。 这样整个磁盘块就形成了一个由0和1组成的一个大位图。</p>
-<p><img src="http://read.html5.qq.com/image?src=forum&amp;q=5&amp;r=0&amp;imgflag=7&amp;imageUrl=http://mmbiz.qpic.cn/mmbiz_png/KyXfCrME6ULu5uegUBxu8afic7eQ47NJcyL5HFByDEKrNmE1v2Dic9S2exsDn2VNnO1Sicr1klORIeia7k293l1ZPg/640?wx_fmt=png" alt="此处输入图片的描述"></p>
-<p>由于每个磁盘块只用一个位来表示， 非常节省空间， 这个方案我喜欢！</p>
-<hr>
-<p><strong>7 文件系统</strong></p>
-<p>  扯了这么多，是时候看一看全局了， 在你们程序员的眼中， 其实我是长这个样子的（拿你们崇拜的Linux ext2为例）：</p>
-<p> <img src="http://read.html5.qq.com/image?src=forum&amp;q=5&amp;r=0&amp;imgflag=7&amp;imageUrl=http://mmbiz.qpic.cn/mmbiz_png/KyXfCrME6ULu5uegUBxu8afic7eQ47NJcO1NDOOQzbvWJLwQG4G3FmmibzmuZHSNQWS0a1tgThnkqQpPicD57FbRA/640?wx_fmt=png" alt="此处输入图片的描述"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">微机原理</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/work/" class="article-tag-list-link color5">work</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/10/16/我是一块硬盘/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-操作系统原理面试题目总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/16/操作系统原理面试题目总结/">操作系统原理面试题目总结</a>
-    </h1>
-  
-
-        
-        <a href="/2016/10/16/操作系统原理面试题目总结/" class="archive-article-date">
-  	<time datetime="2016-10-16T13:44:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>1 - 进程和现成的区别</strong></p>
-<p>粒度性分析：线程的粒度小于进程。</p>
-<p>调度性分析：进程是资源拥有的基本单位，线程是独立调度与独立运行的基本单位，出了寄存器，程序计数器等必要的资源外基本不拥有其他资源。</p>
-<p>系统开销分析：由于线程基本不拥有系统资源，所以在进行切换时，线程切换的开销远远小于进程。</p>
-<p><strong>2 - 进程的状态及其转换</strong><br><img src="http://img.blog.csdn.net/20141020094108593" alt="图片"></p>
-<p><strong>3 - 进程同步与互斥的区别</strong></p>
-<p>互斥：是指某一资源同时只允许一个访问者对其进行访问，具有唯一性和排它性。但互斥无法限制访问者对资源的访问顺序，即访问是无序的。</p>
-<p>同步：是指在互斥的基础上（大多数情况），通过其它机制实现访问者对资源的有序访问。在大多数情况下，同步已经实现了互斥，特别是所有写入资源的情况必定是互斥的。少数情况是指可以允许多个访问者同时访问资源。</p>
-<p>简单地说：同步体现的是一种协作性，互斥体现的是一种排他性。</p>
-<p><strong>4 - 进程间的通信方式有哪些？</strong></p>
-<p>管道( pipe )：管道是一种半双工的通信方式，数据只能单向流动，而且只能在具有亲缘关系的进程间使用。进程的亲缘关系通常是指父子进程关系。</p>
-<p>有名管道 (named pipe) ： 有名管道也是半双工的通信方式，但是它允许无亲缘关系进程间的通信。</p>
-<p>信号量( semophore ) ： 信号量是一个计数器，可以用来控制多个进程对共享资源的访问。它常作为一种锁机制，防止某进程正在访问共享资源时，其他进程也访问该资源。因此，主要作为进程间以及同一进程内不同线程之间的同步手段。</p>
-<p>消息队列( message queue ) ： 消息队列是由消息的链表，存放在内核中并由消息队列标识符标识。消息队列克服了信号传递信息少、管道只能承载无格式字节流以及缓冲区大小受限等缺点。</p>
-<p>信号 ( sinal ) ： 信号是一种比较复杂的通信方式，用于通知接收进程某个事件已经发生。</p>
-<p>共享内存( shared memory ) ：共享内存就是映射一段能被其他进程所访问的内存，这段共享内存由一个进程创建，但多个进程都可以访问。共享内存是最快的 IPC 方式，它是针对其他进程间通信方式运行效率低而专门设计的。它往往与其他通信机制，如信号两，配合使用，来实现进程间的同步和通信。</p>
-<p>套接字( socket ) ： 套解口也是一种进程间通信机制，与其他通信机制不同的是，它可用于不同及其间的进程通信。</p>
-<p><strong>5 - 作业（或进程）的调度算法有哪些？</strong></p>
-<p>先来先服务（FCFS，First-Come-First-Served）: 此算法的原则是按照作业到达后备作业队列（或进程进入就绪队列）的先后次序来选择作业（或进程）。</p>
-<p>短作业优先（SJF,Shortest Process Next）：这种调度算法主要用于作业调度，它从作业后备队列中挑选所需运行时间（估计值）最短的作业进入主存运行。</p>
-<p>时间片轮转调度算法（RR，Round-Robin）：当某个进程执行的时间片用完时，调度程序便停止该进程的执行，并将它送就绪队列的末尾，等待分配下一时间片再执行。然后把处理机分配给就绪队列中新的队首进程，同时也让它执行一个时间片。这样就可以保证就绪队列中的所有进程，在一给定的时间内，均能获得一时间片处理机执行时间。</p>
-<p>高响应比优先（HRRN，Highest Response Ratio Next）: 按照高响应比（（已等待时间＋要求运行时间）/ 要求运行时间）优先的原则，在每次选择作业投入运行时，先计算此时后备作业队列中每个作业的响应比RP然后选择其值最大的作业投入运行。</p>
-<p>优先权(Priority)调度算法: 按照进程的优先权大小来调度，使高优先权进程得到优先处理的调度策略称为优先权调度算法。注意：优先数越多，优先权越小。</p>
-<p>多级队列调度算法：多队列调度是根据作业的性质和类型的不同，将就绪队列再分为若干个子队列，所有的作业（或进程）按其性质排入相应的队列中，而不同的就绪队列采用不同的调度算法。</p>
-<p><strong>6 - 死锁产生的原因，死锁产生的必要条件是什么，如何预防死锁，如何避免死锁，死锁定理？</strong></p>
-<p><strong>死锁产生的原因：</strong></p>
-<blockquote>
-<p>竞争资源</p>
-<p>进程推进顺序不当</p>
-</blockquote>
-<p><strong>死锁产生的必要条件：</strong></p>
-<blockquote>
-<p>互斥条件：一个资源一次只能被一个进程所使用，即是排它性使用。</p>
-<p>不剥夺条件：一个资源仅能被占有它的进程所释放，而不能被别的进程强占。</p>
-<p>请求与保持条件：进程已经保持了至少一个资源，但又提出了新的资源要求，而该资源又已被其它进程占有，此时请求进程阻塞，但又对已经获得的其它资源保持不放。</p>
-<p>环路等待条件：当每类资源只有一个时，在发生死锁时，必然存在一个进程-资源的环形链。</p>
-</blockquote>
-<p><strong>预防死锁：</strong></p>
-<p>破坏四个必要条件之一。</p>
-<p><strong>死锁的避免：</strong></p>
-<p>银行家算法，该方法允许进程动态地申请资源，系统在进行资源分配之前，先计算资源分配的安全性。若此次分配不会导致系统从安全状态向不安全状态转换，便可将资源分配给进程；否则不分配资源，进程必须阻塞等待。从而避免发生死锁。</p>
-<p><strong>死锁定理：</strong></p>
-<p>S为死锁状态的充分条件是：尚且仅当S状态的资源分配图是不可完全简化的，该充分条件称为死锁定理。</p>
-<p><strong>死锁的解除：</strong></p>
-<blockquote>
-<p>方法1：强制性地从系统中撤消一个或多个死锁的进程以断开循环等待链，并收回分配给终止进程的全部资源供剩下的进程使用。</p>
-<p>方法2：使用一个有效的挂起和解除机构来挂起一些死锁的进程，其实质是从被挂起的进程那里抢占资源以解除死锁。</p>
-</blockquote>
-<p><strong>7. 分段式存储管理、分页式存储管理，两个的区别？</strong></p>
-<p>分段式存储管理：分页存储管理是将一个进程的地址（逻辑地址空间）空间划分成若干个大小相等的区域，称为页，相应地，将内存空间划分成与页相同大小（为了保证页内偏移一致）的若干个物理块，称为块或页框（页架）。在为进程分配内存时，将进程中的若干页分别装入多个不相邻接的块中。</p>
-<p>分页式存储管理：在分段存储管理方式中，作业的地址空间被划分为若干个段，每个段是一组完整的逻辑信息，如有主程序段、子程序段、数据段及堆栈段等，每个段都有自己的名字，都是从零开始编址的一段连续的地址空间，各段长度是不等的。</p>
-<p><strong>两者的区别：</strong></p>
-<p>页是信息的物理单位，分页是为了实现非连续的分配，以便解决内存的碎片问题，或者说分页是为了由于系统管理的需要。</p>
-<p>页的大小固定是由系统确定的，将逻辑地址划分为页号和页内地址是由机器硬件实现的。而段的长度是不固定的，决定与用户的程序长度，通常由编译程序进行编译时根据信息的性质来划分。</p>
-<p>分页式存储管理的作业地址空间是一维的，分段式的存储管理的作业管理地址空间是二维的。</p>
-<p><strong>8. 页面置换算法有哪些？</strong></p>
-<p>最佳置换算法（Optimal）：即选择那些永不使用的，或者是在最长时间内不再被访问的页面置换出去。（它是一种理想化的算法，性能最好，但在实际上难于实现）。</p>
-<p>先进先出置换算法FIFO：该算法总是淘汰最先进入内存的页面，即选择在内存中驻留时间最久的页面予以淘汰。</p>
-<p>最近最久未使用置换算法LRU（Least Recently Used）：该算法是选择最近最久未使用的页面予以淘汰，系统在每个页面设置一个访问字段，用以记录这个页面自上次被访问以来所经历的时间T，当要淘汰一个页面时，选择T最大的页面。</p>
-<p>Clock置换算法：也叫最近未用算法NRU（Not RecentlyUsed）。该算法为每个页面设置一位访问位，将内存中的所有页面都通过链接指针链成一个循环队列。当某页被访问时，其访问位置“1”。在选择一页淘汰时，就检查其访问位，如果是“0”，就选择该页换出；若为“1”，则重新置为“0”，暂不换出该页，在循环队列中检查下一个页面，直到访问位为“0”的页面为止。由于该算法只有一位访问位，只能用它表示该页是否已经使用过，而置换时是将未使用过的页面换出去，所以把该算法称为最近未用算法。</p>
-<p>最少使用置换算法LFU：该算法选择最近时期使用最少的页面作为淘汰页。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">os</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/cm/" class="article-tag-list-link color3">cm</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/10/16/操作系统原理面试题目总结/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-CPU-是如何运行函数的" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/16/CPU-是如何运行函数的/">CPU 是如何运行函数的</a>
-    </h1>
-  
-
-        
-        <a href="/2016/10/16/CPU-是如何运行函数的/" class="archive-article-date">
-  	<time datetime="2016-10-15T16:28:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p> <strong>1. CPU的内部结构</strong></p>
-<p>我们都知道CPU是一台电脑的核心部件，所有的程序都是通过它运行的，那么CPU是如何让一个程序跑起来的呢？我们今天就来一起简单的做个了解，首先看下CPU的基本结构。</p>
-<p><img src="http://images2015.cnblogs.com/blog/741758/201602/741758-20160226221332771-1727363091.png" alt="CPU结构"></p>
-<p><img src="http://images2015.cnblogs.com/blog/741758/201602/741758-20160227150005599-1830927020.png" alt="寄存器"></p>
-<hr>
-<p><strong>2. 程序流程</strong></p>
-<p>假如现在我们有个两个数相加的程序，当你点击运行这个程序时，系统会将这个程序复制到内存中。程序中的这些数据和指令会被存储在一个一个小的“内存空间”，并给每个空间一个“门牌号”，也就是内存中的地址。</p>
-<p>系统将程序复制到内存中后，会将程序计数器设定到程序运行的开始位置（假设这个程序的开始位置是0100），然后开始运行；当CPU每执行一条指令，程序的累加器的值就自动加1，然后CPU的控制器就会参照程序计数器的数值从内存中读取命令并执行，那么我们用图表示这个流程的话大概是下图中的样子：</p>
-<p><img src="http://images2015.cnblogs.com/blog/741758/201602/741758-20160227122007193-1280025548.png" alt="此处输入图片的描述"></p>
-<p>在CPU进行运算时，标志寄存器的数值会根据运算结果自动设定。如果程序执行到跳转指令的时候，会根据地址中的内容跳转到对应的地址；条件分支在跳转指令之前会进行比较运算，然后CPU根据标志寄存器的数值进行判断是否要跳转：</p>
-<p><img src="http://images2015.cnblogs.com/blog/741758/201602/741758-20160227124651724-419479493.png" alt="此处输入图片的描述"></p>
-<hr>
-<p><strong>3. 函数调用</strong></p>
-<p>对CPU的执行流程有了个大概的了解后，我们现在可以来看看咱们平时写的程序函数是怎么运行的了。在介绍之前我们先了解两个机器语言指令。</p>
-<blockquote>
-<p>call指令：把函数要执行的指令地址存储在名为栈的主内存<br>return指令：把保存在栈中的地址设定到程序计数器中</p>
-</blockquote>
-<p><img src="http://images2015.cnblogs.com/blog/741758/201602/741758-20160227143352911-811194625.png" alt="此处输入图片的描述"></p>
-<p>在上图中，函数执行到0132的时候，并不是通过跳转指令跳转到Add函数的入口，而是通过call指令；这个地方和我没前面讲到的条件分支跳转指令是不一样的，因为调用完函数，我们还要返回函数调用的地方继续下一条指令。</p>
-<p>到此，我们可以对程序的运行过程有个大概的了解。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">微机原理</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/work/" class="article-tag-list-link color5">work</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/10/16/CPU-是如何运行函数的/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-C语言中的字符串" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/15/C语言中的字符串/">C语言中的字符串</a>
-    </h1>
-  
-
-        
-        <a href="/2016/10/15/C语言中的字符串/" class="archive-article-date">
-  	<time datetime="2016-10-15T14:35:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>1. C语言中的字符串</strong></p>
-<p>C语言中，字符串的使用对于初学者来说是个很容易混淆、很容易出错。C语言字符串是以‘\0′结尾。因此，我们使用字符串时，始终要记得留一个字节用于存放结尾符。</p>
-<p>请看下面一段代码，哪个地方会在运行时出错？</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">char</span> str1[]=<span class="string">"hello,world"</span>;   </div><div class="line"><span class="keyword">char</span> str2[<span class="number">100</span>]=<span class="string">"hello,world"</span>;   </div><div class="line"><span class="keyword">char</span> *str3 = <span class="string">"hello,world"</span>;   </div><div class="line">str1[<span class="number">0</span>]=<span class="string">'H'</span>;   </div><div class="line">str3[<span class="number">0</span>]=<span class="string">'H'</span>;     </div><div class="line"><span class="built_in">printf</span>(<span class="string">" %s   %s  %s"</span>,str1,str2,str3);</div></pre></td></tr></table></figure>
-<p>上面的代码会在如下地方出错。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">str3[<span class="number">0</span>]=<span class="string">'H'</span>;</div></pre></td></tr></table></figure>
-<p>从概念上讲，之所以出错是因为str3是个常量字符串，而常量是不允许被改变的。</p>
-<p>在一些开源项目中，我们能看到C语言字符串的一些引申版本，他们对c语言原生字符串进行封装以获得额外的优点。例如：</p>
-<hr>
-<p><strong>2. Nginx中的字符串</strong></p>
-<p> nginx中字符串类型被定义为一个结构体，如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> &#123;</div><div class="line">    <span class="keyword">size_t</span> len;</div><div class="line">    u_char *data;</div><div class="line">&#125; <span class="keyword">ngx_str_t</span>;</div></pre></td></tr></table></figure>
-<p>这样定义有什么好处呢？</p>
-<p>nginx针对web服务器特定的场景对字符串进行的一个简单封装。这样封装的好处是可以有效的降低内存使用量。</p>
-<p>例如：假设如下一个http请求存放在起始地址为0×12345678的内存处。<br>GET  /about.html  http/1.1</p>
-<p>我们要取出http请求的请求方法，只需要如下赋值即可获得，而不需要额外开辟内存空间来存储。这样就节省了内存。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">len=<span class="number">3</span>;</div><div class="line">data = <span class="number">0x12345678</span></div></pre></td></tr></table></figure>
-<hr>
-<p><strong>3. Redis中的字符串</strong></p>
-<p> 在Redis中，字符串同样也被封装成了一个结构体，具体如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">struct</span> sdsdr&#123;   </div><div class="line">    <span class="keyword">int</span> len;  <span class="comment">//存放字符串长度   </span></div><div class="line">    <span class="keyword">int</span> <span class="built_in">free</span>; <span class="comment">//记录buf中还有多少字节未使用   </span></div><div class="line">    <span class="keyword">char</span> buf[];   </div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<hr>
-<p>Redis总将字符串封装成如上结构，你能看出它相比于原生字符串，有什么好处么？</p>
-<p><strong>至少有如下几个好处</strong></p>
-<ul>
-<li><p>能够在O(1)时间内获取到字符串的长度。而原生字符串要获取器长度择需要通过检测字符串结尾符才能得到字符串长度，时间复杂度为O(n)</p>
-</li>
-<li><p>能够有效杜绝缓冲区溢出。这个很好理解，比如c语言字符串复制操作，如果如果事先没有分配足够的内存，便会出现缓存区溢出。而有了len这个字段后，我们可以利用它来防止缓存区溢出。</p>
-</li>
-<li><p>二进制安全。这个有点不容易注意到。C语言中的字符中，除了字符串末尾之外，字符串里不能包含空字符，否则最先读入的空字符就会被误认为是字符串结尾，因此字符串就被无故截断了，这种限制使得C语言原生字符串只能保持文本数据，而不能保持诸如图片、音频、视频等二进制数据。但是，通过上面的结构体封装后，有了len字段记录字符串的真实长度，我们就不会再有限制，我们只管通过len来取数据就行了，不用担心buf里面存放的是不是空字符。</p>
-</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">c</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/work/" class="article-tag-list-link color5">work</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/10/15/C语言中的字符串/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-Hexo-用法指南" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/14/Hexo-用法指南/">Hexo 用法指南</a>
-    </h1>
-  
-
-        
-        <a href="/2016/10/14/Hexo-用法指南/" class="archive-article-date">
-  	<time datetime="2016-10-14T15:56:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li><p>Hexo是一个开源的静态博客生成器，用node.js开发，作者是台湾大学生tommy351</p>
-</li>
-<li><p>在配置GitHub时候可以先不考虑SSH登录（可能存在问题）</p>
-</li>
-<li><p>Hexo中主配置文件参考(yilia主题)</p>
-<ul>
-<li>Site<blockquote>
-<p>title: Wenboo’s Blog<br>subtitle:<br>description:<br>author: Cheng<br>language: zh-CN<br>timezone:</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p>URL</p>
-<blockquote>
-<p>url: <a href="http://wenboo.github.io">http://wenboo.github.io</a><br>root: /<br>permalink: :year/:month/:day/:title/<br>permalink_defaults:</p>
-</blockquote>
-</li>
-<li><p>Themes</p>
-<blockquote>
-<p>theme: yilia-l</p>
-</blockquote>
-</li>
-<li><p>Deploy</p>
-<blockquote>
-<p>deploy:<br>type: git<br>repository: <a href="https://github.com/wenboo/wenboo.github.io.git" target="_blank" rel="external">https://github.com/wenboo/wenboo.github.io.git</a><br>branch: master</p>
-</blockquote>
-</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">tool</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/work/" class="article-tag-list-link color5">work</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/10/14/Hexo-用法指南/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/17/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><span class="page-number current">18</span>
+      <a class="extend prev" rel="prev" href="/page/17/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><span class="page-number current">18</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/19/">Next &raquo;</a>
     </nav>
   
 
@@ -1316,7 +1067,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">书单</a>
+                <a href="javascript:void(0)" class="js-tag color2">c</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1328,11 +1083,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">c</a>
+                <a href="javascript:void(0)" class="js-tag color4">cpu</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">cpu</a>
+                <a href="javascript:void(0)" class="js-tag color3">书单</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1344,15 +1099,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">http</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1368,19 +1127,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">gc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">并发</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">jdbc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">main</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1388,7 +1135,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
+                <a href="javascript:void(0)" class="js-tag color2">sqlite</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">并发</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1396,15 +1147,23 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">sqlite</a>
+                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">常量池</a>
+                <a href="javascript:void(0)" class="js-tag color5">main</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">gc</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">回调</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">常量池</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1420,15 +1179,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux</a>
+                <a href="javascript:void(0)" class="js-tag color1">log4j</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">restful</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1440,7 +1195,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">log4j</a>
+                <a href="javascript:void(0)" class="js-tag color2">socket</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1448,15 +1203,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">socket</a>
+                <a href="javascript:void(0)" class="js-tag color5">wireshark</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">static</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">wireshark</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1468,6 +1219,18 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">typedef</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">二叉树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">代码重构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">json</a>
               </li>
              
@@ -1476,35 +1239,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">代码重构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">二叉树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">架构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">路由器</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网卡</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">进程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">volatile</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1512,23 +1247,27 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">网卡</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">路由器</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">嵌入式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">os</a>
+                <a href="javascript:void(0)" class="js-tag color3">进程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">知乎</a>
+                <a href="javascript:void(0)" class="js-tag color5">数字签名</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">j2ee</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">内存</a>
+                <a href="javascript:void(0)" class="js-tag color4">volatile</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1536,7 +1275,27 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">架构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">知乎</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">内存</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">j2ee</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">键盘</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">os</a>
               </li>
             
             <div class="clearfix"></div>
