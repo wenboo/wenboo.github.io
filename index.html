@@ -240,6 +240,171 @@
 
 
   
+    <article id="post-MD5-SHA1-HMAC-HMAC-SHA1-区别" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/30/MD5-SHA1-HMAC-HMAC-SHA1-区别/">MD5 SHA1 HMAC HMAC_SHA1 区别</a>
+    </h1>
+  
+
+        
+        <a href="/2017/07/30/MD5-SHA1-HMAC-HMAC-SHA1-区别/" class="archive-article-date">
+  	<time datetime="2017-07-30T12:39:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>1 MD5、SHA1、HMAC、HMAC_SHA1区别</li>
+<li>2 引言</li>
+<li>3 MD4</li>
+<li>4 MD5</li>
+<li>5 SHA1及其他</li>
+<li>6 HMAC_SHA1</li>
+<li>7 什么是CRC</li>
+<li>8 这些Hash算法到底有什么用呢？</li>
+<li>9 参考</li>
+</ul>
+<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>什么是MD5，什么是SHA1，如何校验这些Hash。还有拿单个apk文件的MD5，SHA1讯问是不是原版的问题，在这里，让我们先来了解一些基本知识，了解Hash。</p>
+<p>Hash，一般翻译做“散列”，也有直接音译为”哈希”的，就是把任意长度的输入（又叫做预映射，pre-image），通过散列算法，变换成固定长度的输出，该输出就是散列值。这种转换是一种压缩映射，也就是，散列值的空间通常远小于输入的空间，不同的输入可能会散列成相同的输出，而不可能从散列值来唯一地确定输入值。</p>
+<p>简单的说就是一种将任意长度的消息压缩到某一固定长度的消息摘要的函数。</p>
+<p>Hash主要用于信息安全领域中加密算法，他把一些不同长度的信息转化成杂乱的128位的编码里,叫做Hash值.也可以说，Hash就是找到一种数据内容和数据存放地址之间的映射关系。</p>
+<p>了解了Hash基本定义，就不能不提到一些著名的Hash算法，MD5和SHA1可以说是目前应用最广泛的Hash算法，而它们都是以MD4为基础设计的。</p>
+        
+          <a class="article-more-a" href="/2017/07/30/MD5-SHA1-HMAC-HMAC-SHA1-区别/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">加密</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/cm/" class="article-tag-list-link color3">cm</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/07/30/MD5-SHA1-HMAC-HMAC-SHA1-区别/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-HMAC-SHA1-和-SHA1-的区别" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/30/HMAC-SHA1-和-SHA1-的区别/">HMAC_SHA1 和 SHA1 的区别</a>
+    </h1>
+  
+
+        
+        <a href="/2017/07/30/HMAC-SHA1-和-SHA1-的区别/" class="archive-article-date">
+  	<time datetime="2017-07-30T12:36:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>HMAC的百度百科解释：</p>
+<blockquote>
+<p>HMAC 是密钥相关的哈希运算消息认证码（Hash-based Message Authentication Code）,HMAC 运算利用哈希算法，以一个密钥和一个消息为输入，生成一个消息摘要作为输出。</p>
+</blockquote>
+<p>可以看出，HMAC是需要一个密钥的。所以，HMAC_SHA1也是需要一个密钥的，而SHA1不需要。</p>
+<p>以下是两种算法在 Java 中的实现：</p>
+<p>如下方法是使用 SHA1 计算一个文件的摘要，不需要密钥，有点类似于 MD5，注意这句：</p>
+        
+          <a class="article-more-a" href="/2017/07/30/HMAC-SHA1-和-SHA1-的区别/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">加密</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/cm/" class="article-tag-list-link color3">cm</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/07/30/HMAC-SHA1-和-SHA1-的区别/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-ARM-芯片、内核、架构、指令集的联系与区别" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -264,13 +429,9 @@
 <p>在嵌入式领域ARM芯片和CPU有什么区别呢？其实随着嵌入式科技的不断发展，单片机（像ARM芯片）和CPU的界限越来越模糊，我们暂且可以认为ARM芯片就是一个CPU，或者暂且认为单片机就相当于一个CPU。</p>
 <p>问题 2：什么是ARM芯片</p>
 <p>凡是采用ARM内核的芯片（或者凡是采用ARM内核的CPU）都是ARM芯片。例如高通的OMAP36X0系列处理器（Droid 2和Droid X用的OMAP3630），采用的就是ARM内核，所以在概念上我们也可以将其称为ARM芯片</p>
-<p>问题 3：什么是ARM内核</p>
-<p>所谓内核，就是CPU里面实现运算的核心，我们也可以将内核称之为CPU（注意，该CPU是真正意义上的CPU，因为它实现了数据的运算与处理）。而问题一中所说的单片机和芯片相当于一个CPU只是指宏观意义上的CPU。ARM内核只是一个统称，它有以下几个系列：ARM7,ARM9，ARM11，CORTEX等几个内核家族，每个内核家族都有不同的内核种类，比如CORTEX内核家族就有：Cortex-A8内核、Cortex-A9内核、Cortex-R4内核、Cortex-M0内核、Cortex-M1、Cortex-M3、Cortex-M4内核等，目前使用最广的STM32系列芯片使用的就是Cortex-M3内核。具体内核家族分类见：<a href="http://hardware.mydrivers.com/2/223/223488_all.htm" target="_blank" rel="external">http://hardware.mydrivers.com/2/223/223488_all.htm</a></p>
-<p>问题 4：什么是架构</p>
-<p>片面上讲，我们可以将架构理解为内核所使用的指令集。例如：用于高端的（手机等）Cortex-A8，Cortex-A9等内核用的是ARMv7-A架构，或者说用的是ARMv7-A指令集架构，我们常用到的STM32的Cortex-M3内核用到的是ARMv7-M架构。</p>
-<p>问题 5：什么是指令集</p>
-<p>所谓指令集就是一整套底层指令的统称。分为RISC（简单指令集）和CISC（复杂指令集），相比较而言RISC指令集的指令格式统一，种类比较少，寻址方式也比复杂指令集少，而CISC指令集的效率比较高。拿STM32系列芯片使用的ARMv7指令集来讲，ARMv7意思是ARM的第七个版本的指令，采用的RISC。</p>
-
+        
+          <a class="article-more-a" href="/2017/07/19/ARM-芯片、内核、架构、指令集的联系与区别/#more">more >></a>
+        
       
 
       
@@ -342,16 +503,9 @@
         <p>ARM 架构是构建每个 ARM 处理器的基础。ARM 架构随着时间的推移不断发展，其中包含的架构功能可满足不断增长的新功能、高性能需求以及新兴市场的需要。有关最新公布版本的信息，请参阅 ARMv8 架构。</p>
 <p>ARM 架构支持跨跃多个性能点的实现，并已在许多细分市场中成为主导的架构。ARM 架构支持非常广泛的性能点，因而可以利用最新的微架构技术获得极小的 ARM 处理器实现和极有效的高级设计实现。实现规模、性能和低功耗是 ARM 架构的关键特性。</p>
 <p>ARM 已经开发了架构扩展，从而为 Java 加速 (Jazelle®)、安全性 (TrustZone®)、SIMD 和高级 SIMD (NEON™) 技术提供支持。ARMv8-A 架构增加了密码扩展作为可选功能。</p>
-<p>ARM 架构与精简指令集计算 (RISC) 架构类似，因为它包含以下典型 RISC 架构特征：</p>
-<ul>
-<li><p>统一寄存器文件加载/存储架构，其中的数据处理操作只针对寄存器内容，并不直接针对内存内容。</p>
-</li>
-<li><p>简单寻址模式，所有加载/存储地址只通过寄存器内容和指令字段确定。</p>
-</li>
-</ul>
-<p>对基本 RISC 架构的增强使 ARM 处理器可以实现较高性能、较小代码大小、较低功耗和较小硅面积的良好平衡。</p>
-<p><img src="https://www.arm.com/zh/assets/images/roadmap/V5_to_V8_Architecture.jpg" alt="img"></p>
-
+        
+          <a class="article-more-a" href="/2017/07/19/ARM-处理器架构/#more">more >></a>
+        
       
 
       
@@ -781,167 +935,6 @@
 
 
   
-    <article id="post-Ubuntu-文件夹颜色设置及-vim-颜色设置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/29/Ubuntu-文件夹颜色设置及-vim-颜色设置/">Ubuntu 文件夹颜色设置及 vim 颜色设置</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/29/Ubuntu-文件夹颜色设置及-vim-颜色设置/" class="archive-article-date">
-  	<time datetime="2017-06-29T14:04:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>因为ubuntu下的/etc/目录里没有DIR_COLORS, 所以费了点劲儿。 </p>
-<h2 id="方法一："><a href="#方法一：" class="headerlink" title="方法一："></a>方法一：</h2><ol>
-<li><p>利用dircolors命令，查看我们的系统当前的文件名称显示颜色的值，然后利用管道重定向到用户目录下的任意一个文件（这里我们创建了一个.dircolors文件） </p>
-<p>命令1： <code>cd ~</code></p>
-<p>命令2： <code>dircolors -p &gt; .dircolors</code></p>
-</li>
-<li><p>用vim打开 <code>.dircolors</code> 文件，然后找到“DIR 01;34”，修改为 “DIR 01;35”，保存退出。(这里的01表示高亮度显示，34表示蓝色，35表示洋红色)</p>
-</li>
-</ol>
-        
-          <a class="article-more-a" href="/2017/06/29/Ubuntu-文件夹颜色设置及-vim-颜色设置/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/c/" class="article-tag-list-link color2">c</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/29/Ubuntu-文件夹颜色设置及-vim-颜色设置/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-fopen-、fwrite-、fread-函数使用说明与示例" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/28/fopen-、fwrite-、fread-函数使用说明与示例/">fopen()、fwrite()、fread()函数使用说明与示例</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/28/fopen-、fwrite-、fread-函数使用说明与示例/" class="archive-article-date">
-  	<time datetime="2017-06-28T14:55:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="fopen-函数"><a href="#fopen-函数" class="headerlink" title="fopen()函数"></a>fopen()函数</h2><ol>
-<li>作用: 在C语言中fopen()函数用于打开指定路径的文件，获取指向该文件的指针。</li>
-<li>函数原型：</li>
-</ol>
-<blockquote>
-<p>FILE <em> fopen(const char </em> path,const char * mode);  </p>
-</blockquote>
-<p>path：文件路径，如：”F:\Visual Stdio 2012\test.txt”<br>mode：文件打开方式，例如：  </p>
-<p>“r” 以只读方式打开文件，该文件必须存在。<br>“w” 打开只写文件，若文件存在则文件长度清为0，即该文件内容会消失。若文件不存在则建立该文件。<br>“w+” 打开可读写文件，若文件存在则文件长度清为零，即该文件内容会消失。若文件不存在则建立该文件。 “a” 以附加的方式打开只写文件。若文件不存在，则会建立该文件，如果文件存在，写入的数据会被加到文件尾，即文件原先的内容会被保留。（EOF符保留）<br>“a+” 以附加方式打开可读写的文件。若文件不存在，则会建立该文件，如果文件存在，写入的数据会被加到文件尾后，即文件原先的内容会被保留。（原来的EOF符不保留）<br>“wb” 只写打开或新建一个二进制文件，只允许写数据。<br>“wb+” 读写打开或建立一个二进制文件，允许读和写。<br>“ab” 追加打开一个二进制文件，并在文件末尾写数据。<br>“ab+”读写打开一个二进制文件，允许读，或在文件末追加数据。     </p>
-<p>返回值：文件顺利打开后，指向该流的文件指针就会被返回。如果文件打开失败则返回NULL，并把错误代码存在errno中。</p>
-        
-          <a class="article-more-a" href="/2017/06/28/fopen-、fwrite-、fread-函数使用说明与示例/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/c/" class="article-tag-list-link color2">c</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/28/fopen-、fwrite-、fread-函数使用说明与示例/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1030,10 +1023,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">c</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">面试</a>
               </li>
              
@@ -1050,19 +1039,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">http</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
+                <a href="javascript:void(0)" class="js-tag color2">c</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1074,23 +1051,31 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">加密</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">http</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">tool</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">classloader</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">jdbc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">jsp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">jvm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">sqlite</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1102,11 +1087,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">tool</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">log4j</a>
+                <a href="javascript:void(0)" class="js-tag color5">jdbc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1114,11 +1095,23 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
+                <a href="javascript:void(0)" class="js-tag color4">jsp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">线程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">sqlite</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">常量池</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1130,7 +1123,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">常量池</a>
+                <a href="javascript:void(0)" class="js-tag color1">final</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1138,15 +1131,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">final</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1154,7 +1139,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">javaweb</a>
+                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1162,11 +1151,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">socket</a>
+                <a href="javascript:void(0)" class="js-tag color1">log4j</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">wireshark</a>
+                <a href="javascript:void(0)" class="js-tag color3">javaweb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">socket</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1174,15 +1167,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">代码重构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">json</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">字节码</a>
+                <a href="javascript:void(0)" class="js-tag color5">wireshark</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1190,7 +1175,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">二叉树</a>
+                <a href="javascript:void(0)" class="js-tag color4">字节码</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">json</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1198,19 +1187,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">代码重构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">嵌入式</a>
+                <a href="javascript:void(0)" class="js-tag color4">二叉树</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">架构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">单元测试</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1222,10 +1211,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mvc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">进程</a>
               </li>
              
@@ -1234,11 +1219,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">os</a>
+                <a href="javascript:void(0)" class="js-tag color5">单元测试</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">内存</a>
+                <a href="javascript:void(0)" class="js-tag color4">嵌入式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">os</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1247,6 +1236,14 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">j2ee</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">内存</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">mvc</a>
               </li>
              
               <li class="article-tag-list-item">
