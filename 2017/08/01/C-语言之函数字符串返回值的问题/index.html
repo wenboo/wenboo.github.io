@@ -18,7 +18,7 @@ char str[]=&amp;quot;hello&amp;quot;;
 <meta property="og:description" content="char str[]=&amp;quot;hello&amp;quot;; 和 char *str=&amp;quot;hello&amp;quot;; 不一样。
 char str[]=&amp;quot;hello&amp;quot;;
 是在动态变量区中开辟了 可以容纳6个字符的数组，数组名叫str。同时 将字符串”hello”（原存放于常数空间）拷贝到这个数组空间中去作为数组的初始化值。此时若执行return str; 其中的str是数组名">
-<meta property="og:updated_time" content="2017-08-01T13:35:36.449Z">
+<meta property="og:updated_time" content="2017-08-01T13:44:55.815Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C 语言之函数字符串返回值的问题">
 <meta name="twitter:description" content="char str[]=&amp;quot;hello&amp;quot;; 和 char *str=&amp;quot;hello&amp;quot;; 不一样。
@@ -209,9 +209,9 @@ char str[]=&amp;quot;hello&amp;quot;;
 <p>除这5项以外，其它怪技巧不提倡。</p>
 <p>函数内的变量，没有关键字static修饰的变量的生命周期只在本函数内，函数结束后变量自动销毁。当返回为指针的时候需要特别注意，因为函数结束后指针所指向的地址依然存在，但是该地址可以被其他程序修改，里面的内容就不确定了，有可能后面的操作会继续用到这块地址，有可能不会用到，所以会出现时对时错的情况，如果需要返回一个指针而又不出错的话只能调用内存申请函数。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> *<span class="title">fun</span><span class="params">(<span class="keyword">void</span>)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="comment">// 不是静态存储区，在函数返回之后，释放了str的空间,输出的值是不确定的</span></div><div class="line">	<span class="keyword">int</span> str[]=&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;    </div><div class="line">	<span class="keyword">int</span> *q=str;</div><div class="line">	<span class="keyword">return</span> q;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> *p;</div><div class="line">	<span class="keyword">int</span> i;</div><div class="line">	<span class="function"><span class="keyword">int</span> *<span class="title">fun</span><span class="params">(<span class="keyword">void</span>)</span></span>;</div><div class="line">	p=fun();</div><div class="line">	<span class="keyword">for</span> (i=<span class="number">0</span>;i&lt;<span class="number">3</span>;i++)</div><div class="line">	&#123;</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,*p);</div><div class="line">		p++;</div><div class="line">	&#125;</div><div class="line">	getch();</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">char</span> *<span class="title">fun</span><span class="params">(<span class="keyword">void</span>)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">// 不用申请为static也可以正确输出，str指向常数空间(始终存在)，其空间不会被破坏</span></div><div class="line">	<span class="keyword">char</span> *str=<span class="string">"hello,world"</span>;    </div><div class="line">	<span class="comment">// 就是一个指向这种常量区的指针</span></div><div class="line">	<span class="keyword">return</span> str;                 </div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">char</span> *p;</div><div class="line">	<span class="keyword">int</span> i;</div><div class="line">	<span class="function"><span class="keyword">char</span> *<span class="title">fun</span><span class="params">(<span class="keyword">void</span>)</span></span>;</div><div class="line">	p=fun();</div><div class="line">	<span class="keyword">for</span> (i=<span class="number">0</span>;i&lt;<span class="number">3</span>;i++)</div><div class="line">	&#123;</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"%s\n"</span>,p[i]);</div><div class="line">	&#125;</div><div class="line">	getch();</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">char</span> *<span class="title">fun</span><span class="params">(<span class="keyword">void</span>)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">// 系统自动分配存储空间，但是函数返回的时候释放掉，无法正常输出</span></div><div class="line">	<span class="keyword">char</span> str[]=&#123;<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>&#125;;   </div><div class="line">	<span class="keyword">return</span> str;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">char</span> *p;</div><div class="line">	<span class="keyword">int</span> i;</div><div class="line">	<span class="function"><span class="keyword">char</span> *<span class="title">fun</span><span class="params">(<span class="keyword">void</span>)</span></span>;</div><div class="line">	p=fun();</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"%x\n"</span>,p);</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"%s\n"</span>,p);</div><div class="line">	getch();</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">char</span> *<span class="title">fun</span><span class="params">(<span class="keyword">void</span>)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">// 函数返回后释放地址，无法正常输出</span></div><div class="line">	<span class="keyword">char</span> str[]=<span class="string">"hello"</span>;    </div><div class="line">	<span class="built_in">printf</span>(<span class="string">"%x\n"</span>,str);</div><div class="line">	<span class="keyword">return</span> str;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">char</span> *p;</div><div class="line">	<span class="keyword">int</span> i;</div><div class="line">	<span class="function"><span class="keyword">char</span> *<span class="title">fun</span><span class="params">(<span class="keyword">void</span>)</span></span>;</div><div class="line">	p=fun();</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"%x\n"</span>,p);</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"%s\n"</span>,p);</div><div class="line">	getch();</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">char</span> *<span class="title">fun</span><span class="params">(<span class="keyword">void</span>)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="comment">// 不用申请为static也可以正确输出，str指向常数空间(始终存在)，其空间不会被破坏</span></div><div class="line">	<span class="keyword">char</span> *str=<span class="string">"hello,world"</span>;    </div><div class="line">	<span class="comment">// 就是一个指向这种常量区的指针</span></div><div class="line">	<span class="keyword">return</span> str;                 </div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">char</span> *p;</div><div class="line">	<span class="keyword">int</span> i;</div><div class="line">	<span class="function"><span class="keyword">char</span> *<span class="title">fun</span><span class="params">(<span class="keyword">void</span>)</span></span>;</div><div class="line">	p=fun();</div><div class="line">	<span class="keyword">for</span> (i=<span class="number">0</span>;i&lt;<span class="number">3</span>;i++)</div><div class="line">	&#123;</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"%s\n"</span>,p[i]);</div><div class="line">	&#125;</div><div class="line">	getch();</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">char</span> *<span class="title">fun</span><span class="params">(<span class="keyword">void</span>)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="comment">// 系统自动分配存储空间，但是函数返回的时候释放掉，无法正常输出</span></div><div class="line">	<span class="keyword">char</span> str[]=&#123;<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>&#125;;   </div><div class="line">	<span class="keyword">return</span> str;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">char</span> *p;</div><div class="line">	<span class="keyword">int</span> i;</div><div class="line">	<span class="function"><span class="keyword">char</span> *<span class="title">fun</span><span class="params">(<span class="keyword">void</span>)</span></span>;</div><div class="line">	p=fun();</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"%x\n"</span>,p);</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"%s\n"</span>,p);</div><div class="line">	getch();</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">char</span> *<span class="title">fun</span><span class="params">(<span class="keyword">void</span>)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="comment">// 函数返回后释放地址，无法正常输出</span></div><div class="line">	<span class="keyword">char</span> str[]=<span class="string">"hello"</span>;    </div><div class="line">	<span class="built_in">printf</span>(<span class="string">"%x\n"</span>,str);</div><div class="line">	<span class="keyword">return</span> str;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">char</span> *p;</div><div class="line">	<span class="keyword">int</span> i;</div><div class="line">	<span class="function"><span class="keyword">char</span> *<span class="title">fun</span><span class="params">(<span class="keyword">void</span>)</span></span>;</div><div class="line">	p=fun();</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"%x\n"</span>,p);</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"%s\n"</span>,p);</div><div class="line">	getch();</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
       
 
@@ -441,6 +441,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">c</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
@@ -453,23 +457,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">c</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">书单</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">dns</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">加密</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -481,7 +473,23 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">dns</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">加密</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">http</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">tool</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -493,7 +501,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
+                <a href="javascript:void(0)" class="js-tag color5">jdbc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -505,11 +513,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">tool</a>
+                <a href="javascript:void(0)" class="js-tag color3">并发</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">并发</a>
+                <a href="javascript:void(0)" class="js-tag color2">sqlite</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -521,7 +529,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">jdbc</a>
+                <a href="javascript:void(0)" class="js-tag color5">main</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -529,7 +537,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">sqlite</a>
+                <a href="javascript:void(0)" class="js-tag color3">回调</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -537,23 +545,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">this</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">回调</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">main</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">final</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">restful</a>
+                <a href="javascript:void(0)" class="js-tag color5">this</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -561,15 +557,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">tcp</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">socket</a>
+                <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">restful</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -577,15 +573,27 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">static</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">javaweb</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">socket</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">static</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">锁</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">代码重构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">字节码</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -601,11 +609,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">代码重构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">json</a>
+                <a href="javascript:void(0)" class="js-tag color3">架构</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -613,15 +617,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">字节码</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">架构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">单元测试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">json</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">网卡</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -630,14 +634,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">嵌入式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网卡</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">os</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -653,11 +649,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">知乎</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">j2ee</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">内存</a>
+                <a href="javascript:void(0)" class="js-tag color3">进程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -665,11 +665,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">知乎</a>
+                <a href="javascript:void(0)" class="js-tag color3">内存</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">进程</a>
+                <a href="javascript:void(0)" class="js-tag color3">os</a>
               </li>
             
             <div class="clearfix"></div>
