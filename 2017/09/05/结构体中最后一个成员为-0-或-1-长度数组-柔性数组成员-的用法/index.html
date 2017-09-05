@@ -6,14 +6,30 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://wenboo.github.io">
-  <title>Tag: 多线程 | Hi~Welcome to Wenboo&#39;s Blog</title>
+  <title>结构体中最后一个成员为[0]或[1]长度数组(柔性数组成员)的用法 | Hi~Welcome to Wenboo&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hi~Welcome to Wenboo's Blog">
-<meta property="og:url" content="http://wenboo.github.io/tags/多线程/index.html">
+  <meta name="description" content="1. 结构体中最后一个成员为[0]长度数组的用法这是个广泛使用的常见技巧，常用来构成缓冲区。比起指针，用空数组有这样的优势：
+
+不需要初始化，数组名直接就是所在的偏移
+
+不占任何空间，指针需要占用int长度空间，空数组不占任何空间。“这个数组不占用任何内存”，意味着这样的结构节省空间；“该数组的内存地址就和它后面的元素地址相同”，意味着无需初始化，数组名就是后面元素的地址，直接就能当指针使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="结构体中最后一个成员为[0]或[1]长度数组(柔性数组成员)的用法">
+<meta property="og:url" content="http://wenboo.github.io/2017/09/05/结构体中最后一个成员为-0-或-1-长度数组-柔性数组成员-的用法/index.html">
 <meta property="og:site_name" content="Hi~Welcome to Wenboo's Blog">
+<meta property="og:description" content="1. 结构体中最后一个成员为[0]长度数组的用法这是个广泛使用的常见技巧，常用来构成缓冲区。比起指针，用空数组有这样的优势：
+
+不需要初始化，数组名直接就是所在的偏移
+
+不占任何空间，指针需要占用int长度空间，空数组不占任何空间。“这个数组不占用任何内存”，意味着这样的结构节省空间；“该数组的内存地址就和它后面的元素地址相同”，意味着无需初始化，数组名就是后面元素的地址，直接就能当指针使用">
+<meta property="og:updated_time" content="2017-09-05T15:56:49.776Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hi~Welcome to Wenboo's Blog">
+<meta name="twitter:title" content="结构体中最后一个成员为[0]或[1]长度数组(柔性数组成员)的用法">
+<meta name="twitter:description" content="1. 结构体中最后一个成员为[0]长度数组的用法这是个广泛使用的常见技巧，常用来构成缓冲区。比起指针，用空数组有这样的优势：
+
+不需要初始化，数组名直接就是所在的偏移
+
+不占任何空间，指针需要占用int长度空间，空数组不占任何空间。“这个数组不占用任何内存”，意味着这样的结构节省空间；“该数组的内存地址就和它后面的元素地址相同”，意味着无需初始化，数组名就是后面元素的地址，直接就能当指针使用">
   
     <link rel="alternative" href="/atom.xml" title="Hi~Welcome to Wenboo&#39;s Blog" type="application/atom+xml">
   
@@ -165,71 +181,199 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-结构体中最后一个成员为-0-或-1-长度数组-柔性数组成员-的用法" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/10/17/Java-多线程面试题及回答/" class="archive-article-date">
-  	<time datetime="2016-10-17T14:15:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-17</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/10/17/Java-多线程面试题及回答/">Java 多线程面试题及回答</a>
+    <h1 class="article-title" itemprop="name">
+      结构体中最后一个成员为[0]或[1]长度数组(柔性数组成员)的用法
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/09/05/结构体中最后一个成员为-0-或-1-长度数组-柔性数组成员-的用法/" class="archive-article-date">
+  	<time datetime="2017-09-05T15:56:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-结构体中最后一个成员为-0-长度数组的用法"><a href="#1-结构体中最后一个成员为-0-长度数组的用法" class="headerlink" title="1. 结构体中最后一个成员为[0]长度数组的用法"></a>1. 结构体中最后一个成员为[0]长度数组的用法</h2><p>这是个广泛使用的常见技巧，常用来构成缓冲区。比起指针，用空数组有这样的优势：</p>
+<ul>
+<li><p>不需要初始化，数组名直接就是所在的偏移</p>
+</li>
+<li><p>不占任何空间，指针需要占用int长度空间，空数组不占任何空间。“这个数组不占用任何内存”，意味着这样的结构节省空间；“该数组的内存地址就和它后面的元素地址相同”，意味着无需初始化，数组名就是后面元素的地址，直接就能当指针使用</p>
+</li>
+</ul>
+<p>这样的写法最适合制作 <strong>动态buffer</strong>，因为可以这样分配空间 <code>malloc(sizeof(structXXX) + buff_len)</code> ; 直接就把buffer的结构体和缓冲区一块分配了。用起来也非常方便，因为现在空数组其实变成了 buff_len 长度的数组了。</p>
+<p><strong>这样的好处是</strong>：</p>
+<ul>
+<li><p>一次分配解决问题，省了不少麻烦。为了防止内存泄露，如果是分两次分配(结构体和缓冲区)，那么要是第二次 malloc 失败了，必须回滚释放第一个分配的结构体。这样带来了编码麻烦。其次，分配了第二个缓冲区以后，如果结构里面用的是指针，还要为这个指针赋值。同样，在 free 这个 buffer 的时候，用指针也要两次 free。如果用空数组，所有问题一次解决</p>
+</li>
+<li><p>小内存的管理是非常困难的，如果用指针，这个 buffer 的 struct 部分就是小内存了，在系统内存在多了势必严重影响内存管理的性能。要是用空数组把 struct 和实际数据缓冲区一次分配大块问题，就没有这个问题。如此看来，用空数组既简化编码，又解决了小内存碎片问题提高了性能</p>
+</li>
+</ul>
+<p><strong>结构体最后使用0或1长度数组的原因</strong>：主要是为了方便的管理内存缓冲区(其实就是分配一段连续的内存，减少内存的碎片化)，如果直接使用指针而不使用数组，那么，在分配内存缓冲区时，就必须分配结构体一次，然后再分配结构体内的指针一次，(而此时分配的内存已经与结构体的内存不连续了，所有要分别管理即申请和释放)而如果使用数组，那么只需要一次就可以全部分配出来，反过来，释放时也是一样，使用数组，一次释放。使用指针，得先释放结构体内的指针，再释放结构体，还不能颠倒顺序。</p>
+<a id="more"></a>
+<h2 id="2-结构体中最后一个成员为-1-长度数组的用法"><a href="#2-结构体中最后一个成员为-1-长度数组的用法" class="headerlink" title="2. 结构体中最后一个成员为[1]长度数组的用法"></a>2. 结构体中最后一个成员为[1]长度数组的用法</h2><p>与长度为[0]数组的用法相同，改写为[1]是出于可移植性的考虑。有些编译器不支持[0]数组，可将其改成[]或[1]。</p>
+<p><strong>不完整类型（incomplete type）</strong></p>
+<p>它缺乏足够的信息例如长度去描述一个完整的对象。</p>
+<ul>
+<li><p>前向声明就是一种常用的不完整类型， <code>class base; struct test</code> ; base 和 test 只给出了声明，没有给出定义。不完整类型必须通过某种方式补充完整，才能使用它们进行实例化，否则只能用于定义指针或引用，否则只能用于指针或引用，因为此时实例化的是指针或引用本身，不是 base 或 test 对象</p>
+</li>
+<li><p>一个未知长度的数组也属于不完整类型：<code>extern int a[]</code>; extern 不能去掉，因为数组的长度未知，不能作为定义出现。不完整类型的数组可以通过几种方式补充完整才能使用，大括号形式的初始化就是其中一种方式：<code>int a[] = {10, 20}</code></p>
+</li>
+</ul>
+<p><strong>柔性数组成员（flexible array member）</strong></p>
+<p>也叫收缩性数组成员，这种代码结构产生于对动态结构体的需求。C99 使用不完整类型实现柔性数组成员，在 C99 中，结构中的最后一个元素允许是未知大小的数组，这就叫 <strong>柔性数组成员</strong>。但结构中的柔性数组成员前面必须至少一个其它成员。柔性数组成员允许结构中包含一个大小可变的数组。柔性数组成员只作为一个符号地址存在，而且必须是结构体的最后一个成员，sizeof 返回的这种结构大小不包括柔性数组的内存。柔性数组成员不仅可以用于字符数组，还可以是元素为其它类型的数组。包含柔性数组成员的结构用 malloc() 函数进行内存的动态分配，并且分配的内存应该大于结构的大小，以适应柔性数组的预期大小。</p>
+<p>C/C++标准规定不能定义长度为0的数组，因此，有些编译器就把0长度的数组成员作为自己的非标准扩展。</p>
+<p>示例代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span>  </span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;  </div><div class="line">  </div><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> _FlexibleArray  </div><div class="line">&#123;  </div><div class="line">    <span class="keyword">char</span> ch;  </div><div class="line">    <span class="keyword">int</span> arr[<span class="number">0</span>];<span class="comment">//int arr[];//int arr[1];  </span></div><div class="line">&#125;FlexibleArray;  </div><div class="line">  </div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span>  </span></div><div class="line">&#123;  </div><div class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="keyword">sizeof</span>(FlexibleArray)&lt;&lt;<span class="built_in">endl</span>;  </div><div class="line">  </div><div class="line">    <span class="keyword">const</span> <span class="keyword">int</span> LENGTH = <span class="number">10</span>;  </div><div class="line">    FlexibleArray* flexibleArray = (FlexibleArray*)<span class="keyword">new</span> <span class="keyword">char</span>[<span class="keyword">sizeof</span>(FlexibleArray) + LENGTH * <span class="keyword">sizeof</span>(<span class="keyword">int</span>)];  </div><div class="line">  </div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; LENGTH; i ++) &#123;  </div><div class="line">        flexibleArray-&gt;arr[i] = i * i;  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; LENGTH; i ++) &#123;  </div><div class="line">        <span class="built_in">cout</span>&lt;&lt;flexibleArray-&gt;arr[i]&lt;&lt;<span class="built_in">endl</span>;  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">    <span class="keyword">delete</span> [] flexibleArray;  </div><div class="line">  </div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">多线程</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">c</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
+        			<a href="/categories/c/" class="article-tag-list-link color2">c</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://wenboo.github.io/2017/09/05/结构体中最后一个成员为-0-或-1-长度数组-柔性数组成员-的用法/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2017/12/31/2017-年开发阅读书单/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          2017 年开发阅读书单
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2017/09/05/结构体中最后成员为一个零长数组与一个指针/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">结构体中最后成员为一个零长数组与一个指针</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="结构体中最后一个成员为-0-或-1-长度数组-柔性数组成员-的用法" data-title="结构体中最后一个成员为[0]或[1]长度数组(柔性数组成员)的用法" data-url="http://wenboo.github.io/2017/09/05/结构体中最后一个成员为-0-或-1-长度数组-柔性数组成员-的用法/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"‘wenboo-hexo’"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+  
+  
   
 
-    
+  
+
+  
 
 
           </div>
@@ -252,9 +396,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		root: "/",
