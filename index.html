@@ -240,6 +240,151 @@
 
 
   
+    <article id="post-C语言：全局变量在多个c文件中公用的方法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/24/C语言：全局变量在多个c文件中公用的方法/">C语言：全局变量在多个c文件中公用的方法</a>
+    </h1>
+  
+
+        
+        <a href="/2017/10/24/C语言：全局变量在多个c文件中公用的方法/" class="archive-article-date">
+  	<time datetime="2017-10-24T14:39:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>用C语言编写程序的时候，我们经常会遇到这样一种情况：希望在头文件中定义一个全局变量，然后包含到两个不同的c文件中，希望这个全局变量能在两个文件中共用。</p>
+<p>举例说明：项目文件夹 project 下有 <code>main.c</code>、<code>common.c</code> 和 <code>common.h</code> 三个文件，其中 <code>common.h</code> 文件分别 <code>#include</code> 在 <code>main.c</code> 和 <code>common.c</code> 文件中。现在希望声明一个字符型变量 key，在 <code>main.c</code> 和 <code>common.c</code> 中公用。</p>
+<p>有人想，既然是想两个文件都用，那就在 <code>common.h</code> 中声明一个 unsigned char key，然后由于包含关系，在 <code>main.c</code> 和 <code>common.c</code> 中都是可见的，所以就能共用了。</p>
+<p>想起来确实有道理，但是实际写出来，我们发现编译的时候编译器提示出错，一般提示大概都类似于：<code>Error: L6200E: Symbol key multiply defined (by common.o and main.o)</code> ，也就是说编译器认为我们 <strong>重复定义</strong> 了key这个变量。这是因为 <code>#include</code> 命令就是原封不同的把头文件中的内容搬到 <code>#include</code> 的位置，所以相当于 <code>main.c</code> 和 <code>common.c</code> 中都执行了一次 unsigned char key，而C语言中全局变量是项目内（或者叫工程内）可见的，这样就造成了一个项目中两个变量 key，编译器就认为是重复定义。</p>
+<p><strong>正确的解决办法</strong>：使用 extern 关键字来声明变量为外部变量。具体说就是在其中一个c文件中定义一个全局变量 key，然后在另一个要使用 key 这个变量的c文件中使用 extern 关键字声明一次，说明这个变量为外部变量，是在其他的c文件中定义的全局变量。请注意这里的用词：定义和声明。例如在 <code>main.c</code> 文件中定义变量key，在 <code>common.c</code> 文件中声明 key 变量为外部变量，这样这两个文件中就能共享这个变量 key 了。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//main.c文件</span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"common.h"</span></span></div><div class="line"><span class="keyword">unsigned</span> <span class="keyword">char</span> key;</div></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// common.c文件</span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"common.h"</span></span></div><div class="line"><span class="keyword">extern</span> <span class="keyword">unsigned</span> <span class="keyword">char</span> key;</div></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2017/10/24/C语言：全局变量在多个c文件中公用的方法/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/c/" class="article-tag-list-link color2">c</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/10/24/C语言：全局变量在多个c文件中公用的方法/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-C-语言中-static-和-const-关键字的的作用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/24/C-语言中-static-和-const-关键字的的作用/">C语言中 static 和 const 关键字的的作用</a>
+    </h1>
+  
+
+        
+        <a href="/2017/10/24/C-语言中-static-和-const-关键字的的作用/" class="archive-article-date">
+  	<time datetime="2017-10-24T14:15:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>static 作用：“改变生命周期” 或者 “改变作用域”。程序的局部变量存在于（堆栈）中，全局变量存在于（静态区 ）中，动态申请数据存在于（ 堆）中。</p>
+<h2 id="1-作用于变量"><a href="#1-作用于变量" class="headerlink" title="1 作用于变量"></a>1 作用于变量</h2><p>用 static 声明 <strong>局部变量</strong>：局部变量指在代码块{}内部定义的变量，只在代码块内部有效（作用域），其缺省的存储方式是自动变量或说是动态存储的，即指令执行到变量定义处时才给变量分配存储单元，跳出代码块时释放内存单元（生命期）。用 static 声明局部变量时，则改变变量的存储方式（生命期），使变量成为静态的局部变量，即编译时就为变量分配内存，直到程序退出才释放存储单元。这样，使得该局部变量有记忆功能，可以记忆上次的数据，不过由于仍是局部变量，因而只能在代码块内部使用（<strong>作用域不变</strong>）。</p>
+<p>用 static 声明 <strong>外部变量</strong>：外部变量指在所有代码块 <code>{}</code> 之外定义的变量，它缺省为静态变量，编译时分配内存，程序结束时释放内存单元。同时其作用域很广，整个文件都有效甚至别的文件也能引用它。为了限制某些外部变量的作用域，使其只在本文件中有效，而不能被其他文件引用，可以用 static 关键字对其作出声明。</p>
+<p>总结：用 static 声明局部变量，使其变为静态存储方式（静态数据区），作用域不变；用 static 声明外部变量，其本身就是静态变量，这只会改变其连接方式，使其只在本文件内部有效，而其他文件不可连接或引用该变量。</p>
+<h2 id="2-作用于函数"><a href="#2-作用于函数" class="headerlink" title="2 作用于函数"></a>2 作用于函数</h2><p>使用 static 用于函数定义时，对函数的连接方式产生影响，使得函数只在本文件内部有效，对其他文件是不可见的。这样的函数又叫作 <strong>静态函数</strong>。使用静态函数的好处是，不用担心与其他文件的同名函数产生干扰，另外也是对函数本身的一种保护机制。</p>
+<p>如果想要其他文件可以引用本地函数，则要在函数定义时使用关键字 extern，表示该函数是外部函数，可供其他文件调用。另外在要引用别的文件中定义的外部函数的文件中，使用 extern 声明要用的外部函数即可。</p>
+<p>const作用: “只读(readonly)”</p>
+        
+          <a class="article-more-a" href="/2017/10/24/C-语言中-static-和-const-关键字的的作用/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">static</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/c/" class="article-tag-list-link color2">c</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/10/24/C-语言中-static-和-const-关键字的的作用/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-波兰式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -769,161 +914,6 @@
 
 
   
-    <article id="post-C-语言之函数字符串返回值的问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/01/C-语言之函数字符串返回值的问题/">C 语言之函数字符串返回值的问题</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/01/C-语言之函数字符串返回值的问题/" class="archive-article-date">
-  	<time datetime="2017-08-01T13:34:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><code>char str[]=&quot;hello&quot;;</code> 和 <code>char *str=&quot;hello&quot;;</code> 不一样。</p>
-<p><code>char str[]=&quot;hello&quot;;</code></p>
-<p>是在动态变量区中开辟了 <strong>可以容纳6个字符的数组</strong>，数组名叫str。同时 <strong>将字符串”hello”（原存放于常数空间）</strong>拷贝到这个数组空间中去作为数组的初始化值。<br>此时若执行return str; 其中的str是数组名。C语言规定，表达式中如果是数组名，则该表达式的值就等于这个数组的地址。所以返回的是这个数组的地址，请注意：并不是字符串常量”hello”的地址！<strong>而函数结束时，虽然常数空间并不破坏，但这个数组空间是破坏了的</strong>，而你返回的却不是常数空间里的地址而正是已经破坏了的数组的地址。</p>
-<p><code>char *str=&quot;hello&quot;;</code></p>
-<p>是在动态变量区中开辟了一个可以存放一个指针值的变量，名叫str。同时将原存放于常数空间的字符串”hello”的地址赋给这个指针变量作为初始值。<br>此时若执行return str; 其中的str是指针变量名。C语言规定，表达式中如果是变量名，则该表达式的值就等于这个变量的值。所以返回的是变量str的值，而变量str的值就等于字符串常量”hello”的地址。<strong>而函数结束时，变量str破坏了的，但常数空间中的字符串并不破坏。主程序根据返回的地址就可以找到该字符串</strong>。</p>
-        
-          <a class="article-more-a" href="/2017/08/01/C-语言之函数字符串返回值的问题/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">c</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/c/" class="article-tag-list-link color2">c</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/08/01/C-语言之函数字符串返回值的问题/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-bss-段、data-段和-text-段" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/01/bss-段、data-段和-text-段/">bss 段、data 段和 text 段</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/01/bss-段、data-段和-text-段/" class="archive-article-date">
-  	<time datetime="2017-08-01T13:14:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在采用段式内存管理的架构中（比如intel的80x86系统）,一个程序本质上都是由bss段、data段、text段三个组成的。</p>
-<p>BSS段：BSS段（bss segment - Block Started by Symbol segment）通常是指用来存放程序中未初始化的全局变量的一块内存区域。BSS是Unix链接器产生的未初始化数据段。其他的段分别是包含程序代码的“text”段和包含已初始化数据的“data”段。BSS段的变量只有名称和大小却没有值。此名后来被许多文件格式使用，包括PE。“以符号开始的块”指的是编译器处理未初始化数据的地方。BSS节不包含任何数据，只是简单的维护开始和结束的地址，以便内存区能在运行时被有效地清零。BSS节在应用程序的二进制映象文件中并不存在。</p>
-<p>Data段：数据段（data segment）通常是指用来存放程序中已初始化的全局变量的一块内存区域。数据段属于静态内存分配。</p>
-<p>Text段：代码段（code segment/text segment）通常是指用来存放程序执行代码的一块内存区域。这部分区域的大小在程序运行前就已经确定，并且内存区域通常属于只读, 某些架构允许代码段为可写，即允许修改程序。在代码段中，也有可能包含一些只读的常数变量，例如字符串常量等。</p>
-<p>堆（heap）：堆是用于存放进程运行中被动态分配的内存段，它的大小并不固定，可动态扩张或缩减。当进程调用malloc等函数分配内存时，新分配的内存就被动态添加到堆上（堆被扩张）；当利用free等函数释放内存时，被释放的内存从堆中被剔除（堆被缩减）。</p>
-<p>栈(stack)：栈又称堆栈， 是用户存放程序临时创建的局部变量，也就是说我们函数括弧“{}”中定义的变量（但不包括static声明的变量，static意味着在数据段中存放变量）。除此以外，在函数被调用时，其参数也会被压入发起调用的进程栈中，并且待到调用结束后，函数的返回值也会被存放回栈中。由于栈的先进先出特点，所以栈特别方便用来保存/恢复调用现场。从这个意义上讲，我们可以把堆栈看成一个寄存、交换临时数据的内存区。</p>
-<p>一般情况下，一个程序本质上都是由 bss段、data段、text段三个组成的——本概念是当前的计算机程序设计中是很重要的一个基本概念。而且在嵌入式系统的设计中也非常重要，牵涉到嵌入式系统运行时的内存大小分配，存储单元占用空间大小的问题。</p>
-<p>在采用段式内存管理的架构中（比如intel的80x86系统），bss段（Block Started by Symbol segment）通常是指用来存放程序中未初始化的全局变量的一块内存区域，一般在初始化时bss 段部分将会清零（bss段属于静态内存分配，即程序一开始就将其清零了）。</p>
-        
-          <a class="article-more-a" href="/2017/08/01/bss-段、data-段和-text-段/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">c</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/c/" class="article-tag-list-link color2">c</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/08/01/bss-段、data-段和-text-段/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1012,11 +1002,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">c</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color3">面试</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1024,7 +1010,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面试</a>
+                <a href="javascript:void(0)" class="js-tag color2">c</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1032,7 +1018,31 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">static</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">callback</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">dns</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">http</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1044,35 +1054,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">dns</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">加密</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">http</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">tool</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">jdbc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">jsp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1084,11 +1070,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">gc</a>
+                <a href="javascript:void(0)" class="js-tag color3">加密</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">sqlite</a>
+                <a href="javascript:void(0)" class="js-tag color3">gc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1096,11 +1082,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">sqlite</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">main</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">线程</a>
+                <a href="javascript:void(0)" class="js-tag color1">log4j</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1112,15 +1102,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">线程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">jsp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">常量池</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">final</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1152,31 +1146,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">static</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">log4j</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">代码重构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">锁</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">json</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">字节码</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">typedef</a>
+                <a href="javascript:void(0)" class="js-tag color1">final</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1184,11 +1154,31 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">代码重构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">字节码</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">锁</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">tcp/ip</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">return</a>
+                <a href="javascript:void(0)" class="js-tag color5">json</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">typedef</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1196,11 +1186,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">return</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">嵌入式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网卡</a>
+                <a href="javascript:void(0)" class="js-tag color5">单元测试</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1208,15 +1202,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">进程</a>
+                <a href="javascript:void(0)" class="js-tag color5">数字签名</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">键盘</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color3">hashmap</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">volatile</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1228,27 +1226,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">单元测试</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">volatile</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数字签名</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">hashmap</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">知乎</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">j2ee</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">键盘</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1256,7 +1242,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">j2ee</a>
+                <a href="javascript:void(0)" class="js-tag color3">网卡</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">进程</a>
               </li>
             
             <div class="clearfix"></div>
