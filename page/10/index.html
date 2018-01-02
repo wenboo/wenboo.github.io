@@ -167,6 +167,124 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Java-设计模式之策略模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/16/Java-设计模式之策略模式/">Java 设计模式之策略模式</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/16/Java-设计模式之策略模式/" class="archive-article-date">
+  	<time datetime="2017-06-16T14:30:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>策略</strong>（<strong>Strategy</strong>）<strong>模式</strong>：又名Policy，它的用意是定义一组算法，把它们一个个封装起来，并且使他们可以相互替换。策略模式可以独立于使用他们的客户端而变化。GOF策略模式静态结构类图如下：</p>
+<p><img src="http://dl2.iteye.com/upload/attachment/0087/8884/0d024111-f198-3ff6-947e-8d75a7544901.png" alt="img"></p>
+<p>通过上图可以看出策略模式有以下角色构成：</p>
+<blockquote>
+<p>1、<strong>抽象策略</strong>（Strategy）角色：抽象策略角色由抽象类或接口来承担，它给出具体策略角色需要实现的接口；</p>
+<p>2、<strong>具体策略</strong>（ConcreteStrategy）角色：实现封装了具体的算法或行为；</p>
+<p>3、<strong>场景</strong>（Context）角色：持有抽象策略类的引用。</p>
+</blockquote>
+<p>策略模式重点是 <strong>封装不同的算法和行为</strong>，<strong>不同的场景下可以相互替换</strong>。策略模式是 <strong>开闭原则</strong> 的体现，开闭原则讲的是一个软件实体应该对扩展开放对修改关闭。策略模式在新的策略增加时，不会影响其他类的修改，增加了扩展性，也就是对扩展是开放的；对于场景来说，只依赖于抽象，而不依赖于具体实现，所以对修改是关闭的。策略模式的认识可以借助《Java与模式》一书中写到诸葛亮的锦囊妙计来学习，在不同的场景下赵云打开不同的锦囊，便化险为夷，锦囊便是抽象策略，具体的锦囊里面的计策便是具体的策略角色，场景就是赵云，变化的处境选择具体策略的条件。</p>
+<p>策略模式在程序设计中也很常用，在板桥（banq）的博客里有篇文章叫 “你还在用if else吗？”<br>“<a href="http://www.jdon.com/artichect/ifelse.htm”讲的很好，策略模式不但是继承的代替方案而且能很好地解决if" target="_blank" rel="external">http://www.jdon.com/artichect/ifelse.htm”讲的很好，策略模式不但是继承的代替方案而且能很好地解决if</a> else问题，下面举个实例来说明，怎么使用策略模式。</p>
+<!-- more ->
+
+
+**需求如下**：
+
+某支付系统接入以下几种商户进行充值：易宝网易，快线网银，19pay手机支付，支付宝支付，骏网一卡通，由于每家充值系统的结算比例不一样，而且 同一家商户的不同充值方式也有所不同，具体系统情况比较复杂，像支付宝既有支付宝账号支付和支付宝网银支付等这些暂时不考虑，为了讲述策略模式这里简单描 述，假如分为四种，手机支付，网银支付，商户账号支付和点卡支付。因为没个支付结算比例不同，所以对手续费低的做一些优惠活动，尽可能让用户使用手续费低 的支付方式来充值，这样降低渠道费用，增加收入，具体优惠政策如下：
+
+> ① 网银充值，8.5折；
+
+> ② 商户充值，9折；
+
+> ③ 手机充值，没有优惠；
+
+> ④ 点卡充值，收取1%的渠道费；
+
+对于一个新手的代码如下：
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">package strategy;</div><div class="line"> </div><div class="line">public class Example &#123;</div><div class="line"> </div><div class="line">   </div><div class="line">    public Double calRecharge(Double charge ,RechargeTypeEnum type )&#123;</div><div class="line">      </div><div class="line">       if(type.equals(RechargeTypeEnum.E_BANK))&#123;</div><div class="line">           return charge*0.85;</div><div class="line">       &#125;else if(type.equals(RechargeTypeEnum.BUSI_ACCOUNTS))&#123;</div><div class="line">           return charge*0.90;</div><div class="line">       &#125;else if(type.equals(RechargeTypeEnum.MOBILE))&#123;</div><div class="line">           return charge;</div><div class="line">       &#125;else if(type.equals(RechargeTypeEnum.CARD_RECHARGE))&#123;</div><div class="line">           return charge+charge*0.01;</div><div class="line">       &#125;else&#123;</div><div class="line">           return null;</div><div class="line">       &#125;</div><div class="line"> </div><div class="line">    &#125;</div><div class="line">   </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">package strategy;</div><div class="line"> </div><div class="line">public enum RechargeTypeEnum &#123;</div><div class="line"> </div><div class="line">    E_BANK(1, &quot;网银&quot;),</div><div class="line">   </div><div class="line">    BUSI_ACCOUNTS(2, &quot;商户账号&quot;),</div><div class="line">   </div><div class="line">    MOBILE(3,&quot;手机卡充值&quot;),</div><div class="line">   </div><div class="line">    CARD_RECHARGE(4,&quot;充值卡&quot;)</div><div class="line">    ;</div><div class="line">   </div><div class="line">   </div><div class="line">    private int value;</div><div class="line">   </div><div class="line">   </div><div class="line">    private String description;</div><div class="line">   </div><div class="line">   </div><div class="line">   </div><div class="line">    private RechargeTypeEnum(int value, String description) &#123;</div><div class="line">       this.value = value;</div><div class="line">       this.description = description;</div><div class="line">    &#125;</div><div class="line">      </div><div class="line">    public int value() &#123;</div><div class="line">       return value;</div><div class="line">    &#125;</div><div class="line">    public String description() &#123;</div><div class="line">       return description;</div><div class="line">    &#125;</div><div class="line">   </div><div class="line"> </div><div class="line">    public static RechargeTypeEnum valueOf(int value) &#123;</div><div class="line">        for(RechargeTypeEnum type : RechargeTypeEnum.values()) &#123;</div><div class="line">            if(type.value() == value) &#123;</div><div class="line">                return type;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return null;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>使用策略模式入下</strong>：</p>
+<p>策略接口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">package strategy.strategy;</div><div class="line"> </div><div class="line">import strategy.RechargeTypeEnum;</div><div class="line"> </div><div class="line"> </div><div class="line">public interface Strategy &#123;</div><div class="line"> </div><div class="line">   </div><div class="line">    public Double calRecharge(Double charge ,RechargeTypeEnum type );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>EBank 策略</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">package strategy.strategy;</div><div class="line"> </div><div class="line">import strategy.RechargeTypeEnum;</div><div class="line"> </div><div class="line">public class EBankStrategy implements Strategy&#123;</div><div class="line"> </div><div class="line">    @Override</div><div class="line">    public Double calRecharge(Double charge, RechargeTypeEnum type) &#123;</div><div class="line">       return charge*0.85;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>BusiAcct 策略</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">package strategy.strategy;</div><div class="line"> </div><div class="line">import strategy.RechargeTypeEnum;</div><div class="line"> </div><div class="line">public class BusiAcctStrategy implements Strategy&#123;</div><div class="line"> </div><div class="line">    @Override</div><div class="line">    public Double calRecharge(Double charge, RechargeTypeEnum type) &#123;</div><div class="line">       // TODO Auto-generated method stub</div><div class="line">       return charge*0.90;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Mobile 策略</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">package strategy.strategy;</div><div class="line"> </div><div class="line">import strategy.RechargeTypeEnum;</div><div class="line"> </div><div class="line">public class MobileStrategy implements Strategy &#123;</div><div class="line"> </div><div class="line">    @Override</div><div class="line">    public Double calRecharge(Double charge, RechargeTypeEnum type) &#123;</div><div class="line">       // TODO Auto-generated method stub</div><div class="line">       return charge;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Card 策略</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">package strategy.strategy;</div><div class="line"> </div><div class="line">import strategy.RechargeTypeEnum;</div><div class="line"> </div><div class="line">public class CardStrategy implements Strategy&#123;</div><div class="line"> </div><div class="line">    @Override</div><div class="line">    public Double calRecharge(Double charge, RechargeTypeEnum type) &#123;</div><div class="line">       return charge+charge*0.01;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Context 实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">package strategy.strategy;</div><div class="line"> </div><div class="line">import strategy.RechargeTypeEnum;</div><div class="line"> </div><div class="line"> </div><div class="line">public class Context &#123;</div><div class="line"> </div><div class="line">    private Strategy strategy;</div><div class="line">   </div><div class="line">    public Double calRecharge(Double charge, Integer type) &#123;</div><div class="line">       strategy = StrategyFactory.getInstance().creator(type);</div><div class="line">       return strategy.calRecharge(charge, RechargeTypeEnum.valueOf(type));</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    public Strategy getStrategy() &#123;</div><div class="line">       return strategy;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    public void setStrategy(Strategy strategy) &#123;</div><div class="line">       this.strategy = strategy;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>StrategyFactory 实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">package strategy.strategy;</div><div class="line"> </div><div class="line">import java.util.HashMap;</div><div class="line">import java.util.Map;</div><div class="line"> </div><div class="line">import strategy.RechargeTypeEnum;</div><div class="line"> </div><div class="line">public class StrategyFactory &#123;</div><div class="line"> </div><div class="line">    private static StrategyFactory factory = new StrategyFactory();</div><div class="line">    private StrategyFactory()&#123;</div><div class="line">    &#125;</div><div class="line">    private static Map strategyMap = new HashMap&lt;&gt;();</div><div class="line">    static&#123;</div><div class="line">       strategyMap.put(RechargeTypeEnum.E_BANK.value(), new EBankStrategy());</div><div class="line">       strategyMap.put(RechargeTypeEnum.BUSI_ACCOUNTS.value(), new BusiAcctStrategy());</div><div class="line">       strategyMap.put(RechargeTypeEnum.MOBILE.value(), new MobileStrategy());</div><div class="line">       strategyMap.put(RechargeTypeEnum.CARD_RECHARGE.value(), new CardStrategy());</div><div class="line">    &#125;</div><div class="line">    public Strategy creator(Integer type)&#123;</div><div class="line">       return strategyMap.get(type);</div><div class="line">    &#125;</div><div class="line">    public static StrategyFactory getInstance()&#123;</div><div class="line">       return factory;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Test </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">package strategy.strategy;</div><div class="line"> </div><div class="line">import strategy.RechargeTypeEnum;</div><div class="line"> </div><div class="line">public class Client &#123;</div><div class="line"> </div><div class="line">   </div><div class="line">    public static void main(String[] args) &#123;</div><div class="line"> </div><div class="line">       Context context = new Context();</div><div class="line">       // 网银充值100 需要付多少</div><div class="line">       Double money = context.calRecharge(100D,</div><div class="line">              RechargeTypeEnum.E_BANK.value());</div><div class="line">       System.out.println(money);</div><div class="line"> </div><div class="line">       // 商户账户充值100 需要付多少</div><div class="line">       Double money2 = context.calRecharge(100D,</div><div class="line">              RechargeTypeEnum.BUSI_ACCOUNTS.value());</div><div class="line">       System.out.println(money2);</div><div class="line"> </div><div class="line">       // 手机充值100 需要付多少</div><div class="line">       Double money3 = context.calRecharge(100D,</div><div class="line">              RechargeTypeEnum.MOBILE.value());</div><div class="line">       System.out.println(money3);</div><div class="line"> </div><div class="line">       // 充值卡充值100 需要付多少</div><div class="line">       Double money4 = context.calRecharge(100D,</div><div class="line">              RechargeTypeEnum.CARD_RECHARGE.value());</div><div class="line">       System.out.println(money4);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">85.0</div><div class="line">90.0</div><div class="line">100.0</div><div class="line">101.0</div></pre></td></tr></table></figure>
+<p>从上面类图和代码可以看出，策略模式把具体的算法封装到了具体策略角色内部，<strong>增强了可扩展性</strong>，<strong>隐蔽了实现细节</strong>；它替代继承来实现，避免了 <code>if- else</code> 这种不易维护的条件语句。当然我们也可以看到，策略模式由于独立策略实现，使得系统内增加了很多策略类；对客户端来说必须知道兜友哪些具体策略， 而且需要知道选择具体策略的条件。</p>
+-->
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/16/Java-设计模式之策略模式/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-Java-虚拟机：新生代与老年代-GC" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -876,81 +994,6 @@
 
 
   
-    <article id="post-JVM-中的类加载机制" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/15/JVM-中的类加载机制/">JVM 中的类加载机制</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/15/JVM-中的类加载机制/" class="archive-article-date">
-  	<time datetime="2017-06-15T12:01:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1，类与类加载器的关系"><a href="#1，类与类加载器的关系" class="headerlink" title="1，类与类加载器的关系"></a>1，类与类加载器的关系</h2><p>一个类需要由加载它的类加载器和这个类本身一同来确定这个类在Java虚拟机中的唯一性。  </p>
-<p>注：每一个类加载器，都有一个独立的类命名空间。  </p>
-<p><strong>判断两个类是否相等</strong>：  </p>
-<p>只有当两个类是由同一个类加载器加载时，判断它们是否相等才有意义。 如果两个类不是由同一个类加载器加载的，即使这两个类来源于同一个Class文件，被同一个虚拟机加载，只要加载它们的类加载器不同，那么这两个类一定不相等。  </p>
-        
-          <a class="article-more-a" href="/2017/06/15/JVM-中的类加载机制/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">classloader</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/java/" class="article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/15/JVM-中的类加载机制/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/9/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/11/">Next &raquo;</a>
@@ -1039,11 +1082,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">面试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">c</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面试</a>
+                <a href="javascript:void(0)" class="js-tag color4">arm</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1059,15 +1106,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">arm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">static</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1075,19 +1114,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">cpu</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
+                <a href="javascript:void(0)" class="js-tag color3">加密</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">dns</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">加密</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1103,6 +1142,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">jsp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">classloader</a>
               </li>
              
@@ -1115,11 +1158,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">jsp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">sqlite</a>
+                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1160,6 +1199,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">this</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">sqlite</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1235,11 +1278,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">路由器</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">进程</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">键盘</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">os</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1252,10 +1303,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">os</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1276,10 +1323,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">j2ee</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">路由器</a>
               </li>
             
             <div class="clearfix"></div>

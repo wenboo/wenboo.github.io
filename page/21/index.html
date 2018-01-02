@@ -167,6 +167,107 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-C语言中的字符串" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/15/C语言中的字符串/">C语言中的字符串</a>
+    </h1>
+  
+
+        
+        <a href="/2016/10/15/C语言中的字符串/" class="archive-article-date">
+  	<time datetime="2016-10-15T14:35:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>1. C语言中的字符串</strong></p>
+<p>C语言中，字符串的使用对于初学者来说是个很容易混淆、很容易出错。C语言字符串是以‘\0′结尾。因此，我们使用字符串时，始终要记得留一个字节用于存放结尾符。</p>
+<p>请看下面一段代码，哪个地方会在运行时出错？</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">char</span> str1[]=<span class="string">"hello,world"</span>;   </div><div class="line"><span class="keyword">char</span> str2[<span class="number">100</span>]=<span class="string">"hello,world"</span>;   </div><div class="line"><span class="keyword">char</span> *str3 = <span class="string">"hello,world"</span>;   </div><div class="line">str1[<span class="number">0</span>]=<span class="string">'H'</span>;   </div><div class="line">str3[<span class="number">0</span>]=<span class="string">'H'</span>;     </div><div class="line"><span class="built_in">printf</span>(<span class="string">" %s   %s  %s"</span>,str1,str2,str3);</div></pre></td></tr></table></figure>
+<p>上面的代码会在如下地方出错。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">str3[<span class="number">0</span>]=<span class="string">'H'</span>;</div></pre></td></tr></table></figure>
+<p>从概念上讲，之所以出错是因为str3是个常量字符串，而常量是不允许被改变的。</p>
+<p>在一些开源项目中，我们能看到C语言字符串的一些引申版本，他们对c语言原生字符串进行封装以获得额外的优点。例如：</p>
+<hr>
+<p><strong>2. Nginx中的字符串</strong></p>
+<p> nginx中字符串类型被定义为一个结构体，如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> &#123;</div><div class="line">    <span class="keyword">size_t</span> len;</div><div class="line">    u_char *data;</div><div class="line">&#125; <span class="keyword">ngx_str_t</span>;</div></pre></td></tr></table></figure>
+<p>这样定义有什么好处呢？</p>
+<p>nginx针对web服务器特定的场景对字符串进行的一个简单封装。这样封装的好处是可以有效的降低内存使用量。</p>
+<p>例如：假设如下一个http请求存放在起始地址为0×12345678的内存处。<br>GET  /about.html  http/1.1</p>
+<p>我们要取出http请求的请求方法，只需要如下赋值即可获得，而不需要额外开辟内存空间来存储。这样就节省了内存。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">len=<span class="number">3</span>;</div><div class="line">data = <span class="number">0x12345678</span></div></pre></td></tr></table></figure>
+<hr>
+<p><strong>3. Redis中的字符串</strong></p>
+<p> 在Redis中，字符串同样也被封装成了一个结构体，具体如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">struct</span> sdsdr&#123;   </div><div class="line">    <span class="keyword">int</span> len;  <span class="comment">//存放字符串长度   </span></div><div class="line">    <span class="keyword">int</span> <span class="built_in">free</span>; <span class="comment">//记录buf中还有多少字节未使用   </span></div><div class="line">    <span class="keyword">char</span> buf[];   </div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<hr>
+<p>Redis总将字符串封装成如上结构，你能看出它相比于原生字符串，有什么好处么？</p>
+<p><strong>至少有如下几个好处</strong></p>
+<ul>
+<li><p>能够在O(1)时间内获取到字符串的长度。而原生字符串要获取器长度择需要通过检测字符串结尾符才能得到字符串长度，时间复杂度为O(n)</p>
+</li>
+<li><p>能够有效杜绝缓冲区溢出。这个很好理解，比如c语言字符串复制操作，如果如果事先没有分配足够的内存，便会出现缓存区溢出。而有了len这个字段后，我们可以利用它来防止缓存区溢出。</p>
+</li>
+<li><p>二进制安全。这个有点不容易注意到。C语言中的字符中，除了字符串末尾之外，字符串里不能包含空字符，否则最先读入的空字符就会被误认为是字符串结尾，因此字符串就被无故截断了，这种限制使得C语言原生字符串只能保持文本数据，而不能保持诸如图片、音频、视频等二进制数据。但是，通过上面的结构体封装后，有了len字段记录字符串的真实长度，我们就不会再有限制，我们只管通过len来取数据就行了，不用担心buf里面存放的是不是空字符。</p>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">c</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/c/" class="article-tag-list-link color2">c</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/10/15/C语言中的字符串/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-Hexo-用法指南" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -355,11 +456,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">面试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">c</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面试</a>
+                <a href="javascript:void(0)" class="js-tag color4">arm</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -375,15 +480,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">arm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">static</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -391,19 +488,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">微机原理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">cpu</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
+                <a href="javascript:void(0)" class="js-tag color3">加密</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">dns</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">加密</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -419,6 +516,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">jsp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">classloader</a>
               </li>
              
@@ -431,11 +532,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">jsp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">sqlite</a>
+                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -476,6 +573,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">this</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">sqlite</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -551,11 +652,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">路由器</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">进程</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">键盘</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">os</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -568,10 +677,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">os</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -592,10 +697,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">j2ee</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">路由器</a>
               </li>
             
             <div class="clearfix"></div>
