@@ -66,6 +66,10 @@
     			
             
     			
+    			<a q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友链</a>
+    			
+            
+    			
             
     			
     			<a q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)">关于我</a>
@@ -148,6 +152,7 @@
   	<time datetime="2023-10-13T11:32:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-10-13</time>
 </a>
         
+		
       </header>
     
     <div class="article-entry" itemprop="articleBody">
@@ -224,6 +229,7 @@
   	<time datetime="2023-08-27T05:42:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-08-27</time>
 </a>
         
+		
       </header>
     
     <div class="article-entry" itemprop="articleBody">
@@ -300,6 +306,7 @@
   	<time datetime="2023-07-08T11:52:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-08</time>
 </a>
         
+		
       </header>
     
     <div class="article-entry" itemprop="articleBody">
@@ -375,6 +382,7 @@
   	<time datetime="2023-07-08T11:49:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-08</time>
 </a>
         
+		
       </header>
     
     <div class="article-entry" itemprop="articleBody">
@@ -452,6 +460,7 @@
   	<time datetime="2023-07-08T11:39:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-08</time>
 </a>
         
+		
       </header>
     
     <div class="article-entry" itemprop="articleBody">
@@ -529,6 +538,7 @@
   	<time datetime="2022-10-30T11:39:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-10-30</time>
 </a>
         
+		
       </header>
     
     <div class="article-entry" itemprop="articleBody">
@@ -603,6 +613,7 @@
   	<time datetime="2022-07-01T04:16:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-01</time>
 </a>
         
+		
       </header>
     
     <div class="article-entry" itemprop="articleBody">
@@ -679,6 +690,7 @@
   	<time datetime="2021-10-07T16:29:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-08</time>
 </a>
         
+		
       </header>
     
     <div class="article-entry" itemprop="articleBody">
@@ -756,6 +768,7 @@
   	<time datetime="2021-08-03T16:00:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-04</time>
 </a>
         
+		
       </header>
     
     <div class="article-entry" itemprop="articleBody">
@@ -832,6 +845,7 @@
   	<time datetime="2020-12-26T14:51:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-26</time>
 </a>
         
+		
       </header>
     
     <div class="article-entry" itemprop="articleBody">
@@ -913,6 +927,17 @@
       	</div>
     </div>
   </div>
+  
+      <!-- 不蒜子统计 -->
+      <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+      <span id="busuanzi_container_site_pv" style='display:none'>
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+      </span>
+      <span class="post-meta-divider">|</span>
+      <span id="busuanzi_container_site_uv" style='display:none'>
+            本站总访客数<span id="busuanzi_value_site_uv"></span>人次
+      </span>
+
 </footer>
     </div>
     <script>
@@ -947,6 +972,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
       
     
       
+      
+      
+    
+      
     
       
       
@@ -958,13 +987,17 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
     
       
-      <li style="width: 50%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
+      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
+      
+        
+      
+      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'friends')"><a href="javascript:void(0)" q-class="active:friends">友链</a></li>
       
         
       
         
       
-      <li style="width: 50%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
+      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
       
         
     </ul>
@@ -1031,6 +1064,38 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     	</section>
     
 
+    
+    	<section class="tools-section tools-section-friends" q-show="friends">
+  		
+        <ul class="search-ul">
+          
+            <li class="search-li">
+              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接1</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接2</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接3</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接4</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接5</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接6</a>
+            </li>
+          
+        </ul>
+  		
+    	</section>
     
 
     
